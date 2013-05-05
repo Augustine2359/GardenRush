@@ -100,11 +100,7 @@
 		// Add the menu to the layer
 		[self addChild:menu];
 
-        CCLabelTTF* gotoTestSceneLabel = [CCLabelTTF labelWithString:@"Test Screen" dimensions:CGSizeZero hAlignment:kCCTextAlignmentLeft fontName:@"Marker Felt" fontSize:12];
-        CCMenuItemLabel* gotoTestScene = [CCMenuItemLabel itemWithLabel:gotoTestSceneLabel target:self selector:@selector(gotoTestScreen)];
-        CCMenu* sceneMenu = [CCMenu menuWithItems:gotoTestScene, nil];
-        sceneMenu.position = ccp(0, 0);
-        [self addChild:sceneMenu];
+        [self addStandardMenuString:@"Test Screen" withSelector:@selector(gotoTestScreen)];
 	}
 	return self;
 }
@@ -118,6 +114,11 @@
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];
+}
+
+-(void)gotoTestScreen
+{
+    [self changeToScene:TargetSceneFirst];
 }
 
 #pragma mark GameKit delegate

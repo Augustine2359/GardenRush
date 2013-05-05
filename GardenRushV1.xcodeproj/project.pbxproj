@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
+		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
+		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
+		BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FD79C173692D90065D4CF /* Default-568h@2x.png */; };
 		BC8EA6441734C4EA004454CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6431734C4EA004454CF /* QuartzCore.framework */; };
 		BC8EA6461734C4EA004454CF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6451734C4EA004454CF /* OpenGLES.framework */; };
 		BC8EA6481734C4EA004454CF /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6471734C4EA004454CF /* OpenAL.framework */; };
@@ -135,11 +139,16 @@
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
 		BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */; };
 		BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */; };
-		BC8EA7E217362EA4004454CF /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7E117362EA4004454CF /* TestLayer.m */; };
-		BC8EA7E5173631DE004454CF /* NBSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7E4173631DE004454CF /* NBSceneManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
+		BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBasicScreenLayer.m; path = NBClasses/BasicClasses/NBBasicScreenLayer.m; sourceTree = "<group>"; };
+		BC1FD79417363CB60065D4CF /* NBTestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestScreen.h; path = NBClasses/BasicClasses/NBTestScreen.h; sourceTree = "<group>"; };
+		BC1FD79517363CB60065D4CF /* NBTestScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBTestScreen.m; path = NBClasses/BasicClasses/NBTestScreen.m; sourceTree = "<group>"; };
+		BC1FD79917363D4A0065D4CF /* NBDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBDataManager.h; path = NBClasses/BasicClasses/NBDataManager.h; sourceTree = "<group>"; };
+		BC1FD79A17363D4A0065D4CF /* NBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBDataManager.m; path = NBClasses/BasicClasses/NBDataManager.m; sourceTree = "<group>"; };
+		BC1FD79C173692D90065D4CF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BC8EA6401734C4EA004454CF /* GardenRushV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GardenRushV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8EA6431734C4EA004454CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BC8EA6451734C4EA004454CF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -404,10 +413,6 @@
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/MainGameArts/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
 		BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GardenRushSpriteSheet1.png; path = Resources/MainGameArts/GardenRushSpriteSheet1.png; sourceTree = "<group>"; };
-		BC8EA7E017362EA4004454CF /* TestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestLayer.h; path = Scenes/TestLayer.h; sourceTree = "<group>"; };
-		BC8EA7E117362EA4004454CF /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Scenes/TestLayer.m; sourceTree = "<group>"; };
-		BC8EA7E3173631DE004454CF /* NBSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBSceneManager.h; path = Scenes/NBSceneManager.h; sourceTree = "<group>"; };
-		BC8EA7E4173631DE004454CF /* NBSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBSceneManager.m; path = Scenes/NBSceneManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,9 +435,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC1FD79817363D210065D4CF /* BasicClasses */ = {
+			isa = PBXGroup;
+			children = (
+				BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */,
+				BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */,
+				BC1FD79417363CB60065D4CF /* NBTestScreen.h */,
+				BC1FD79517363CB60065D4CF /* NBTestScreen.m */,
+				BC1FD79917363D4A0065D4CF /* NBDataManager.h */,
+				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
+			);
+			name = BasicClasses;
+			sourceTree = "<group>";
+		};
 		BC8EA6371734C4EA004454CF = {
 			isa = PBXGroup;
 			children = (
+				BC1FD79C173692D90065D4CF /* Default-568h@2x.png */,
 				BC8EA6551734C4EA004454CF /* GardenRushV1 */,
 				BC8EA6421734C4EA004454CF /* Frameworks */,
 				BC8EA6411734C4EA004454CF /* Products */,
@@ -466,7 +485,7 @@
 		BC8EA6551734C4EA004454CF /* GardenRushV1 */ = {
 			isa = PBXGroup;
 			children = (
-				BC8EA7DF17362E77004454CF /* Scenes */,
+				BC8EA7DF17362E77004454CF /* NBClasses */,
 				BC8EA7CD1734C4ED004454CF /* AppDelegate.h */,
 				BC8EA7CE1734C4ED004454CF /* AppDelegate.m */,
 				BC8EA7D01734C4ED004454CF /* MainGameLayer.h */,
@@ -845,15 +864,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BC8EA7DF17362E77004454CF /* Scenes */ = {
+		BC8EA7DF17362E77004454CF /* NBClasses */ = {
 			isa = PBXGroup;
 			children = (
-				BC8EA7E017362EA4004454CF /* TestLayer.h */,
-				BC8EA7E117362EA4004454CF /* TestLayer.m */,
-				BC8EA7E3173631DE004454CF /* NBSceneManager.h */,
-				BC8EA7E4173631DE004454CF /* NBSceneManager.m */,
+				BC1FD79817363D210065D4CF /* BasicClasses */,
 			);
-			name = Scenes;
+			name = NBClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -921,6 +937,7 @@
 				BC8EA7AD1734C4EC004454CF /* ChangeLog in Resources */,
 				BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */,
 				BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */,
+				BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,8 +1052,9 @@
 				BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */,
 				BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */,
 				BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */,
-				BC8EA7E217362EA4004454CF /* TestLayer.m in Sources */,
-				BC8EA7E5173631DE004454CF /* NBSceneManager.m in Sources */,
+				BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */,
+				BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */,
+				BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,6 +1158,7 @@
 				BC8EA7DA1734C4ED004454CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
