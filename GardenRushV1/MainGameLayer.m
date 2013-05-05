@@ -8,15 +8,15 @@
 
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "MainGameLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
-#pragma mark - HelloWorldLayer
+#pragma mark - MainGameLayer
 
 // HelloWorldLayer implementation
-@implementation HelloWorldLayer
+@implementation MainGameLayer
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
@@ -25,7 +25,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	MainGameLayer *layer = [MainGameLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -100,6 +100,11 @@
 		// Add the menu to the layer
 		[self addChild:menu];
 
+        CCLabelTTF* gotoTestSceneLabel = [CCLabelTTF labelWithString:@"Test Screen" dimensions:CGSizeZero hAlignment:kCCTextAlignmentLeft fontName:@"Marker Felt" fontSize:12];
+        CCMenuItemLabel* gotoTestScene = [CCMenuItemLabel itemWithLabel:gotoTestSceneLabel target:self selector:@selector(gotoTestScreen)];
+        CCMenu* sceneMenu = [CCMenu menuWithItems:gotoTestScene, nil];
+        sceneMenu.position = ccp(0, 0);
+        [self addChild:sceneMenu];
 	}
 	return self;
 }

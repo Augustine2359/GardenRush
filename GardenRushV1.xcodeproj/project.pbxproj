@@ -131,8 +131,12 @@
 		BC8EA7C71734C4ED004454CF /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7C61734C4EC004454CF /* vec4.c */; };
 		BC8EA7CC1734C4ED004454CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7CB1734C4ED004454CF /* main.m */; };
 		BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7CE1734C4ED004454CF /* AppDelegate.m */; };
-		BC8EA7D21734C4ED004454CF /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D11734C4ED004454CF /* HelloWorldLayer.m */; };
+		BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D11734C4ED004454CF /* MainGameLayer.m */; };
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
+		BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */; };
+		BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */; };
+		BC8EA7E217362EA4004454CF /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7E117362EA4004454CF /* TestLayer.m */; };
+		BC8EA7E5173631DE004454CF /* NBSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7E4173631DE004454CF /* NBSceneManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -394,10 +398,16 @@
 		BC8EA7CB1734C4ED004454CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC8EA7CD1734C4ED004454CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC8EA7CE1734C4ED004454CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BC8EA7D01734C4ED004454CF /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		BC8EA7D11734C4ED004454CF /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		BC8EA7D01734C4ED004454CF /* MainGameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainGameLayer.h; sourceTree = "<group>"; };
+		BC8EA7D11734C4ED004454CF /* MainGameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameLayer.m; sourceTree = "<group>"; };
 		BC8EA7D31734C4ED004454CF /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/MainGameArts/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
+		BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GardenRushSpriteSheet1.png; path = Resources/MainGameArts/GardenRushSpriteSheet1.png; sourceTree = "<group>"; };
+		BC8EA7E017362EA4004454CF /* TestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestLayer.h; path = Scenes/TestLayer.h; sourceTree = "<group>"; };
+		BC8EA7E117362EA4004454CF /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Scenes/TestLayer.m; sourceTree = "<group>"; };
+		BC8EA7E3173631DE004454CF /* NBSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBSceneManager.h; path = Scenes/NBSceneManager.h; sourceTree = "<group>"; };
+		BC8EA7E4173631DE004454CF /* NBSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBSceneManager.m; path = Scenes/NBSceneManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,10 +466,11 @@
 		BC8EA6551734C4EA004454CF /* GardenRushV1 */ = {
 			isa = PBXGroup;
 			children = (
+				BC8EA7DF17362E77004454CF /* Scenes */,
 				BC8EA7CD1734C4ED004454CF /* AppDelegate.h */,
 				BC8EA7CE1734C4ED004454CF /* AppDelegate.m */,
-				BC8EA7D01734C4ED004454CF /* HelloWorldLayer.h */,
-				BC8EA7D11734C4ED004454CF /* HelloWorldLayer.m */,
+				BC8EA7D01734C4ED004454CF /* MainGameLayer.h */,
+				BC8EA7D11734C4ED004454CF /* MainGameLayer.m */,
 				BC8EA7D31734C4ED004454CF /* IntroLayer.h */,
 				BC8EA7D41734C4ED004454CF /* IntroLayer.m */,
 				BC8EA6561734C4EA004454CF /* Resources */,
@@ -472,6 +483,8 @@
 		BC8EA6561734C4EA004454CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */,
+				BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */,
 				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
 				BC8EA65B1734C4EA004454CF /* fps_images.png */,
@@ -832,6 +845,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BC8EA7DF17362E77004454CF /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				BC8EA7E017362EA4004454CF /* TestLayer.h */,
+				BC8EA7E117362EA4004454CF /* TestLayer.m */,
+				BC8EA7E3173631DE004454CF /* NBSceneManager.h */,
+				BC8EA7E4173631DE004454CF /* NBSceneManager.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -895,6 +919,8 @@
 				BC8EA66C1734C4EA004454CF /* Icon@2x.png in Resources */,
 				BC8EA66F1734C4EA004454CF /* iTunesArtwork in Resources */,
 				BC8EA7AD1734C4EC004454CF /* ChangeLog in Resources */,
+				BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */,
+				BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,8 +1033,10 @@
 				BC8EA7C71734C4ED004454CF /* vec4.c in Sources */,
 				BC8EA7CC1734C4ED004454CF /* main.m in Sources */,
 				BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */,
-				BC8EA7D21734C4ED004454CF /* HelloWorldLayer.m in Sources */,
+				BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */,
 				BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */,
+				BC8EA7E217362EA4004454CF /* TestLayer.m in Sources */,
+				BC8EA7E5173631DE004454CF /* NBSceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
