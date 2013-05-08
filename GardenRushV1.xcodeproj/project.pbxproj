@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
 		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
@@ -137,11 +138,11 @@
 		BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7CE1734C4ED004454CF /* AppDelegate.m */; };
 		BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D11734C4ED004454CF /* MainGameLayer.m */; };
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
-		BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */; };
-		BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		569D11B1173A818D00D60069 /* NBGameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGameGUI.h; sourceTree = "<group>"; };
+		569D11B2173A818D00D60069 /* NBGameGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBGameGUI.m; sourceTree = "<group>"; };
 		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
 		BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBasicScreenLayer.m; path = NBClasses/BasicClasses/NBBasicScreenLayer.m; sourceTree = "<group>"; };
 		BC1FD79417363CB60065D4CF /* NBTestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestScreen.h; path = NBClasses/BasicClasses/NBTestScreen.h; sourceTree = "<group>"; };
@@ -411,8 +412,6 @@
 		BC8EA7D11734C4ED004454CF /* MainGameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameLayer.m; sourceTree = "<group>"; };
 		BC8EA7D31734C4ED004454CF /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
-		BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/MainGameArts/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
-		BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GardenRushSpriteSheet1.png; path = Resources/MainGameArts/GardenRushSpriteSheet1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -444,6 +443,8 @@
 				BC1FD79517363CB60065D4CF /* NBTestScreen.m */,
 				BC1FD79917363D4A0065D4CF /* NBDataManager.h */,
 				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
+				569D11B1173A818D00D60069 /* NBGameGUI.h */,
+				569D11B2173A818D00D60069 /* NBGameGUI.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -502,8 +503,6 @@
 		BC8EA6561734C4EA004454CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BC8EA7DB17362E45004454CF /* GardenRushSpriteSheet1.plist */,
-				BC8EA7DC17362E45004454CF /* GardenRushSpriteSheet1.png */,
 				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
 				BC8EA65B1734C4EA004454CF /* fps_images.png */,
@@ -935,8 +934,6 @@
 				BC8EA66C1734C4EA004454CF /* Icon@2x.png in Resources */,
 				BC8EA66F1734C4EA004454CF /* iTunesArtwork in Resources */,
 				BC8EA7AD1734C4EC004454CF /* ChangeLog in Resources */,
-				BC8EA7DD17362E45004454CF /* GardenRushSpriteSheet1.plist in Resources */,
-				BC8EA7DE17362E45004454CF /* GardenRushSpriteSheet1.png in Resources */,
 				BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1055,6 +1052,7 @@
 				BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */,
 				BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */,
 				BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */,
+				569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
