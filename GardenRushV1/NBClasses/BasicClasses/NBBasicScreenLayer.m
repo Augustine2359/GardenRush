@@ -87,10 +87,10 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
         if (!self.dataManager)
             self.dataManager = [NBDataManager sharedDataManager];
         
-//        self.currentFrameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-//        [self.currentFrameCache addSpriteFramesWithFile:@"GardenRushSpriteSheet1.plist"];
-//        self.currentSpritesBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"GardenRushSpriteSheet1.png"];
-//        [self addChild:self.currentSpritesBatchNode z:0 tag:0];
+        self.currentFrameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+        [self.currentFrameCache addSpriteFramesWithFile:@"GardenRushSpriteSheet1.plist"];
+        self.currentSpritesBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"GardenRushSpriteSheet1.png"];
+        [self addChild:self.currentSpritesBatchNode z:0 tag:0];
         
         self.layerSize = [[CCDirector sharedDirector] winSize];
         self.layerSizeInPixels = [[CCDirector sharedDirector] winSizeInPixels];
