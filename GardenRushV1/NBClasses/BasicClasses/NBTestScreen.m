@@ -44,7 +44,7 @@
     [self displayLayerTitle:@"Test Screen"];
     
     CGSize fieldSize = CGSizeMake(8, 8);
-    self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticemptybox_white.png"];
+    self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
     self.fieldBackground.scaleX = fieldSize.width * 30 / self.fieldBackground.contentSize.width;
     self.fieldBackground.scaleY = fieldSize.height * 30 / self.fieldBackground.contentSize.height;
     self.fieldBackground.position = ccp(self.layerSize.width / 2, self.layerSize.height / 2);
