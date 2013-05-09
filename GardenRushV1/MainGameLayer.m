@@ -9,11 +9,13 @@
 
 // Import the interfaces
 #import "MainGameLayer.h"
+#import "NBGameGUI.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
 #pragma mark - MainGameLayer
+
 
 // HelloWorldLayer implementation
 @implementation MainGameLayer
@@ -101,6 +103,12 @@
 		[self addChild:menu];
 
         [self addStandardMenuString:@"Test Screen" withSelector:@selector(gotoTestScreen)];
+        
+        
+        //Temp test pls delete
+        NBGameGUI* test = [NBGameGUI new];
+        [self addChild:test];
+
 	}
 	return self;
 }

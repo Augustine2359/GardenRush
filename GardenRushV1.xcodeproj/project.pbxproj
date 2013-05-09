@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
 		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
@@ -142,6 +143,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		569D11B1173A818D00D60069 /* NBGameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGameGUI.h; sourceTree = "<group>"; };
+		569D11B2173A818D00D60069 /* NBGameGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBGameGUI.m; sourceTree = "<group>"; };
 		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
 		BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBasicScreenLayer.m; path = NBClasses/BasicClasses/NBBasicScreenLayer.m; sourceTree = "<group>"; };
 		BC1FD79417363CB60065D4CF /* NBTestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestScreen.h; path = NBClasses/BasicClasses/NBTestScreen.h; sourceTree = "<group>"; };
@@ -444,6 +447,8 @@
 				BC1FD79517363CB60065D4CF /* NBTestScreen.m */,
 				BC1FD79917363D4A0065D4CF /* NBDataManager.h */,
 				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
+				569D11B1173A818D00D60069 /* NBGameGUI.h */,
+				569D11B2173A818D00D60069 /* NBGameGUI.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1055,6 +1060,7 @@
 				BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */,
 				BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */,
 				BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */,
+				569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
