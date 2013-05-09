@@ -40,15 +40,16 @@
     
     UI_USER_INTERFACE_IDIOM();
     
+    self.currentScene = (CCScene*)self.parent;
+    
     //Display Title in the middle of the screen
     [self displayLayerTitle:@"Test Screen"];
     
-    CGSize fieldSize = CGSizeMake(8, 8);
-    self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
-    self.fieldBackground.scaleX = fieldSize.width * 30 / self.fieldBackground.contentSize.width;
-    self.fieldBackground.scaleY = fieldSize.height * 30 / self.fieldBackground.contentSize.height;
-    self.fieldBackground.position = ccp(self.layerSize.width / 2, self.layerSize.height / 2);
-    self.fieldBackground.anchorPoint = ccp(0.5f, 0.5f);
-    [self addChild:self.fieldBackground];
+    self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] init];
+    [self.currentScene addChild:self.flowerFieldGameGrid];
+    
+    //Temp test pls delete
+    NBGameGUI* test = [NBGameGUI new];
+    [self addChild:test];
 }
 @end

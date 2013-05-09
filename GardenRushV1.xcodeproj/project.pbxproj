@@ -140,6 +140,8 @@
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
 		BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */; };
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
+		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
+		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -416,6 +418,10 @@
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
 		BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GardenRushSpriteSheet1.png; path = Resources/GardenRushSpriteSheet1.png; sourceTree = "<group>"; };
+		BCDBE3BC173BE870007CEEF2 /* NBFlowerFieldGameGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlowerFieldGameGrid.h; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.h; sourceTree = "<group>"; };
+		BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlowerFieldGameGrid.m; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.m; sourceTree = "<group>"; };
+		BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlower.h; path = NBClasses/BasicClasses/NBFlower.h; sourceTree = "<group>"; };
+		BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlower.m; path = NBClasses/BasicClasses/NBFlower.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +455,10 @@
 				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
 				569D11B1173A818D00D60069 /* NBGameGUI.h */,
 				569D11B2173A818D00D60069 /* NBGameGUI.m */,
+				BCDBE3BC173BE870007CEEF2 /* NBFlowerFieldGameGrid.h */,
+				BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */,
+				BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */,
+				BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1069,6 +1079,8 @@
 				BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */,
 				BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */,
 				569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */,
+				BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */,
+				BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "NBBasicScreenLayer.h"
+#import "NBGameGUI.h"
+#import "NBFlowerFieldGameGrid.h"
 
 @interface NBTestScreen : NBBasicScreenLayer
 
-@property (nonatomic, retain) CCSprite* fieldBackground;
+@property (nonatomic, retain) CCScene* currentScene;
+@property (nonatomic, retain) NBFlowerFieldGameGrid* flowerFieldGameGrid;
 
 @end
