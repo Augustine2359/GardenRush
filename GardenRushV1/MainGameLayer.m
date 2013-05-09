@@ -103,12 +103,6 @@
 		[self addChild:menu];
 
         [self addStandardMenuString:@"Test Screen" withSelector:@selector(gotoTestScreen)];
-        
-        
-        //Temp test pls delete
-        NBGameGUI* test = [NBGameGUI new];
-        [self addChild:test];
-
 	}
 	return self;
 }
