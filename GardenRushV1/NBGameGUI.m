@@ -65,17 +65,9 @@
 }
 
 -(void)initialiseCustomerGUI{
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    
     for (int x = 0; x < 3; x++) {
-        CCSprite* customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
-        CGSize frameSize = customerFrame.boundingBox.size;
-        [customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
-        [customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
-        frameSize = customerFrame.boundingBox.size;
-        [customerFrame setAnchorPoint:ccp(0.5, 0.5)];
-        [customerFrame setPosition:ccp(screenSize.width/3 * x + frameSize.width*0.5, screenSize.height - frameSize.height)];
-        [self addChild:customerFrame];
+        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
+        [self addChild:thatCustomer];
     }
 }
 

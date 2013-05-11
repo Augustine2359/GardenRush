@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5690B2A5173E91690059192E /* NBCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5690B2A4173E91690059192E /* NBCustomer.m */; };
 		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
 		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
@@ -145,6 +146,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5690B2A3173E91690059192E /* NBCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBCustomer.h; sourceTree = "<group>"; };
+		5690B2A4173E91690059192E /* NBCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBCustomer.m; sourceTree = "<group>"; };
 		569D11B1173A818D00D60069 /* NBGameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGameGUI.h; sourceTree = "<group>"; };
 		569D11B2173A818D00D60069 /* NBGameGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBGameGUI.m; sourceTree = "<group>"; };
 		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
@@ -444,6 +447,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5690B2A1173E91480059192E /* AdvanceClasses */ = {
+			isa = PBXGroup;
+			children = (
+				5690B2A3173E91690059192E /* NBCustomer.h */,
+				5690B2A4173E91690059192E /* NBCustomer.m */,
+			);
+			name = AdvanceClasses;
+			sourceTree = "<group>";
+		};
 		BC1FD79817363D210065D4CF /* BasicClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,6 +893,7 @@
 		BC8EA7DF17362E77004454CF /* NBClasses */ = {
 			isa = PBXGroup;
 			children = (
+				5690B2A1173E91480059192E /* AdvanceClasses */,
 				BC1FD79817363D210065D4CF /* BasicClasses */,
 			);
 			name = NBClasses;
@@ -1081,6 +1094,7 @@
 				569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */,
 				BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */,
 				BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */,
+				5690B2A5173E91690059192E /* NBCustomer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
