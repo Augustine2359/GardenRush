@@ -34,7 +34,29 @@
         
         //Request images
         //TimerBar image
+        timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+        [timerBarImage setScaleX:5];
+        [timerBarImage setPosition:ccp(faceImage.position.x - faceImage.boundingBox.size.width*0.5, customerFrame.position.y - customerFrame.boundingBox.size.height*0.25)];
+        [self addChild:timerBarImage];
+        
+        //Misc
+        initialWaitingTime = 10;
+        currentWaitingTIme = initialWaitingTime;
+        [timerBarImage setAnchorPoint:ccp(0, 0.5)];
+        [self schedule:@selector(updateTimer) interval:0];
     }
     return self;
 }
+
+-(void)updateTimer{
+    currentWaitingTIme--;
+    if (currentWaitingTIme <= 0) {
+        currentWaitingTIme = 0;
+        CCLOG(@"Time up!");
+        [self unschedule:@selector(updateTimer)];
+    }
+    
+    [timerBarImage setScaleX:(currentWaitingTIme/initialWaitingTime * 5)];
+}
+
 @end

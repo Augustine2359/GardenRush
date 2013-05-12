@@ -13,8 +13,12 @@
     CCSprite* faceImage;
     CCSprite* timerBarImage;
     CCArray* requests;
+    
+    float initialWaitingTime;
+    float currentWaitingTIme;
 }
 
 -(id)initWithIndex:(int)index;
+-(void)updateTimer;
 
 @end
