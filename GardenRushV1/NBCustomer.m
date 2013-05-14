@@ -41,22 +41,41 @@
         
         //Misc
         initialWaitingTime = 10;
-        currentWaitingTIme = initialWaitingTime;
+        currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
-        [self schedule:@selector(updateTimer) interval:0];
+        [self schedule:@selector(updateTimer) interval:1];
     }
     return self;
 }
 
 -(void)updateTimer{
-    currentWaitingTIme--;
-    if (currentWaitingTIme <= 0) {
-        currentWaitingTIme = 0;
+    currentWaitingTime--;
+    CCLOG(@"TIME = %f", currentWaitingTime);
+    if (currentWaitingTime <= 0) {
         CCLOG(@"Time up!");
         [self unschedule:@selector(updateTimer)];
+        [self doCustomerLeave];
     }
     
-    [timerBarImage setScaleX:(currentWaitingTIme/initialWaitingTime * 5)];
+    [timerBarImage setScaleX:(currentWaitingTime/initialWaitingTime * 5)];
+}
+
+-(void)doSpawnNewCustomer{
+//    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+//    id action = [CCMoveTo actionWithDuration:3 position:ccp(self.position.x, screenSize.height + self.boundingBox.size.height)];
+//    id actionEnd = [CCCallFunc actionWithTarget:self selector:@selector(deleteSelf)];
+//    [self runAction:[CCSequence actions:action, actionEnd, nil]];
+}
+
+-(void)doCustomerLeave{
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    id action = [CCMoveTo actionWithDuration:3 position:ccp(self.position.x, screenSize.height + self.boundingBox.size.height)];
+    id actionEnd = [CCCallFunc actionWithTarget:self selector:@selector(deleteSelf)];
+    [self runAction:[CCSequence actions:action, actionEnd, nil]];
+}
+                    
+-(void)deleteSelf{
+    [self removeFromParentAndCleanup:true];
 }
 
 @end

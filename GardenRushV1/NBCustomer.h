@@ -15,10 +15,13 @@
     CCArray* requests;
     
     float initialWaitingTime;
-    float currentWaitingTIme;
+    float currentWaitingTime;
 }
 
 -(id)initWithIndex:(int)index;
 -(void)updateTimer;
+-(void)doSpawnNewCustomer;
+-(void)doCustomerLeave;
+-(void)deleteSelf;
 
 @end
