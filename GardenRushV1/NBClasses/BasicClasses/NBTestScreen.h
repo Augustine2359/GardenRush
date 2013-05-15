@@ -13,6 +13,8 @@
 
 @interface NBTestScreen : NBBasicScreenLayer
 
+-(void)update:(ccTime)delta;
+
 @property (nonatomic, retain) CCScene* currentScene;
 @property (nonatomic, retain) NBFlowerFieldGameGrid* flowerFieldGameGrid;
 

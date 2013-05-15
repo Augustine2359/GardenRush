@@ -52,4 +52,9 @@
     NBGameGUI* test = [NBGameGUI new];
     [self addChild:test];
 }
+
+-(void)update:(ccTime)delta
+{
+    DLog(@"test");
+}
 @end

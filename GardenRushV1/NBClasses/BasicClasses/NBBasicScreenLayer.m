@@ -14,7 +14,6 @@
 
 #pragma mark - NBBattleLayer
 
-static Boolean isAutoStart = NO;
 static int menuIndex = 0;
 static CCScene* currentScreen = nil;
 static CCScene* defaultScreen = nil;

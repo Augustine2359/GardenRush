@@ -12,15 +12,27 @@
 typedef enum {
 	ftRedFlower = 0,
     ftYellowFlower,
-} FlowerType;
+    ftGreenFlower,
+    ftBlueFlower,
+    ftMaxFlower
+} NBFlowerType;
 
-@interface NBFlower : NSObject
+typedef enum {
+	fmtUp = 0,
+    fmtDown,
+    fmtLeft,
+    fmtRight
+} NBFlowerMoveType;
 
-+(id)createNewFlower:(FlowerType)flowertype onGridPosition:(CGPoint)gridPosition;
-+(void)assignFieldLayer:(CCLayer*)layer;
+@interface NBFlower : CCNode /*<CCTargetedTouchDelegate>*/
+
++(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition;
++(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition;
++(void)assignFieldLayer:(CCNode*)layer;
+-(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
-@property (nonatomic, assign) FlowerType flowerType;
+@property (nonatomic, assign) NBFlowerType flowerType;
 @property (nonatomic, assign) CGPoint gridPosition;
 
 @end
