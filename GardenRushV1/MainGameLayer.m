@@ -9,7 +9,6 @@
 
 // Import the interfaces
 #import "MainGameLayer.h"
-#import "NBGameGUI.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"

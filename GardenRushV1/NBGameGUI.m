@@ -47,11 +47,28 @@
 }
 
 -(void)initialiseMoneyGUI{
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    //Read from plist when available
+    currentMoney = 9999;
     
+    CCSprite* moneyFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
+    CGSize frameSize = moneyFrame.boundingBox.size;
+    [moneyFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
+    [moneyFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+    frameSize = moneyFrame.boundingBox.size;
+    [moneyFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
+    [self addChild:moneyFrame];
+    
+    CCLabelTTF* moneyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", currentMoney] fontName:@"Marker Felt" fontSize:32];
+    [moneyLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - moneyFrame.boundingBox.size.height*0.5)];
+    [self addChild:moneyLabel];
 }
 
 -(void)initialiseCustomerGUI{
-    
+    for (int x = 0; x < 3; x++) {
+        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
+        [self addChild:thatCustomer];
+    }
 }
 
 @end
