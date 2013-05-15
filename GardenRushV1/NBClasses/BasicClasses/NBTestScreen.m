@@ -55,6 +55,5 @@
 
 -(void)update:(ccTime)delta
 {
-    DLog(@"test");
 }
 @end
