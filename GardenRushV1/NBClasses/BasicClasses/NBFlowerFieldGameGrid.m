@@ -179,6 +179,8 @@
     NBFlower* originalFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
     NBFlower* flowerToBeSwapped = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
     
+    [originalFlower setZOrder:(flowerToBeSwapped.zOrder + 1)];
+    
     switch (swipeGestureRecognizer.direction)
     {
         case UISwipeGestureRecognizerDirectionDown:
@@ -213,6 +215,8 @@
     NBFlower* originalFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
     NBFlower* flowerToBeSwapped = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
     
+    [originalFlower setZOrder:(flowerToBeSwapped.zOrder + 1)];
+    
     switch (lastGestureDirection)
     {
         case UISwipeGestureRecognizerDirectionDown:
@@ -234,6 +238,10 @@
         default:
             break;
     }
+    
+    CGPoint newGridPosition = flowerToBeSwapped.gridPosition;
+    flowerToBeSwapped.gridPosition = originalFlower.gridPosition;
+    originalFlower.gridPosition = newGridPosition;
 }
 
 -(NBFlowerMatchType)checkLocalMatchFlowersAndAddToMatchSlots:(CGPoint)gridPoint
@@ -388,6 +396,8 @@
     [[self.flowerArrays objectAtIndex:flowerAGrid.x] setObject:newToBeSwappedFlower atIndex:flowerAGrid.y];
     [[self.flowerArrays objectAtIndex:flowerBGrid.x] setObject:newSwappingFlower atIndex:flowerBGrid.y];
     
+    swappingFlower.visible = NO;
+    toBeSwappedFlower.visible = NO;
     [swappingFlower removeFromParentAndCleanup:YES];
     [toBeSwappedFlower removeFromParentAndCleanup:YES];
     
@@ -398,6 +408,8 @@
 
 -(void)onFlowerMoveCompleted
 {
+    bool hasMatch = false;
+    
     isProcessingMove = false;
     
     DLog("Move completed.");
@@ -415,21 +427,27 @@
                 break;
             case mtThreeOfAKind:
                 DLog(@"found three of a kind on selected flower");
+                hasMatch = true;
                 break;
             case mtFourOfAKind:
                 DLog(@"found four of a kind on selected flower");
+                hasMatch = true;
                 break;
             case mtFiveOfAKind:
                 DLog(@"found five of a kind on selected flower");
+                hasMatch = true;
                 break;
             case mtCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on selected flower");
+                hasMatch = true;
                 break;
             case mtSixOfAKind:
                 DLog(@"found six of a kind on selected flower");
+                hasMatch = true;
                 break;
             case mtSevenOfAKind:
                 DLog(@"found seven of a kind on selected flower");
+                hasMatch = true;
                 break;
             default:
                 break;
@@ -442,25 +460,34 @@
                 break;
             case mtThreeOfAKind:
                 DLog(@"found three of a kind on swapped flower");
+                hasMatch = true;
                 break;
             case mtFourOfAKind:
                 DLog(@"found four of a kind on swapped flower");
+                hasMatch = true;
                 break;
             case mtFiveOfAKind:
                 DLog(@"found five of a kind on swapped flower");
+                hasMatch = true;
                 break;
             case mtCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on swapped flower");
+                hasMatch = true;
                 break;
             case mtSixOfAKind:
                 DLog(@"found six of a kind on swapped flower");
+                hasMatch = true;
                 break;
             case mtSevenOfAKind:
                 DLog(@"found seven of a kind on swapped flower");
+                hasMatch = true;
                 break;
             default:
                 break;
         }
+        
+        if (!hasMatch)
+            [self returnFlower];
     }
     else
         isReturningFlower = false;
