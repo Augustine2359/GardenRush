@@ -43,17 +43,15 @@
         initialWaitingTime = 10;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
-        [self schedule:@selector(updateTimer) interval:1];
     }
     return self;
 }
 
--(void)updateTimer{
-    currentWaitingTime--;
-    CCLOG(@"TIME = %f", currentWaitingTime);
+-(void)updateTimer:(ccTime)deltaTime{
+    currentWaitingTime -= deltaTime;
     if (currentWaitingTime <= 0) {
         CCLOG(@"Time up!");
-        [self unschedule:@selector(updateTimer)];
+        currentWaitingTime = 0;
         [self doCustomerLeave];
     }
     

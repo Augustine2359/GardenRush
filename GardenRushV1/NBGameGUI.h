@@ -13,11 +13,20 @@
 
 @interface NBGameGUI : CCLayer {
     CCArray* livesArray;
-    int currentMoney;
+    
+    CCLabelTTF* moneyLabel;
+    int tempMoney, actualMoney;
+    
+    CCArray* customersArray;
 }
 
 -(void)initialiseLivesGUI;
 -(void)initialiseMoneyGUI;
 -(void)initialiseCustomerGUI;
+
+-(void)updateCustomer:(ccTime)deltaTime;
+-(void)updateMoney;
+
+-(void)doAddMoney:(int)amount;
 
 @end

@@ -7,6 +7,10 @@
 //
 
 #import "NBTestScreen.h"
+#import "NBGameGUI.h"
+
+NBGameGUI* test = nil;
+
 
 @implementation NBTestScreen
 
@@ -49,11 +53,12 @@
     [self.currentScene addChild:self.flowerFieldGameGrid];
     
     //Temp test pls delete
-    NBGameGUI* test = [NBGameGUI new];
+    test = [NBGameGUI new];
     [self addChild:test];
 }
 
 -(void)update:(ccTime)delta
 {
+    [test updateCustomer:delta];
 }
 @end

@@ -19,7 +19,7 @@
 }
 
 -(id)initWithIndex:(int)index;
--(void)updateTimer;
+-(void)updateTimer:(ccTime)deltaTime;
 -(void)doSpawnNewCustomer;
 -(void)doCustomerLeave;
 -(void)deleteSelf;
