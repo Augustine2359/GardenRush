@@ -43,7 +43,6 @@
         initialWaitingTime = 10;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
-        [self schedule:@selector(updateTimer) interval:1];
     }
     return self;
 }
@@ -53,7 +52,7 @@
     //CCLOG(@"TIME = %f", currentWaitingTime);
     if (currentWaitingTime <= 0) {
         CCLOG(@"Time up!");
-        [self unschedule:@selector(updateTimer)];
+        currentWaitingTime = 0;
         [self doCustomerLeave];
     }
     

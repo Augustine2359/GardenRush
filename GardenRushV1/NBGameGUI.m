@@ -49,9 +49,10 @@
 -(void)initialiseMoneyGUI{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     //Read from plist when available
-    currentMoney = 9999;
+    actualMoney = 0;
+    tempMoney = actualMoney;
     
-    CCSprite* moneyFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
+    CCSprite* moneyFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
     CGSize frameSize = moneyFrame.boundingBox.size;
     [moneyFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
     [moneyFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
@@ -59,16 +60,45 @@
     [moneyFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
     [self addChild:moneyFrame];
     
-    CCLabelTTF* moneyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", currentMoney] fontName:@"Marker Felt" fontSize:32];
+    moneyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempMoney] fontName:@"Marker Felt" fontSize:32];
     [moneyLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - moneyFrame.boundingBox.size.height*0.5)];
     [self addChild:moneyLabel];
+    
+//    id delay = [CCDelayTime actionWithDuration:2];
+//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddMoney:)];
+//    [self runAction:[CCSequence actions:delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
+    customersArray = [CCArray new];
+    
     for (int x = 0; x < 3; x++) {
         NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
         [self addChild:thatCustomer];
+        [customersArray addObject:thatCustomer];
     }
+}
+
+-(void)updateCustomer:(ccTime)deltaTime{
+    for (int x = 0; x < [customersArray count]; x++) {
+        [(NBCustomer*)[customersArray objectAtIndex:x] updateTimer:deltaTime];
+    }
+}
+
+-(void)updateMoney{
+    if (tempMoney >= actualMoney) {
+        tempMoney = actualMoney;
+        [self unschedule:@selector(updateMoney)];
+        return;
+    }
+    
+    tempMoney += 5;
+    [moneyLabel setString:[NSString stringWithFormat:@"$%i", tempMoney]];
+}
+
+-(void)doAddMoney:(int)amount{
+    actualMoney += amount;
+    [self schedule:@selector(updateMoney) interval:1.0f/60.0f];
 }
 
 @end
