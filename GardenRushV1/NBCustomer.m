@@ -47,9 +47,8 @@
     return self;
 }
 
--(void)updateTimer{
-    currentWaitingTime--;
-    //CCLOG(@"TIME = %f", currentWaitingTime);
+-(void)updateTimer:(ccTime)deltaTime{
+    currentWaitingTime -= deltaTime;
     if (currentWaitingTime <= 0) {
         CCLOG(@"Time up!");
         currentWaitingTime = 0;
