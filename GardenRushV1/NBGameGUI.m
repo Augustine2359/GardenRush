@@ -64,9 +64,9 @@
     [moneyLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - moneyFrame.boundingBox.size.height*0.5)];
     [self addChild:moneyLabel];
     
-    id delay = [CCDelayTime actionWithDuration:2];
-    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddMoney:)];
-    [self runAction:[CCSequence actions:delay, asd, nil]];
+//    id delay = [CCDelayTime actionWithDuration:2];
+//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddMoney:)];
+//    [self runAction:[CCSequence actions:delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
