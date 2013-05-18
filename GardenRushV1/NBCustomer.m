@@ -50,7 +50,7 @@
 
 -(void)updateTimer{
     currentWaitingTime--;
-    CCLOG(@"TIME = %f", currentWaitingTime);
+    //CCLOG(@"TIME = %f", currentWaitingTime);
     if (currentWaitingTime <= 0) {
         CCLOG(@"Time up!");
         [self unschedule:@selector(updateTimer)];

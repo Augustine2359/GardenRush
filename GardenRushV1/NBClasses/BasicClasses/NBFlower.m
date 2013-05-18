@@ -9,6 +9,7 @@
 #import "NBFlower.h"
 
 static CCNode* flowerFieldLayer = nil;
+static CGPoint startingPosition = {0, 0};
 
 @implementation NBFlower
 
@@ -31,6 +32,11 @@ static CCNode* flowerFieldLayer = nil;
 +(void)assignFieldLayer:(CCNode*)layer
 {
     flowerFieldLayer = layer;
+}
+
++(void)assignStartingPosition:(CGPoint)position
+{
+    startingPosition = position;
 }
 
 -(id)initWithFlowerType:(NBFlowerType)flowerType onGridPosition:(CGPoint)gridPosition
@@ -70,10 +76,11 @@ static CCNode* flowerFieldLayer = nil;
         //self.flowerImage.visible = NO;
         self.flowerType = flowerType;
         self.gridPosition = gridPosition;
-        self.flowerImage.anchorPoint = ccp(0.5f, 0.5f);
-        self.flowerImage.position = ccp((gridPosition.x * 30) + 15, (gridPosition.y * 30) + 15);
-        self.flowerImage.scaleX = 26 / self.flowerImage.contentSize.width;
-        self.flowerImage.scaleY = 26 / self.flowerImage.contentSize.height;
+        self.flowerImage.anchorPoint = ccp(0, 0);
+        self.position = ccp((gridPosition.x * (FLOWERSIZE_WIDTH + 4)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + 4)) + startingPosition.y);
+        //self.flowerImage.position = ccp((gridPosition.x * (FLOWERSIZE_WIDTH + 4)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + 4)) + startingPosition.y);
+        self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
+        self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
         [self addChild:self.flowerImage];
         [flowerFieldLayer addChild:self];
         
@@ -87,20 +94,21 @@ static CCNode* flowerFieldLayer = nil;
 {
     CCMoveBy* moveBy = nil;
     float moveDuration = 0.65f;
+    CGFloat moveDistance = FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH;
     
     switch (moveType)
     {
         case fmtUp:
-            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(0, 30)];
+            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(0, moveDistance)];
             break;
         case fmtDown:
-            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(0, -30)];
+            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(0, -moveDistance)];
             break;
         case fmtLeft:
-            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(-30, 0)];
+            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(-moveDistance, 0)];
             break;
         case fmtRight:
-            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(30, 0)];
+            moveBy = [CCMoveBy actionWithDuration:moveDuration position:ccp(moveDistance, 0)];
             break;
         default:
             break;
@@ -116,6 +124,24 @@ static CCNode* flowerFieldLayer = nil;
         CCSequence* sequence = [CCSequence actions:moveBy, moveCompleted, nil];
         [self runAction:sequence];
     }
+}
+
+-(void)moveToGrid:(CGPoint)destinationGrid
+{
+    self.isMovingForMatchingRemovalCompleted = false;
+    
+    CGPoint destination = CGPointMake(destinationGrid.x * (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH), destinationGrid.y * (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH));
+    destination = ccpAdd(destination, CGPointMake(FIELD_FLOWER_GAP_WIDTH, FIELD_FLOWER_GAP_WIDTH));
+    
+    CCMoveTo* moveTo = [CCMoveTo actionWithDuration:0.5f position:destination];
+    CCCallFunc* moveCompleted = [CCCallFunc actionWithTarget:self selector:@selector(onMoveForRemovalCompleted)];
+    CCSequence* sequence = [CCSequence actions:moveTo, moveCompleted, nil];
+    [self runAction:sequence];
+}
+
+-(void)onMoveForRemovalCompleted
+{
+    self.isMovingForMatchingRemovalCompleted = true;
 }
 
 @end
