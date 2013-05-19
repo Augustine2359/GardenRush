@@ -14,7 +14,7 @@
 -(id)init{
     if ([super init]) {
         [self initialiseLivesGUI];
-        [self initialiseMoneyGUI];
+        [self initialiseScoreGUI];
         [self initialiseCustomerGUI];
     }
     return self;
@@ -46,27 +46,30 @@
     }
 }
 
--(void)initialiseMoneyGUI{
+-(void)initialiseScoreGUI{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    additionalScoreLabels = [CCArray new];
+    [additionalScoreLabels retain];
     //Read from plist when available
-    actualMoney = 0;
-    tempMoney = actualMoney;
+    actualScore = 0;
+    tempScore = actualScore;
     
-    CCSprite* moneyFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
-    CGSize frameSize = moneyFrame.boundingBox.size;
-    [moneyFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
-    [moneyFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-    frameSize = moneyFrame.boundingBox.size;
-    [moneyFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
-    [self addChild:moneyFrame];
+    CCSprite* scoreFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
+    CGSize frameSize = scoreFrame.boundingBox.size;
+    [scoreFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
+    [scoreFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+    frameSize = scoreFrame.boundingBox.size;
+    [scoreFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
+    [self addChild:scoreFrame];
     
-    moneyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempMoney] fontName:@"Marker Felt" fontSize:32];
-    [moneyLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - moneyFrame.boundingBox.size.height*0.5)];
-    [self addChild:moneyLabel];
+    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:32];
+    [scoreLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5)];
+    [self addChild:scoreLabel];
     
-//    id delay = [CCDelayTime actionWithDuration:2];
-//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddMoney:)];
-//    [self runAction:[CCSequence actions:delay, asd, nil]];
+    //Testing only 
+    id delay = [CCDelayTime actionWithDuration:1];
+    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddScore:)];
+    [self runAction:[CCSequence actions:delay, asd, delay, asd, delay, asd, delay, asd, delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
@@ -74,7 +77,7 @@
     
     for (int x = 0; x < 3; x++) {
         NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-        [self addChild:thatCustomer];
+        [self addChild:thatCustomer z:-1];
         [customersArray addObject:thatCustomer];
     }
 }
@@ -85,20 +88,39 @@
     }
 }
 
--(void)updateMoney{
-    if (tempMoney >= actualMoney) {
-        tempMoney = actualMoney;
-        [self unschedule:@selector(updateMoney)];
+-(void)updateScore{
+    if (tempScore >= actualScore) {
+        tempScore = actualScore;
+        [self unschedule:@selector(updateScore)];
+        isScoreUpdating = NO;
         return;
     }
     
-    tempMoney += 5;
-    [moneyLabel setString:[NSString stringWithFormat:@"$%i", tempMoney]];
+    tempScore += 5;
+    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
 }
 
--(void)doAddMoney:(int)amount{
-    actualMoney += amount;
-    [self schedule:@selector(updateMoney) interval:1.0f/60.0f];
+-(void)doAddScore:(int)amount{
+    amount = 200;
+    actualScore += amount;
+    
+    CCLabelTTF* additionalScoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"+%i", amount] fontName:@"Marker Felt" fontSize:30];
+    additionalScoreLabel.position = scoreLabel.position;
+    [self addChild:additionalScoreLabel];
+    [additionalScoreLabels addObject:additionalScoreLabel];
+    id move = [CCMoveBy actionWithDuration:2 position:ccp(0, -50)];
+    id delete = [CCCallFunc actionWithTarget:self selector:@selector(deleteAdditionalScoreLabel)];
+    [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
+    
+    if (!isScoreUpdating) {
+        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
+        isScoreUpdating = YES;
+    }
+}
+
+-(void)deleteAdditionalScoreLabel{
+    [[additionalScoreLabels objectAtIndex:0] removeFromParentAndCleanup:YES];
+    [additionalScoreLabels removeObjectAtIndex:0];
 }
 
 @end

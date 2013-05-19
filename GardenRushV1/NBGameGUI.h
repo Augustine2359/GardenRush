@@ -14,19 +14,22 @@
 @interface NBGameGUI : CCLayer {
     CCArray* livesArray;
     
-    CCLabelTTF* moneyLabel;
-    int tempMoney, actualMoney;
+    CCLabelTTF* scoreLabel;
+    CCArray* additionalScoreLabels;
+    int tempScore, actualScore;
+    bool isScoreUpdating;
     
     CCArray* customersArray;
 }
 
 -(void)initialiseLivesGUI;
--(void)initialiseMoneyGUI;
+-(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
 
 -(void)updateCustomer:(ccTime)deltaTime;
--(void)updateMoney;
+-(void)updateScore;
+-(void)deleteAdditionalScoreLabel;
 
--(void)doAddMoney:(int)amount;
+-(void)doAddScore:(int)amount;
 
 @end
