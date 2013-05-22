@@ -13,6 +13,7 @@
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
 		BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FD79C173692D90065D4CF /* Default-568h@2x.png */; };
+		BC829158174A6A800064B977 /* NBTestNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BC829157174A6A800064B977 /* NBTestNode.m */; };
 		BC8EA6441734C4EA004454CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6431734C4EA004454CF /* QuartzCore.framework */; };
 		BC8EA6461734C4EA004454CF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6451734C4EA004454CF /* OpenGLES.framework */; };
 		BC8EA6481734C4EA004454CF /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6471734C4EA004454CF /* OpenAL.framework */; };
@@ -139,6 +140,7 @@
 		BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7CE1734C4ED004454CF /* AppDelegate.m */; };
 		BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D11734C4ED004454CF /* MainGameLayer.m */; };
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
+		BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */; };
 		BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */; };
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
 		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
@@ -157,6 +159,8 @@
 		BC1FD79917363D4A0065D4CF /* NBDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBDataManager.h; path = NBClasses/BasicClasses/NBDataManager.h; sourceTree = "<group>"; };
 		BC1FD79A17363D4A0065D4CF /* NBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBDataManager.m; path = NBClasses/BasicClasses/NBDataManager.m; sourceTree = "<group>"; };
 		BC1FD79C173692D90065D4CF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BC829156174A6A800064B977 /* NBTestNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestNode.h; path = NBClasses/BasicClasses/NBTestNode.h; sourceTree = "<group>"; };
+		BC829157174A6A800064B977 /* NBTestNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBTestNode.m; path = NBClasses/BasicClasses/NBTestNode.m; sourceTree = "<group>"; };
 		BC8EA6401734C4EA004454CF /* GardenRushV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GardenRushV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8EA6431734C4EA004454CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BC8EA6451734C4EA004454CF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -419,6 +423,8 @@
 		BC8EA7D11734C4ED004454CF /* MainGameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameLayer.m; sourceTree = "<group>"; };
 		BC8EA7D31734C4ED004454CF /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		BC9B37691748E3C900FD1EDA /* NBGameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBGameKitHelper.h; path = NBClasses/BasicClasses/NBGameKitHelper.h; sourceTree = "<group>"; };
+		BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBGameKitHelper.m; path = NBClasses/BasicClasses/NBGameKitHelper.m; sourceTree = "<group>"; };
 		BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
 		BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GardenRushSpriteSheet1.png; path = Resources/GardenRushSpriteSheet1.png; sourceTree = "<group>"; };
 		BCDBE3BC173BE870007CEEF2 /* NBFlowerFieldGameGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlowerFieldGameGrid.h; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.h; sourceTree = "<group>"; };
@@ -471,6 +477,10 @@
 				BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */,
 				BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */,
 				BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */,
+				BC9B37691748E3C900FD1EDA /* NBGameKitHelper.h */,
+				BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */,
+				BC829156174A6A800064B977 /* NBTestNode.h */,
+				BC829157174A6A800064B977 /* NBTestNode.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1095,6 +1105,8 @@
 				BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */,
 				BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */,
 				5690B2A5173E91690059192E /* NBCustomer.m in Sources */,
+				BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */,
+				BC829158174A6A800064B977 /* NBTestNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

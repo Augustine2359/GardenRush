@@ -16,6 +16,7 @@
 @interface NBFlowerFieldGameGrid : CCNode
 
 -(void)update:(ccTime)delta;
+-(void)onFlowerGetNewGridPosition:(CGPoint)newPosition fromPosition:(CGPoint)oldPosition;
 
 @property (nonatomic, retain) CCSprite* fieldBackground;
 @property (nonatomic, retain) NSMutableArray* flowerArrays;

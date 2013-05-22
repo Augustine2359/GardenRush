@@ -50,7 +50,7 @@
 -(void)updateTimer:(ccTime)deltaTime{
     currentWaitingTime -= deltaTime;
     if (currentWaitingTime <= 0) {
-        CCLOG(@"Time up!");
+        //CCLOG(@"Time up!");
         currentWaitingTime = 0;
         [self doCustomerLeave];
     }

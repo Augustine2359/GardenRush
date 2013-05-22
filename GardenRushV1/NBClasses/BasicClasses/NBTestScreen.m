@@ -55,10 +55,21 @@ NBGameGUI* test = nil;
     //Temp test pls delete
     test = [NBGameGUI new];
     [self addChild:test];
+    
+    self.flowerCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
+    self.flowerCountLabel.position = CGPointMake(20, self.layerSize.height - 20);
+    [self addChild:self.flowerCountLabel];
+    
+    self.flowerFieldChildCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
+    self.flowerFieldChildCountLabel.position = CGPointMake(20, self.layerSize.height - 50);
+    [self addChild:self.flowerFieldChildCountLabel];
 }
 
 -(void)update:(ccTime)delta
 {
     [test updateCustomer:delta];
+    
+    [self.flowerCountLabel setString:[NSString stringWithFormat:@"%i", [NBFlower getFlowerCount]]];
+    [self.flowerFieldChildCountLabel setString:[NSString stringWithFormat:@"%i", [self.flowerFieldGameGrid children].count]];
 }
 @end

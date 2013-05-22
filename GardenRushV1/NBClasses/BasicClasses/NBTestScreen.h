@@ -17,5 +17,7 @@
 
 @property (nonatomic, retain) CCScene* currentScene;
 @property (nonatomic, retain) NBFlowerFieldGameGrid* flowerFieldGameGrid;
+@property (nonatomic, retain) CCLabelTTF* flowerCountLabel;
+@property (nonatomic, retain) CCLabelTTF* flowerFieldChildCountLabel;
 
 @end

@@ -8,17 +8,22 @@
 
 
 #import <GameKit/GameKit.h>
+#import "NBGameKitHelper.h"
 #import "NBBasicScreenLayer.h"
+#import "NBTestNode.h"
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
 // HelloWorldLayer
-@interface MainGameLayer : NBBasicScreenLayer
+@interface MainGameLayer : NBBasicScreenLayer <NBGameKitHelperProtocol>
 {
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+
+@property (nonatomic, retain) CCLabelTTF* testNodeCountLabel;
+@property (nonatomic, retain) CCLabelTTF* layerNodeCountLabel;
 
 @end

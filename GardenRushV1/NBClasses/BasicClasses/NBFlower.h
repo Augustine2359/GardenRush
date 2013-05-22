@@ -25,7 +25,8 @@ typedef enum
 } NBFlowerMatchType;
 
 typedef enum {
-	ftRedFlower = 0,
+    ftNoFlower = 0,
+	ftRedFlower,
     ftYellowFlower,
     ftGreenFlower,
     ftBlueFlower,
@@ -39,20 +40,28 @@ typedef enum {
     fmtRight
 } NBFlowerMoveType;
 
-@interface NBFlower : CCNode /*<CCTargetedTouchDelegate>*/
+@interface NBFlower : CCNode <CCTargetedTouchDelegate>
+{
+    SEL callSelectorAfterMove;
+}
 
 +(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition;
 +(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition;
++(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
++(void)assignFlowerField:(NSMutableArray*)fieldFlowerArray;
++(int)getFlowerCount;
++(CGPoint)convertFieldGridPositionToActualPixel:(CGPoint)gridPosition;
 -(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector;
--(void)moveToGrid:(CGPoint)destinationGrid;
+-(void)moveToGrid:(CGPoint)destinationGrid withDuration:(float)duration informSelector:(SEL)selector;
+-(void)fallByOneGrid:(SEL)selector;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBFlowerType flowerType;
 @property (nonatomic, assign) CGPoint gridPosition;
 @property (nonatomic, assign) bool isMarkedMatched;
-@property (nonatomic, assign) bool isMovingForMatchingRemovalCompleted;
+@property (nonatomic, assign) bool isMoveCompleted;
 @property (nonatomic, assign) NBFlowerMatchType matchType;
 
 @end
