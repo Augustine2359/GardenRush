@@ -43,8 +43,15 @@
         initialWaitingTime = 10;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
+        
+        [self scheduleUpdate];
     }
     return self;
+}
+
+-(void)update:(ccTime)delta
+{
+    //DLog(@"test");
 }
 
 -(void)updateTimer:(ccTime)deltaTime{

@@ -14,7 +14,9 @@
     bool isProcessingMatching;
     bool isReturningFlower; //use to detect whether after the move need to check match
     bool isRearranging;
+    bool isCheckingCombo;
     UISwipeGestureRecognizerDirection lastGestureDirection;
+    ccTime timeRemainingBeforeComboCheck;
 }
 
 @property (nonatomic, strong) NSArray *gestureRecognizers;
@@ -33,7 +35,8 @@
         
         [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * FIELD_HORIZONTAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * FIELD_VERTICAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH))];
         self.anchorPoint = ccp(0, 0);
-        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), 10);
+        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), 30);
+        //DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
         self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
         self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
@@ -48,6 +51,7 @@
         self.arrayOfMatchedFlowerSlot1 = [NSMutableArray array];
         self.arrayOfMatchedFlowerSlot2 = [NSMutableArray array];
         self.arrayOfMatchedFlowerSlots = [NSMutableArray array];
+        self.potentialComboGrids = [NSMutableArray array];
         
         for (int i = 0; i < FIELD_HORIZONTAL_UNIT_COUNT; i++)
         {
@@ -60,11 +64,14 @@
         [NBFlower assignStartingPosition:CGPointMake(FIELD_FLOWER_GAP_WIDTH, FIELD_FLOWER_GAP_WIDTH)];
         [NBFlower assignFlowerField:self.flowerArrays];
         
-        [self fillFlower];
+        [self generateLevel];
+        [self showAllFlower];
         isProcessingMove = false;
         
         [self addSwipeGestureRecognizers];
         [self scheduleUpdate];
+        
+        timeRemainingBeforeComboCheck = DURATION_TO_CHECK_EMPTY_SLOT;
     }
     
     return self;
@@ -78,18 +85,130 @@
         {
             if ([[self.flowerArrays objectAtIndex:i] count] < 10)
             {
-                NBFlower* flower = [NBFlower createRandomFlowerOnGridPosition:CGPointMake(i, j)];
-                //NBFlower* flower = [NBFlower createNewFlower:ftRedFlower onGridPosition:CGPointMake(i, j)];
+                NBFlower* flower = [NBFlower createRandomFlowerOnGridPosition:CGPointMake(i, j) show:true];
                 [[self.flowerArrays objectAtIndex:i] addObject:flower];
             }
             else
             {
-                NBFlower* flower = [NBFlower createRandomFlowerOnGridPosition:CGPointMake(i, j)];
-                //NBFlower* flower = [NBFlower createNewFlower:ftRedFlower onGridPosition:CGPointMake(i, j)];
+                NBFlower* flower = [NBFlower createRandomFlowerOnGridPosition:CGPointMake(i, j) show:true];
+                [flower show];
                 [[self.flowerArrays objectAtIndex:i] setObject:flower atIndex:j];
             }
         }
     }
+}
+
+-(void)generateLevel
+{
+    for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
+    {
+        for (int y = 0; y < FIELD_VERTICAL_UNIT_COUNT; y++)
+        {
+            NBFlower* newFlower = [NBFlower createRandomFlowerOnGridPosition:ccp(x, y) show:false];
+            [[self.flowerArrays objectAtIndex:x] addObject:newFlower];
+            if ([self checkMatchOnGrid:ccp(x, y)])
+            {
+                [[self.flowerArrays objectAtIndex:x] removeLastObject];
+                [self removeChild:newFlower cleanup:YES];
+                [newFlower release];
+                y--;
+            }
+        }
+    }
+}
+
+-(void)showAllFlower
+{
+    for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
+    {
+        for (int y = 0; y < FIELD_VERTICAL_UNIT_COUNT; y++)
+        {
+            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
+            [flower show];
+        }
+    }
+}
+
+-(bool)checkMatchOnGrid:(CGPoint)gridPosition
+{
+    int matchCount = 1; //include the flower itself
+    int matchCountHorizontal = 1;
+    int matchCountVertical = 1;
+    bool matchDetectedOnHorizontal = false;
+    bool matchDetectedOnVertical = false;
+    
+    NBFlower* localFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridPosition.y];
+    
+    //check to the right
+    for (int i = 1; i < 5; i++)
+    {
+        int gridX = gridPosition.x + i;
+        if (gridX >= FIELD_HORIZONTAL_UNIT_COUNT) break;
+        if (gridX >= [[self.flowerArrays objectAtIndex:gridX] count]) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
+        if (localFlower.flowerType == nextFlower.flowerType)
+            matchCountHorizontal++;
+        else
+            break;
+    }
+    
+    //check to the left
+    for (int i = 1; i < 5; i++)
+    {
+        int gridX = gridPosition.x - i;
+        if (gridX < 0) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
+        if (localFlower.flowerType == nextFlower.flowerType)
+            matchCountHorizontal++;
+        else
+            break;
+    }
+    
+    if (matchCountHorizontal < 3)
+        matchCountHorizontal = 1; //If match count is not even three, dont add to the total match count and make 1
+    else
+        matchDetectedOnHorizontal = true; //if have 3 or more, mark as match found horizontally
+    
+    //check to the above
+    for (int i = 1; i < 5; i++)
+    {
+        int gridY = gridPosition.y + i;
+        if (gridY >= FIELD_VERTICAL_UNIT_COUNT) break;
+        if (gridY >= [[self.flowerArrays objectAtIndex:gridPosition.x] count]) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
+        if (localFlower.flowerType == nextFlower.flowerType)
+            matchCountVertical++;
+        else
+            break;
+    }
+    
+    //check to the bottom
+    for (int i = 1; i < 5; i++)
+    {
+        int gridY = gridPosition.y - i;
+        if (gridY < 0) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
+        if (localFlower.flowerType == nextFlower.flowerType)
+            matchCountVertical++;
+        else
+            break;
+    }
+    
+    if (matchCountVertical < 3)
+        matchCountVertical = 1; //If match count is not even three, dont add to the total match count and make 1
+    else
+        matchDetectedOnVertical = true; //if have 3 or more, mark as match found vertically as well
+    
+    matchCount = matchCountHorizontal + matchCountVertical - 1; //minus 1 to remove duplicate match with self when matching vertically
+    
+    if (matchCount >= 3)
+        return true;
+    else
+        return false;
 }
 
 -(CGPoint)isTouchingWhichGrid:(CGPoint)touchLocation
@@ -130,6 +249,8 @@
 {
     if (isProcessingMove || isProcessingMatching) return;
     
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
     isProcessingMove = true;
     
     CGPoint touchLocation = [swipeGestureRecognizer locationInView:[CCDirector sharedDirector].view];
@@ -137,7 +258,7 @@
     //need to flip because the coordinate systems are flipped
     touchLocation.y = [[CCDirector sharedDirector] winSize].height - touchLocation.y;
     
-    touchLocation = ccp(touchLocation.x - 10, touchLocation.y - 10);
+    touchLocation = ccp(touchLocation.x - (winSize.width / 2 - (self.contentSize.width / 2)), touchLocation.y - FIELD_Y_POSITION);
     
     CGPoint gridPositionBeingTouch = [self isTouchingWhichGrid:touchLocation];
     DLog(@"Flower Index (%f, %f) is touched.", gridPositionBeingTouch.x, gridPositionBeingTouch.y);
@@ -246,7 +367,7 @@
     originalFlower.gridPosition = newGridPosition;
 }
 
--(NBFlowerMatchType)checkLocalMatchFlowersAndAddToMatchSlots:(CGPoint)gridPoint
+-(NSMutableArray*)checkLocalMatchFlowersAndAddToMatchSlots:(CGPoint)gridPoint
 {
     NSMutableArray* array = [NSMutableArray array];
     
@@ -368,7 +489,7 @@
     
         for (int i = 0; i < [array count]; i++)
         {
-            NSValue* value = [array objectAtIndex:0];
+            NSValue* value = [array objectAtIndex:i];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
             flower.matchType = matchType;
@@ -377,13 +498,13 @@
         [self.arrayOfMatchedFlowerSlots addObject:array];
         [self processRemoveMatchedFlowerOnArray:array];
         
-        return matchType;
+        return array;
     }
     else
     {
         //Otherwise
         [array removeAllObjects];
-        return mtNoMatch;
+        return nil;
     }
 }
 
@@ -392,8 +513,8 @@
     NBFlower* swappingFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerAGrid.x] objectAtIndex:flowerAGrid.y];
     NBFlower* toBeSwappedFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerBGrid.x] objectAtIndex:flowerBGrid.y];
     
-    NBFlower* newSwappingFlower = [NBFlower createNewFlower:swappingFlower.flowerType onGridPosition:swappingFlower.gridPosition];
-    NBFlower* newToBeSwappedFlower = [NBFlower createNewFlower:toBeSwappedFlower.flowerType onGridPosition:toBeSwappedFlower.gridPosition];
+    NBFlower* newSwappingFlower = [NBFlower createNewFlower:swappingFlower.flowerType onGridPosition:swappingFlower.gridPosition show:true];
+    NBFlower* newToBeSwappedFlower = [NBFlower createNewFlower:toBeSwappedFlower.flowerType onGridPosition:toBeSwappedFlower.gridPosition show:true];
     
     [[self.flowerArrays objectAtIndex:flowerAGrid.x] setObject:newToBeSwappedFlower atIndex:flowerAGrid.y];
     [[self.flowerArrays objectAtIndex:flowerBGrid.x] setObject:newSwappingFlower atIndex:flowerBGrid.y];
@@ -422,7 +543,14 @@
 
     if (!isReturningFlower)
     {
-        self.currentMatchType = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
+        NSMutableArray* arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
+        if ([arrayOfMatchedFlowers count] > 0)
+        {
+            NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
+            CGPoint flowerPosition = [value CGPointValue];
+            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
+            self.currentMatchType = flower.matchType;
+        }
         
         switch (self.currentMatchType)
         {
@@ -457,7 +585,16 @@
                 break;
         }
         
-        switch ([self checkLocalMatchFlowersAndAddToMatchSlots:self.swappedFlowerGrid])
+        arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.swappedFlowerGrid];
+        if ([arrayOfMatchedFlowers count] > 0)
+        {
+            NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
+            CGPoint flowerPosition = [value CGPointValue];
+            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
+            self.currentMatchType = flower.matchType;
+        }
+        
+        switch (self.currentMatchType)
         {
             case mtNoMatch:
                 DLog(@"no match on swapped flower");
@@ -516,7 +653,7 @@
         [matchingFlower moveToGrid:originalFlower.gridPosition withDuration:0.45f informSelector:nil];
     }
     
-    isProcessingMatching = true;
+    //isProcessingMatching = true;
 }
 
 -(void)update:(ccTime)delta
@@ -561,7 +698,19 @@
     
     if (!isRearranging)
     {
+        //if ([self.potentialComboGrids count] == 0)
         [self checkEmptySlots];
+        
+        timeRemainingBeforeComboCheck -= delta;
+        if (timeRemainingBeforeComboCheck <= 0)
+        {
+            timeRemainingBeforeComboCheck = DURATION_TO_CHECK_EMPTY_SLOT;
+            
+            if ([self.potentialComboGrids count] > 0)
+            {
+                [self checkMatchCombo];
+            }
+        }
     }
 }
 
@@ -572,7 +721,7 @@
         NSValue* value = [arrayOfToBeRemovedFlowers objectAtIndex:i];
         CGPoint matchingFlowerPosition = [value CGPointValue];
         NBFlower* matchingFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:matchingFlowerPosition.x] objectAtIndex:matchingFlowerPosition.y];
-        NBFlower* emptyFlower = [NBFlower createNewFlower:ftNoFlower onGridPosition:matchingFlowerPosition];
+        NBFlower* emptyFlower = [NBFlower createNewFlower:ftNoFlower onGridPosition:matchingFlowerPosition show:true];
         
         [[self.flowerArrays objectAtIndex:matchingFlowerPosition.x] setObject:emptyFlower atIndex:matchingFlowerPosition.y];
         [self removeChild:matchingFlower cleanup:YES];
@@ -582,7 +731,10 @@
 
 -(void)checkEmptySlots
 {
-    if (isProcessingMatching) return;
+    //if (isProcessingMatching) return;
+    
+    bool hasEmpty = false;
+    //self.potentialComboGrids = [NSMutableArray array];
     
     for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
     {
@@ -591,107 +743,146 @@
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
             if (flower.flowerType == ftNoFlower)
             {
+                hasEmpty = true;
                 [self rearrangeGridPosition:CGPointMake(x, y)];
             }
         }
     }
+    
+    if (!hasEmpty)
+        isProcessingMatching = false;
+}
+
+-(void)checkMatchCombo
+{
+    if (isProcessingMatching) return;
+    
+    isCheckingCombo = true;
+    bool hasMatch = false;
+    
+    for (int i = 0; i < [self.potentialComboGrids count]; i++)
+    {
+        NSValue* value = [self.potentialComboGrids objectAtIndex:i];
+        CGPoint flowerPosition = [value CGPointValue];
+        
+        NSMutableArray* arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:flowerPosition];
+        if ([arrayOfMatchedFlowers count] > 0)
+        {
+            NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
+            CGPoint flowerPosition = [value CGPointValue];
+            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
+            self.currentMatchType = flower.matchType;
+        }
+
+        switch (self.currentMatchType)
+        {
+            case mtNoMatch:
+                DLog(@"no match on swapped flower");
+                break;
+            case mtThreeOfAKind:
+                DLog(@"found three of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            case mtFourOfAKind:
+                DLog(@"found four of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            case mtFiveOfAKind:
+                DLog(@"found five of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            case mtCornerFiveOfAKind:
+                DLog(@"found corner type five of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            case mtSixOfAKind:
+                DLog(@"found six of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            case mtSevenOfAKind:
+                DLog(@"found seven of a kind on swapped flower");
+                hasMatch = true;
+                break;
+            default:
+                break;
+        }
+        
+        if (hasMatch)
+        {
+            for (int i = 0; i < [arrayOfMatchedFlowers count]; i++)
+            {
+                NSValue* valueOfMatched = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:i];
+                CGPoint matchedFlowerPosition = [valueOfMatched CGPointValue];
+                
+                for (int j = 0; j < [self.potentialComboGrids count]; j++)
+                {
+                    NSValue* valueOfPotentialCombo = (NSValue*)[self.potentialComboGrids objectAtIndex:j];
+                    CGPoint potentialComboFlowerPosition = [valueOfPotentialCombo CGPointValue];
+                    
+                    if (matchedFlowerPosition.x == potentialComboFlowerPosition.x && matchedFlowerPosition.y == potentialComboFlowerPosition.y)
+                    {
+                        [self.potentialComboGrids removeObjectAtIndex:j];
+                        j--;
+                    }
+                }
+            }
+        }
+    }
+    
+    isCheckingCombo = false;
 }
 
 -(void)rearrangeGridPosition:(CGPoint)gridPosition
 {
     isRearranging = true;
-    int emptyCount = 1;
+    int emptyCount = 0;
+    //self.potentialComboGrids = [NSMutableArray array];
+    timeRemainingBeforeComboCheck = DURATION_TO_CHECK_EMPTY_SLOT;
 
     while (true)
     {
-        CGPoint gridAbove = CGPointMake(gridPosition.x, gridPosition.y + 1);
+        CGPoint gridAbove = CGPointMake(gridPosition.x, gridPosition.y + 1 + emptyCount);
         if (gridAbove.y >= FIELD_VERTICAL_UNIT_COUNT)
         {
-            [self generateRandomFlowerAndFallOnGridPosition:gridPosition];
+            [self generateRandomFlowerAndBloomOnGridPosition:gridPosition];
             break;
         }
-        
-        NBFlower* flowerAbove = (NBFlower*)[[self.flowerArrays objectAtIndex:gridAbove.x] objectAtIndex:gridAbove.y];
-        NBFlower* flowerInThisGrid = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridPosition.y];
-        NBFlower* emptyFlower = [NBFlower createNewFlower:ftNoFlower onGridPosition:gridAbove];
-        
-        if (flowerAbove.flowerType == ftNoFlower)
-            emptyCount++;
-        
-        NBFlower* newFlowerAbove = [NBFlower createNewFlower:flowerAbove.flowerType onGridPosition:flowerAbove.gridPosition];
-        [[self.flowerArrays objectAtIndex:gridPosition.x] setObject:newFlowerAbove atIndex:gridPosition.y];
-        [[self.flowerArrays objectAtIndex:gridAbove.x] setObject:emptyFlower atIndex:gridAbove.y];
-        [newFlowerAbove moveToGrid:gridPosition withDuration:0.3f informSelector:nil];
-        
-        [flowerAbove removeFromParentAndCleanup:YES];
-        [flowerAbove release];
-        [flowerInThisGrid removeFromParentAndCleanup:YES];
-        [flowerInThisGrid release];
-        
-        gridPosition = CGPointMake(gridPosition.x, gridPosition.y + 1);
-    }
-    
-    isRearranging = false;
-}
-
--(void)processFillFlowerOnGrid:(CGPoint)gridPosition
-{
-    CGPoint gridAbove = CGPointMake(gridPosition.x, gridPosition.y + 1);
-    if (gridAbove.y >= FIELD_VERTICAL_UNIT_COUNT)
-    {
-        [self generateRandomFlowerAndFallOnGridPosition:gridAbove];
-    }
-    else
-    {
-        while (true)
+        else
         {
             NBFlower* flowerAbove = (NBFlower*)[[self.flowerArrays objectAtIndex:gridAbove.x] objectAtIndex:gridAbove.y];
             if (flowerAbove.flowerType == ftNoFlower)
             {
-                gridAbove = CGPointMake(gridAbove.x, gridAbove.y + 1);
-                
-                if (gridAbove.y >= FIELD_VERTICAL_UNIT_COUNT)
-                {
-                    [self generateRandomFlowerAndFallOnGridPosition:gridAbove];
-                }
-                
-                continue;
+                emptyCount++;
             }
             else
             {
-                [self dropFlowersOnGridPosition:gridPosition];
-                break;
+                NBFlower* flowerInThisGrid = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridPosition.y];
+                NBFlower* emptyFlower = [NBFlower createNewFlower:ftNoFlower onGridPosition:gridAbove show:true];
+                NBFlower* newFlowerAbove = [NBFlower createNewFlower:flowerAbove.flowerType onGridPosition:flowerAbove.gridPosition show:true];
+                
+                [[self.flowerArrays objectAtIndex:gridPosition.x] setObject:newFlowerAbove atIndex:gridPosition.y];
+                [[self.flowerArrays objectAtIndex:gridAbove.x] setObject:emptyFlower atIndex:gridAbove.y];
+                [newFlowerAbove moveToGrid:gridPosition withDuration:(0.3f * (1 + (emptyCount / 2))) informSelector:nil];
+                newFlowerAbove.gridPosition = gridPosition;
+                NSValue* gridPositionObject = [NSValue valueWithCGPoint:newFlowerAbove.gridPosition];
+                [self.potentialComboGrids addObject:gridPositionObject];
+                
+                [flowerAbove removeFromParentAndCleanup:YES];
+                [flowerAbove release];
+                [flowerInThisGrid removeFromParentAndCleanup:YES];
+                [flowerInThisGrid release];
+                
+                emptyCount = 0;
+                gridPosition = CGPointMake(gridPosition.x, gridPosition.y + 1);
             }
         }
     }
-}
-
--(void)dropFlowersOnGridPosition:(CGPoint)gridPosition
-{
-    for (int i = ((int)gridPosition.y + 1); i < FIELD_VERTICAL_UNIT_COUNT; i++)
-    {
-        NBFlower* flowerAbove = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:i];
-        [flowerAbove fallByOneGrid:@selector(onFlowerDropped:)];
-    }
-}
-
--(void)onFlowerDropped:(NBFlower*)flower
-{
-    [self swapFlowerOnGrid:flower.gridPosition withFlowerOnGrid:CGPointMake(flower.gridPosition.x, (flower.gridPosition.y + 1))];
-}
-
--(void)onFlowerGetNewGridPosition:(CGPoint)newPosition fromPosition:(CGPoint)oldPosition
-{
-    NBFlower* flowerThatGetsNewPosition = (NBFlower*)[[self.flowerArrays objectAtIndex:oldPosition.x] objectAtIndex:oldPosition.y];
-    NBFlower* flowerThatWillBeReplaced = (NBFlower*)[[self.flowerArrays objectAtIndex:newPosition.x] objectAtIndex:newPosition.y];
-    NBFlower* newFlower = [NBFlower createNewFlower:flowerThatGetsNewPosition.flowerType onGridPosition:newPosition];
-    [[self.flowerArrays objectAtIndex:newPosition.x] setObject:newFlower atIndex:newPosition.y];
     
-    [flowerThatWillBeReplaced removeFromParentAndCleanup:YES];
-    [flowerThatWillBeReplaced release];
+    isRearranging = false;
+    isProcessingMatching = false;
 }
 
--(void)generateRandomFlowerAndFallOnGridPosition:(CGPoint)gridPosition
+-(void)generateRandomFlowerAndBloomOnGridPosition:(CGPoint)gridPosition
 {
     NBFlower* flowerToBeReplaced = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridPosition.y];
     flowerToBeReplaced.visible = NO;
@@ -700,6 +891,11 @@
     
     [flowerToBeReplaced removeFromParentAndCleanup:YES];
     [flowerToBeReplaced release];
+}
+
+-(bool)checkMatchedFlowerWithCustomerRequirement:(NBFlowerMatchType)flowerMatchType
+{
+    return false;
 }
 
 @end

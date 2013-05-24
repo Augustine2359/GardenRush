@@ -23,5 +23,6 @@
 -(void)doSpawnNewCustomer;
 -(void)doCustomerLeave;
 -(void)deleteSelf;
+-(void)update:(ccTime)delta;
 
 @end

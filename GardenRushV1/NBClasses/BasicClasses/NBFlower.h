@@ -24,7 +24,8 @@ typedef enum
     mtSevenOfAKind
 } NBFlowerMatchType;
 
-typedef enum {
+typedef enum
+{
     ftNoFlower = 0,
 	ftRedFlower,
     ftYellowFlower,
@@ -33,7 +34,8 @@ typedef enum {
     ftMaxFlower
 } NBFlowerType;
 
-typedef enum {
+typedef enum
+{
 	fmtUp = 0,
     fmtDown,
     fmtLeft,
@@ -45,8 +47,8 @@ typedef enum {
     SEL callSelectorAfterMove;
 }
 
-+(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition;
-+(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition;
++(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition show:(bool)show;
++(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition show:(bool)show;
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
@@ -56,6 +58,7 @@ typedef enum {
 -(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector;
 -(void)moveToGrid:(CGPoint)destinationGrid withDuration:(float)duration informSelector:(SEL)selector;
 -(void)fallByOneGrid:(SEL)selector;
+-(void)show;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBFlowerType flowerType;

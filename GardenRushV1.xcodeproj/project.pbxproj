@@ -14,6 +14,7 @@
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
 		BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FD79C173692D90065D4CF /* Default-568h@2x.png */; };
 		BC829158174A6A800064B977 /* NBTestNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BC829157174A6A800064B977 /* NBTestNode.m */; };
+		BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */ = {isa = PBXBuildFile; fileRef = BC82915A174FCBDD0064B977 /* NBBouquet.m */; };
 		BC8EA6441734C4EA004454CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6431734C4EA004454CF /* QuartzCore.framework */; };
 		BC8EA6461734C4EA004454CF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6451734C4EA004454CF /* OpenGLES.framework */; };
 		BC8EA6481734C4EA004454CF /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6471734C4EA004454CF /* OpenAL.framework */; };
@@ -161,6 +162,8 @@
 		BC1FD79C173692D90065D4CF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BC829156174A6A800064B977 /* NBTestNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestNode.h; path = NBClasses/BasicClasses/NBTestNode.h; sourceTree = "<group>"; };
 		BC829157174A6A800064B977 /* NBTestNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBTestNode.m; path = NBClasses/BasicClasses/NBTestNode.m; sourceTree = "<group>"; };
+		BC829159174FCBDD0064B977 /* NBBouquet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBouquet.h; path = NBClasses/BasicClasses/NBBouquet.h; sourceTree = "<group>"; };
+		BC82915A174FCBDD0064B977 /* NBBouquet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBouquet.m; path = NBClasses/BasicClasses/NBBouquet.m; sourceTree = "<group>"; };
 		BC8EA6401734C4EA004454CF /* GardenRushV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GardenRushV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8EA6431734C4EA004454CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BC8EA6451734C4EA004454CF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -481,6 +484,8 @@
 				BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */,
 				BC829156174A6A800064B977 /* NBTestNode.h */,
 				BC829157174A6A800064B977 /* NBTestNode.m */,
+				BC829159174FCBDD0064B977 /* NBBouquet.h */,
+				BC82915A174FCBDD0064B977 /* NBBouquet.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1107,6 +1112,7 @@
 				5690B2A5173E91690059192E /* NBCustomer.m in Sources */,
 				BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */,
 				BC829158174A6A800064B977 /* NBTestNode.m in Sources */,
+				BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
