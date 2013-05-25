@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "NBFlower.h"
+#import "NBBouquet.h"
 
 
 @interface NBCustomer : CCLayer {
     CCSprite* faceImage;
     CCSprite* timerBarImage;
-    NBFlower* flowerRequest;
+    NBBouquet* flowerRequest;
     
     float initialWaitingTime;
     float currentWaitingTime;

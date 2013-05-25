@@ -72,7 +72,7 @@ static NSMutableArray* flowerField = nil;
 
 +(NBFlower*)randomFlower{
     int random = arc4random() % (int)ftMaxFlower;
-    NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0) show:NO];
+    NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0) show:YES];
     return flower;
 }
 

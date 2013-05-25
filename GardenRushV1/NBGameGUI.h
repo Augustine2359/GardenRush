@@ -27,10 +27,10 @@
 -(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
 -(void)updateScore;
+-(void)doAddScore:(int)amount index:(int)customerIndex;
 -(void)deleteAdditionalScoreLabel;
 
 //Public
--(void)doAddScore:(int)amount;
--(void)doFulfillCustomer:(int)index;
+-(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 
 @end
