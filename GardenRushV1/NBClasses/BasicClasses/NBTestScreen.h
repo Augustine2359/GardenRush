@@ -10,6 +10,7 @@
 #import "NBBasicScreenLayer.h"
 #import "NBGameGUI.h"
 #import "NBFlowerFieldGameGrid.h"
+#import "NBBouquet.h"
 
 @interface NBTestScreen : NBBasicScreenLayer
 
