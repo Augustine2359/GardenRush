@@ -67,8 +67,6 @@ NBGameGUI* test = nil;
 
 -(void)update:(ccTime)delta
 {
-    [test updateCustomer:delta];
-    
     [self.flowerCountLabel setString:[NSString stringWithFormat:@"%i", [NBFlower getFlowerCount]]];
     [self.flowerFieldChildCountLabel setString:[NSString stringWithFormat:@"%i", [self.flowerFieldGameGrid children].count]];
 }

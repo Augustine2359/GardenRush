@@ -33,6 +33,12 @@
         [self addChild:faceImage];
         
         //Request images
+        flowerRequest = [NBFlower randomFlower];
+        CCSprite* requestImage = [flowerRequest flowerImage];
+        [requestImage setPosition:ccp(customerFrame.position.x + customerFrame.boundingBox.size.width*0.25,
+                                   customerFrame.position.y + customerFrame.boundingBox.size.height*0.25)];
+//        [self addChild:requestImage];
+        
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
         [timerBarImage setScaleX:5];
@@ -43,15 +49,17 @@
         initialWaitingTime = 10;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
+        [self scheduleUpdate];
     }
     return self;
 }
 
--(void)updateTimer:(ccTime)deltaTime{
-    currentWaitingTime -= deltaTime;
+-(void)update:(ccTime)delta{
+    currentWaitingTime -= delta;
     if (currentWaitingTime <= 0) {
         //CCLOG(@"Time up!");
         currentWaitingTime = 0;
+        [self unscheduleUpdate];
         [self doCustomerLeave];
     }
     

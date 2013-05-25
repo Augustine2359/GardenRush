@@ -67,9 +67,9 @@
     [self addChild:scoreLabel];
     
     //Testing only 
-    id delay = [CCDelayTime actionWithDuration:1];
-    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddScore:)];
-    [self runAction:[CCSequence actions:delay, asd, delay, asd, delay, asd, delay, asd, delay, asd, nil]];
+//    id delay = [CCDelayTime actionWithDuration:1];
+//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddScore:)];
+//    [self runAction:[CCSequence actions:delay, asd, delay, asd, delay, asd, delay, asd, delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
@@ -77,14 +77,8 @@
     
     for (int x = 0; x < 3; x++) {
         NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-        [self addChild:thatCustomer z:-1];
+        [self addChild:thatCustomer z:-2];
         [customersArray addObject:thatCustomer];
-    }
-}
-
--(void)updateCustomer:(ccTime)deltaTime{
-    for (int x = 0; x < [customersArray count]; x++) {
-        [(NBCustomer*)[customersArray objectAtIndex:x] updateTimer:deltaTime];
     }
 }
 
@@ -101,7 +95,7 @@
 }
 
 -(void)doAddScore:(int)amount{
-    amount = 200;
+//    amount = 200;
     actualScore += amount;
     
     CCLabelTTF* additionalScoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"+%i", amount] fontName:@"Marker Felt" fontSize:30];
@@ -121,6 +115,11 @@
 -(void)deleteAdditionalScoreLabel{
     [[additionalScoreLabels objectAtIndex:0] removeFromParentAndCleanup:YES];
     [additionalScoreLabels removeObjectAtIndex:0];
+}
+
+-(void)doFulfillCustomer:(int)index{
+    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
+    [thatCustomer doCustomerLeave];
 }
 
 @end

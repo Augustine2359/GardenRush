@@ -53,6 +53,7 @@ typedef enum {
 +(void)assignFlowerField:(NSMutableArray*)fieldFlowerArray;
 +(int)getFlowerCount;
 +(CGPoint)convertFieldGridPositionToActualPixel:(CGPoint)gridPosition;
++(NBFlower*)randomFlower;
 -(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector;
 -(void)moveToGrid:(CGPoint)destinationGrid withDuration:(float)duration informSelector:(SEL)selector;
 -(void)fallByOneGrid:(SEL)selector;

@@ -22,14 +22,15 @@
     CCArray* customersArray;
 }
 
+//Private
 -(void)initialiseLivesGUI;
 -(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
-
--(void)updateCustomer:(ccTime)deltaTime;
 -(void)updateScore;
 -(void)deleteAdditionalScoreLabel;
 
+//Public
 -(void)doAddScore:(int)amount;
+-(void)doFulfillCustomer:(int)index;
 
 @end

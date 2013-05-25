@@ -8,18 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "NBFlower.h"
+
 
 @interface NBCustomer : CCLayer {
     CCSprite* faceImage;
     CCSprite* timerBarImage;
-    CCArray* requests;
+    NBFlower* flowerRequest;
     
     float initialWaitingTime;
     float currentWaitingTime;
 }
 
+//Private
 -(id)initWithIndex:(int)index;
--(void)updateTimer:(ccTime)deltaTime;
+-(void)update:(ccTime)delta;
 -(void)doSpawnNewCustomer;
 -(void)doCustomerLeave;
 -(void)deleteSelf;
