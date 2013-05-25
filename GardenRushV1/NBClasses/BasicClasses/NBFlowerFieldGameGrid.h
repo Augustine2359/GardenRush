@@ -12,11 +12,12 @@
 
 #define FIELD_HORIZONTAL_UNIT_COUNT 9
 #define FIELD_VERTICAL_UNIT_COUNT 9
+#define FIELD_Y_POSITION 30
+#define DURATION_TO_CHECK_EMPTY_SLOT 0.75f
 
 @interface NBFlowerFieldGameGrid : CCNode
 
 -(void)update:(ccTime)delta;
--(void)onFlowerGetNewGridPosition:(CGPoint)newPosition fromPosition:(CGPoint)oldPosition;
 
 @property (nonatomic, retain) CCSprite* fieldBackground;
 @property (nonatomic, retain) NSMutableArray* flowerArrays;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlot1;
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlot2;
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlots;
+@property (nonatomic, retain) NSMutableArray* potentialComboGrids;
 @property (nonatomic, assign) NBFlowerMatchType currentMatchType;
 
 @end

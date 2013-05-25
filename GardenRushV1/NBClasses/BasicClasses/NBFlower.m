@@ -18,26 +18,29 @@ static NSMutableArray* flowerField = nil;
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition
 {
     NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + 1;
-    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition];
+    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition show:true];
     flower.flowerImage.scale = 0;
     CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scaleX:FLOWERSIZE_WIDTH / flower.flowerImage.contentSize.width scaleY:FLOWERSIZE_HEIGHT / flower.flowerImage.contentSize.height];
     [flower.flowerImage runAction:scaleTo];
     
-    return flower;
-}
-
-+(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition
-{
-    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:flowertype onGridPosition:gridPosition];
+    CCRotateBy* rotateBy = [CCRotateBy actionWithDuration:0.75f angle:360];
+    [flower.flowerImage runAction:rotateBy];
     
     return flower;
 }
 
-+(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition
++(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition show:(bool)show
+{
+    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:flowertype onGridPosition:gridPosition show:show];
+    
+    return flower;
+}
+
++(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition show:(bool)show
 {
     NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + 1;
     
-    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition];
+    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition show:show];
     
     return flower;
 }
@@ -69,11 +72,11 @@ static NSMutableArray* flowerField = nil;
 
 +(NBFlower*)randomFlower{
     int random = arc4random() % (int)ftMaxFlower;
-    NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0)];
+    NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0) show:NO];
     return flower;
 }
 
--(id)initWithFlowerType:(NBFlowerType)flowerType onGridPosition:(CGPoint)gridPosition
+-(id)initWithFlowerType:(NBFlowerType)flowerType onGridPosition:(CGPoint)gridPosition show:(bool)show
 {
     if (!flowerFieldLayer)
     {
@@ -81,7 +84,7 @@ static NSMutableArray* flowerField = nil;
         return nil;
     }
         
-    if ((self = [super init]))
+    if ((self = [[super init] autorelease]))
     {
         self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];;
         
@@ -112,13 +115,13 @@ static NSMutableArray* flowerField = nil;
                 break;
         }
         
-        //self.flowerImage.visible = NO;
+        if (!show)
+            self.flowerImage.visible = NO;
+        
         self.flowerType = flowerType;
         self.gridPosition = gridPosition;
         self.flowerImage.anchorPoint = ccp(0.5, 0.5);
         self.position = [NBFlower convertFieldGridPositionToActualPixel:gridPosition];
-        //self.position = ccp((gridPosition.x * (FLOWERSIZE_WIDTH + 4) + (FLOWERSIZE_WIDTH / 2)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + 4) + (FLOWERSIZE_HEIGHT / 2)) + startingPosition.y);
-        //self.flowerImage.position = ccp((gridPosition.x * (FLOWERSIZE_WIDTH + 4)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + 4)) + startingPosition.y);
         self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
         self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
         [self setContentSize:CGSizeMake(FLOWERSIZE_WIDTH, FLOWERSIZE_HEIGHT)];
@@ -127,7 +130,7 @@ static NSMutableArray* flowerField = nil;
         
         flowerCount++;
         
-        //[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
     }
     
     return self;
@@ -135,6 +138,7 @@ static NSMutableArray* flowerField = nil;
 
 -(void)dealloc
 {
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     [super dealloc];
     //[self removeAllChildrenWithCleanup:YES];
     //[self removeChild:self.flowerImage cleanup:YES];
@@ -185,8 +189,6 @@ static NSMutableArray* flowerField = nil;
     callSelectorAfterMove = selector;
     
     CGPoint destination = [NBFlower convertFieldGridPositionToActualPixel:destinationGrid];
-    //CGPoint destination = ccp((destinationGrid.x * (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_WIDTH / 2)) + startingPosition.x, (destinationGrid.y * (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_HEIGHT / 2)) + startingPosition.y);
-    
     CCMoveTo* moveTo = [CCMoveTo actionWithDuration:duration position:destination];
     CCCallFunc* moveCompleted = [CCCallFunc actionWithTarget:self selector:@selector(onMoveCompleted)];
     CCSequence* sequence = [CCSequence actions:moveTo, moveCompleted, nil];
@@ -196,6 +198,7 @@ static NSMutableArray* flowerField = nil;
 -(void)onMoveCompleted
 {
     self.isMoveCompleted = true;
+    //self.gridPosition = ccp(self.position.x / (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH), self.position.y / (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH));
     
     if (callSelectorAfterMove)
     {
@@ -207,11 +210,39 @@ static NSMutableArray* flowerField = nil;
 {
     CGPoint touchLocation = [touch locationInView:[CCDirector sharedDirector].view];
     touchLocation.y = [[CCDirector sharedDirector] winSize].height - touchLocation.y;
-    touchLocation = ccp(touchLocation.x - 10, touchLocation.y - 10);
+    touchLocation = ccp(touchLocation.x - 5, touchLocation.y - 30);
     int x = touchLocation.x / (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH);
     int y = touchLocation.y / (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH);
     
-    DLog(@"flower at position %i, %i type is %i", x, y, self.flowerType);
+    NBFlower* touchedFlower = (NBFlower*)[[flowerField objectAtIndex:x] objectAtIndex:y];
+    NSString* flowerTypeInString = nil;
+    switch (touchedFlower.flowerType)
+    {
+        case ftNoFlower:
+            flowerTypeInString = @"No Flower";
+            break;
+        
+        case ftRedFlower:
+            flowerTypeInString = @"Red Flower";
+            break;
+            
+        case ftYellowFlower:
+            flowerTypeInString = @"Yellow Flower";
+            break;
+            
+        case ftGreenFlower:
+            flowerTypeInString = @"Green Flower";
+            break;
+            
+        case ftBlueFlower:
+            flowerTypeInString = @"Blue Flower";
+            break;
+            
+        default:
+            break;
+    }
+    
+    DLog(@"flower at position %i, %i type is %@", x, y, flowerTypeInString);
     
     return YES;
 }
@@ -219,6 +250,14 @@ static NSMutableArray* flowerField = nil;
 -(void)fallByOneGrid:(SEL)selector
 {
     [self moveToGrid:CGPointMake(self.gridPosition.x, self.gridPosition.y - 1) withDuration:0.3f informSelector:selector];
+}
+
+-(void)show
+{
+    self.flowerImage.opacity = 0;
+    self.flowerImage.visible = YES;
+    CCFadeIn* fadeIn = [CCFadeIn actionWithDuration:0.2f];
+    [self.flowerImage runAction:fadeIn];
 }
 
 @end
