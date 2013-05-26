@@ -33,6 +33,13 @@
         [self addChild:faceImage];
         
         //Request images
+        int random = arc4random() % (int)btFiveOfAKind;
+        flowerRequest = [NBBouquet createBouquet:random show:YES];
+        [flowerRequest setPosition:ccp(customerFrame.position.x + customerFrame.boundingBox.size.width*0.25,
+                                    customerFrame.position.y + customerFrame.boundingBox.size.height*0.25)];
+        [self addChild:flowerRequest];
+
+        
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
         [timerBarImage setScaleX:5];
@@ -49,16 +56,13 @@
     return self;
 }
 
--(void)update:(ccTime)delta
-{
-    //DLog(@"test");
-}
-
--(void)updateTimer:(ccTime)deltaTime{
-    currentWaitingTime -= deltaTime;
+-(void)update:(ccTime)delta{
+    currentWaitingTime -= delta;
+    
     if (currentWaitingTime <= 0) {
         //CCLOG(@"Time up!");
         currentWaitingTime = 0;
+        [self unscheduleUpdate];
         [self doCustomerLeave];
     }
     

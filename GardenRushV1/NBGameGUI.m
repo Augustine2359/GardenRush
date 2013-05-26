@@ -67,9 +67,9 @@
     [self addChild:scoreLabel];
     
     //Testing only 
-    id delay = [CCDelayTime actionWithDuration:1];
-    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doAddScore:)];
-    [self runAction:[CCSequence actions:delay, asd, delay, asd, delay, asd, delay, asd, delay, asd, nil]];
+//    id delay = [CCDelayTime actionWithDuration:3];
+//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doFulfillCustomer)];
+//    [self runAction:[CCSequence actions:delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
@@ -77,15 +77,12 @@
     
     for (int x = 0; x < 3; x++) {
         NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-        [self addChild:thatCustomer z:-1];
+        [self addChild:thatCustomer z:-2];
         [customersArray addObject:thatCustomer];
     }
-}
-
--(void)updateCustomer:(ccTime)deltaTime{
-    for (int x = 0; x < [customersArray count]; x++) {
-        [(NBCustomer*)[customersArray objectAtIndex:x] updateTimer:deltaTime];
-    }
+    
+    //Testing
+//    [self doFulfillCustomer:1 flowerScore:100];
 }
 
 -(void)updateScore{
@@ -100,9 +97,10 @@
     [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
 }
 
--(void)doAddScore:(int)amount{
-    amount = 200;
+-(void)doAddScore:(int)amount index:(int)customerIndex{
     actualScore += amount;
+    
+//    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:customerIndex];
     
     CCLabelTTF* additionalScoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"+%i", amount] fontName:@"Marker Felt" fontSize:30];
     additionalScoreLabel.position = scoreLabel.position;
@@ -121,6 +119,14 @@
 -(void)deleteAdditionalScoreLabel{
     [[additionalScoreLabels objectAtIndex:0] removeFromParentAndCleanup:YES];
     [additionalScoreLabels removeObjectAtIndex:0];
+}
+
+-(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
+    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
+    int requestScore = 200;
+    int totalScore = flowerScore + requestScore;
+    [self doAddScore:totalScore index:index];
+    [thatCustomer doCustomerLeave];
 }
 
 @end

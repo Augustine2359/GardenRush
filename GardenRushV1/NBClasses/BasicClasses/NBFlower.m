@@ -70,6 +70,12 @@ static NSMutableArray* flowerField = nil;
     return ccp((gridPosition.x * (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_WIDTH / 2)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_HEIGHT / 2)) + startingPosition.y);
 }
 
++(NBFlower*)randomFlower{
+    int random = arc4random() % (int)ftMaxFlower;
+    NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0) show:YES];
+    return flower;
+}
+
 -(id)initWithFlowerType:(NBFlowerType)flowerType onGridPosition:(CGPoint)gridPosition show:(bool)show
 {
     if (!flowerFieldLayer)

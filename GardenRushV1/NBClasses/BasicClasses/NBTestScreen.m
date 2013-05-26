@@ -62,18 +62,11 @@ NBGameGUI* test = nil;
     
     self.flowerFieldChildCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
     self.flowerFieldChildCountLabel.position = CGPointMake(20, self.layerSize.height - 50);
-    [self addChild:self.flowerFieldChildCountLabel];
-    
-#warning Sample code for NBBouquet
-    NBBouquet* bouquetTest = [NBBouquet createBouquet:btThreeOfAKind show:true];
-    bouquetTest.position = ccp(50, self.layerSize.height - 50);
-    [self addChild:bouquetTest];
+    [self addChild:self.flowerFieldChildCountLabel];    
 }
 
 -(void)update:(ccTime)delta
 {
-    [test updateCustomer:delta];
-    
     [self.flowerCountLabel setString:[NSString stringWithFormat:@"%i", [NBFlower getFlowerCount]]];
     [self.flowerFieldChildCountLabel setString:[NSString stringWithFormat:@"%i", [self.flowerFieldGameGrid children].count]];
 }

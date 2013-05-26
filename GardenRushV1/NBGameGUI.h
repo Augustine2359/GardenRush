@@ -22,14 +22,15 @@
     CCArray* customersArray;
 }
 
+//Private
 -(void)initialiseLivesGUI;
 -(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
-
--(void)updateCustomer:(ccTime)deltaTime;
 -(void)updateScore;
+-(void)doAddScore:(int)amount index:(int)customerIndex;
 -(void)deleteAdditionalScoreLabel;
 
--(void)doAddScore:(int)amount;
+//Public
+-(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 
 @end
