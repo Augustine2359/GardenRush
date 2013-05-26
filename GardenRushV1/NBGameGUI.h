@@ -18,6 +18,7 @@
     CCArray* additionalScoreLabels;
     int tempScore, actualScore;
     bool isScoreUpdating;
+    bool isSpawningCustomer;
     
     CCArray* customersArray;
 }
@@ -26,11 +27,12 @@
 -(void)initialiseLivesGUI;
 -(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
--(void)updateScore;
--(void)doAddScore:(int)amount index:(int)customerIndex;
+-(void)update:(ccTime)delta;
+//-(void)updateScore;
 -(void)deleteAdditionalScoreLabel;
 
 //Public
+-(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 
 @end

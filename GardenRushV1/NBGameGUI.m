@@ -66,6 +66,8 @@
     [scoreLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5)];
     [self addChild:scoreLabel];
     
+    [self scheduleUpdate];
+    
     //Testing only 
 //    id delay = [CCDelayTime actionWithDuration:3];
 //    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doFulfillCustomer)];
@@ -85,19 +87,42 @@
 //    [self doFulfillCustomer:1 flowerScore:100];
 }
 
--(void)updateScore{
-    if (tempScore >= actualScore) {
-        tempScore = actualScore;
-        [self unschedule:@selector(updateScore)];
-        isScoreUpdating = NO;
-        return;
+-(void)update:(ccTime)delta{
+    
+    //Update score
+    if (isScoreUpdating) {
+        tempScore += 5;
+        [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+        
+        if (tempScore >= actualScore) {
+            tempScore = actualScore;
+            isScoreUpdating = NO;
+        }
     }
     
-    tempScore += 5;
-    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+    //Spawn customer
+    if ([customersArray count] < 3 && !isSpawningCustomer) {
+        isSpawningCustomer = YES;
+        int randomDelay = arc4random() % 3  + 1;
+        id delay = [CCDelayTime actionWithDuration:randomDelay];
+        id action = [CCCallFunc actionWithTarget:self selector:@selector(doSpawnNewCustomer)];
+        [self runAction:[CCSequence actions:delay, action, nil]];
+    }
 }
 
--(void)doAddScore:(int)amount index:(int)customerIndex{
+//-(void)updateScore{
+//    if (tempScore >= actualScore) {
+//        tempScore = actualScore;
+//        [self unschedule:@selector(updateScore)];
+//        isScoreUpdating = NO;
+//        return;
+//    }
+//    
+//    tempScore += 5;
+//    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+//}
+
+-(void)doAddScore:(int)amount{
     actualScore += amount;
     
 //    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:customerIndex];
@@ -110,10 +135,12 @@
     id delete = [CCCallFunc actionWithTarget:self selector:@selector(deleteAdditionalScoreLabel)];
     [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
     
-    if (!isScoreUpdating) {
-        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
-        isScoreUpdating = YES;
-    }
+//    if (!isScoreUpdating) {
+//        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
+//        isScoreUpdating = YES;
+//    }
+    
+    isScoreUpdating = YES;
 }
 
 -(void)deleteAdditionalScoreLabel{
@@ -123,10 +150,24 @@
 
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
     NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
-    int requestScore = 200;
+    int requestScore = thatCustomer.requestScore;
     int totalScore = flowerScore + requestScore;
-    [self doAddScore:totalScore index:index];
+    [self doAddScore:totalScore];
     [thatCustomer doCustomerLeave];
+}
+
+-(void)doSpawnNewCustomer{
+    CCLOG(@"OH");
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
+    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:0];
+    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
+    [self addChild:newCustomer];
+    
+    id action = [CCMoveBy actionWithDuration:3 position:ccp(newCustomer.position.x, screenSize.height)];
+    [self runAction:[CCSequence actions:action, nil]];
+    
+    isSpawningCustomer = NO;
 }
 
 @end

@@ -20,10 +20,12 @@
     float currentWaitingTime;
 }
 
+@property (nonatomic, retain) CCSprite* customerFrame;
+@property (nonatomic, assign) int requestScore;
+
 //Private
 -(id)initWithIndex:(int)index;
 -(void)update:(ccTime)delta;
--(void)doSpawnNewCustomer;
 -(void)doCustomerLeave;
 -(void)deleteSelf;
 -(void)update:(ccTime)delta;
