@@ -28,6 +28,6 @@
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlot2;
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlots;
 @property (nonatomic, retain) NSMutableArray* potentialComboGrids;
-@property (nonatomic, assign) NBFlowerMatchType currentMatchType;
+@property (nonatomic, assign) NBBouquetType currentBouquetMatchType;
 
 @end

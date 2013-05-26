@@ -44,6 +44,9 @@ static int bouquetCount = 0;
                 break;
                 
             case btFiveOfAKind:
+            case btCornerFiveOfAKind:
+            case btSixOfAKind:
+            case btSevenOfAKind:
                 self.flowerImage.color = ccGREEN;
                 break;
                 

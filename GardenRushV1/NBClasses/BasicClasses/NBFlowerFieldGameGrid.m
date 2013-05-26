@@ -478,21 +478,21 @@
     
     if (matchCount >= 3)
     {
-        NBFlowerMatchType matchType = mtNoMatch;
+        NBBouquetType bouquetType = btNoMatch;
         
-        if (matchCount == 3) matchType = mtThreeOfAKind;
-        if (matchCount == 4) matchType = mtFourOfAKind;
-        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) matchType = mtCornerFiveOfAKind;
-        if (matchCount == 5) matchType = mtFiveOfAKind;
-        if (matchCount == 6) matchType = mtSixOfAKind;
-        if (matchCount >= 7) matchType = mtSevenOfAKind;
+        if (matchCount == 3) bouquetType = btThreeOfAKind;
+        if (matchCount == 4) bouquetType = btFourOfAKind;
+        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) bouquetType = btCornerFiveOfAKind;
+        if (matchCount == 5) bouquetType = btFiveOfAKind;
+        if (matchCount == 6) bouquetType = btSixOfAKind;
+        if (matchCount >= 7) bouquetType = btSevenOfAKind;
     
         for (int i = 0; i < [array count]; i++)
         {
             NSValue* value = [array objectAtIndex:i];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            flower.matchType = matchType;
+            flower.bouquetType = bouquetType;
         }
         
         [self.arrayOfMatchedFlowerSlots addObject:array];
@@ -549,35 +549,35 @@
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
         
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on selected flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on selected flower");
                 hasMatch = true;
                 break;
@@ -591,35 +591,35 @@
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
         
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on swapped flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on swapped flower");
                 hasMatch = true;
                 break;
@@ -771,35 +771,35 @@
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
 
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on swapped flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on swapped flower");
                 hasMatch = true;
                 break;
@@ -893,7 +893,7 @@
     [flowerToBeReplaced release];
 }
 
--(bool)checkMatchedFlowerWithCustomerRequirement:(NBFlowerMatchType)flowerMatchType
+-(bool)checkMatchedFlowerWithCustomerRequirement:(NBBouquetType)bouquetType
 {
     return false;
 }

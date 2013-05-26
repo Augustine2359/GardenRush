@@ -14,10 +14,14 @@
 
 typedef enum
 {
-    btSingleFlower = 0,
+    btNoMatch = 0,
+    btSingleFlower,
     btThreeOfAKind,
     btFourOfAKind,
-    btFiveOfAKind
+    btFiveOfAKind,
+    btCornerFiveOfAKind,
+    btSixOfAKind,
+    btSevenOfAKind
 } NBBouquetType;
 
 @interface NBBouquet : CCNode
