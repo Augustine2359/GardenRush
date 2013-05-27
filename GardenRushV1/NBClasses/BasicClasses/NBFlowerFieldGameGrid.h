@@ -10,13 +10,16 @@
 #import "cocos2d.h"
 #import "NBFlower.h"
 
-#define FIELD_HORIZONTAL_UNIT_COUNT 9
-#define FIELD_VERTICAL_UNIT_COUNT 9
+#define FIELD_HORIZONTAL_UNIT_COUNT 8
+#define FIELD_VERTICAL_UNIT_COUNT 8
+#define FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED 9
+#define FIELD_VERTICAL_UNIT_COUNT_EXPANDED 9
 #define FIELD_Y_POSITION 30
 #define DURATION_TO_CHECK_EMPTY_SLOT 0.75f
 
 @interface NBFlowerFieldGameGrid : CCNode
 
+- (id)initWithExpandedFlowerField:(BOOL)isFlowerFieldExpanded;
 -(void)update:(ccTime)delta;
 
 @property (nonatomic, retain) CCSprite* fieldBackground;

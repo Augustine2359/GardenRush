@@ -48,8 +48,9 @@ NBGameGUI* test = nil;
     
     //Display Title in the middle of the screen
     [self displayLayerTitle:@"Test Screen"];
-    
-    self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] init];
+  
+    BOOL isFlowerFieldExpanded = [[[NSUserDefaults standardUserDefaults] objectForKey:IS_FLOWER_FIELD_EXPANDED] boolValue];
+    self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] initWithExpandedFlowerField:isFlowerFieldExpanded];
     [self.currentScene addChild:self.flowerFieldGameGrid];
     
     //Temp test pls delete

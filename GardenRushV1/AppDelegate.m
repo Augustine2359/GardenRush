@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "NBInAppPurchaseManager.h"
 
 @implementation AppController
 
@@ -87,6 +88,8 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
+  [NBInAppPurchaseManager sharedInstance];
+  
 	return YES;
 }
 
