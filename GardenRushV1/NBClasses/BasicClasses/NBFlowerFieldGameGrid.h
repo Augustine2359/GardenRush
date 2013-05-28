@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "NBFlower.h"
 
 #define FIELD_HORIZONTAL_UNIT_COUNT 8

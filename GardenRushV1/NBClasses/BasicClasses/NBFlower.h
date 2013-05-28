@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 
 #define FLOWERSIZE_WIDTH 30
 #define FLOWERSIZE_HEIGHT 30
