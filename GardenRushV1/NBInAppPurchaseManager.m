@@ -118,7 +118,7 @@
     return;
   }
   
-  [self makePurchase:EXPAND_FLOWER_FIELD];
+//  [self makePurchase:EXPAND_FLOWER_FIELD];
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
