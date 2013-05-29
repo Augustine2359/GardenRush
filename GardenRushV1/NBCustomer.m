@@ -46,10 +46,15 @@
         [self addChild:timerBarImage];
         
         //Misc
-        initialWaitingTime = 10;
+        initialWaitingTime = 30;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
         self.requestScore = 100;
+        
+        //Transit to position
+        self.position = ccp(self.position.x, self.position.y+screenSize.height*0.5);
+        id action = [CCMoveBy actionWithDuration:3 position:ccp(0, -screenSize.height*0.5)];
+        [self runAction:[CCSequence actions:action, nil]];
         
         [self scheduleUpdate];
     }
@@ -71,7 +76,7 @@
 
 -(void)doCustomerLeave{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    id action = [CCMoveTo actionWithDuration:3 position:ccp(self.position.x, screenSize.height + self.boundingBox.size.height)];
+    id action = [CCMoveBy actionWithDuration:3 position:ccp(0, screenSize.height)];
     id actionEnd = [CCCallFunc actionWithTarget:self selector:@selector(deleteSelf)];
     [self runAction:[CCSequence actions:action, actionEnd, nil]];
 }

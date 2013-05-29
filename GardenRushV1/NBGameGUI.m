@@ -75,16 +75,21 @@
 }
 
 -(void)initialiseCustomerGUI{
-    customersArray = [CCArray new];
+    customersArray = [[CCArray alloc] initWithCapacity:3];
+    missingCustomerIndex = [CCArray new];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:2]];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
-    for (int x = 0; x < 3; x++) {
-        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-        [self addChild:thatCustomer z:-2];
-        [customersArray addObject:thatCustomer];
-    }
+//    for (int x = 0; x < 3; x++) {
+//        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
+//        [self addChild:thatCustomer z:-2];
+//        [customersArray addObject:thatCustomer];
+//    }
     
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
+//    [self doSpawnNewCustomer];
 }
 
 -(void)update:(ccTime)delta{
@@ -101,11 +106,14 @@
     }
     
     //Spawn customer
-    if ([customersArray count] < 3 && !isSpawningCustomer) {
+    if ([missingCustomerIndex count] > 0 && !isSpawningCustomer) {
         isSpawningCustomer = YES;
         int randomDelay = arc4random() % 3  + 1;
         id delay = [CCDelayTime actionWithDuration:randomDelay];
-        id action = [CCCallFunc actionWithTarget:self selector:@selector(doSpawnNewCustomer)];
+        int temp1 = [[missingCustomerIndex objectAtIndex:[missingCustomerIndex count]-1] intValue];
+        [missingCustomerIndex removeLastObject];
+        NSNumber* temp2 = [NSNumber numberWithInt:temp1];
+        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:) data:temp2];
         [self runAction:[CCSequence actions:delay, action, nil]];
     }
 }
@@ -156,16 +164,15 @@
     [thatCustomer doCustomerLeave];
 }
 
--(void)doSpawnNewCustomer{
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index{
     CCLOG(@"OH");
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
-    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:0];
-    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
-    [self addChild:newCustomer];
-    
-    id action = [CCMoveBy actionWithDuration:3 position:ccp(newCustomer.position.x, screenSize.height)];
-    [self runAction:[CCSequence actions:action, nil]];
+    int temp = [index intValue];
+    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp];
+//    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
+    [self addChild:newCustomer z:-2];
+    [customersArray addObject:newCustomer];
+//    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
     
     isSpawningCustomer = NO;
 }
