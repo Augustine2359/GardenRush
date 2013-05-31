@@ -16,6 +16,7 @@ typedef enum
     TargetSceneINVALID = 0,
     TargetSceneFirst,
     TargetSceneSecond,
+    TargetScenePreGame,
     TargetSceneMAX,
 } TargetSceneTypes;
 

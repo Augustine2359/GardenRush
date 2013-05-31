@@ -146,6 +146,7 @@
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
 		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
 		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
+		F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CA645E17585527006A1033 /* NBPreGameScreen.m */; };
 		F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */; };
 		F9D169F01753B0780083D338 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9D169EE1753B06D0083D338 /* StoreKit.framework */; };
 		F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */; };
@@ -437,6 +438,8 @@
 		BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlowerFieldGameGrid.m; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.m; sourceTree = "<group>"; };
 		BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlower.h; path = NBClasses/BasicClasses/NBFlower.h; sourceTree = "<group>"; };
 		BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlower.m; path = NBClasses/BasicClasses/NBFlower.m; sourceTree = "<group>"; };
+		F9CA645D17585527006A1033 /* NBPreGameScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBPreGameScreen.h; path = NBClasses/BasicClasses/NBPreGameScreen.h; sourceTree = "<group>"; };
+		F9CA645E17585527006A1033 /* NBPreGameScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBPreGameScreen.m; path = NBClasses/BasicClasses/NBPreGameScreen.m; sourceTree = "<group>"; };
 		F9D169EB1753AFA40083D338 /* NBInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBInAppPurchaseManager.h; sourceTree = "<group>"; };
 		F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBInAppPurchaseManager.m; sourceTree = "<group>"; };
 		F9D169EE1753B06D0083D338 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -481,6 +484,8 @@
 				BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */,
 				BC1FD79417363CB60065D4CF /* NBTestScreen.h */,
 				BC1FD79517363CB60065D4CF /* NBTestScreen.m */,
+				F9CA645D17585527006A1033 /* NBPreGameScreen.h */,
+				F9CA645E17585527006A1033 /* NBPreGameScreen.m */,
 				BC1FD79917363D4A0065D4CF /* NBDataManager.h */,
 				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
 				569D11B1173A818D00D60069 /* NBGameGUI.h */,
@@ -1137,6 +1142,7 @@
 				BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */,
 				F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */,
 				F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */,
+				F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

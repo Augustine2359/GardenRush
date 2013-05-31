@@ -42,19 +42,32 @@
     [self addChild:sprite];
     [self.buttonSprites addObject:sprite];
 
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [self setShouldRespondToTouches:YES];
   }
 
   return self;
 }
 
+- (BOOL)containsButton:(CCSprite *)buttonSprite {
+  return [self.buttonSprites containsObject:buttonSprite];
+}
+
+- (void)setShouldRespondToTouches:(BOOL)shouldRespondToTouches {
+  if (shouldRespondToTouches)
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+  else
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+}
+
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint touchLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView:[touch view]]];
-
-  for (CCSprite *sprite in self.buttonSprites) {
-    if ([self touchLocation:touchLocation intersectsSprite:sprite]) {
+  touchLocation.x -= self.position.x;
+  touchLocation.y -= self.position.y;
+  
+  for (CCSprite *buttonSprite in self.buttonSprites) {
+    if ([self touchLocation:touchLocation intersectsSprite:buttonSprite]) {
       if ([self.delegate respondsToSelector:@selector(onButtonPressed:)])
-        [self.delegate onButtonPressed:sprite.tag];
+        [self.delegate onButtonPressed:buttonSprite];
       else
         DLog(@"DELEGATE NOT SET, WHAT'S WRONG");
 
