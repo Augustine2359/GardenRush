@@ -25,7 +25,7 @@
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
     //Main frame for GUI
-    GUIFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
+    GUIFrame = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
     CGSize frameSize = GUIFrame.boundingBox.size;
     [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
     [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
@@ -34,35 +34,45 @@
     [self addChild:GUIFrame];
     
     //Pause button
-    CCSprite* pauseButton = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_red.png"];
-    CCMenuItem* asd = [[CCMenuItem alloc] initWithTarget:self selector:@selector(doPauseGame)];
-//    CGSize frameSize = GUIFrame.boundingBox.size;
-//    [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
-//    [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-//    frameSize = GUIFrame.boundingBox.size;
-//    [GUIFrame setPosition:ccp(screenSize.width*0.5, screenSize.height - frameSize.height*0.5)];
-//    [self addChild:GUIFrame];
+    pauseButtonImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+//    CCMenuItem* pauseButton = [CCMenuItemImage itemWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];//itemWithNormalImage:@"staticbox_red.png" selectedImage:@"staticbox_red.png" target:self selector:@selector(doPauseGame)];
+    
+//    CCMenuItemSprite* pauseButton = [[CCMenuItemSprite alloc] initWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage disabledSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];
+    
+    CGSize buttonSize = pauseButtonImage.boundingBox.size;
+    [pauseButtonImage setScaleX:(frameSize.width*0.1/buttonSize.width)];
+    [pauseButtonImage setScaleY:(frameSize.height*0.5/buttonSize.height)];
+//    buttonSize = pauseButtonImage.boundingBox.size;
+    [pauseButtonImage setPosition:ccp(frameSize.width*0.1, GUIFrame.position.y)];
+    
+    [self addChild:pauseButtonImage z:1];
+    
+//    CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
+//    [self addChild:GUIMenu];
 }
 
 -(void)initialiseLivesGUI{
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    livesArray = [CCArray new];
+    [livesArray retain];
     //Read from datamanager when available
-    int currentLives = 5;
+    maxLives = 5;
     
     CGSize frameSize = GUIFrame.boundingBox.size;
     
-    for (int x = 0; x < currentLives; x++) {
+    for (int x = 0; x < 3; x++) {
         CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
         CGSize spriteSize = lifeSprite.boundingBox.size;
         [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
         [lifeSprite setScaleY:(frameSize.height*0.5/spriteSize.height)];
         spriteSize = lifeSprite.boundingBox.size;
-        float liveOffsetFromLeft = GUIFrame.position.x*0.5 - spriteSize.width*0.5;
-        [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*x, screenSize.height - frameSize.height*0.5)];
-//        [lifeSprite setPosition:ccp(0, 0)];
+        float liveOffsetFromLeft = GUIFrame.position.x*0.5;
+        [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*x, GUIFrame.position.y)];
         [self addChild:lifeSprite];
         [livesArray addObject:lifeSprite];
     }
+    
+    //Testing only
+    [self doGainLife:-4];
 }
 
 -(void)initialiseScoreGUI{
@@ -137,18 +147,6 @@
     }
 }
 
-//-(void)updateScore{
-//    if (tempScore >= actualScore) {
-//        tempScore = actualScore;
-//        [self unschedule:@selector(updateScore)];
-//        isScoreUpdating = NO;
-//        return;
-//    }
-//    
-//    tempScore += 5;
-//    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
-//}
-
 -(void)doAddScore:(int)amount{
     actualScore += amount;
     
@@ -161,11 +159,6 @@
     id move = [CCMoveBy actionWithDuration:2 position:ccp(0, -50)];
     id delete = [CCCallFunc actionWithTarget:self selector:@selector(deleteAdditionalScoreLabel)];
     [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
-    
-//    if (!isScoreUpdating) {
-//        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
-//        isScoreUpdating = YES;
-//    }
     
     isScoreUpdating = YES;
 }
@@ -184,8 +177,6 @@
 }
 
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index{
-    CCLOG(@"OH");
-    
     int temp = [index intValue];
     NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp];
 //    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
@@ -197,9 +188,46 @@
 }
 
 -(void)doPauseGame{
+    CCLOG(@"Paused game!");
     //Set timeScale to 0
     //Transit image down cover screen
     //Resume and quit button
+}
+
+-(void)doGainLife:(int)amount{
+    if (amount > 0) {
+        for (int x = 0; x < amount; x++) {
+            if ([livesArray count] == maxLives) {
+                CCLOG(@"Full life");
+                return;
+            }
+            
+            CGSize frameSize = GUIFrame.boundingBox.size;
+
+            CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
+            CGSize spriteSize = lifeSprite.boundingBox.size;
+            [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
+            [lifeSprite setScaleY:(frameSize.height*0.5/spriteSize.height)];
+            spriteSize = lifeSprite.boundingBox.size;
+            float liveOffsetFromLeft = GUIFrame.position.x*0.5;
+            int index = [livesArray count];
+            [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*index, GUIFrame.position.y)];
+            [self addChild:lifeSprite];
+            [livesArray addObject:lifeSprite];
+        }
+    }
+    else if (amount < 0){
+        for (int x = amount; x < 0; x++) {
+            if ([livesArray count] == 0) {
+                CCLOG(@"No more lives");
+                //Call game over method here
+                return;
+            }
+            
+            [[livesArray objectAtIndex:[livesArray count]-1] removeFromParentAndCleanup:YES];
+            [livesArray removeLastObject];
+        }
+    }
 }
 
 @end
