@@ -10,12 +10,15 @@
 
 @protocol NBSpecialPowerButtonsContainerDelegate <NSObject>
 
-- (void)onButtonPressed:(NSInteger)button;
+- (void)onButtonPressed:(CCSprite *)buttonSprite;
 
 @end
 
 @interface NBSpecialPowerButtonsContainer : CCNode
 
 @property (nonatomic, strong) id<NBSpecialPowerButtonsContainerDelegate> delegate;
+
+- (void)setShouldRespondToTouches:(BOOL)shouldRespondToTouches;
+- (BOOL)containsButton:(CCSprite *)buttonSprite;
 
 @end

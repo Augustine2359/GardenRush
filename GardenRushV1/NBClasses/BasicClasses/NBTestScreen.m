@@ -82,8 +82,8 @@ NBGameGUI* test = nil;
 
 #pragma mark - NBSpecialPowerButtonsContainerDelegate
 
-- (void)onButtonPressed:(NSInteger)powerNumber {
-  DLog(@"special power %d was used", powerNumber);
+- (void)onButtonPressed:(CCSprite *)buttonSprite {
+  DLog(@"special power %d was used", buttonSprite.tag);
 }
 
 @end
