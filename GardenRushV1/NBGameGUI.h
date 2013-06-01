@@ -11,6 +11,8 @@
 
 
 @interface NBGameGUI : CCLayer {
+    CCSprite* GUIFrame;
+    
     CCArray* livesArray;
     
     CCLabelTTF* scoreLabel;
@@ -35,5 +37,6 @@
 -(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index;
+-(void)doPauseGame;
 
 @end

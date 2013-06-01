@@ -13,6 +13,7 @@
 
 -(id)init{
     if ([super init]) {
+        [self initialiseMisc];
         [self initialiseLivesGUI];
         [self initialiseScoreGUI];
         [self initialiseCustomerGUI];
@@ -20,27 +21,45 @@
     return self;
 }
 
+-(void)initialiseMisc{
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
+    //Main frame for GUI
+    GUIFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
+    CGSize frameSize = GUIFrame.boundingBox.size;
+    [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
+    [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+    frameSize = GUIFrame.boundingBox.size;
+    [GUIFrame setPosition:ccp(screenSize.width*0.5, screenSize.height - frameSize.height*0.5)];
+    [self addChild:GUIFrame];
+    
+    //Pause button
+    CCSprite* pauseButton = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_red.png"];
+    CCMenuItem* asd = [[CCMenuItem alloc] initWithTarget:self selector:@selector(doPauseGame)];
+//    CGSize frameSize = GUIFrame.boundingBox.size;
+//    [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
+//    [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+//    frameSize = GUIFrame.boundingBox.size;
+//    [GUIFrame setPosition:ccp(screenSize.width*0.5, screenSize.height - frameSize.height*0.5)];
+//    [self addChild:GUIFrame];
+}
+
 -(void)initialiseLivesGUI{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    //Read from plist when available
-    int currentLives = 3;
+    //Read from datamanager when available
+    int currentLives = 5;
     
-    CCSprite* lifeFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
-    CGSize frameSize = lifeFrame.boundingBox.size;
-    [lifeFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
-    [lifeFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-    frameSize = lifeFrame.boundingBox.size;
-    [lifeFrame setPosition:ccp(screenSize.width*0.25, screenSize.height - frameSize.height*0.5)];
-    [self addChild:lifeFrame];
+    CGSize frameSize = GUIFrame.boundingBox.size;
     
     for (int x = 0; x < currentLives; x++) {
         CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
         CGSize spriteSize = lifeSprite.boundingBox.size;
-        [lifeSprite setScaleX:(frameSize.width*0.2/spriteSize.width)];
-        [lifeSprite setScaleY:(frameSize.height*0.8/spriteSize.height)];
+        [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
+        [lifeSprite setScaleY:(frameSize.height*0.5/spriteSize.height)];
         spriteSize = lifeSprite.boundingBox.size;
-        float liveOffsetFromLeft = frameSize.width*0.1 + spriteSize.width*0.5;
-        [lifeSprite setPosition:ccp(liveOffsetFromLeft + (spriteSize.width + frameSize.width*0.1)*x, screenSize.height - frameSize.height*0.5)];
+        float liveOffsetFromLeft = GUIFrame.position.x*0.5 - spriteSize.width*0.5;
+        [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*x, screenSize.height - frameSize.height*0.5)];
+//        [lifeSprite setPosition:ccp(0, 0)];
         [self addChild:lifeSprite];
         [livesArray addObject:lifeSprite];
     }
@@ -50,20 +69,20 @@
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     additionalScoreLabels = [CCArray new];
     [additionalScoreLabels retain];
-    //Read from plist when available
+    
     actualScore = 0;
     tempScore = actualScore;
     
-    CCSprite* scoreFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
-    CGSize frameSize = scoreFrame.boundingBox.size;
-    [scoreFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
-    [scoreFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-    frameSize = scoreFrame.boundingBox.size;
-    [scoreFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
-    [self addChild:scoreFrame];
+//    CCSprite* scoreFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
+//    CGSize frameSize = scoreFrame.boundingBox.size;
+//    [scoreFrame setScaleX:(screenSize.width*0.4/frameSize.width)];
+//    [scoreFrame setScaleY:(screenSize.height*0.08/frameSize.height)];
+//    frameSize = scoreFrame.boundingBox.size;
+//    [scoreFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
+//    [self addChild:scoreFrame];
     
-    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:32];
-    [scoreLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5)];
+    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:30];
+    [scoreLabel setPosition:ccp(GUIFrame.boundingBox.size.width*0.8, GUIFrame.position.y)];
     [self addChild:scoreLabel];
     
     [self scheduleUpdate];
@@ -175,6 +194,12 @@
 //    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
     
     isSpawningCustomer = NO;
+}
+
+-(void)doPauseGame{
+    //Set timeScale to 0
+    //Transit image down cover screen
+    //Resume and quit button
 }
 
 @end
