@@ -33,10 +33,10 @@
         
         //Request images
         int random = arc4random() % (int)btFiveOfAKind;
-        flowerRequest = [NBBouquet createBouquet:random show:YES];
-        [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.25,
+        self.flowerRequest = [NBBouquet createBouquet:random show:YES];
+        [self.flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.25,
                                     self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
-        [self addChild:flowerRequest];
+        [self addChild:self.flowerRequest];
 
         
         //TimerBar image

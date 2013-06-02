@@ -90,7 +90,7 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)initialiseCustomerGUI{
-    customersArray = [[CCArray alloc] initWithCapacity:3];
+    self.customersArray = [[CCArray alloc] initWithCapacity:3];
     missingCustomerIndex = [CCArray new];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:2]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
@@ -172,7 +172,7 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
-    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
+    NBCustomer* thatCustomer = (NBCustomer*)[self.customersArray objectAtIndex:index];
     int requestScore = thatCustomer.requestScore;
     int totalScore = flowerScore + requestScore;
     [self doAddScore:totalScore];
@@ -186,7 +186,7 @@ static CGPoint scorePosition = {0, 0};
     NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp];
 //    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
     [self addChild:newCustomer z:-2];
-    [customersArray addObject:newCustomer];
+    [self.customersArray addObject:newCustomer];
 //    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
     
     isSpawningCustomer = NO;

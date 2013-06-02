@@ -49,7 +49,7 @@ static CGPoint scorePadPosition = {0, 0};
 {
     if ((self = [[super init] autorelease]))
     {
-        self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];;
+        self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"bouquet_dummy.png"];;
         
         switch (bouquetType)
         {

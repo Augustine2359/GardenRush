@@ -12,6 +12,7 @@ static int flowerCount = 0;
 static CCNode* flowerFieldLayer = nil;
 static CGPoint startingPosition = {0, 0};
 static NSMutableArray* flowerField = nil;
+static CGSize fieldContentSize = {0, 0};
 
 @implementation NBFlower
 
@@ -50,6 +51,12 @@ static NSMutableArray* flowerField = nil;
     flowerFieldLayer = layer;
 }
 
++(void)assignFieldContentSize:(CGSize)contentSize
+
+{
+    fieldContentSize = contentSize;
+}
+
 +(void)assignStartingPosition:(CGPoint)position
 {
     startingPosition = position;
@@ -83,10 +90,10 @@ static NSMutableArray* flowerField = nil;
         DLog(@"No Field Flower defined...exiting");
         return nil;
     }
-        
+    
     if ((self = [[super init] autorelease]))
     {
-        self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];;
+        self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower_sketch_sakura.png"];;
         
         switch (flowerType)
         {
@@ -208,12 +215,13 @@ static NSMutableArray* flowerField = nil;
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     CGPoint touchLocation = [touch locationInView:[CCDirector sharedDirector].view];
     touchLocation.y = [[CCDirector sharedDirector] winSize].height - touchLocation.y;
-    touchLocation = ccp(touchLocation.x - 5, touchLocation.y - 30);
+    touchLocation = ccp(touchLocation.x - (winSize.width / 2 - (fieldContentSize.width / 2)), touchLocation.y - 4);
     int x = touchLocation.x / (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH);
     int y = touchLocation.y / (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH);
-    
+
     NBFlower* touchedFlower = (NBFlower*)[[flowerField objectAtIndex:x] objectAtIndex:y];
     NSString* flowerTypeInString = nil;
     switch (touchedFlower.flowerType)

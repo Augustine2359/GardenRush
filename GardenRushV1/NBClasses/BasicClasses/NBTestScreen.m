@@ -55,7 +55,7 @@ NBGameGUI* test = nil;
   
     BOOL isFlowerFieldExpanded = [[[NSUserDefaults standardUserDefaults] objectForKey:IS_FLOWER_FIELD_EXPANDED] boolValue];
     self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] initWithExpandedFlowerField:isFlowerFieldExpanded];
-    [self.currentScene addChild:self.flowerFieldGameGrid];
+    [self addChild:self.flowerFieldGameGrid];
     
     //Temp test pls delete
     test = [NBGameGUI new];
@@ -73,9 +73,9 @@ NBGameGUI* test = nil;
     self.flowerFieldChildCountLabel.position = CGPointMake(20, self.layerSize.height - 50);
     [self addChild:self.flowerFieldChildCountLabel];
   
-  NBSpecialPowerButtonsContainer *specialPowerButton = [[NBSpecialPowerButtonsContainer alloc] init];
-  specialPowerButton.delegate = self;
-  [self.currentScene addChild:specialPowerButton];
+    //NBSpecialPowerButtonsContainer *specialPowerButton = [[NBSpecialPowerButtonsContainer alloc] init];
+    //specialPowerButton.delegate = self;
+    //[self.currentScene addChild:specialPowerButton];
 }
 
 -(void)update:(ccTime)delta

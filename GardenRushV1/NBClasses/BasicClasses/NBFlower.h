@@ -53,6 +53,7 @@ typedef enum
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
++(void)assignFieldContentSize:(CGSize)contentSize;
 +(void)assignFlowerField:(NSMutableArray*)fieldFlowerArray;
 +(int)getFlowerCount;
 +(CGPoint)convertFieldGridPositionToActualPixel:(CGPoint)gridPosition;

@@ -19,9 +19,10 @@
     bool isScoreUpdating;
     bool isSpawningCustomer;
     
-    CCArray* customersArray;
     CCArray* missingCustomerIndex;
 }
+
+@property (nonatomic, retain) CCArray* customersArray;
 
 //Private
 -(void)initialiseLivesGUI;

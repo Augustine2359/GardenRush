@@ -74,6 +74,7 @@
         [NBFlower assignFieldLayer:self];
         [NBFlower assignStartingPosition:CGPointMake(FIELD_FLOWER_GAP_WIDTH, FIELD_FLOWER_GAP_WIDTH)];
         [NBFlower assignFlowerField:self.flowerArrays];
+        [NBFlower assignFieldContentSize:self.contentSize];
         
         [self generateLevel];
         [self showAllFlower];
@@ -933,7 +934,7 @@
 -(void)onBouquetReachedScore:(NBBouquet*)bouquet
 {
     NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
-    [gameGUI doAddScore:bouquet.value index:0];
+    [gameGUI doAddScore:bouquet.value];
     
     [self removeChild:bouquet cleanup:YES];
 }

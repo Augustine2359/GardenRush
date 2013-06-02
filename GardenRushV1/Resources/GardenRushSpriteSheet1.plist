@@ -5,6 +5,50 @@
 	<key>frames</key>
 	<dict>
 		
+		<key>bouquet_dummy.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{3, 1}, {96, 98}}</string>
+			<key>spriteOffset</key>
+			<string>{1, -0}</string>
+			<key>spriteSize</key>
+			<string>{96, 98}</string>
+			<key>spriteSourceSize</key>
+			<string>{100, 100}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{219, 0}, {96, 98}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>flower_sketch_sakura.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {217, 207}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{217, 207}</string>
+			<key>spriteSourceSize</key>
+			<string>{217, 207}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {217, 207}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
 		<key>staticbox_blue.png</key>
 		<dict>
 			<key>aliases</key>
@@ -22,7 +66,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 68}, {32, 32}}</string>
+			<string>{{68, 209}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -44,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{34, 34}, {32, 32}}</string>
+			<string>{{34, 209}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -66,7 +110,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{34, 0}, {32, 32}}</string>
+			<string>{{219, 100}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -88,7 +132,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{34, 68}, {32, 32}}</string>
+			<string>{{219, 202}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -110,7 +154,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {32, 32}}</string>
+			<string>{{219, 134}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -132,7 +176,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{68, 0}, {32, 32}}</string>
+			<string>{{219, 168}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -154,7 +198,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 34}, {32, 32}}</string>
+			<string>{{0, 209}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -169,7 +213,7 @@
 		<key>size</key>
 		<string>{2048, 2048}</string>
 		<key>name</key>
-		<string>Untitled</string>
+		<string>GardenRushSpriteSheet1</string>
 		<key>premultipliedAlpha</key>
 		<false/>
 		<key>target</key>

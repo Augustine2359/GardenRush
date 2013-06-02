@@ -141,6 +141,9 @@
 		BC8EA7CF1734C4ED004454CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7CE1734C4ED004454CF /* AppDelegate.m */; };
 		BC8EA7D21734C4ED004454CF /* MainGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D11734C4ED004454CF /* MainGameLayer.m */; };
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
+		BC98EC59175ADBD20025709A /* GameSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC58175ADBD20025709A /* GameSettings.plist */; };
+		BC98EC5B175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */; };
+		BC98EC5F175AEE720025709A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC5E175AEE720025709A /* Default@2x.png */; };
 		BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */; };
 		BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */; };
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
@@ -430,6 +433,10 @@
 		BC8EA7D11734C4ED004454CF /* MainGameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameLayer.m; sourceTree = "<group>"; };
 		BC8EA7D31734C4ED004454CF /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		BC8EA7D41734C4ED004454CF /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		BC98EC58175ADBD20025709A /* GameSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameSettings.plist; sourceTree = "<group>"; };
+		BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_nebulaLogo_960x640-hd.png"; path = "Resources/MainGameArts/NB_nebulaLogo_960x640-hd.png"; sourceTree = "<group>"; };
+		BC98EC5C175AEA5C0025709A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		BC98EC5E175AEE720025709A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BC9B37691748E3C900FD1EDA /* NBGameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBGameKitHelper.h; path = NBClasses/BasicClasses/NBGameKitHelper.h; sourceTree = "<group>"; };
 		BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBGameKitHelper.m; path = NBClasses/BasicClasses/NBGameKitHelper.m; sourceTree = "<group>"; };
 		BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GardenRushSpriteSheet1.plist; path = Resources/GardenRushSpriteSheet1.plist; sourceTree = "<group>"; };
@@ -509,6 +516,8 @@
 		BC8EA6371734C4EA004454CF = {
 			isa = PBXGroup;
 			children = (
+				BC98EC5E175AEE720025709A /* Default@2x.png */,
+				BC98EC5C175AEA5C0025709A /* Default.png */,
 				BC1FD79C173692D90065D4CF /* Default-568h@2x.png */,
 				BC8EA6551734C4EA004454CF /* GardenRushV1 */,
 				BC8EA6421734C4EA004454CF /* Frameworks */,
@@ -561,12 +570,12 @@
 		BC8EA6561734C4EA004454CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
-				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
-				BC8EA65B1734C4EA004454CF /* fps_images.png */,
+				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA65D1734C4EA004454CF /* fps_images-hd.png */,
 				BC8EA65F1734C4EA004454CF /* fps_images-ipadhd.png */,
+				BC8EA65B1734C4EA004454CF /* fps_images.png */,
+				BC98EC58175ADBD20025709A /* GameSettings.plist */,
 				BC8EA6611734C4EA004454CF /* Icon-72.png */,
 				BC8EA6631734C4EA004454CF /* Icon-Small-50.png */,
 				BC8EA6651734C4EA004454CF /* Icon-Small.png */,
@@ -575,6 +584,8 @@
 				BC8EA66B1734C4EA004454CF /* Icon@2x.png */,
 				BC8EA66D1734C4EA004454CF /* Info.plist */,
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
+				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
+				BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1016,6 +1027,9 @@
 				BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */,
 				BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */,
 				BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */,
+				BC98EC59175ADBD20025709A /* GameSettings.plist in Resources */,
+				BC98EC5B175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png in Resources */,
+				BC98EC5F175AEE720025709A /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
