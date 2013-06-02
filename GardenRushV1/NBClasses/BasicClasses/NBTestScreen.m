@@ -8,9 +8,13 @@
 
 #import "NBTestScreen.h"
 #import "NBGameGUI.h"
+#import "NBSpecialPowerButtonsContainer.h"
 
 NBGameGUI* test = nil;
 
+@interface NBTestScreen() <NBSpecialPowerButtonsContainerDelegate>
+
+@end
 
 @implementation NBTestScreen
 
@@ -48,8 +52,9 @@ NBGameGUI* test = nil;
     
     //Display Title in the middle of the screen
     [self displayLayerTitle:@"Test Screen"];
-    
-    self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] init];
+  
+    BOOL isFlowerFieldExpanded = [[[NSUserDefaults standardUserDefaults] objectForKey:IS_FLOWER_FIELD_EXPANDED] boolValue];
+    self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] initWithExpandedFlowerField:isFlowerFieldExpanded];
     [self.currentScene addChild:self.flowerFieldGameGrid];
     
     //Temp test pls delete
@@ -66,7 +71,11 @@ NBGameGUI* test = nil;
     
     self.flowerFieldChildCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
     self.flowerFieldChildCountLabel.position = CGPointMake(20, self.layerSize.height - 50);
-    [self addChild:self.flowerFieldChildCountLabel];    
+    [self addChild:self.flowerFieldChildCountLabel];
+  
+  NBSpecialPowerButtonsContainer *specialPowerButton = [[NBSpecialPowerButtonsContainer alloc] init];
+  specialPowerButton.delegate = self;
+  [self.currentScene addChild:specialPowerButton];
 }
 
 -(void)update:(ccTime)delta
@@ -74,4 +83,11 @@ NBGameGUI* test = nil;
     [self.flowerCountLabel setString:[NSString stringWithFormat:@"%i", [NBFlower getFlowerCount]]];
     [self.flowerFieldChildCountLabel setString:[NSString stringWithFormat:@"%i", [self.flowerFieldGameGrid children].count]];
 }
+
+#pragma mark - NBSpecialPowerButtonsContainerDelegate
+
+- (void)onButtonPressed:(CCSprite *)buttonSprite {
+  DLog(@"special power %d was used", buttonSprite.tag);
+}
+
 @end

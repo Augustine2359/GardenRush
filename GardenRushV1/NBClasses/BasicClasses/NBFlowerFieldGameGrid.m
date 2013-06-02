@@ -20,20 +20,31 @@
 }
 
 @property (nonatomic, strong) NSArray *gestureRecognizers;
+@property (nonatomic) CGFloat horizontalTileCount;
+@property (nonatomic) CGFloat verticalTileCount;
 
 @end
 
 @implementation NBFlowerFieldGameGrid
 
--(id)init
+-(id)initWithExpandedFlowerField:(BOOL)isFlowerFieldExpanded
 {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     if (self = [super init])
     {
+        if (isFlowerFieldExpanded) {
+            self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
+            self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
+        }
+        else {
+            self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
+            self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
+        }
+      
         //CGSize fieldSize = CGSizeMake(10, 10);
         
-        [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * FIELD_HORIZONTAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * FIELD_VERTICAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH))];
+        [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * self.horizontalTileCount) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * self.verticalTileCount) + FIELD_FLOWER_GAP_WIDTH))];
         self.anchorPoint = ccp(0, 0);
         self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
@@ -53,7 +64,7 @@
         self.arrayOfMatchedFlowerSlots = [NSMutableArray array];
         self.potentialComboGrids = [NSMutableArray array];
         
-        for (int i = 0; i < FIELD_HORIZONTAL_UNIT_COUNT; i++)
+        for (int i = 0; i < self.horizontalTileCount; i++)
         {
             NSMutableArray* verticalFlowerArray = [NSMutableArray array];
             
@@ -79,9 +90,9 @@
 
 -(void)fillFlower
 {
-    for (int i = 0; i < FIELD_HORIZONTAL_UNIT_COUNT; i++)
+    for (int i = 0; i < self.horizontalTileCount; i++)
     {
-        for (int j = 0; j < FIELD_VERTICAL_UNIT_COUNT; j++)
+        for (int j = 0; j < self.verticalTileCount; j++)
         {
             if ([[self.flowerArrays objectAtIndex:i] count] < 10)
             {
@@ -100,9 +111,9 @@
 
 -(void)generateLevel
 {
-    for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
+    for (int x = 0; x < self.horizontalTileCount; x++)
     {
-        for (int y = 0; y < FIELD_VERTICAL_UNIT_COUNT; y++)
+        for (int y = 0; y < self.verticalTileCount; y++)
         {
             NBFlower* newFlower = [NBFlower createRandomFlowerOnGridPosition:ccp(x, y) show:false];
             [[self.flowerArrays objectAtIndex:x] addObject:newFlower];
@@ -119,9 +130,9 @@
 
 -(void)showAllFlower
 {
-    for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
+    for (int x = 0; x < self.horizontalTileCount; x++)
     {
-        for (int y = 0; y < FIELD_VERTICAL_UNIT_COUNT; y++)
+        for (int y = 0; y < self.verticalTileCount; y++)
         {
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
             [flower show];
@@ -143,7 +154,7 @@
     for (int i = 1; i < 5; i++)
     {
         int gridX = gridPosition.x + i;
-        if (gridX >= FIELD_HORIZONTAL_UNIT_COUNT) break;
+        if (gridX >= self.horizontalTileCount) break;
         if (gridX >= [[self.flowerArrays objectAtIndex:gridX] count]) break;
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
@@ -175,7 +186,7 @@
     for (int i = 1; i < 5; i++)
     {
         int gridY = gridPosition.y + i;
-        if (gridY >= FIELD_VERTICAL_UNIT_COUNT) break;
+        if (gridY >= self.verticalTileCount) break;
         if (gridY >= [[self.flowerArrays objectAtIndex:gridPosition.x] count]) break;
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
@@ -294,7 +305,7 @@
 -(void)moveFlower:(CGPoint)originalGridPosition toGridPosition:(CGPoint)newGridPosition swipe:(UISwipeGestureRecognizer*)swipeGestureRecognizer
 {
     //Check if at the border
-    if ((newGridPosition.x < 0) || (newGridPosition.x > (FIELD_HORIZONTAL_UNIT_COUNT - 1)) || (newGridPosition.y < 0) || (newGridPosition.y > (FIELD_VERTICAL_UNIT_COUNT - 1)))
+    if ((newGridPosition.x < 0) || (newGridPosition.x > (self.horizontalTileCount - 1)) || (newGridPosition.y < 0) || (newGridPosition.y > (self.verticalTileCount - 1)))
     {
         isProcessingMove = false;
     }
@@ -386,7 +397,7 @@
     for (int i = 1; i < 5; i++)
     {
         int gridX = gridPoint.x + i;
-        if (gridX >= FIELD_HORIZONTAL_UNIT_COUNT) break;
+        if (gridX >= self.horizontalTileCount) break;
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
         if (localFlower.flowerType == nextFlower.flowerType)
@@ -432,7 +443,7 @@
     for (int i = 1; i < 5; i++)
     {
         int gridY = gridPoint.y + i;
-        if (gridY >= FIELD_VERTICAL_UNIT_COUNT) break;
+        if (gridY >= self.verticalTileCount) break;
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
         if (localFlower.flowerType == nextFlower.flowerType)
@@ -744,9 +755,9 @@
     bool hasEmpty = false;
     //self.potentialComboGrids = [NSMutableArray array];
     
-    for (int x = 0; x < FIELD_HORIZONTAL_UNIT_COUNT; x++)
+    for (int x = 0; x < self.horizontalTileCount; x++)
     {
-        for (int y = 0; y < FIELD_VERTICAL_UNIT_COUNT; y++)
+        for (int y = 0; y < self.verticalTileCount; y++)
         {
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
             if (flower.flowerType == ftNoFlower)
@@ -854,7 +865,7 @@
     while (true)
     {
         CGPoint gridAbove = CGPointMake(gridPosition.x, gridPosition.y + 1 + emptyCount);
-        if (gridAbove.y >= FIELD_VERTICAL_UNIT_COUNT)
+        if (gridAbove.y >= self.verticalTileCount)
         {
             [self generateRandomFlowerAndBloomOnGridPosition:gridPosition];
             break;

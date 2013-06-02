@@ -6,10 +6,9 @@
 //  Copyright __MyCompanyName__ 2013. All rights reserved.
 //
 
-#import "cocos2d.h"
-
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "NBInAppPurchaseManager.h"
 
 @implementation AppController
 
@@ -87,6 +86,8 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
+  [NBInAppPurchaseManager sharedInstance];
+  
 	return YES;
 }
 

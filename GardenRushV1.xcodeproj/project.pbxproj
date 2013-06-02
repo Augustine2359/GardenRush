@@ -146,6 +146,10 @@
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
 		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
 		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
+		F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CA645E17585527006A1033 /* NBPreGameScreen.m */; };
+		F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */; };
+		F9D169F01753B0780083D338 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9D169EE1753B06D0083D338 /* StoreKit.framework */; };
+		F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -434,6 +438,13 @@
 		BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlowerFieldGameGrid.m; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.m; sourceTree = "<group>"; };
 		BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlower.h; path = NBClasses/BasicClasses/NBFlower.h; sourceTree = "<group>"; };
 		BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlower.m; path = NBClasses/BasicClasses/NBFlower.m; sourceTree = "<group>"; };
+		F9CA645D17585527006A1033 /* NBPreGameScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBPreGameScreen.h; path = NBClasses/BasicClasses/NBPreGameScreen.h; sourceTree = "<group>"; };
+		F9CA645E17585527006A1033 /* NBPreGameScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBPreGameScreen.m; path = NBClasses/BasicClasses/NBPreGameScreen.m; sourceTree = "<group>"; };
+		F9D169EB1753AFA40083D338 /* NBInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBInAppPurchaseManager.h; sourceTree = "<group>"; };
+		F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBInAppPurchaseManager.m; sourceTree = "<group>"; };
+		F9D169EE1753B06D0083D338 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F9D16A031754FF070083D338 /* NBSpecialPowerButtonsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBSpecialPowerButtonsContainer.h; path = NBClasses/BasicClasses/NBSpecialPowerButtonsContainer.h; sourceTree = "<group>"; };
+		F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBSpecialPowerButtonsContainer.m; path = NBClasses/BasicClasses/NBSpecialPowerButtonsContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +452,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D169F01753B0780083D338 /* StoreKit.framework in Frameworks */,
 				BC8EA6441734C4EA004454CF /* QuartzCore.framework in Frameworks */,
 				BC8EA6461734C4EA004454CF /* OpenGLES.framework in Frameworks */,
 				BC8EA6481734C4EA004454CF /* OpenAL.framework in Frameworks */,
@@ -472,6 +484,8 @@
 				BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */,
 				BC1FD79417363CB60065D4CF /* NBTestScreen.h */,
 				BC1FD79517363CB60065D4CF /* NBTestScreen.m */,
+				F9CA645D17585527006A1033 /* NBPreGameScreen.h */,
+				F9CA645E17585527006A1033 /* NBPreGameScreen.m */,
 				BC1FD79917363D4A0065D4CF /* NBDataManager.h */,
 				BC1FD79A17363D4A0065D4CF /* NBDataManager.m */,
 				569D11B1173A818D00D60069 /* NBGameGUI.h */,
@@ -480,6 +494,8 @@
 				BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */,
 				BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */,
 				BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */,
+				F9D16A031754FF070083D338 /* NBSpecialPowerButtonsContainer.h */,
+				F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */,
 				BC9B37691748E3C900FD1EDA /* NBGameKitHelper.h */,
 				BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */,
 				BC829156174A6A800064B977 /* NBTestNode.h */,
@@ -511,6 +527,7 @@
 		BC8EA6421734C4EA004454CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9D169EE1753B06D0083D338 /* StoreKit.framework */,
 				BC8EA6431734C4EA004454CF /* QuartzCore.framework */,
 				BC8EA6451734C4EA004454CF /* OpenGLES.framework */,
 				BC8EA6471734C4EA004454CF /* OpenAL.framework */,
@@ -908,8 +925,9 @@
 		BC8EA7DF17362E77004454CF /* NBClasses */ = {
 			isa = PBXGroup;
 			children = (
-				5690B2A1173E91480059192E /* AdvanceClasses */,
 				BC1FD79817363D210065D4CF /* BasicClasses */,
+				5690B2A1173E91480059192E /* AdvanceClasses */,
+				F9D169EA1753AF5F0083D338 /* Managers */,
 			);
 			name = NBClasses;
 			sourceTree = "<group>";
@@ -921,6 +939,15 @@
 				BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */,
 			);
 			name = MainGameArts;
+			sourceTree = "<group>";
+		};
+		F9D169EA1753AF5F0083D338 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F9D169EB1753AFA40083D338 /* NBInAppPurchaseManager.h */,
+				F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1113,6 +1140,9 @@
 				BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */,
 				BC829158174A6A800064B977 /* NBTestNode.m in Sources */,
 				BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */,
+				F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */,
+				F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */,
+				F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -105,7 +105,8 @@
         [self addStandardMenuString:@"View Leaderboard" withSelector:@selector(openGameCenterLeaderBoard)];
         [self addStandardMenuString:@"Test add node" withSelector:@selector(addNode)];
         [self addStandardMenuString:@"Test remove node" withSelector:@selector(removeNode)];
-        
+        [self addStandardMenuString:@"Pre-game screen" withSelector:@selector(goToPreGameScreen)];
+      
         self.testNodeCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
         self.testNodeCountLabel.position = CGPointMake(20, self.layerSize.height - 20);
         [self addChild:self.testNodeCountLabel];
@@ -141,6 +142,11 @@
 -(void)gotoTestScreen
 {
     [self changeToScene:TargetSceneFirst];
+}
+
+-(void)goToPreGameScreen
+{
+    [self changeToScene:TargetScenePreGame];
 }
 
 -(void)submitDummyScoreForTest

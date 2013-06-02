@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "NBCustomer.h"
 
 
@@ -18,21 +17,24 @@
     CCArray* additionalScoreLabels;
     int tempScore, actualScore;
     bool isScoreUpdating;
+    bool isSpawningCustomer;
     
     CCArray* customersArray;
+    CCArray* missingCustomerIndex;
 }
 
 //Private
 -(void)initialiseLivesGUI;
 -(void)initialiseScoreGUI;
 -(void)initialiseCustomerGUI;
--(void)updateScore;
--(void)doAddScore:(int)amount index:(int)customerIndex;
+-(void)update:(ccTime)delta;
+//-(void)updateScore;
 -(void)deleteAdditionalScoreLabel;
 
 //Public
 +(NBGameGUI*)sharedGameGUI;
 +(CGPoint)getScorePosition;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index;
 
 @end

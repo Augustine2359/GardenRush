@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-// When you import this file, you import all the cocos2d classes
-#import "cocos2d.h"
 #import "NBDataManager.h"
 
 typedef enum
@@ -18,6 +16,7 @@ typedef enum
     TargetSceneINVALID = 0,
     TargetSceneFirst,
     TargetSceneSecond,
+    TargetScenePreGame,
     TargetSceneMAX,
 } TargetSceneTypes;
 

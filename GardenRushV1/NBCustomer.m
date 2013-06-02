@@ -13,43 +13,48 @@
 
 -(id)initWithIndex:(int)index{
     if ([super init]) {
-        CCLOG(@"creating cust");
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
         
         //Background frame
-        CCSprite* customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
-        CGSize frameSize = customerFrame.boundingBox.size;
-        [customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
-        [customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
-        frameSize = customerFrame.boundingBox.size;
-        [customerFrame setPosition:ccp(screenSize.width/3 * index + frameSize.width*0.5, screenSize.height - frameSize.height)];
-        [self addChild:customerFrame];
+        self.customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
+        CGSize frameSize = self.customerFrame.boundingBox.size;
+        [self.customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
+        [self.customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
+        frameSize = self.customerFrame.boundingBox.size;
+        [self.customerFrame setPosition:ccp(screenSize.width/3 * index + frameSize.width*0.5, screenSize.height - frameSize.height)];
+        [self addChild:self.customerFrame];
         
         //Sprite image
         faceImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
         [faceImage setScale:2.5];
-        [faceImage setPosition:ccp(customerFrame.position.x - customerFrame.boundingBox.size.width*0.25,
-                                   customerFrame.position.y + customerFrame.boundingBox.size.height*0.25)];
+        [faceImage setPosition:ccp(self.customerFrame.position.x - self.customerFrame.boundingBox.size.width*0.25,
+                                   self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
         [self addChild:faceImage];
         
         //Request images
         int random = arc4random() % (int)btFiveOfAKind;
         flowerRequest = [NBBouquet createBouquet:random show:YES];
-        [flowerRequest setPosition:ccp(customerFrame.position.x + customerFrame.boundingBox.size.width*0.25,
-                                    customerFrame.position.y + customerFrame.boundingBox.size.height*0.25)];
+        [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.25,
+                                    self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
         [self addChild:flowerRequest];
 
         
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
         [timerBarImage setScaleX:5];
-        [timerBarImage setPosition:ccp(faceImage.position.x - faceImage.boundingBox.size.width*0.5, customerFrame.position.y - customerFrame.boundingBox.size.height*0.25)];
+        [timerBarImage setPosition:ccp(faceImage.position.x - faceImage.boundingBox.size.width*0.5, self.customerFrame.position.y - self.customerFrame.boundingBox.size.height*0.25)];
         [self addChild:timerBarImage];
         
         //Misc
-        initialWaitingTime = 10;
+        initialWaitingTime = 30;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
+        self.requestScore = 100;
+        
+        //Transit to position
+        self.position = ccp(self.position.x, self.position.y+screenSize.height*0.5);
+        id action = [CCMoveBy actionWithDuration:3 position:ccp(0, -screenSize.height*0.5)];
+        [self runAction:[CCSequence actions:action, nil]];
         
         [self scheduleUpdate];
     }
@@ -69,16 +74,9 @@
     [timerBarImage setScaleX:(currentWaitingTime/initialWaitingTime * 5)];
 }
 
--(void)doSpawnNewCustomer{
-//    CGSize screenSize = [[CCDirector sharedDirector] winSize];
-//    id action = [CCMoveTo actionWithDuration:3 position:ccp(self.position.x, screenSize.height + self.boundingBox.size.height)];
-//    id actionEnd = [CCCallFunc actionWithTarget:self selector:@selector(deleteSelf)];
-//    [self runAction:[CCSequence actions:action, actionEnd, nil]];
-}
-
 -(void)doCustomerLeave{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    id action = [CCMoveTo actionWithDuration:3 position:ccp(self.position.x, screenSize.height + self.boundingBox.size.height)];
+    id action = [CCMoveBy actionWithDuration:3 position:ccp(0, screenSize.height)];
     id actionEnd = [CCCallFunc actionWithTarget:self selector:@selector(deleteSelf)];
     [self runAction:[CCSequence actions:action, actionEnd, nil]];
 }

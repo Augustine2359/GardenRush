@@ -81,6 +81,8 @@ static CGPoint scorePosition = {0, 0};
     [scoreLabel setPosition:scorePosition];
     [self addChild:scoreLabel];
     
+    [self scheduleUpdate];
+    
     //Testing only 
 //    id delay = [CCDelayTime actionWithDuration:3];
 //    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doFulfillCustomer)];
@@ -88,31 +90,62 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)initialiseCustomerGUI{
-    customersArray = [CCArray new];
+    customersArray = [[CCArray alloc] initWithCapacity:3];
+    missingCustomerIndex = [CCArray new];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:2]];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
-    for (int x = 0; x < 3; x++) {
-        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-        [self addChild:thatCustomer z:-2];
-        [customersArray addObject:thatCustomer];
-    }
+//    for (int x = 0; x < 3; x++) {
+//        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
+//        [self addChild:thatCustomer z:-2];
+//        [customersArray addObject:thatCustomer];
+//    }
     
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
+//    [self doSpawnNewCustomer];
 }
 
--(void)updateScore{
-    if (tempScore >= actualScore) {
-        tempScore = actualScore;
-        [self unschedule:@selector(updateScore)];
-        isScoreUpdating = NO;
-        return;
+-(void)update:(ccTime)delta{
+    
+    //Update score
+    if (isScoreUpdating) {
+        tempScore += 5;
+        [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+        
+        if (tempScore >= actualScore) {
+            tempScore = actualScore;
+            isScoreUpdating = NO;
+        }
     }
     
-    tempScore += 5;
-    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+    //Spawn customer
+    if ([missingCustomerIndex count] > 0 && !isSpawningCustomer) {
+        isSpawningCustomer = YES;
+        int randomDelay = arc4random() % 3  + 1;
+        id delay = [CCDelayTime actionWithDuration:randomDelay];
+        int temp1 = [[missingCustomerIndex objectAtIndex:[missingCustomerIndex count]-1] intValue];
+        [missingCustomerIndex removeLastObject];
+        NSNumber* temp2 = [NSNumber numberWithInt:temp1];
+        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:) data:temp2];
+        [self runAction:[CCSequence actions:delay, action, nil]];
+    }
 }
 
--(void)doAddScore:(int)amount index:(int)customerIndex{
+//-(void)updateScore{
+//    if (tempScore >= actualScore) {
+//        tempScore = actualScore;
+//        [self unschedule:@selector(updateScore)];
+//        isScoreUpdating = NO;
+//        return;
+//    }
+//    
+//    tempScore += 5;
+//    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+//}
+
+-(void)doAddScore:(int)amount{
     actualScore += amount;
     
 //    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:customerIndex];
@@ -125,10 +158,12 @@ static CGPoint scorePosition = {0, 0};
     id delete = [CCCallFunc actionWithTarget:self selector:@selector(deleteAdditionalScoreLabel)];
     [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
     
-    if (!isScoreUpdating) {
-        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
-        isScoreUpdating = YES;
-    }
+//    if (!isScoreUpdating) {
+//        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
+//        isScoreUpdating = YES;
+//    }
+    
+    isScoreUpdating = YES;
 }
 
 -(void)deleteAdditionalScoreLabel{
@@ -138,10 +173,23 @@ static CGPoint scorePosition = {0, 0};
 
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
     NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
-    int requestScore = 200;
+    int requestScore = thatCustomer.requestScore;
     int totalScore = flowerScore + requestScore;
-    [self doAddScore:totalScore index:index];
+    [self doAddScore:totalScore];
     [thatCustomer doCustomerLeave];
+}
+
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index{
+    CCLOG(@"OH");
+    
+    int temp = [index intValue];
+    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp];
+//    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
+    [self addChild:newCustomer z:-2];
+    [customersArray addObject:newCustomer];
+//    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
+    
+    isSpawningCustomer = NO;
 }
 
 @end

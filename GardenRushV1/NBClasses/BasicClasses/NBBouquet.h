@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 
 #define BOUQUET_SIZE_WIDTH 20
 #define BOUQUET_SIZE_HEIGHT 20
