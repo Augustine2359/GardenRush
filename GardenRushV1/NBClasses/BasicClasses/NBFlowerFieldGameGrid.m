@@ -35,8 +35,8 @@
         
         [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * FIELD_HORIZONTAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * FIELD_VERTICAL_UNIT_COUNT) + FIELD_FLOWER_GAP_WIDTH))];
         self.anchorPoint = ccp(0, 0);
-        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), 30);
-        //DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
+        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
+        DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
         self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
         self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
@@ -551,6 +551,8 @@
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
             self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
         
         switch (self.currentBouquetMatchType)
         {
@@ -585,6 +587,8 @@
                 break;
         }
         
+        [self produceBouquet:self.currentBouquetMatchType onGrid:self.selectedFlowerGrid];
+        
         arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.swappedFlowerGrid];
         if ([arrayOfMatchedFlowers count] > 0)
         {
@@ -593,6 +597,8 @@
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
             self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
         
         switch (self.currentBouquetMatchType)
         {
@@ -626,6 +632,8 @@
             default:
                 break;
         }
+        
+        [self produceBouquet:self.currentBouquetMatchType onGrid:self.swappedFlowerGrid];
         
         if (!hasMatch)
             [self returnFlower];
@@ -773,6 +781,8 @@
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
             self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
 
         switch (self.currentBouquetMatchType)
         {
@@ -807,6 +817,8 @@
                 break;
         }
         
+        [self produceBouquet:self.currentBouquetMatchType onGrid:flowerPosition];
+        
         if (hasMatch)
         {
             for (int i = 0; i < [arrayOfMatchedFlowers count]; i++)
@@ -822,7 +834,7 @@
                     if (matchedFlowerPosition.x == potentialComboFlowerPosition.x && matchedFlowerPosition.y == potentialComboFlowerPosition.y)
                     {
                         [self.potentialComboGrids removeObjectAtIndex:j];
-                        j--;
+                        break;
                     }
                 }
             }
@@ -896,6 +908,23 @@
 -(bool)checkMatchedFlowerWithCustomerRequirement:(NBBouquetType)bouquetType
 {
     return false;
+}
+
+-(void)produceBouquet:(NBBouquetType)bouquetType onGrid:(CGPoint)gridPosition
+{
+    if (bouquetType == btNoMatch)
+        return;
+    
+    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:self];
+    [bouquet performScoringAndInformLayer:self withSelector:@selector(onBouquetReachedScore:)];
+}
+
+-(void)onBouquetReachedScore:(NBBouquet*)bouquet
+{
+    NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
+    [gameGUI doAddScore:bouquet.value index:0];
+    
+    [self removeChild:bouquet cleanup:YES];
 }
 
 @end

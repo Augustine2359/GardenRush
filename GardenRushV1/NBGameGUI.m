@@ -8,14 +8,28 @@
 
 #import "NBGameGUI.h"
 
+static NBGameGUI* sharedGameGUI = nil;
+static CGPoint scorePosition = {0, 0};
 
 @implementation NBGameGUI
+
++(NBGameGUI*)sharedGameGUI
+{
+    return sharedGameGUI;
+}
+
++(CGPoint)getScorePosition
+{
+    return scorePosition;
+}
 
 -(id)init{
     if ([super init]) {
         [self initialiseLivesGUI];
         [self initialiseScoreGUI];
         [self initialiseCustomerGUI];
+        
+        sharedGameGUI = self;
     }
     return self;
 }
@@ -62,8 +76,9 @@
     [scoreFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
     [self addChild:scoreFrame];
     
-    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:32];
-    [scoreLabel setPosition:ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5)];
+    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:24];
+    scorePosition = ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5);
+    [scoreLabel setPosition:scorePosition];
     [self addChild:scoreLabel];
     
     //Testing only 

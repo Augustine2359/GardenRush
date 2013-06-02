@@ -31,6 +31,8 @@
 -(void)deleteAdditionalScoreLabel;
 
 //Public
++(NBGameGUI*)sharedGameGUI;
++(CGPoint)getScorePosition;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 
 @end
