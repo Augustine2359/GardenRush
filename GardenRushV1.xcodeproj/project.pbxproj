@@ -147,7 +147,13 @@
 		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
 		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
 		F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CA645E17585527006A1033 /* NBPreGameScreen.m */; };
-		F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */; };
+		F9D01A3F175B93F20084EAB6 /* NBAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D01A3C175B93F20084EAB6 /* NBAudioManager.m */; };
+		F9D01A40175B93F20084EAB6 /* NBInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D01A3E175B93F20084EAB6 /* NBInAppPurchaseManager.m */; };
+		F9D01A47175B94B90084EAB6 /* die.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A42175B94B90084EAB6 /* die.wav */; };
+		F9D01A48175B94B90084EAB6 /* FFMainTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */; };
+		F9D01A49175B94B90084EAB6 /* hadouken.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A44175B94B90084EAB6 /* hadouken.wav */; };
+		F9D01A4A175B94B90084EAB6 /* shoryuken.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A45175B94B90084EAB6 /* shoryuken.wav */; };
+		F9D01A4B175B94B90084EAB6 /* tatsumakisenpuukyaku.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */; };
 		F9D169F01753B0780083D338 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9D169EE1753B06D0083D338 /* StoreKit.framework */; };
 		F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */; };
 /* End PBXBuildFile section */
@@ -440,8 +446,15 @@
 		BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlower.m; path = NBClasses/BasicClasses/NBFlower.m; sourceTree = "<group>"; };
 		F9CA645D17585527006A1033 /* NBPreGameScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBPreGameScreen.h; path = NBClasses/BasicClasses/NBPreGameScreen.h; sourceTree = "<group>"; };
 		F9CA645E17585527006A1033 /* NBPreGameScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBPreGameScreen.m; path = NBClasses/BasicClasses/NBPreGameScreen.m; sourceTree = "<group>"; };
-		F9D169EB1753AFA40083D338 /* NBInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBInAppPurchaseManager.h; sourceTree = "<group>"; };
-		F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBInAppPurchaseManager.m; sourceTree = "<group>"; };
+		F9D01A3B175B93F20084EAB6 /* NBAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBAudioManager.h; path = NBClasses/Managers/NBAudioManager.h; sourceTree = "<group>"; };
+		F9D01A3C175B93F20084EAB6 /* NBAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBAudioManager.m; path = NBClasses/Managers/NBAudioManager.m; sourceTree = "<group>"; };
+		F9D01A3D175B93F20084EAB6 /* NBInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBInAppPurchaseManager.h; path = NBClasses/Managers/NBInAppPurchaseManager.h; sourceTree = "<group>"; };
+		F9D01A3E175B93F20084EAB6 /* NBInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBInAppPurchaseManager.m; path = NBClasses/Managers/NBInAppPurchaseManager.m; sourceTree = "<group>"; };
+		F9D01A42175B94B90084EAB6 /* die.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = die.wav; sourceTree = "<group>"; };
+		F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FFMainTheme.mp3; sourceTree = "<group>"; };
+		F9D01A44175B94B90084EAB6 /* hadouken.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hadouken.wav; sourceTree = "<group>"; };
+		F9D01A45175B94B90084EAB6 /* shoryuken.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoryuken.wav; sourceTree = "<group>"; };
+		F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tatsumakisenpuukyaku.wav; sourceTree = "<group>"; };
 		F9D169EE1753B06D0083D338 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F9D16A031754FF070083D338 /* NBSpecialPowerButtonsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBSpecialPowerButtonsContainer.h; path = NBClasses/BasicClasses/NBSpecialPowerButtonsContainer.h; sourceTree = "<group>"; };
 		F9D16A041754FF080083D338 /* NBSpecialPowerButtonsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBSpecialPowerButtonsContainer.m; path = NBClasses/BasicClasses/NBSpecialPowerButtonsContainer.m; sourceTree = "<group>"; };
@@ -561,6 +574,7 @@
 		BC8EA6561734C4EA004454CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9D01A41175B94B90084EAB6 /* Audio */,
 				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
@@ -941,11 +955,26 @@
 			name = MainGameArts;
 			sourceTree = "<group>";
 		};
+		F9D01A41175B94B90084EAB6 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				F9D01A42175B94B90084EAB6 /* die.wav */,
+				F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */,
+				F9D01A44175B94B90084EAB6 /* hadouken.wav */,
+				F9D01A45175B94B90084EAB6 /* shoryuken.wav */,
+				F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */,
+			);
+			name = Audio;
+			path = Resources/Audio;
+			sourceTree = "<group>";
+		};
 		F9D169EA1753AF5F0083D338 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				F9D169EB1753AFA40083D338 /* NBInAppPurchaseManager.h */,
-				F9D169EC1753AFA40083D338 /* NBInAppPurchaseManager.m */,
+				F9D01A3B175B93F20084EAB6 /* NBAudioManager.h */,
+				F9D01A3C175B93F20084EAB6 /* NBAudioManager.m */,
+				F9D01A3D175B93F20084EAB6 /* NBInAppPurchaseManager.h */,
+				F9D01A3E175B93F20084EAB6 /* NBInAppPurchaseManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1016,6 +1045,11 @@
 				BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */,
 				BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */,
 				BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */,
+				F9D01A47175B94B90084EAB6 /* die.wav in Resources */,
+				F9D01A48175B94B90084EAB6 /* FFMainTheme.mp3 in Resources */,
+				F9D01A49175B94B90084EAB6 /* hadouken.wav in Resources */,
+				F9D01A4A175B94B90084EAB6 /* shoryuken.wav in Resources */,
+				F9D01A4B175B94B90084EAB6 /* tatsumakisenpuukyaku.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,9 +1174,10 @@
 				BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */,
 				BC829158174A6A800064B977 /* NBTestNode.m in Sources */,
 				BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */,
-				F9D169ED1753AFA40083D338 /* NBInAppPurchaseManager.m in Sources */,
 				F9D16A051754FF090083D338 /* NBSpecialPowerButtonsContainer.m in Sources */,
 				F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */,
+				F9D01A3F175B93F20084EAB6 /* NBAudioManager.m in Sources */,
+				F9D01A40175B93F20084EAB6 /* NBInAppPurchaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
