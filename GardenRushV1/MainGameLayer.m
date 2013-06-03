@@ -12,6 +12,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "NBLayerWithFlowerAtEnd.h"
 
 #pragma mark - MainGameLayer
 
@@ -118,6 +119,8 @@
         NBGameKitHelper* gkHelper = [NBGameKitHelper sharedGameKitHelper];
         gkHelper.delegate = self;
         [gkHelper authenticateLocalPlayer];
+
+      [self doPetalsFalling];
 	}
 	return self;
 }
@@ -189,6 +192,17 @@
     {
         CCLOG(@"Score submitted with value %lli", score.value);
     }
+}
+
+- (void)doPetalsFalling {
+  [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(generatePetal) userInfo:nil repeats:YES];
+}
+
+- (void)generatePetal {
+  NSInteger width = [[CCDirector sharedDirector] winSize].width;
+  NBLayerWithFlowerAtEnd *layerWithFlowerAtEnd = [[NBLayerWithFlowerAtEnd alloc] initWithColor:ccc4(0, 0, 0, 0) width:50 height:300];
+  layerWithFlowerAtEnd.position = CGPointMake(arc4random()%width, [[CCDirector sharedDirector] winSize].height);
+  [self addChild:layerWithFlowerAtEnd z:-1];
 }
 
 #pragma mark GameKit delegate
