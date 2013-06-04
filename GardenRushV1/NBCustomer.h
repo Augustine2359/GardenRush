@@ -13,17 +13,22 @@
 @interface NBCustomer : CCLayer {
     CCSprite* faceImage;
     CCSprite* timerBarImage;
-    NBBouquet* flowerRequest;
+    CCArray* requests;
     
     float initialWaitingTime;
     float currentWaitingTime;
+    
+    id layer;
+    SEL leaveSel;
+    int selfIndex;
 }
 
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 
+
 //Private
--(id)initWithIndex:(int)index;
+-(id)initWithIndex:(int)index layer:(id)fromLayer leaveSelector:(SEL)leaveSelector requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
 -(void)update:(ccTime)delta;
 -(void)doCustomerLeave;
 -(void)deleteSelf;

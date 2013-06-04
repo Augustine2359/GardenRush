@@ -11,9 +11,12 @@
 
 @implementation NBCustomer
 
--(id)initWithIndex:(int)index{
+-(id)initWithIndex:(int)index layer:(id)fromLayer leaveSelector:(SEL)leaveSelector requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime{
     if ([super init]) {
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        layer = fromLayer;
+        leaveSel = leaveSelector;
+        selfIndex = index;
         
         //Background frame
         self.customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
@@ -33,11 +36,13 @@
         
         //Request images
         int random = arc4random() % (int)btFiveOfAKind;
-        flowerRequest = [NBBouquet createBouquet:random show:YES];
-        [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.25,
-                                    self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
-        [self addChild:flowerRequest];
-
+        for (int x = 0; x < requestQuantity; x++) {
+            NBBouquet* flowerRequest = [NBBouquet createBouquet:random show:YES];
+            [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x,
+                                           self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
+            [self addChild:flowerRequest];
+            [requests addObject:flowerRequest];
+        }
         
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
@@ -46,10 +51,10 @@
         [self addChild:timerBarImage];
         
         //Misc
-        initialWaitingTime = 30;
+        initialWaitingTime = waitingTime;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
-        self.requestScore = 100;
+        self.requestScore = 100 * requestQuantity;
         
         //Transit to position
         self.position = ccp(self.position.x, self.position.y+screenSize.height*0.5);
@@ -82,6 +87,7 @@
 }
                     
 -(void)deleteSelf{
+    [layer performSelector:leaveSel withObject:[NSNumber numberWithInt:selfIndex]];
     [self removeFromParentAndCleanup:true];
 }
 

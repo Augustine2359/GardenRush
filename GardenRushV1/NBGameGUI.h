@@ -20,7 +20,8 @@
     
     CCLabelTTF* scoreLabel;
     CCArray* additionalScoreLabels;
-    int tempScore, actualScore;
+    float tempScore, actualScore;
+    float deltaScore;
     bool isScoreUpdating;
     bool isSpawningCustomer;
     
@@ -39,7 +40,8 @@
 //Public
 -(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
--(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index;
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
+-(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;
 -(void)doGainLife:(int)amount;
 
