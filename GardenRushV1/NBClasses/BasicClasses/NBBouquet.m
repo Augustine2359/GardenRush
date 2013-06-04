@@ -9,8 +9,25 @@
 #import "NBBouquet.h"
 
 static int bouquetCount = 0;
+static CGPoint scorePadPosition = {0, 0};
 
 @implementation NBBouquet
+
++(id)bloomBouquetWithType:(NBBouquetType)bouquetType withPosition:(CGPoint)position addToNode:(CCNode*)layer
+{
+    NBBouquet* bouquet = [[NBBouquet alloc] initWithBouquetType:bouquetType show:true];
+    bouquet.position = position;
+    [layer addChild:bouquet z:99];
+    
+    bouquet.flowerImage.scale = 0;
+    CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scaleX:BOUQUET_SIZE_WIDTH / bouquet.flowerImage.contentSize.width scaleY:BOUQUET_SIZE_HEIGHT / bouquet.flowerImage.contentSize.height];
+    [bouquet.flowerImage runAction:scaleTo];
+    
+    CCRotateBy* rotateBy = [CCRotateBy actionWithDuration:0.75f angle:360];
+    [bouquet.flowerImage runAction:rotateBy];
+    
+    return bouquet;
+}
 
 +(id)createBouquet:(NBBouquetType)bouquetType show:(bool)show
 {
@@ -23,6 +40,11 @@ static int bouquetCount = 0;
     return bouquetCount;
 }
 
++(void)setScorePadPosition:(CGPoint)position
+{
+    scorePadPosition = position;
+}
+
 -(id)initWithBouquetType:(NBBouquetType)bouquetType show:(bool)show
 {
     if ((self = [[super init] autorelease]))
@@ -33,18 +55,37 @@ static int bouquetCount = 0;
         {
             case btSingleFlower:
                 self.flowerImage.color = ccWHITE;
+                self.value = 100;
                 break;
                 
             case btThreeOfAKind:
-                self.flowerImage.color = ccRED;
+                self.flowerImage.color = ccc3(204, 51, 255);
+                self.value = 300;
                 break;
                 
             case btFourOfAKind:
-                self.flowerImage.color = ccYELLOW;
+                self.flowerImage.color = ccc3(153, 51, 51);
+                self.value = 500;
                 break;
                 
             case btFiveOfAKind:
-                self.flowerImage.color = ccGREEN;
+                self.flowerImage.color = ccc3(228, 149, 202);
+                self.value = 700;
+                break;
+                
+            case btCornerFiveOfAKind:
+                self.flowerImage.color = ccc3(228, 149, 202);
+                self.value = 700;
+                break;
+                
+            case btSixOfAKind:
+                self.flowerImage.color = ccc3(228, 149, 202);
+                self.value = 1000;
+                break;
+                
+            case btSevenOfAKind:
+                self.flowerImage.color = ccc3(228, 149, 202);
+                self.value = 1500;
                 break;
                 
             default:
@@ -79,6 +120,30 @@ static int bouquetCount = 0;
     self.flowerImage.visible = YES;
     CCFadeIn* fadeIn = [CCFadeIn actionWithDuration:0.2f];
     [self.flowerImage runAction:fadeIn];
+}
+
+-(void)performScoringAndInformLayer:(CCNode*)node withSelector:(SEL)selector
+{
+    self.nodeToReportScore = node;
+    self.selectorToReportScore = selector;
+    
+    CCDelayTime* delay = [CCDelayTime actionWithDuration:1.0f];
+    CCMoveTo* moveTo = [CCMoveTo actionWithDuration:1.0f position:scorePadPosition];
+    CCEaseInOut* easeInOut = [CCEaseInOut actionWithAction:moveTo rate:2];
+    CCCallFunc* callFunc = [CCCallFunc actionWithTarget:self selector:@selector(onBouquetReachedScore)];
+    CCSequence* sequence = [CCSequence actions:delay, easeInOut, callFunc, nil];
+    [self runAction:sequence];
+}
+
+-(void)onBouquetReachedScore
+{
+    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.7f];
+    [self runAction:fadeOut];
+    
+    [self.nodeToReportScore performSelector:self.selectorToReportScore withObject:self];
+    
+    self.nodeToReportScore = nil;
+    self.selectorToReportScore = nil;
 }
 
 @end

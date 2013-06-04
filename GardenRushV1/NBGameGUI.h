@@ -38,6 +38,8 @@
 -(void)deleteAdditionalScoreLabel;
 
 //Public
++(NBGameGUI*)sharedGameGUI;
++(CGPoint)getScorePosition;
 -(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;

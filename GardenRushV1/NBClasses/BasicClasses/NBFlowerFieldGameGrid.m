@@ -46,8 +46,8 @@
         
         [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * self.horizontalTileCount) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * self.verticalTileCount) + FIELD_FLOWER_GAP_WIDTH))];
         self.anchorPoint = ccp(0, 0);
-        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), 30);
-        //DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
+        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
+        DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
         self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
         self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
@@ -489,21 +489,21 @@
     
     if (matchCount >= 3)
     {
-        NBFlowerMatchType matchType = mtNoMatch;
+        NBBouquetType bouquetType = btNoMatch;
         
-        if (matchCount == 3) matchType = mtThreeOfAKind;
-        if (matchCount == 4) matchType = mtFourOfAKind;
-        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) matchType = mtCornerFiveOfAKind;
-        if (matchCount == 5) matchType = mtFiveOfAKind;
-        if (matchCount == 6) matchType = mtSixOfAKind;
-        if (matchCount >= 7) matchType = mtSevenOfAKind;
+        if (matchCount == 3) bouquetType = btThreeOfAKind;
+        if (matchCount == 4) bouquetType = btFourOfAKind;
+        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) bouquetType = btCornerFiveOfAKind;
+        if (matchCount == 5) bouquetType = btFiveOfAKind;
+        if (matchCount == 6) bouquetType = btSixOfAKind;
+        if (matchCount >= 7) bouquetType = btSevenOfAKind;
     
         for (int i = 0; i < [array count]; i++)
         {
             NSValue* value = [array objectAtIndex:i];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            flower.matchType = matchType;
+            flower.bouquetType = bouquetType;
         }
         
         [self.arrayOfMatchedFlowerSlots addObject:array];
@@ -560,35 +560,37 @@
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
         
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on selected flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on selected flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on selected flower");
                 hasMatch = true;
                 break;
@@ -596,47 +598,53 @@
                 break;
         }
         
+        [self produceBouquet:self.currentBouquetMatchType onGrid:self.selectedFlowerGrid];
+        
         arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.swappedFlowerGrid];
         if ([arrayOfMatchedFlowers count] > 0)
         {
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
         
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on swapped flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on swapped flower");
                 hasMatch = true;
                 break;
             default:
                 break;
         }
+        
+        [self produceBouquet:self.currentBouquetMatchType onGrid:self.swappedFlowerGrid];
         
         if (!hasMatch)
             [self returnFlower];
@@ -782,41 +790,45 @@
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];
             CGPoint flowerPosition = [value CGPointValue];
             NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            self.currentMatchType = flower.matchType;
+            self.currentBouquetMatchType = flower.bouquetType;
         }
+        else
+            self.currentBouquetMatchType = btNoMatch;
 
-        switch (self.currentMatchType)
+        switch (self.currentBouquetMatchType)
         {
-            case mtNoMatch:
+            case btNoMatch:
                 DLog(@"no match on swapped flower");
                 break;
-            case mtThreeOfAKind:
+            case btThreeOfAKind:
                 DLog(@"found three of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFourOfAKind:
+            case btFourOfAKind:
                 DLog(@"found four of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtFiveOfAKind:
+            case btFiveOfAKind:
                 DLog(@"found five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtCornerFiveOfAKind:
+            case btCornerFiveOfAKind:
                 DLog(@"found corner type five of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSixOfAKind:
+            case btSixOfAKind:
                 DLog(@"found six of a kind on swapped flower");
                 hasMatch = true;
                 break;
-            case mtSevenOfAKind:
+            case btSevenOfAKind:
                 DLog(@"found seven of a kind on swapped flower");
                 hasMatch = true;
                 break;
             default:
                 break;
         }
+        
+        [self produceBouquet:self.currentBouquetMatchType onGrid:flowerPosition];
         
         if (hasMatch)
         {
@@ -833,7 +845,7 @@
                     if (matchedFlowerPosition.x == potentialComboFlowerPosition.x && matchedFlowerPosition.y == potentialComboFlowerPosition.y)
                     {
                         [self.potentialComboGrids removeObjectAtIndex:j];
-                        j--;
+                        break;
                     }
                 }
             }
@@ -904,9 +916,26 @@
     [flowerToBeReplaced release];
 }
 
--(bool)checkMatchedFlowerWithCustomerRequirement:(NBFlowerMatchType)flowerMatchType
+-(bool)checkMatchedFlowerWithCustomerRequirement:(NBBouquetType)bouquetType
 {
     return false;
+}
+
+-(void)produceBouquet:(NBBouquetType)bouquetType onGrid:(CGPoint)gridPosition
+{
+    if (bouquetType == btNoMatch)
+        return;
+    
+    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:self];
+    [bouquet performScoringAndInformLayer:self withSelector:@selector(onBouquetReachedScore:)];
+}
+
+-(void)onBouquetReachedScore:(NBBouquet*)bouquet
+{
+    NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
+    [gameGUI doAddScore:bouquet.value index:0];
+    
+    [self removeChild:bouquet cleanup:YES];
 }
 
 @end

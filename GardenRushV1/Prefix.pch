@@ -15,6 +15,7 @@
 
 #import "cocos2d.h"
 #import "NBInAppPurchaseManager.h"
+#import "NBAudioManager.h"
 
 #define IS_FLOWER_FIELD_EXPANDED @"isFlowerFieldExpanded"
 

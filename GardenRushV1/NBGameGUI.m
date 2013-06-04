@@ -8,8 +8,20 @@
 
 #import "NBGameGUI.h"
 
+static NBGameGUI* sharedGameGUI = nil;
+static CGPoint scorePosition = {0, 0};
 
 @implementation NBGameGUI
+
++(NBGameGUI*)sharedGameGUI
+{
+    return sharedGameGUI;
+}
+
++(CGPoint)getScorePosition
+{
+    return scorePosition;
+}
 
 -(id)init{
     if ([super init]) {
@@ -18,6 +30,8 @@
         [self initialiseScoreGUI];
         [self initialiseCustomerGUI];
         [self scheduleUpdate];
+        
+        sharedGameGUI = self;
     }
     return self;
 }

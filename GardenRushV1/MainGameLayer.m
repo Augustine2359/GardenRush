@@ -12,6 +12,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "NBLayerWithFlowerAtEnd.h"
 
 #pragma mark - MainGameLayer
 
@@ -42,20 +43,19 @@
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if ((self=[super init]))
     {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Flower Fun" fontName:@"Marker Felt" fontSize:64];
-
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
 		
-		// add the label as a child to this Layer
+        // create and initialize a Label
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Bouquet Frenzy" fontName:@"Papyrus" fontSize:36];
+        label.position =  ccp(size.width / 2, size.height / 2);
 		[self addChild: label];
-		
-		
+        
+        CCLabelTTF* playGameLabel =[CCLabelTTF labelWithString:@"Play" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Papyrus" fontSize:24];
+        CCMenuItemLabel* playGameMenu = [CCMenuItemLabel itemWithLabel:playGameLabel target:self selector:@selector(gotoTestScreen)];
+        CCMenu* mainMenu = [CCMenu menuWithItems:playGameMenu, nil];
+		mainMenu.position =  ccp(size.width / 2, (size.height / 2) - 40);
+		[self addChild:mainMenu];
 		
 		//
 		// Leaderboards and Achievements
@@ -102,7 +102,6 @@
 		// Add the menu to the layer
 		[self addChild:menu];*/
 
-        [self addStandardMenuString:@"Test Screen" withSelector:@selector(gotoTestScreen)];
         [self addStandardMenuString:@"Submit Dummy Score" withSelector:@selector(submitDummyScoreForTest)];
         [self addStandardMenuString:@"View Leaderboard" withSelector:@selector(openGameCenterLeaderBoard)];
         [self addStandardMenuString:@"Test add node" withSelector:@selector(addNode)];
@@ -120,6 +119,8 @@
         NBGameKitHelper* gkHelper = [NBGameKitHelper sharedGameKitHelper];
         gkHelper.delegate = self;
         [gkHelper authenticateLocalPlayer];
+
+      [self doPetalsFalling];
 	}
 	return self;
 }
@@ -191,6 +192,17 @@
     {
         CCLOG(@"Score submitted with value %lli", score.value);
     }
+}
+
+- (void)doPetalsFalling {
+  [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(generatePetal) userInfo:nil repeats:YES];
+}
+
+- (void)generatePetal {
+  NSInteger width = [[CCDirector sharedDirector] winSize].width;
+  NBLayerWithFlowerAtEnd *layerWithFlowerAtEnd = [[NBLayerWithFlowerAtEnd alloc] initWithColor:ccc4(0, 0, 0, 0) width:50 height:300];
+  layerWithFlowerAtEnd.position = CGPointMake(arc4random()%width, [[CCDirector sharedDirector] winSize].height);
+  [self addChild:layerWithFlowerAtEnd z:-1];
 }
 
 #pragma mark GameKit delegate

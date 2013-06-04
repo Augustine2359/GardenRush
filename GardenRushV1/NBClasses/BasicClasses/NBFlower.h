@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "NBBouquet.h"
 
 #define FLOWERSIZE_WIDTH 30
 #define FLOWERSIZE_HEIGHT 30
@@ -66,5 +68,6 @@ typedef enum
 @property (nonatomic, assign) bool isMarkedMatched;
 @property (nonatomic, assign) bool isMoveCompleted;
 @property (nonatomic, assign) NBFlowerMatchType matchType;
+@property (nonatomic, assign) NBBouquetType bouquetType;
 
 @end

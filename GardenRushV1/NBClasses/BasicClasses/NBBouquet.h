@@ -13,18 +13,28 @@
 
 typedef enum
 {
-    btSingleFlower = 0,
+    btNoMatch = 0,
+    btSingleFlower,
     btThreeOfAKind,
     btFourOfAKind,
-    btFiveOfAKind
+    btFiveOfAKind,
+    btCornerFiveOfAKind,
+    btSixOfAKind,
+    btSevenOfAKind
 } NBBouquetType;
 
 @interface NBBouquet : CCNode
 
++(id)bloomBouquetWithType:(NBBouquetType)bouquetType withPosition:(CGPoint)position addToNode:(CCNode*)layer;
 +(id)createBouquet:(NBBouquetType)bouquetType show:(bool)show;
 +(int)getBouquetCount;
++(void)setScorePadPosition:(CGPoint)position;
+-(void)performScoringAndInformLayer:(CCNode*)layer withSelector:(SEL)selector;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBBouquetType bouquetType;
+@property (nonatomic, assign) int value;
+@property (nonatomic, retain) CCNode* nodeToReportScore;
+@property (nonatomic, assign) SEL selectorToReportScore;
 
 @end
