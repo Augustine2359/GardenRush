@@ -110,12 +110,18 @@ static CGPoint scorePosition = {0, 0};
 
 -(void)initialiseCustomerGUI{
     customersArray = [[CCArray alloc] initWithCapacity:3];
-    missingCustomerIndex = [CCArray new];
+    [customersArray addObject:NULL];
+    [customersArray addObject:NULL];
+    [customersArray addObject:NULL];
+    
+    missingCustomerIndex = [[CCArray alloc] initWithCapacity:3];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:2]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
-    [self doAssignSpawnInterval:1 max:3];
+    [self setSpawnInterval:1 max:3];
+    [self setNextCustomerWaitingTime:30];
+    [self setCustomerRequestAverageQuantity:3];
     
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
@@ -136,14 +142,14 @@ static CGPoint scorePosition = {0, 0};
     
     //Spawn customer
     if ([missingCustomerIndex count] > 0 && !isSpawningCustomer) {
-        CCLOG(@"Spawn !");
+        CCLOG(@"Spawn customer!");
         isSpawningCustomer = YES;
         int randomDelay = arc4random() % maxSpawnInterval + minSpawnInterval;
         id delay = [CCDelayTime actionWithDuration:randomDelay];
         int temp1 = [[missingCustomerIndex objectAtIndex:[missingCustomerIndex count]-1] intValue];
         [missingCustomerIndex removeLastObject];
         NSNumber* temp2 = [NSNumber numberWithInt:temp1];
-        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:requestQuantity:waitingTime:) data:temp2];
+        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:/*requestQuantity:waitingTime:*/) data:temp2];
         [self runAction:[CCSequence actions:delay, action, nil]];
     }
 }
@@ -184,23 +190,30 @@ static CGPoint scorePosition = {0, 0};
     [self doDeleteCustomer:[NSNumber numberWithInt:index]];
 }
 
--(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime{
-    CCLOG(@"Really Spawn !");
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/{
     int temp = [index intValue];
-    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp layer:self leaveSelector:@selector(doDeleteCustomer) requestQuantity:3 waitingTime:30];
-//    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
+    
+    //Quantity is the average +- 1
+    int quantity = arc4random() * 3 - 1;
+    quantity += averageRequestQuantity;
+    if (quantity < 1) {
+        quantity = 1;
+    }
+    else if (quantity > 5){
+        quantity = 5;
+    }
+    
+    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp/* layer:self leaveSelector:@selector(doDeleteCustomer)*/ requestQuantity:quantity waitingTime:nextWaitingTime];
     [self addChild:newCustomer z:-2];
-    [customersArray addObject:newCustomer];
-//    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
+    [customersArray replaceObjectAtIndex:temp withObject:newCustomer];
     
     isSpawningCustomer = NO;
 }
 
 -(void)doDeleteCustomer:(NSNumber*)index{
     int thatIndex = [index intValue];
-    CCLOG(@"AA = %i", thatIndex);
     [missingCustomerIndex addObject:[NSNumber numberWithInt:thatIndex]];
-    [customersArray removeObjectAtIndex:thatIndex];
+    [customersArray replaceObjectAtIndex:thatIndex withObject:NULL];
 }
 
 -(void)doPauseGame{
@@ -246,9 +259,17 @@ static CGPoint scorePosition = {0, 0};
     }
 }
 
--(void)doAssignSpawnInterval:(int)min max:(int)max{
+-(void)setSpawnInterval:(int)min max:(int)max{
     minSpawnInterval = min;
     maxSpawnInterval = max - min + 1;
+}
+
+-(void)setCustomerRequestAverageQuantity:(int)amount{
+    averageRequestQuantity = amount;
+}
+
+-(void)setNextCustomerWaitingTime:(float)time{
+    nextWaitingTime = time;
 }
 
 @end

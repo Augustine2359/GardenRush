@@ -15,23 +15,15 @@
     CCSprite* timerBarImage;
     CCArray* requests;
     
-    float initialWaitingTime;
-    float currentWaitingTime;
-    
-    id layer;
-    SEL leaveSel;
+    float initialWaitingTime, currentWaitingTime;
     int selfIndex;
 }
 
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 
-
-//Private
--(id)initWithIndex:(int)index layer:(id)fromLayer leaveSelector:(SEL)leaveSelector requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
+-(id)initWithIndex:(int)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
 -(void)update:(ccTime)delta;
 -(void)doCustomerLeave;
--(void)deleteSelf;
--(void)update:(ccTime)delta;
 
 @end

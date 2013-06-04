@@ -11,42 +11,43 @@
 
 
 @interface NBGameGUI : CCLayer {
+    //Misc
     CCSprite* GUIFrame;
     
+    //Pause
     CCSprite* pauseButtonImage;
     
+    //Life
     CCArray* livesArray;
     int maxLives;
     
+    //Score
     CCLabelTTF* scoreLabel;
     CCArray* additionalScoreLabels;
     float tempScore, actualScore;
     float deltaScore;
     bool isScoreUpdating;
     
+    //Customer
     CCArray* customersArray;
     CCArray* missingCustomerIndex;
     bool isSpawningCustomer;
     int minSpawnInterval, maxSpawnInterval;
+    int averageRequestQuantity;
+    float nextWaitingTime;
 }
 
-//Private
--(void)initialiseLivesGUI;
--(void)initialiseScoreGUI;
--(void)initialiseCustomerGUI;
--(void)update:(ccTime)delta;
-//-(void)updateScore;
--(void)deleteAdditionalScoreLabel;
-
-//Public
 +(NBGameGUI*)sharedGameGUI;
 +(CGPoint)getScorePosition;
+-(void)update:(ccTime)delta;
 -(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
--(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;
 -(void)doChangeLife:(int)amount;
--(void)doAssignSpawnInterval:(int)min max:(int)max;
+-(void)setSpawnInterval:(int)min max:(int)max;
+-(void)setCustomerRequestAverageQuantity:(int)amount;
+-(void)setNextCustomerWaitingTime:(float)time;
 
 @end

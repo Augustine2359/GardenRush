@@ -7,15 +7,14 @@
 //
 
 #import "NBCustomer.h"
+#import "NBGameGUI.h"
 
 
 @implementation NBCustomer
 
--(id)initWithIndex:(int)index layer:(id)fromLayer leaveSelector:(SEL)leaveSelector requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime{
+-(id)initWithIndex:(int)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime{
     if ([super init]) {
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        layer = fromLayer;
-        leaveSel = leaveSelector;
         selfIndex = index;
         
         //Background frame
@@ -70,7 +69,7 @@
     currentWaitingTime -= delta;
     
     if (currentWaitingTime <= 0) {
-        //CCLOG(@"Time up!");
+        CCLOG(@"You pissed off a customer!");
         currentWaitingTime = 0;
         [self unscheduleUpdate];
         [self doCustomerLeave];
@@ -87,7 +86,7 @@
 }
                     
 -(void)deleteSelf{
-    [layer performSelector:leaveSel withObject:[NSNumber numberWithInt:selfIndex]];
+    [[NBGameGUI sharedGameGUI] doDeleteCustomer:[NSNumber numberWithInt:selfIndex]];
     [self removeFromParentAndCleanup:true];
 }
 
