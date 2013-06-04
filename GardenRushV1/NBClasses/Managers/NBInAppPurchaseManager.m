@@ -30,7 +30,7 @@
 - (id)init {
   self = [super init];
   if (self) {
-    NSSet *identifiers = [NSSet setWithObject:EXPAND_FLOWER_FIELD];
+    NSSet *identifiers = [NSSet setWithObjects:EXPAND_FLOWER_FIELD, COINS_100, COINS_300, COINS_750, nil];
     SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:identifiers];
     productsRequest.delegate = self;
     [productsRequest start];

@@ -195,7 +195,7 @@
 }
 
 - (void)doPetalsFalling {
-  [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(generatePetal) userInfo:nil repeats:YES];
+  [self schedule:@selector(generatePetal) interval:0.5 repeat:NSNotFound delay:0];
 }
 
 - (void)generatePetal {
