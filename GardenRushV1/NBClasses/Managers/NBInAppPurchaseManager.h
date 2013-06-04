@@ -10,6 +10,9 @@
 #import <StoreKit/StoreKit.h>
 
 #define EXPAND_FLOWER_FIELD @"com.nebula.FlowerFun.9x9FlowerField"
+#define COINS_100           @"com.nebula.flowerfrenzy.coin100"
+#define COINS_300           @"com.nebula.flowerfrenzy.coin300"
+#define COINS_750           @"com.nebula.flowerfrenzy.coin750"
 
 @protocol NBInAppPurchaseManagerDelegate <NSObject>
 
