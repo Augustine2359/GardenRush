@@ -23,10 +23,11 @@
     float tempScore, actualScore;
     float deltaScore;
     bool isScoreUpdating;
-    bool isSpawningCustomer;
     
     CCArray* customersArray;
     CCArray* missingCustomerIndex;
+    bool isSpawningCustomer;
+    int minSpawnInterval, maxSpawnInterval;
 }
 
 //Private
@@ -45,6 +46,7 @@
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;
--(void)doGainLife:(int)amount;
+-(void)doChangeLife:(int)amount;
+-(void)doAssignSpawnInterval:(int)min max:(int)max;
 
 @end

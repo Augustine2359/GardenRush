@@ -87,7 +87,7 @@ static CGPoint scorePosition = {0, 0};
     }
     
     //Testing only
-//    [self doGainLife:-4];
+//    [self doChangeLife:-4];
 }
 
 -(void)initialiseScoreGUI{
@@ -115,6 +115,8 @@ static CGPoint scorePosition = {0, 0};
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
+    [self doAssignSpawnInterval:1 max:3];
+    
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
 //    [self doSpawnNewCustomer];
@@ -136,7 +138,7 @@ static CGPoint scorePosition = {0, 0};
     if ([missingCustomerIndex count] > 0 && !isSpawningCustomer) {
         CCLOG(@"Spawn !");
         isSpawningCustomer = YES;
-        int randomDelay = arc4random() % 3  + 1;
+        int randomDelay = arc4random() % maxSpawnInterval + minSpawnInterval;
         id delay = [CCDelayTime actionWithDuration:randomDelay];
         int temp1 = [[missingCustomerIndex objectAtIndex:[missingCustomerIndex count]-1] intValue];
         [missingCustomerIndex removeLastObject];
@@ -208,7 +210,7 @@ static CGPoint scorePosition = {0, 0};
     //Resume and quit button
 }
 
--(void)doGainLife:(int)amount{
+-(void)doChangeLife:(int)amount{
     if (amount > 0) {
         for (int x = 0; x < amount; x++) {
             if ([livesArray count] == maxLives) {
@@ -242,6 +244,11 @@ static CGPoint scorePosition = {0, 0};
             [livesArray removeLastObject];
         }
     }
+}
+
+-(void)doAssignSpawnInterval:(int)min max:(int)max{
+    minSpawnInterval = min;
+    maxSpawnInterval = max - min + 1;
 }
 
 @end
