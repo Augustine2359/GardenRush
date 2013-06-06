@@ -79,7 +79,7 @@
         
         [self generateLevel];
         [self showAllFlower];
-        isProcessingMove = false;
+        [self unlockField];
         needToCheckCombo = false;
         
         [self addSwipeGestureRecognizers];
@@ -261,7 +261,7 @@
 
 -(void)onSwipe:(UISwipeGestureRecognizer*)swipeGestureRecognizer
 {
-    if (isProcessingMove || isProcessingMatching || isRearranging)
+    if (isProcessingMove || isProcessingMatching/* || isRearranging*/)
         return;
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -311,7 +311,7 @@
     //Check if at the border
     if ((newGridPosition.x < 0) || (newGridPosition.x > (self.horizontalTileCount - 1)) || (newGridPosition.y < 0) || (newGridPosition.y > (self.verticalTileCount - 1)))
     {
-        isProcessingMove = false;
+        [self unlockField];
         return;
     }
     
@@ -348,7 +348,7 @@
 
 -(void)returnFlower
 {
-    isProcessingMove = true;
+    [self lockField];
     isReturningFlower = true;
     
     NBFlower* originalFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
@@ -556,7 +556,7 @@
 {
     bool hasMatch = false;
     
-    isProcessingMove = false;
+    //isProcessingMove = false;
     
     DLog("Move completed.");
 
@@ -668,7 +668,7 @@
 {
     if ([flowerArray count] == 0) return;
     
-    isProcessingMove = true;
+    [self lockField];
     
     NSValue* value = [flowerArray objectAtIndex:0];
     CGPoint originalFlowerPosition = [value CGPointValue];
@@ -682,15 +682,13 @@
         matchingFlower.isMoveCompleted = false;
         [matchingFlower moveToGrid:originalFlower.gridPosition withDuration:0.45f informSelector:nil];
     }
-    
-    //isProcessingMatching = true;
 }
 
 -(void)update:(ccTime)delta
 {
     if ([self.arrayOfMatchedFlowerSlots count] > 0)
     {
-        isProcessingMatching = true;
+        [self lockField];
         
         for (int i = 0; i < [self.arrayOfMatchedFlowerSlots count]; i++)
         {
@@ -724,11 +722,11 @@
             }
         }
     }
-    /*else
+    else
     {
         isProcessingMatching = false;
         isProcessingMove = false;
-    }*/
+    }
     
     if (needToCheckCombo)
     {
@@ -939,11 +937,11 @@
 #warning need to find a way to completely lock the touch before all movement is completed.
 -(void)onRearrangingMoveCompleted
 {
-    if ([self.arrayOfMatchedFlower count] == 0)
+    /*if ([self.arrayOfMatchedFlower count] == 0)
     {
         isProcessingMatching = false;
         isProcessingMove = false;
-    }
+    }*/
 }
 
 -(void)generateRandomFlowerAndBloomOnGridPosition:(CGPoint)gridPosition
@@ -1015,6 +1013,18 @@
     [gameGUI doFulfillCustomer:[customerIndex intValue] flowerScore:0];
     
     [self removeChild:bouquet cleanup:YES];
+}
+
+-(void)lockField
+{
+    DLog(@"locking...");
+    isProcessingMove = true;
+}
+
+-(void)unlockField
+{
+    DLog(@"unlocking...");
+    isProcessingMove = false;
 }
 
 @end

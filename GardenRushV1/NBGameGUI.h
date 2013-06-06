@@ -33,6 +33,7 @@
     int minSpawnInterval, maxSpawnInterval;
     int averageRequestQuantity;
     float nextWaitingTime;
+    CCArray* customersArray;
 }
 
 @property (nonatomic, retain) CCArray* customersArray;

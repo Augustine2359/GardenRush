@@ -35,11 +35,13 @@
         
         //Request images
         int random = arc4random() % (int)btFiveOfAKind;
-        self.flowerRequest = [NBBouquet createBouquet:random show:YES];
-        [self.flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.25,
-                                    self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
-        [self addChild:self.flowerRequest];
-
+        for (int x = 0; x < requestQuantity; x++) {
+            NBBouquet* flowerRequest = [NBBouquet createBouquet:random show:YES];
+            [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x,
+                                           self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
+            [self addChild:flowerRequest];
+            [requests addObject:flowerRequest];
+        }
         
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];

@@ -597,6 +597,8 @@
 		BC8EA6561734C4EA004454CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9D01A41175B94B90084EAB6 /* Audio */,
+				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
 				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA65D1734C4EA004454CF /* fps_images-hd.png */,
@@ -611,6 +613,8 @@
 				BC8EA66B1734C4EA004454CF /* Icon@2x.png */,
 				BC8EA66D1734C4EA004454CF /* Info.plist */,
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
+				F9CC90841760877E008D1E3F /* Particles_fire.png */,
+				F909BF69175C932400E46AF0 /* petal.png */,
 				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */,
 			);
@@ -1069,6 +1073,13 @@
 				BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */,
 				BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */,
 				BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */,
+				F9D01A47175B94B90084EAB6 /* die.wav in Resources */,
+				F9D01A48175B94B90084EAB6 /* FFMainTheme.mp3 in Resources */,
+				F9D01A49175B94B90084EAB6 /* hadouken.wav in Resources */,
+				F9D01A4A175B94B90084EAB6 /* shoryuken.wav in Resources */,
+				F9D01A4B175B94B90084EAB6 /* tatsumakisenpuukyaku.wav in Resources */,
+				F909BF6A175C932400E46AF0 /* petal.png in Resources */,
+				F9CC90851760877E008D1E3F /* Particles_fire.png in Resources */,
 				BC98EC59175ADBD20025709A /* GameSettings.plist in Resources */,
 				BC98EC5B175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png in Resources */,
 				BC98EC5F175AEE720025709A /* Default@2x.png in Resources */,

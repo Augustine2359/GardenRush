@@ -13,6 +13,8 @@ static CGPoint scorePosition = {0, 0};
 
 @implementation NBGameGUI
 
+@synthesize customersArray;
+
 +(NBGameGUI*)sharedGameGUI
 {
     return sharedGameGUI;
@@ -109,8 +111,12 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)initialiseCustomerGUI{
-    self.customersArray = [[CCArray alloc] initWithCapacity:3];
-    missingCustomerIndex = [CCArray new];
+    customersArray = [[CCArray alloc] initWithCapacity:3];
+    [customersArray addObject:NULL];
+    [customersArray addObject:NULL];
+    [customersArray addObject:NULL];
+    
+    missingCustomerIndex = [[CCArray alloc] initWithCapacity:3];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:2]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
@@ -173,7 +179,12 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
-    NBCustomer* thatCustomer = (NBCustomer*)[self.customersArray objectAtIndex:index];
+    if (index > [customersArray count]) {
+        CCLOG(@"Invalid customer index");
+        return;
+    }
+    
+    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
     int requestScore = thatCustomer.requestScore;
     int totalScore = flowerScore + requestScore;
     [self doAddScore:totalScore];
@@ -196,8 +207,7 @@ static CGPoint scorePosition = {0, 0};
     
     NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp/* layer:self leaveSelector:@selector(doDeleteCustomer)*/ requestQuantity:quantity waitingTime:nextWaitingTime];
     [self addChild:newCustomer z:-2];
-    [self.customersArray addObject:newCustomer];
-//    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
+    [customersArray replaceObjectAtIndex:temp withObject:newCustomer];
     
     isSpawningCustomer = NO;
 }

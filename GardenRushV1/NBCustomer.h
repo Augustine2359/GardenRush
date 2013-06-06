@@ -16,6 +16,8 @@
     
     float initialWaitingTime, currentWaitingTime;
     int selfIndex;
+    
+    CCArray* requests;
 }
 
 @property (nonatomic, retain) NBBouquet* flowerRequest;
