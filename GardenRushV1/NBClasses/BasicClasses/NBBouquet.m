@@ -11,6 +11,13 @@
 static int bouquetCount = 0;
 static CGPoint scorePadPosition = {0, 0};
 
+@interface NBBouquet()
+{
+    bool isScoringCompleted;
+}
+
+@end
+
 @implementation NBBouquet
 
 +(id)bloomBouquetWithType:(NBBouquetType)bouquetType withPosition:(CGPoint)position addToNode:(CCNode*)layer
@@ -102,6 +109,8 @@ static CGPoint scorePadPosition = {0, 0};
         [self setContentSize:CGSizeMake(BOUQUET_SIZE_WIDTH, BOUQUET_SIZE_HEIGHT)];
         [self addChild:self.flowerImage];
         
+        isScoringCompleted = false;
+        
         bouquetCount++;
     }
     
@@ -122,8 +131,10 @@ static CGPoint scorePadPosition = {0, 0};
     [self.flowerImage runAction:fadeIn];
 }
 
--(void)performScoringAndInformLayer:(CCNode*)node withSelector:(SEL)selector
+-(void)performStandardScoringAndInformLayer:(CCNode*)node withSelector:(SEL)selector
 {
+    if (isScoringCompleted) return; //Avoid double scoring
+    
     self.nodeToReportScore = node;
     self.selectorToReportScore = selector;
     
@@ -133,6 +144,26 @@ static CGPoint scorePadPosition = {0, 0};
     CCCallFunc* callFunc = [CCCallFunc actionWithTarget:self selector:@selector(onBouquetReachedScore)];
     CCSequence* sequence = [CCSequence actions:delay, easeInOut, callFunc, nil];
     [self runAction:sequence];
+    
+    isScoringCompleted = true;
+}
+
+-(void)performCustomerFulfillingScoringAtCustomerPosition:(CGPoint)position andIndex:(int)index andInformLayer:(CCNode*)node withSelector:(SEL)selector
+{
+    if (isScoringCompleted) return; //Avoid double scoring
+    
+    self.nodeToReportScore = node;
+    self.selectorToReportScore = selector;
+    self.fulfilledCustomerIndex = index;
+    
+    CCDelayTime* delay = [CCDelayTime actionWithDuration:1.0f];
+    CCMoveTo* moveTo = [CCMoveTo actionWithDuration:1.0f position:position];
+    CCEaseInOut* easeInOut = [CCEaseInOut actionWithAction:moveTo rate:2];
+    CCCallFunc* callFunc = [CCCallFunc actionWithTarget:self selector:@selector(onBouquetReachedCustomer)];
+    CCSequence* sequence = [CCSequence actions:delay, easeInOut, callFunc, nil];
+    [self runAction:sequence];
+    
+    isScoringCompleted = true;
 }
 
 -(void)onBouquetReachedScore
@@ -141,6 +172,17 @@ static CGPoint scorePadPosition = {0, 0};
     [self runAction:fadeOut];
     
     [self.nodeToReportScore performSelector:self.selectorToReportScore withObject:self];
+    
+    self.nodeToReportScore = nil;
+    self.selectorToReportScore = nil;
+}
+
+-(void)onBouquetReachedCustomer
+{
+    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.7f];
+    [self runAction:fadeOut];
+    
+    [self.nodeToReportScore performSelector:self.selectorToReportScore withObject:[NSNumber numberWithInt:self.fulfilledCustomerIndex] withObject:self];
     
     self.nodeToReportScore = nil;
     self.selectorToReportScore = nil;

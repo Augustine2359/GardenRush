@@ -156,7 +156,7 @@ static CGSize fieldContentSize = {0, 0};
 -(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector
 {
     CCMoveBy* moveBy = nil;
-    float moveDuration = 0.65f;
+    float moveDuration = FLOWER_MOVE_DURATION;
     CGFloat moveDistance = FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH;
     
     switch (moveType)

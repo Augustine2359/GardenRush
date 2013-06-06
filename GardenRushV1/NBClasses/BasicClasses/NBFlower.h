@@ -13,6 +13,7 @@
 #define FLOWERSIZE_WIDTH 30
 #define FLOWERSIZE_HEIGHT 30
 #define FIELD_FLOWER_GAP_WIDTH 4
+#define FLOWER_MOVE_DURATION 0.4f
 
 typedef enum
 {
