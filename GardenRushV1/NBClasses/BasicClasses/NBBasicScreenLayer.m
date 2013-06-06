@@ -192,6 +192,8 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
             break;
       case TargetScenePreGame:
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBPreGameScreen") scene] withColor:ccWHITE]];
+      case TargetSceneParticle:
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBParticleScreen") scene] withColor:ccBLUE]];
         default:
             break;
     }

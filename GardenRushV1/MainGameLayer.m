@@ -107,6 +107,7 @@
         [self addStandardMenuString:@"Test add node" withSelector:@selector(addNode)];
         [self addStandardMenuString:@"Test remove node" withSelector:@selector(removeNode)];
         [self addStandardMenuString:@"Pre-game screen" withSelector:@selector(goToPreGameScreen)];
+        [self addStandardMenuString:@"Particle screen" withSelector:@selector(goToParticleScreen)];
       
         self.testNodeCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
         self.testNodeCountLabel.position = CGPointMake(20, self.layerSize.height - 20);
@@ -150,6 +151,11 @@
 -(void)goToPreGameScreen
 {
     [self changeToScene:TargetScenePreGame];
+}
+
+- (void)goToParticleScreen
+{
+    [self changeToScene:TargetSceneParticle];
 }
 
 -(void)submitDummyScoreForTest
