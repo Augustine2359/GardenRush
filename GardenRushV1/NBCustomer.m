@@ -7,13 +7,15 @@
 //
 
 #import "NBCustomer.h"
+#import "NBGameGUI.h"
 
 
 @implementation NBCustomer
 
--(id)initWithIndex:(int)index{
+-(id)initWithIndex:(int)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime{
     if ([super init]) {
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        selfIndex = index;
         
         //Background frame
         self.customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
@@ -46,10 +48,10 @@
         [self addChild:timerBarImage];
         
         //Misc
-        initialWaitingTime = 30;
+        initialWaitingTime = waitingTime;
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
-        self.requestScore = 100;
+        self.requestScore = 100 * requestQuantity;
         
         //Transit to position
         self.position = ccp(self.position.x, self.position.y+screenSize.height*0.5);
@@ -65,7 +67,7 @@
     currentWaitingTime -= delta;
     
     if (currentWaitingTime <= 0) {
-        //CCLOG(@"Time up!");
+        CCLOG(@"You pissed off a customer!");
         currentWaitingTime = 0;
         [self unscheduleUpdate];
         [self doCustomerLeave];
@@ -82,6 +84,7 @@
 }
                     
 -(void)deleteSelf{
+    [[NBGameGUI sharedGameGUI] doDeleteCustomer:[NSNumber numberWithInt:selfIndex]];
     [self removeFromParentAndCleanup:true];
 }
 

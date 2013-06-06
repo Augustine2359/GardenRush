@@ -17,6 +17,7 @@ typedef enum
     TargetSceneFirst,
     TargetSceneSecond,
     TargetScenePreGame,
+    TargetSceneParticle,
     TargetSceneMAX,
 } TargetSceneTypes;
 

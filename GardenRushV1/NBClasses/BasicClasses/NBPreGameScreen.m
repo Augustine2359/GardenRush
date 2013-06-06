@@ -43,6 +43,15 @@
 	return scene;
 }
 
+- (id)init {
+  self = [super init];
+  if (self) {
+    [NBAudioManager sharedInstance];
+  }
+
+  return self;
+}
+
 - (void)onEnter {
   [super onEnter];
   
@@ -72,6 +81,8 @@
 
     [self.inGameItemsButtonsContainer setShouldRespondToTouches:NO];
     [self.iapButtonsContainer setShouldRespondToTouches:YES];
+
+    [[NBAudioManager sharedInstance] playSoundEffect:@"hadouken.wav"];
   }
   else {
     CCFadeTo *fadeOut = [[CCFadeTo alloc] initWithDuration:1 opacity:0];
@@ -79,6 +90,8 @@
 
     [self.iapButtonsContainer setShouldRespondToTouches:NO];
     [self.inGameItemsButtonsContainer setShouldRespondToTouches:YES];
+
+    [[NBAudioManager sharedInstance] playSoundEffect:@"shoryuken.wav"];
   }
 }
 

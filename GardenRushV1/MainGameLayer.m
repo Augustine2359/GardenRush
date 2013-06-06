@@ -12,6 +12,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "NBLayerWithFlowerAtEnd.h"
 
 #pragma mark - MainGameLayer
 
@@ -63,6 +64,7 @@
         [self addStandardMenuString:@"Test add node" withSelector:@selector(addNode)];
         [self addStandardMenuString:@"Test remove node" withSelector:@selector(removeNode)];
         [self addStandardMenuString:@"Pre-game screen" withSelector:@selector(goToPreGameScreen)];
+        [self addStandardMenuString:@"Particle screen" withSelector:@selector(goToParticleScreen)];
       
         self.testNodeCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
         self.testNodeCountLabel.position = CGPointMake(20, self.layerSize.height - 20);
@@ -75,6 +77,8 @@
         NBGameKitHelper* gkHelper = [NBGameKitHelper sharedGameKitHelper];
         gkHelper.delegate = self;
         [gkHelper authenticateLocalPlayer];
+
+      [self doPetalsFalling];
 	}
 	return self;
 }
@@ -104,6 +108,11 @@
 -(void)goToPreGameScreen
 {
     [self changeToScene:TargetScenePreGame];
+}
+
+- (void)goToParticleScreen
+{
+    [self changeToScene:TargetSceneParticle];
 }
 
 -(void)submitDummyScoreForTest
@@ -146,6 +155,17 @@
     {
         CCLOG(@"Score submitted with value %lli", score.value);
     }
+}
+
+- (void)doPetalsFalling {
+  [self schedule:@selector(generatePetal) interval:0.5 repeat:NSNotFound delay:0];
+}
+
+- (void)generatePetal {
+  NSInteger width = [[CCDirector sharedDirector] winSize].width;
+  NBLayerWithFlowerAtEnd *layerWithFlowerAtEnd = [[NBLayerWithFlowerAtEnd alloc] initWithColor:ccc4(0, 0, 0, 0) width:50 height:300];
+  layerWithFlowerAtEnd.position = CGPointMake(arc4random()%width, [[CCDirector sharedDirector] winSize].height);
+  [self addChild:layerWithFlowerAtEnd z:-1];
 }
 
 #pragma mark GameKit delegate

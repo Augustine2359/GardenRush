@@ -25,68 +25,87 @@ static CGPoint scorePosition = {0, 0};
 
 -(id)init{
     if ([super init]) {
+        [self initialiseMisc];
         [self initialiseLivesGUI];
         [self initialiseScoreGUI];
         [self initialiseCustomerGUI];
+        [self scheduleUpdate];
         
         sharedGameGUI = self;
     }
     return self;
 }
 
--(void)initialiseLivesGUI{
+-(void)initialiseMisc{
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    //Read from plist when available
-    int currentLives = 3;
     
-    CCSprite* lifeFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
-    CGSize frameSize = lifeFrame.boundingBox.size;
-    [lifeFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
-    [lifeFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-    frameSize = lifeFrame.boundingBox.size;
-    [lifeFrame setPosition:ccp(screenSize.width*0.25, screenSize.height - frameSize.height*0.5)];
-    [self addChild:lifeFrame];
+    //Main frame for GUI
+    GUIFrame = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
+    CGSize frameSize = GUIFrame.boundingBox.size;
+    [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
+    [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+    frameSize = GUIFrame.boundingBox.size;
+    [GUIFrame setPosition:ccp(screenSize.width*0.5, screenSize.height - frameSize.height*0.5)];
+    [self addChild:GUIFrame];
     
-    for (int x = 0; x < currentLives; x++) {
+    //Pause button
+    pauseButtonImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+//    CCMenuItem* pauseButton = [CCMenuItemImage itemWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];//itemWithNormalImage:@"staticbox_red.png" selectedImage:@"staticbox_red.png" target:self selector:@selector(doPauseGame)];
+    
+//    CCMenuItemSprite* pauseButton = [[CCMenuItemSprite alloc] initWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage disabledSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];
+    
+    CGSize buttonSize = pauseButtonImage.boundingBox.size;
+    [pauseButtonImage setScaleX:(frameSize.width*0.1/buttonSize.width)];
+    [pauseButtonImage setScaleY:(frameSize.height*0.5/buttonSize.height)];
+//    buttonSize = pauseButtonImage.boundingBox.size;
+    [pauseButtonImage setPosition:ccp(frameSize.width*0.1, GUIFrame.position.y)];
+    
+    [self addChild:pauseButtonImage z:1];
+    
+//    CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
+//    [self addChild:GUIMenu];
+}
+
+-(void)initialiseLivesGUI{
+    livesArray = [CCArray new];
+    [livesArray retain];
+    //Read from datamanager when available
+    maxLives = 5;
+    
+    CGSize frameSize = GUIFrame.boundingBox.size;
+    
+    for (int x = 0; x < 3; x++) {
         CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
         CGSize spriteSize = lifeSprite.boundingBox.size;
-        [lifeSprite setScaleX:(frameSize.width*0.2/spriteSize.width)];
-        [lifeSprite setScaleY:(frameSize.height*0.8/spriteSize.height)];
+        [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
+        [lifeSprite setScaleY:(frameSize.height*0.5/spriteSize.height)];
         spriteSize = lifeSprite.boundingBox.size;
-        float liveOffsetFromLeft = frameSize.width*0.1 + spriteSize.width*0.5;
-        [lifeSprite setPosition:ccp(liveOffsetFromLeft + (spriteSize.width + frameSize.width*0.1)*x, screenSize.height - frameSize.height*0.5)];
+        float liveOffsetFromLeft = GUIFrame.position.x*0.5;
+        [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*x, GUIFrame.position.y)];
         [self addChild:lifeSprite];
         [livesArray addObject:lifeSprite];
     }
+    
+    //Testing only
+//    [self doChangeLife:-4];
 }
 
 -(void)initialiseScoreGUI{
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     additionalScoreLabels = [CCArray new];
     [additionalScoreLabels retain];
-    //Read from plist when available
+    
     actualScore = 0;
     tempScore = actualScore;
     
-    CCSprite* scoreFrame = [[CCSprite alloc] initWithSpriteFrameName:@"staticbox_green.png"];
-    CGSize frameSize = scoreFrame.boundingBox.size;
-    [scoreFrame setScaleX:(screenSize.width*0.5/frameSize.width)];
-    [scoreFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
-    frameSize = scoreFrame.boundingBox.size;
-    [scoreFrame setPosition:ccp(screenSize.width*0.75, screenSize.height - frameSize.height*0.5)];
-    [self addChild:scoreFrame];
-    
-    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", tempScore] fontName:@"Marker Felt" fontSize:24];
-    scorePosition = ccp(screenSize.width*0.75, screenSize.height - scoreFrame.boundingBox.size.height*0.5);
-    [scoreLabel setPosition:scorePosition];
+    scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", (int)tempScore] fontName:@"Marker Felt" fontSize:30];
+    [scoreLabel setPosition:ccp(GUIFrame.boundingBox.size.width*0.8, GUIFrame.position.y)];
     [self addChild:scoreLabel];
     
-    [self scheduleUpdate];
-    
     //Testing only 
-//    id delay = [CCDelayTime actionWithDuration:3];
-//    id asd = [CCCallFunc actionWithTarget:self selector:@selector(doFulfillCustomer)];
-//    [self runAction:[CCSequence actions:delay, asd, nil]];
+//    id delay = [CCDelayTime actionWithDuration:2];
+//    NSNumber* temp = [NSNumber numberWithInt:100];
+//    id asd = [CCCallFuncND actionWithTarget:self selector:@selector(doAddScore:) data:temp];
+//    [self runAction:[CCSequence actions:delay, asd, delay, asd, nil]];
 }
 
 -(void)initialiseCustomerGUI{
@@ -96,11 +115,9 @@ static CGPoint scorePosition = {0, 0};
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
-//    for (int x = 0; x < 3; x++) {
-//        NBCustomer* thatCustomer = [[NBCustomer alloc] initWithIndex:x];
-//        [self addChild:thatCustomer z:-2];
-//        [customersArray addObject:thatCustomer];
-//    }
+    [self setSpawnInterval:1 max:3];
+    [self setNextCustomerWaitingTime:30];
+    [self setCustomerRequestAverageQuantity:3];
     
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
@@ -108,11 +125,10 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)update:(ccTime)delta{
-    
     //Update score
     if (isScoreUpdating) {
-        tempScore += 5;
-        [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
+        tempScore += deltaScore;
+        [scoreLabel setString:[NSString stringWithFormat:@"$%i", (int)tempScore]];
         
         if (tempScore >= actualScore) {
             tempScore = actualScore;
@@ -122,33 +138,23 @@ static CGPoint scorePosition = {0, 0};
     
     //Spawn customer
     if ([missingCustomerIndex count] > 0 && !isSpawningCustomer) {
+        CCLOG(@"Spawn customer!");
         isSpawningCustomer = YES;
-        int randomDelay = arc4random() % 3  + 1;
+        int randomDelay = arc4random() % maxSpawnInterval + minSpawnInterval;
         id delay = [CCDelayTime actionWithDuration:randomDelay];
         int temp1 = [[missingCustomerIndex objectAtIndex:[missingCustomerIndex count]-1] intValue];
         [missingCustomerIndex removeLastObject];
         NSNumber* temp2 = [NSNumber numberWithInt:temp1];
-        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:) data:temp2];
+        id action = [CCCallFuncND actionWithTarget:self selector:@selector(doSpawnNewCustomer:index:/*requestQuantity:waitingTime:*/) data:temp2];
         [self runAction:[CCSequence actions:delay, action, nil]];
     }
 }
 
-//-(void)updateScore{
-//    if (tempScore >= actualScore) {
-//        tempScore = actualScore;
-//        [self unschedule:@selector(updateScore)];
-//        isScoreUpdating = NO;
-//        return;
-//    }
-//    
-//    tempScore += 5;
-//    [scoreLabel setString:[NSString stringWithFormat:@"$%i", tempScore]];
-//}
-
 -(void)doAddScore:(int)amount{
+//    amount = 200;
     actualScore += amount;
-    
-//    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:customerIndex];
+    deltaScore = actualScore - tempScore;
+    deltaScore = deltaScore / 60;
     
     CCLabelTTF* additionalScoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"+%i", amount] fontName:@"Marker Felt" fontSize:30];
     additionalScoreLabel.position = scoreLabel.position;
@@ -157,11 +163,6 @@ static CGPoint scorePosition = {0, 0};
     id move = [CCMoveBy actionWithDuration:2 position:ccp(0, -50)];
     id delete = [CCCallFunc actionWithTarget:self selector:@selector(deleteAdditionalScoreLabel)];
     [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
-    
-//    if (!isScoreUpdating) {
-//        [self schedule:@selector(updateScore) interval:1.0f/60.0f];
-//        isScoreUpdating = YES;
-//    }
     
     isScoreUpdating = YES;
 }
@@ -177,19 +178,90 @@ static CGPoint scorePosition = {0, 0};
     int totalScore = flowerScore + requestScore;
     [self doAddScore:totalScore];
     [thatCustomer doCustomerLeave];
+    [self doDeleteCustomer:[NSNumber numberWithInt:index]];
 }
 
--(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index{
-    CCLOG(@"OH");
-    
+-(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/{
     int temp = [index intValue];
-    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp];
-//    newCustomer.position = ccp(newCustomer.position.x, screenSize.height + newCustomer.boundingBox.size.height);
+    
+    //Quantity is the average +- 1
+    int quantity = arc4random() * 3 - 1;
+    quantity += averageRequestQuantity;
+    if (quantity < 1) {
+        quantity = 1;
+    }
+    else if (quantity > 5){
+        quantity = 5;
+    }
+    
+    NBCustomer* newCustomer = [[NBCustomer alloc] initWithIndex:temp/* layer:self leaveSelector:@selector(doDeleteCustomer)*/ requestQuantity:quantity waitingTime:nextWaitingTime];
     [self addChild:newCustomer z:-2];
     [self.customersArray addObject:newCustomer];
 //    [customersArray replaceObjectAtIndex:temp withObject:newCustomer]; //problem
     
     isSpawningCustomer = NO;
+}
+
+-(void)doDeleteCustomer:(NSNumber*)index{
+    int thatIndex = [index intValue];
+    [missingCustomerIndex addObject:[NSNumber numberWithInt:thatIndex]];
+    [customersArray replaceObjectAtIndex:thatIndex withObject:NULL];
+}
+
+-(void)doPauseGame{
+    CCLOG(@"Paused game!");
+    //Set timeScale to 0
+    //Transit image down cover screen
+    //Resume and quit button
+}
+
+-(void)doChangeLife:(int)amount{
+    if (amount > 0) {
+        for (int x = 0; x < amount; x++) {
+            if ([livesArray count] == maxLives) {
+                CCLOG(@"Full life");
+                return;
+            }
+            
+            CGSize frameSize = GUIFrame.boundingBox.size;
+
+            CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
+            CGSize spriteSize = lifeSprite.boundingBox.size;
+            [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
+            [lifeSprite setScaleY:(frameSize.height*0.5/spriteSize.height)];
+            spriteSize = lifeSprite.boundingBox.size;
+            float liveOffsetFromLeft = GUIFrame.position.x*0.5;
+            int index = [livesArray count];
+            [lifeSprite setPosition:ccp(liveOffsetFromLeft + spriteSize.width*index, GUIFrame.position.y)];
+            [self addChild:lifeSprite];
+            [livesArray addObject:lifeSprite];
+        }
+    }
+    else if (amount < 0){
+        for (int x = amount; x < 0; x++) {
+            if ([livesArray count] == 0) {
+                CCLOG(@"No more lives");
+                //Call game over method here
+                return;
+            }
+            
+            [[livesArray objectAtIndex:[livesArray count]-1] removeFromParentAndCleanup:YES];
+            [livesArray removeLastObject];
+        }
+    }
+}
+
+-(void)setSpawnInterval:(int)min max:(int)max{
+    minSpawnInterval = min;
+    maxSpawnInterval = max - min + 1;
+}
+
+-(void)setCustomerRequestAverageQuantity:(int)amount{
+    averageRequestQuantity = amount;
+}
+
+-(void)setNextCustomerWaitingTime:(float)time{
+    nextWaitingTime = time;
 }
 
 @end

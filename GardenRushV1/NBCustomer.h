@@ -14,19 +14,16 @@
     CCSprite* faceImage;
     CCSprite* timerBarImage;
     
-    float initialWaitingTime;
-    float currentWaitingTime;
+    float initialWaitingTime, currentWaitingTime;
+    int selfIndex;
 }
 
 @property (nonatomic, retain) NBBouquet* flowerRequest;
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 
-//Private
--(id)initWithIndex:(int)index;
+-(id)initWithIndex:(int)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
 -(void)update:(ccTime)delta;
 -(void)doCustomerLeave;
--(void)deleteSelf;
--(void)update:(ccTime)delta;
 
 @end
