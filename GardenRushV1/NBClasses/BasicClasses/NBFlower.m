@@ -13,12 +13,14 @@ static CCNode* flowerFieldLayer = nil;
 static CGPoint startingPosition = {0, 0};
 static NSMutableArray* flowerField = nil;
 static CGSize fieldContentSize = {0, 0};
+static int difficultyLevel = 1;
 
 @implementation NBFlower
 
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition
 {
-    NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + 1;
+    NBFlowerType randomFlowerType = (NBFlowerType)(arc4random_uniform(ftMaxFlower - ftRedFlower - (MAX_DIFFICULTY_LEVEL - difficultyLevel)) + ftRedFlower);
+    //NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + ftRedFlower;
     NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition show:true];
     flower.flowerImage.scale = 0;
     CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scaleX:FLOWERSIZE_WIDTH / flower.flowerImage.contentSize.width scaleY:FLOWERSIZE_HEIGHT / flower.flowerImage.contentSize.height];
@@ -39,11 +41,17 @@ static CGSize fieldContentSize = {0, 0};
 
 +(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition show:(bool)show
 {
-    NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + 1;
+    NBFlowerType randomFlowerType = (NBFlowerType)(arc4random_uniform(ftMaxFlower - ftRedFlower - (MAX_DIFFICULTY_LEVEL - difficultyLevel)) + ftRedFlower);
+    //NBFlowerType randomFlowerType = (NBFlowerType)(arc4random() % (ftMaxFlower - 1)) + ftRedFlower;
     
     NBFlower* flower = [[NBFlower alloc] initWithFlowerType:randomFlowerType onGridPosition:gridPosition show:show];
     
     return flower;
+}
+
++(id)createVirtualFlower
+{
+    return [[NBFlower alloc] initWithFlowerType:ftVirtualFlower onGridPosition:CGPointZero show:false];
 }
 
 +(void)assignFieldLayer:(CCNode*)layer
@@ -62,6 +70,11 @@ static CGSize fieldContentSize = {0, 0};
     startingPosition = position;
 }
 
++(void)assignDifficultyLevel:(int)level
+{
+    difficultyLevel = level;
+}
+
 +(int)getFlowerCount
 {
     return flowerCount;
@@ -77,7 +90,8 @@ static CGSize fieldContentSize = {0, 0};
     return ccp((gridPosition.x * (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_WIDTH / 2)) + startingPosition.x, (gridPosition.y * (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) + (FLOWERSIZE_HEIGHT / 2)) + startingPosition.y);
 }
 
-+(NBFlower*)randomFlower{
++(NBFlower*)randomFlower
+{
     int random = arc4random() % (int)ftMaxFlower;
     NBFlower* flower = [NBFlower createNewFlower:(NBFlowerType)random onGridPosition:ccp(0, 0) show:YES];
     return flower;
@@ -93,47 +107,62 @@ static CGSize fieldContentSize = {0, 0};
     
     if ((self = [[super init] autorelease]))
     {
-        self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower_sketch_sakura.png"];;
-        
-        switch (flowerType)
+        if (flowerType == ftVirtualFlower)
         {
-            case ftNoFlower:
-                //self.flowerImage.opacity = 0;
-                self.flowerImage.color = ccWHITE;
-                break;
-                
-            case ftRedFlower:
-                self.flowerImage.color = ccRED;
-                break;
-            
-            case ftYellowFlower:
-                self.flowerImage.color = ccYELLOW;
-                break;
-            
-            case ftGreenFlower:
-                self.flowerImage.color = ccGREEN;
-                break;
-                
-            case ftBlueFlower:
-                self.flowerImage.color = ccBLUE;
-                break;
-                
-            default:
-                break;
+            self.flowerType = ftVirtualFlower;
         }
-        
-        if (!show)
-            self.flowerImage.visible = NO;
-        
-        self.flowerType = flowerType;
-        self.gridPosition = gridPosition;
-        self.flowerImage.anchorPoint = ccp(0.5, 0.5);
-        self.position = [NBFlower convertFieldGridPositionToActualPixel:gridPosition];
-        self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
-        self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
-        [self setContentSize:CGSizeMake(FLOWERSIZE_WIDTH, FLOWERSIZE_HEIGHT)];
-        [self addChild:self.flowerImage];
-        [flowerFieldLayer addChild:self];
+        else
+        {
+            self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower_sketch_sakura.png"];;
+            
+            switch (flowerType)
+            {
+                case ftNoFlower:
+                    //self.flowerImage.opacity = 0;
+                    self.flowerImage.color = ccWHITE;
+                    break;
+                    
+                case ftRedFlower:
+                    self.flowerImage.color = ccRED;
+                    break;
+                
+                case ftYellowFlower:
+                    self.flowerImage.color = ccYELLOW;
+                    break;
+                
+                case ftGreenFlower:
+                    self.flowerImage.color = ccGREEN;
+                    break;
+                    
+                case ftBlueFlower:
+                    self.flowerImage.color = ccBLUE;
+                    break;
+                
+                case ftBlackFlower:
+                    self.flowerImage.color = ccBLACK;
+                    break;
+                    
+                case ftWhiteFlower:
+                    self.flowerImage.color = ccWHITE;
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            if (!show)
+                self.flowerImage.visible = NO;
+            
+            self.flowerType = flowerType;
+            self.gridPosition = gridPosition;
+            self.flowerImage.anchorPoint = ccp(0.5, 0.5);
+            self.position = [NBFlower convertFieldGridPositionToActualPixel:gridPosition];
+            self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
+            self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
+            [self setContentSize:CGSizeMake(FLOWERSIZE_WIDTH, FLOWERSIZE_HEIGHT)];
+            [self addChild:self.flowerImage];
+            [flowerFieldLayer addChild:self];
+        }
         
         flowerCount++;
         
@@ -244,6 +273,14 @@ static CGSize fieldContentSize = {0, 0};
             
         case ftBlueFlower:
             flowerTypeInString = @"Blue Flower";
+            break;
+        
+        case ftBlackFlower:
+            flowerTypeInString = @"Black Flower";
+            break;
+            
+        case ftWhiteFlower:
+            flowerTypeInString = @"White Flower";
             break;
             
         default:

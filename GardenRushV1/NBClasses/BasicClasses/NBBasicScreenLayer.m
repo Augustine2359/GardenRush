@@ -83,8 +83,9 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if ((self = [super init]))
     {
-        if (!self.dataManager)
-            self.dataManager = [NBDataManager sharedDataManager];
+        //if (!self.dataManager)
+        //    self.dataManager = [NBDataManager sharedDataManager];
+        [NBDataManager sharedDataManager];
         
         self.currentFrameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [self.currentFrameCache addSpriteFramesWithFile:@"GardenRushSpriteSheet1.plist"];

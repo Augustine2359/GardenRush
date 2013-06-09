@@ -14,6 +14,7 @@
 #define FLOWERSIZE_HEIGHT 30
 #define FIELD_FLOWER_GAP_WIDTH 4
 #define FLOWER_MOVE_DURATION 0.4f
+#define MAX_DIFFICULTY_LEVEL 3
 
 typedef enum
 {
@@ -29,10 +30,13 @@ typedef enum
 typedef enum
 {
     ftNoFlower = 0,
+    ftVirtualFlower,
 	ftRedFlower,
     ftYellowFlower,
     ftGreenFlower,
     ftBlueFlower,
+    ftBlackFlower,
+    ftWhiteFlower,
     ftMaxFlower
 } NBFlowerType;
 
@@ -41,7 +45,8 @@ typedef enum
 	fmtUp = 0,
     fmtDown,
     fmtLeft,
-    fmtRight
+    fmtRight,
+    fmtMaxMoveType
 } NBFlowerMoveType;
 
 @interface NBFlower : CCNode <CCTargetedTouchDelegate>
@@ -51,11 +56,13 @@ typedef enum
 
 +(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition show:(bool)show;
 +(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition show:(bool)show;
++(id)createVirtualFlower;
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
 +(void)assignFieldContentSize:(CGSize)contentSize;
 +(void)assignFlowerField:(NSMutableArray*)fieldFlowerArray;
++(void)assignDifficultyLevel:(int)level;
 +(int)getFlowerCount;
 +(CGPoint)convertFieldGridPositionToActualPixel:(CGPoint)gridPosition;
 +(NBFlower*)randomFlower;

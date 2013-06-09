@@ -11,6 +11,8 @@
 @interface NBDataManager : NSObject
 
 +(NBDataManager*)sharedDataManager;
++(void)assignDifficulty:(int)difficultyIndex;
++(int)getDifficultyValueOnKey:(NSString*)keyString;
 
 @property (nonatomic, retain) NSMutableDictionary* currentDataDictionary;
 
@@ -22,6 +24,14 @@
 
 @property (nonatomic, assign) int availableCoins;
 @property (nonatomic, assign) int availableItem1;
+
+@property (nonatomic, assign) int currentDifficultyTier;
+@property (nonatomic, assign) int flowerTypeLevel;
+@property (nonatomic, assign) int customerPatience;
+@property (nonatomic, assign) int customerRequirementType;
+@property (nonatomic, assign) int customerRequirementCount;
+
+@property (nonatomic, assign) NSArray* difficultyTierArray;
 
 
 @end

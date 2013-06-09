@@ -20,6 +20,26 @@ static NBDataManager* sharedDataManager = nil;
         return [[NBDataManager alloc] init];
 }
 
++(void)assignDifficulty:(int)difficultyIndex
+{
+    sharedDataManager.currentDifficultyTier = difficultyIndex;
+}
+
++(int)getDifficultyValueOnKey:(NSString*)keyString
+{
+    for (NSDictionary* difficultyTier in sharedDataManager.difficultyTierArray)
+    {
+        int tier = [[difficultyTier objectForKey:@"tier"] intValue];
+        
+        if (tier == sharedDataManager.currentDifficultyTier)
+        {
+            return [[difficultyTier objectForKey:keyString] intValue];
+        }
+    }
+    
+    return 0;
+}
+
 +(void)saveState
 {
     if (!sharedDataManager)
@@ -48,6 +68,8 @@ static NBDataManager* sharedDataManager = nil;
 {
     if (self = [super init])
     {
+        sharedDataManager = self;
+        
         NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *plistPath = [rootPath stringByAppendingPathComponent:@"SaveGame.plist"];
         self.currentDataDictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -80,13 +102,29 @@ static NBDataManager* sharedDataManager = nil;
         }
 
         DLog(@"Loading player data");
-        self.availableCoins = [[self.currentDataDictionary objectForKey:@"availableCoins"] intValue];
-        self.availableItem1 = [[self.currentDataDictionary objectForKey:@"AvailableItem1"] intValue];
-        self.currentGameScore = [[self.currentDataDictionary objectForKey:@"currentGameScore"] longValue];
-        self.lastGameScore = [[self.currentDataDictionary objectForKey:@"lastGameScore"] longValue];
-        self.highestGameScoreToday = [[self.currentDataDictionary objectForKey:@"highestGameScoreToday"] longValue];
-        self.highestGameScoreThisWeek = [[self.currentDataDictionary objectForKey:@"highestGameScoreThisWeek"] longValue];
-        self.highestGameScoreAllTime = [[self.currentDataDictionary objectForKey:@"highestGameScoreAllTime"] longValue];
+        NSDictionary* gameStateDictionary = [self.currentDataDictionary objectForKey:@"GameState"];
+        self.currentDifficultyTier = [[gameStateDictionary objectForKey:@"currentDifficultyTier"] intValue];
+        self.availableCoins = [[gameStateDictionary objectForKey:@"availableCoins"] intValue];
+        self.availableItem1 = [[gameStateDictionary objectForKey:@"AvailableItem1"] intValue];
+        
+        NSDictionary* userProfileDictionary = [self.currentDataDictionary objectForKey:@"UserProfile"];
+        self.currentGameScore = [[userProfileDictionary objectForKey:@"currentGameScore"] longValue];
+        self.lastGameScore = [[userProfileDictionary objectForKey:@"lastGameScore"] longValue];
+        self.highestGameScoreToday = [[userProfileDictionary objectForKey:@"highestGameScoreToday"] longValue];
+        self.highestGameScoreThisWeek = [[userProfileDictionary objectForKey:@"highestGameScoreThisWeek"] longValue];
+        self.highestGameScoreAllTime = [[userProfileDictionary objectForKey:@"highestGameScoreAllTime"] longValue];
+        
+        NSArray* tierArray = [self.currentDataDictionary objectForKey:@"Difficulty"];
+        self.difficultyTierArray = [[NSArray alloc] initWithArray:tierArray];
+        
+        for (NSDictionary* difficultyTier in self.difficultyTierArray)
+        {
+            DLog(@"tier = %i", [[difficultyTier objectForKey:@"tier"] intValue]);
+            DLog(@"flowerTypeLevel = %i", [[difficultyTier objectForKey:@"flowerTypeLevel"] intValue]);
+            DLog(@"customerPatience = %i", [[difficultyTier objectForKey:@"customerPatience"] intValue]);
+            DLog(@"customerRequirementType = %i", [[difficultyTier objectForKey:@"customerRequirementType"] intValue]);
+            DLog(@"customerRequirementCount = %i", [[difficultyTier objectForKey:@"customerRequirementCount"] intValue]);
+        }
     }
     
     return self;

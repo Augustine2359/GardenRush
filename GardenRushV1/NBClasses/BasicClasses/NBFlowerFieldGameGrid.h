@@ -19,7 +19,7 @@
 
 @interface NBFlowerFieldGameGrid : CCNode
 
-- (id)initWithExpandedFlowerField:(BOOL)isFlowerFieldExpanded;
+-(id)initWithExpandedFlowerField:(BOOL)isFlowerFieldExpanded;
 -(void)update:(ccTime)delta;
 -(void)onBouquetReachedScore:(NBBouquet*)bouquet;
 
@@ -32,6 +32,10 @@
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlot2;
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlots;
 @property (nonatomic, retain) NSMutableArray* potentialComboGrids;
+@property (nonatomic, retain) NSMutableArray* potentialNextMoveHasMatchGrids;
 @property (nonatomic, assign) NBBouquetType currentBouquetMatchType;
+
+@property (nonatomic, assign) bool isProcessingMove;
+@property (nonatomic, assign) bool isProcessingMatching;
 
 @end

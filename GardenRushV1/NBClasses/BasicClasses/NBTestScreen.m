@@ -72,6 +72,14 @@ NBGameGUI* test = nil;
     self.flowerFieldChildCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
     self.flowerFieldChildCountLabel.position = CGPointMake(20, self.layerSize.height - 50);
     [self addChild:self.flowerFieldChildCountLabel];
+    
+    self.isProcessingMoveLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
+    self.isProcessingMoveLabel.position = CGPointMake(20, self.layerSize.height - 80);
+    [self addChild:self.isProcessingMoveLabel];
+    
+    self.isProcessingMatchLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];
+    self.isProcessingMatchLabel.position = CGPointMake(20, self.layerSize.height - 110);
+    [self addChild:self.isProcessingMatchLabel];
   
     //NBSpecialPowerButtonsContainer *specialPowerButton = [[NBSpecialPowerButtonsContainer alloc] init];
     //specialPowerButton.delegate = self;
@@ -82,6 +90,8 @@ NBGameGUI* test = nil;
 {
     [self.flowerCountLabel setString:[NSString stringWithFormat:@"%i", [NBFlower getFlowerCount]]];
     [self.flowerFieldChildCountLabel setString:[NSString stringWithFormat:@"%i", [self.flowerFieldGameGrid children].count]];
+    [self.isProcessingMoveLabel setString:[NSString stringWithFormat:@"%i", (int)self.flowerFieldGameGrid.isProcessingMove]];
+    [self.isProcessingMatchLabel setString:[NSString stringWithFormat:@"%i", (int)self.flowerFieldGameGrid.isProcessingMatching]];
 }
 
 #pragma mark - NBSpecialPowerButtonsContainerDelegate
