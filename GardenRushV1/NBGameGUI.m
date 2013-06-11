@@ -49,21 +49,15 @@ static CGPoint scorePosition = {0, 0};
     [self addChild:GUIFrame];
     
     //Pause button
-    pauseButtonImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-//    CCMenuItem* pauseButton = [CCMenuItemImage itemWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];//itemWithNormalImage:@"staticbox_red.png" selectedImage:@"staticbox_red.png" target:self selector:@selector(doPauseGame)];
+    CCSprite* pauseButtonImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCSprite* pauseButtonImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCMenuItemSprite* pauseButton = [CCMenuItemSprite itemWithNormalSprite:pauseButtonImageNormal selectedSprite:pauseButtonImageSelected target:self selector:@selector(doPauseGame)];
     
-//    CCMenuItemSprite* pauseButton = [[CCMenuItemSprite alloc] initWithNormalSprite:pauseButtonImage selectedSprite:pauseButtonImage disabledSprite:pauseButtonImage target:self selector:@selector(doPauseGame)];
+    [pauseButton setScale:2];
+    [pauseButton setPosition:ccp(-screenSize.width*0.5 + frameSize.width*0.1, -screenSize.height*0.5 + GUIFrame.position.y)];
     
-    CGSize buttonSize = pauseButtonImage.boundingBox.size;
-    [pauseButtonImage setScaleX:(frameSize.width*0.1/buttonSize.width)];
-    [pauseButtonImage setScaleY:(frameSize.height*0.5/buttonSize.height)];
-//    buttonSize = pauseButtonImage.boundingBox.size;
-    [pauseButtonImage setPosition:ccp(frameSize.width*0.1, GUIFrame.position.y)];
-    
-    [self addChild:pauseButtonImage z:1];
-    
-//    CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
-//    [self addChild:GUIMenu];
+    CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
+    [self addChild:GUIMenu];
 }
 
 -(void)initialiseLivesGUI{
@@ -218,9 +212,85 @@ static CGPoint scorePosition = {0, 0};
 
 -(void)doPauseGame{
     CCLOG(@"Paused game!");
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
     //Set timeScale to 0
-    //Transit image down cover screen
-    //Resume and quit button
+    [self pauseSchedulerAndActions];
+    for(CCSprite *sprite in [self children]) {
+        [[[CCDirector sharedDirector] actionManager] pauseTarget:sprite];
+    }
+    for(int x = 0; x < [customersArray count]; x++){
+        if ([customersArray objectAtIndex:x] != NULL) {
+            NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:x];
+            [thatCustomer pauseSchedulerAndActions];
+        }
+    }
+    
+    //Pause GUI
+    CCSprite* pauseFrameImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_sky.png"];
+    CCSprite* pauseFrameImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_sky.png"];
+    CCMenuItemImage* pauseFrame = [CCMenuItemImage itemWithNormalSprite:pauseFrameImageNormal selectedSprite:pauseFrameImageSelected];
+    CGSize frameSize = pauseFrame.boundingBox.size;
+    [pauseFrame setScaleX:(screenSize.width/frameSize.width)];
+    [pauseFrame setScaleY:(screenSize.height*0.9/frameSize.height)];
+    frameSize = pauseFrame.boundingBox.size;
+    [pauseFrame setPosition:ccp(screenSize.width*0.5, frameSize.height*0.5)];
+    [pauseFrame setIsEnabled:NO];
+    
+    CCSprite* resumeButtonImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCSprite* resumeButtonImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCMenuItemImage* resumeButton = [CCMenuItemSprite itemWithNormalSprite:resumeButtonImageNormal selectedSprite:resumeButtonImageSelected target:self selector:@selector(doResumeGame)];
+    frameSize = resumeButton.boundingBox.size;
+    [resumeButton setScaleX:(screenSize.width*0.5/frameSize.width)];
+    [resumeButton setScaleY:(screenSize.width*0.1/frameSize.height)];
+    [resumeButton setPosition:ccp(screenSize.width*0.5, screenSize.height*0.7)];
+    [resumeButton setZOrder:-2];
+    
+    CCSprite* quitButtonImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCSprite* quitButtonImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCMenuItemImage* quitButton = [CCMenuItemSprite itemWithNormalSprite:quitButtonImageNormal selectedSprite:quitButtonImageSelected target:self selector:@selector(doQuitGame)];
+    frameSize = quitButton.boundingBox.size;
+    [quitButton setScaleX:(screenSize.width*0.5/frameSize.width)];
+    [quitButton setScaleY:(screenSize.width*0.1/frameSize.height)];
+    [quitButton setPosition:ccp(screenSize.width*0.5, screenSize.height*0.3)];
+    [quitButton setZOrder:-1];
+    
+    pauseMenu = [CCMenu menuWithItems: pauseFrame, resumeButton, quitButton, nil];
+    [pauseMenu setPosition:ccp(0, screenSize.height)];
+    [self addChild:pauseMenu z:0];
+    
+    //Pause transition
+    [pauseMenu runAction:[CCMoveBy actionWithDuration:0.25 position:ccp(0, -screenSize.height)]];
+}
+
+-(void)doResumeGame{
+    CCLOG(@"Resume Game!");
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
+    id move = [CCMoveBy actionWithDuration:0.25 position:ccp(0, screenSize.height)];
+    id action = [CCCallFunc actionWithTarget:self selector:@selector(doResumeGameCallback)];
+    [pauseMenu runAction:[CCSequence actions:move, action, nil]];
+}
+
+-(void)doResumeGameCallback{
+    [self resumeSchedulerAndActions];
+    for(CCSprite *sprite in [self children]) {
+        [[[CCDirector sharedDirector] actionManager] resumeTarget:sprite];
+    }
+    
+    for(int x = 0; x < [customersArray count]; x++){
+        if ([customersArray objectAtIndex:x] != NULL) {
+            NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:x];
+            [thatCustomer resumeSchedulerAndActions];
+        }
+    }
+    
+    [pauseMenu removeFromParentAndCleanup:YES];
+}
+
+-(void)doQuitGame{
+    CCLOG(@"Quit Game!");
+    [[CCDirector sharedDirector] popScene];
 }
 
 -(void)doChangeLife:(int)amount{
