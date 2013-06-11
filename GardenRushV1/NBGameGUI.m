@@ -13,6 +13,8 @@ static CGPoint scorePosition = {0, 0};
 
 @implementation NBGameGUI
 
+@synthesize customersArray;
+
 +(NBGameGUI*)sharedGameGUI
 {
     return sharedGameGUI;

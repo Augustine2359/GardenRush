@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UserProfile</key>
+	<dict>
+		<key>userID</key>
+		<string></string>
+		<key>currentGameScore</key>
+		<integer>0</integer>
+		<key>lastGameScore</key>
+		<integer>0</integer>
+		<key>highestGameScoreToday</key>
+		<integer>0</integer>
+		<key>highestGameScoreThisWeek</key>
+		<integer>0</integer>
+		<key>highestGameScoreAllTime</key>
+		<integer>0</integer>
+	</dict>
+	<key>GameState</key>
+	<dict>
+		<key>currentDifficultyTier</key>
+		<integer>1</integer>
+		<key>availableCoins</key>
+		<integer>0</integer>
+		<key>availableItem1</key>
+		<integer>0</integer>
+	</dict>
+	<key>Difficulty</key>
+	<array>
+		<dict>
+			<key>tier</key>
+			<integer>1</integer>
+			<key>flowerTypeLevel</key>
+			<integer>1</integer>
+			<key>customerPatience</key>
+			<integer>1</integer>
+			<key>customerRequirementType</key>
+			<integer>1</integer>
+			<key>customerRequirementCount</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

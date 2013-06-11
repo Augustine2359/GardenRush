@@ -20,6 +20,7 @@
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 
+@property (nonatomic, retain) NBDataManager* dataManager;
 @property (nonatomic, retain) CCLabelTTF* testNodeCountLabel;
 @property (nonatomic, retain) CCLabelTTF* layerNodeCountLabel;
 

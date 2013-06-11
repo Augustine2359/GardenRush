@@ -83,8 +83,9 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if ((self = [super init]))
     {
-        if (!self.dataManager)
-            self.dataManager = [NBDataManager sharedDataManager];
+        //if (!self.dataManager)
+        //    self.dataManager = [NBDataManager sharedDataManager];
+        [NBDataManager sharedDataManager];
         
         self.currentFrameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [self.currentFrameCache addSpriteFramesWithFile:@"GardenRushSpriteSheet1.plist"];
@@ -192,6 +193,8 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
             break;
       case TargetScenePreGame:
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBPreGameScreen") scene] withColor:ccWHITE]];
+      case TargetSceneParticle:
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBParticleScreen") scene] withColor:ccBLUE]];
         default:
             break;
     }

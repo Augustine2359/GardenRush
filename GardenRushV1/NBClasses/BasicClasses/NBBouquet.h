@@ -29,12 +29,14 @@ typedef enum
 +(id)createBouquet:(NBBouquetType)bouquetType show:(bool)show;
 +(int)getBouquetCount;
 +(void)setScorePadPosition:(CGPoint)position;
--(void)performScoringAndInformLayer:(CCNode*)layer withSelector:(SEL)selector;
+-(void)performStandardScoringAndInformLayer:(CCNode*)node withSelector:(SEL)selector;
+-(void)performCustomerFulfillingScoringAtCustomerPosition:(CGPoint)position andIndex:(int)index andInformLayer:(CCNode*)node withSelector:(SEL)selector;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBBouquetType bouquetType;
 @property (nonatomic, assign) int value;
 @property (nonatomic, retain) CCNode* nodeToReportScore;
 @property (nonatomic, assign) SEL selectorToReportScore;
+@property (nonatomic, assign) int fulfilledCustomerIndex;
 
 @end

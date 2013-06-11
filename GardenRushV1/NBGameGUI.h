@@ -26,15 +26,25 @@
     float deltaScore;
     bool isScoreUpdating;
     
-    //Customer
-    CCArray* customersArray;
     CCArray* missingCustomerIndex;
     bool isSpawningCustomer;
     int minSpawnInterval, maxSpawnInterval;
     int averageRequestQuantity;
     float nextWaitingTime;
+    CCArray* customersArray;
 }
 
+@property (nonatomic, retain) CCArray* customersArray;
+
+//Private
+-(void)initialiseLivesGUI;
+-(void)initialiseScoreGUI;
+-(void)initialiseCustomerGUI;
+-(void)update:(ccTime)delta;
+//-(void)updateScore;
+-(void)deleteAdditionalScoreLabel;
+
+//Public
 +(NBGameGUI*)sharedGameGUI;
 +(CGPoint)getScorePosition;
 -(void)update:(ccTime)delta;

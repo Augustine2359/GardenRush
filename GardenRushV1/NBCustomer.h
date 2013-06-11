@@ -13,12 +13,14 @@
 @interface NBCustomer : CCLayer {
     CCSprite* faceImage;
     CCSprite* timerBarImage;
-    CCArray* requests;
     
     float initialWaitingTime, currentWaitingTime;
     int selfIndex;
+    
+    CCArray* requests;
 }
 
+@property (nonatomic, retain) NBBouquet* flowerRequest;
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 

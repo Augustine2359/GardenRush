@@ -20,5 +20,7 @@
 @property (nonatomic, retain) NBFlowerFieldGameGrid* flowerFieldGameGrid;
 @property (nonatomic, retain) CCLabelTTF* flowerCountLabel;
 @property (nonatomic, retain) CCLabelTTF* flowerFieldChildCountLabel;
+@property (nonatomic, retain) CCLabelTTF* isProcessingMoveLabel;
+@property (nonatomic, retain) CCLabelTTF* isProcessingMatchLabel;
 
 @end
