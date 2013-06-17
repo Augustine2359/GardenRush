@@ -7,9 +7,12 @@
 //
 
 #import "NBGameGUI.h"
+#import "NBDifficultyTier.h"
 
 static NBGameGUI* sharedGameGUI = nil;
 static CGPoint scorePosition = {0, 0};
+bool isPaused = false;
+
 
 @implementation NBGameGUI
 
@@ -60,6 +63,10 @@ static CGPoint scorePosition = {0, 0};
     
     CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
     [self addChild:GUIMenu];
+    
+    NBDifficultyTier* difficultyTier = [NBDifficultyTier new];
+    [difficultyTier setTier:1];
+    [self addChild:difficultyTier];
 }
 
 -(void)initialiseLivesGUI{
@@ -115,9 +122,9 @@ static CGPoint scorePosition = {0, 0};
     [missingCustomerIndex addObject:[NSNumber numberWithInt:1]];
     [missingCustomerIndex addObject:[NSNumber numberWithInt:0]];
     
-    [self setSpawnInterval:1 max:3];
-    [self setNextCustomerWaitingTime:30];
-    [self setCustomerRequestAverageQuantity:3];
+    [self setSpawnInterval:14 max:21];
+    [self setNextCustomerWaitingTime:60];
+    [self setCustomerRequestAverageQuantity:1];
     
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
@@ -165,6 +172,7 @@ static CGPoint scorePosition = {0, 0};
     [additionalScoreLabel runAction:[CCSequence actions:move, delete, nil]];
     
     isScoreUpdating = YES;
+    [[NBDifficultyTier sharedDifficulty] checkTierUpdate:(int)actualScore];
 }
 
 -(void)deleteAdditionalScoreLabel{
@@ -190,7 +198,7 @@ static CGPoint scorePosition = {0, 0};
     int temp = [index intValue];
     
     //Quantity is the average +- 1
-    int quantity = arc4random() * 3 - 1;
+    int quantity = arc4random() % 3 - 1;
     quantity += averageRequestQuantity;
     if (quantity < 1) {
         quantity = 1;
@@ -213,7 +221,12 @@ static CGPoint scorePosition = {0, 0};
 }
 
 -(void)doPauseGame{
+    if (isPaused) {
+        return;
+    }
+    
     CCLOG(@"Paused game!");
+    isPaused = YES;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
     //Set timeScale to 0
@@ -246,7 +259,6 @@ static CGPoint scorePosition = {0, 0};
     [resumeButton setScaleX:(screenSize.width*0.5/frameSize.width)];
     [resumeButton setScaleY:(screenSize.width*0.1/frameSize.height)];
     [resumeButton setPosition:ccp(screenSize.width*0.5, screenSize.height*0.7)];
-    [resumeButton setZOrder:-2];
     
     CCSprite* quitButtonImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
     CCSprite* quitButtonImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
@@ -255,11 +267,10 @@ static CGPoint scorePosition = {0, 0};
     [quitButton setScaleX:(screenSize.width*0.5/frameSize.width)];
     [quitButton setScaleY:(screenSize.width*0.1/frameSize.height)];
     [quitButton setPosition:ccp(screenSize.width*0.5, screenSize.height*0.3)];
-    [quitButton setZOrder:-1];
     
     pauseMenu = [CCMenu menuWithItems: pauseFrame, resumeButton, quitButton, nil];
     [pauseMenu setPosition:ccp(0, screenSize.height)];
-    [self addChild:pauseMenu z:0];
+    [self addChild:pauseMenu z:-1];
     
     //Pause transition
     [pauseMenu runAction:[CCMoveBy actionWithDuration:0.25 position:ccp(0, -screenSize.height)]];
@@ -267,6 +278,7 @@ static CGPoint scorePosition = {0, 0};
 
 -(void)doResumeGame{
     CCLOG(@"Resume Game!");
+    isPaused = NO;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
     id move = [CCMoveBy actionWithDuration:0.25 position:ccp(0, screenSize.height)];

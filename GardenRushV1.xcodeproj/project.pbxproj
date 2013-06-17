@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5690B2A5173E91690059192E /* NBCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5690B2A4173E91690059192E /* NBCustomer.m */; };
 		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
+		56A02628176787B400462344 /* NBDifficultyTier.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A02627176787B400462344 /* NBDifficultyTier.m */; };
 		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
@@ -170,6 +171,8 @@
 		5690B2A4173E91690059192E /* NBCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBCustomer.m; sourceTree = "<group>"; };
 		569D11B1173A818D00D60069 /* NBGameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGameGUI.h; sourceTree = "<group>"; };
 		569D11B2173A818D00D60069 /* NBGameGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBGameGUI.m; sourceTree = "<group>"; };
+		56A02626176787B400462344 /* NBDifficultyTier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBDifficultyTier.h; sourceTree = "<group>"; };
+		56A02627176787B400462344 /* NBDifficultyTier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBDifficultyTier.m; sourceTree = "<group>"; };
 		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
 		BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBasicScreenLayer.m; path = NBClasses/BasicClasses/NBBasicScreenLayer.m; sourceTree = "<group>"; };
 		BC1FD79417363CB60065D4CF /* NBTestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestScreen.h; path = NBClasses/BasicClasses/NBTestScreen.h; sourceTree = "<group>"; };
@@ -503,6 +506,8 @@
 			children = (
 				5690B2A3173E91690059192E /* NBCustomer.h */,
 				5690B2A4173E91690059192E /* NBCustomer.m */,
+				56A02626176787B400462344 /* NBDifficultyTier.h */,
+				56A02627176787B400462344 /* NBDifficultyTier.m */,
 			);
 			name = AdvanceClasses;
 			sourceTree = "<group>";
@@ -1213,6 +1218,7 @@
 				F9D01A40175B93F20084EAB6 /* NBInAppPurchaseManager.m in Sources */,
 				F909BF6D175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m in Sources */,
 				F9CC908317607E66008D1E3F /* NBParticleScreen.m in Sources */,
+				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
