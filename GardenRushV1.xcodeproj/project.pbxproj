@@ -13,6 +13,7 @@
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
 		BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FD79C173692D90065D4CF /* Default-568h@2x.png */; };
+		BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */; };
 		BC829158174A6A800064B977 /* NBTestNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BC829157174A6A800064B977 /* NBTestNode.m */; };
 		BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */ = {isa = PBXBuildFile; fileRef = BC82915A174FCBDD0064B977 /* NBBouquet.m */; };
 		BC8EA6441734C4EA004454CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8EA6431734C4EA004454CF /* QuartzCore.framework */; };
@@ -177,6 +178,8 @@
 		BC1FD79917363D4A0065D4CF /* NBDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBDataManager.h; path = NBClasses/BasicClasses/NBDataManager.h; sourceTree = "<group>"; };
 		BC1FD79A17363D4A0065D4CF /* NBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBDataManager.m; path = NBClasses/BasicClasses/NBDataManager.m; sourceTree = "<group>"; };
 		BC1FD79C173692D90065D4CF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BC4E069E176DCE2F00CC2898 /* NBFieldRandomArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFieldRandomArray.h; path = NBClasses/BasicClasses/NBFieldRandomArray.h; sourceTree = "<group>"; };
+		BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFieldRandomArray.m; path = NBClasses/BasicClasses/NBFieldRandomArray.m; sourceTree = "<group>"; };
 		BC829156174A6A800064B977 /* NBTestNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestNode.h; path = NBClasses/BasicClasses/NBTestNode.h; sourceTree = "<group>"; };
 		BC829157174A6A800064B977 /* NBTestNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBTestNode.m; path = NBClasses/BasicClasses/NBTestNode.m; sourceTree = "<group>"; };
 		BC829159174FCBDD0064B977 /* NBBouquet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBouquet.h; path = NBClasses/BasicClasses/NBBouquet.h; sourceTree = "<group>"; };
@@ -536,6 +539,8 @@
 				BC82915A174FCBDD0064B977 /* NBBouquet.m */,
 				F909BF6B175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.h */,
 				F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */,
+				BC4E069E176DCE2F00CC2898 /* NBFieldRandomArray.h */,
+				BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1213,6 +1218,7 @@
 				F9D01A40175B93F20084EAB6 /* NBInAppPurchaseManager.m in Sources */,
 				F909BF6D175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m in Sources */,
 				F9CC908317607E66008D1E3F /* NBParticleScreen.m in Sources */,
+				BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

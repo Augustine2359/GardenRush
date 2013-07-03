@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NBFlower.h"
 #import "NBGameGUI.h"
+#import "NBFieldRandomArray.h"
 
 #define FIELD_HORIZONTAL_UNIT_COUNT 8
 #define FIELD_VERTICAL_UNIT_COUNT 8
@@ -16,6 +17,7 @@
 #define FIELD_VERTICAL_UNIT_COUNT_EXPANDED 9
 #define FIELD_Y_POSITION 4
 #define DURATION_TO_CHECK_EMPTY_SLOT 1.0f
+#define DURATION_BEFORE_DISPLAYING_HINT_MOVE 2.0f
 
 @interface NBFlowerFieldGameGrid : CCNode
 
@@ -33,6 +35,7 @@
 @property (nonatomic, retain) NSMutableArray* arrayOfMatchedFlowerSlots;
 @property (nonatomic, retain) NSMutableArray* potentialComboGrids;
 @property (nonatomic, retain) NSMutableArray* potentialNextMoveHasMatchGrids;
+@property (nonatomic, retain) NSMutableArray* currentRoundPossibleMoves;
 @property (nonatomic, assign) NBBouquetType currentBouquetMatchType;
 
 @property (nonatomic, assign) bool isProcessingMove;

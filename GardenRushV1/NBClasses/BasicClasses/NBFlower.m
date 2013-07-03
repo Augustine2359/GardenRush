@@ -15,6 +15,13 @@ static NSMutableArray* flowerField = nil;
 static CGSize fieldContentSize = {0, 0};
 static int difficultyLevel = 1;
 
+@interface NBFlower()
+{
+    bool isBloomed;
+}
+
+@end
+
 @implementation NBFlower
 
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition
@@ -120,38 +127,71 @@ static int difficultyLevel = 1;
                 case ftNoFlower:
                     //self.flowerImage.opacity = 0;
                     self.flowerImage.color = ccWHITE;
+                    self.isMovableDuringRearrangingShop = false;
                     break;
                     
                 case ftRedFlower:
                     self.flowerImage.color = ccRED;
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                 
                 case ftYellowFlower:
                     self.flowerImage.color = ccYELLOW;
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                 
                 case ftGreenFlower:
                     self.flowerImage.color = ccGREEN;
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                     
                 case ftBlueFlower:
                     self.flowerImage.color = ccBLUE;
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                 
                 case ftBlackFlower:
                     self.flowerImage.color = ccBLACK;
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                     
                 case ftWhiteFlower:
                     self.flowerImage.color = ccWHITE;
+                    self.isMovableDuringRearrangingShop = true;
+                    break;
+                
+                case ftPurpleFlower:
+                    self.flowerImage.color = ccc3(106, 90, 205);
+                    self.isMovableDuringRearrangingShop = true;
+                    break;
+                    
+                case ftCyanFlower:
+                    self.flowerImage.color = ccc3(0, 255, 255);
+                    self.isMovableDuringRearrangingShop = true;
+                    break;
+                
+                case ftBisqueFlower:
+                    self.flowerImage.color = ccc3(139, 125, 107);
+                    self.isMovableDuringRearrangingShop = true;
+                    break;
+                    
+                case ftAquamarineFlower:
+                    self.flowerImage.color = ccc3(127, 255, 212);
+                    self.isMovableDuringRearrangingShop = true;
                     break;
                     
                 default:
+                    self.isMovableDuringRearrangingShop = false;
                     break;
             }
             
             if (!show)
+            {
                 self.flowerImage.visible = NO;
+                isBloomed = false;
+            }
+            else
+                isBloomed = true;
             
             self.flowerType = flowerType;
             self.gridPosition = gridPosition;
@@ -231,6 +271,12 @@ static int difficultyLevel = 1;
     [self runAction:sequence];
 }
 
+-(void)changeToGrid:(CGPoint)destinationGrid
+{
+    CGPoint destination = [NBFlower convertFieldGridPositionToActualPixel:destinationGrid];
+    self.position = destination;
+}
+
 -(void)onMoveCompleted
 {
     self.isMoveCompleted = true;
@@ -251,6 +297,8 @@ static int difficultyLevel = 1;
     int x = touchLocation.x / (FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH);
     int y = touchLocation.y / (FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH);
 
+    if (x >= [flowerField count] || y >= [[flowerField objectAtIndex:0] count]) return FALSE;
+    
     NBFlower* touchedFlower = (NBFlower*)[[flowerField objectAtIndex:x] objectAtIndex:y];
     NSString* flowerTypeInString = nil;
     switch (touchedFlower.flowerType)
@@ -283,6 +331,22 @@ static int difficultyLevel = 1;
             flowerTypeInString = @"White Flower";
             break;
             
+        case ftPurpleFlower:
+            flowerTypeInString = @"Purple Flower";
+            break;
+            
+        case ftCyanFlower:
+            flowerTypeInString = @"Cyan Flower";
+            break;
+            
+        case ftBisqueFlower:
+            flowerTypeInString = @"Bisque Flower";
+            break;
+            
+        case ftAquamarineFlower:
+            flowerTypeInString = @"Aquamarine Flower";
+            break;
+            
         default:
             break;
     }
@@ -303,6 +367,48 @@ static int difficultyLevel = 1;
     self.flowerImage.visible = YES;
     CCFadeIn* fadeIn = [CCFadeIn actionWithDuration:0.2f];
     [self.flowerImage runAction:fadeIn];
+    isBloomed = true;
+}
+
+-(void)toggleBlink:(bool)enable
+{
+    if (enable)
+    {
+        CCBlink* blink = [CCBlink actionWithDuration:10.0f blinks:10];
+        blink.tag = TAG_ID_BLINK;
+        [self runAction:blink];
+    }
+    else
+    {
+        [self stopActionByTag:TAG_ID_BLINK];
+        self.visible = true;
+    }
+}
+
+-(void)debloomToHide
+{
+    if (!isBloomed) return;
+    
+    CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scale:0];
+    [self.flowerImage runAction:scaleTo];
+    
+    CCRotateBy* rotateBy = [CCRotateBy actionWithDuration:0.75f angle:-360];
+    [self.flowerImage runAction:rotateBy];
+    
+    isBloomed = false;
+}
+
+-(void)bloomToShow
+{
+    if (isBloomed) return;
+    
+    CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scaleX:FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width scaleY:FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height];
+    [self.flowerImage runAction:scaleTo];
+    
+    CCRotateBy* rotateBy = [CCRotateBy actionWithDuration:0.75f angle:360];
+    [self.flowerImage runAction:rotateBy];
+    
+    isBloomed = true;
 }
 
 @end

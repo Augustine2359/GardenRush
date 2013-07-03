@@ -14,7 +14,9 @@
 #define FLOWERSIZE_HEIGHT 30
 #define FIELD_FLOWER_GAP_WIDTH 4
 #define FLOWER_MOVE_DURATION 0.4f
-#define MAX_DIFFICULTY_LEVEL 3
+#define MAX_DIFFICULTY_LEVEL 7
+
+#define TAG_ID_BLINK 1
 
 typedef enum
 {
@@ -37,6 +39,10 @@ typedef enum
     ftBlueFlower,
     ftBlackFlower,
     ftWhiteFlower,
+    ftPurpleFlower,
+    ftCyanFlower,
+    ftBisqueFlower,
+    ftAquamarineFlower,
     ftMaxFlower
 } NBFlowerType;
 
@@ -67,9 +73,13 @@ typedef enum
 +(CGPoint)convertFieldGridPositionToActualPixel:(CGPoint)gridPosition;
 +(NBFlower*)randomFlower;
 -(void)move:(NBFlowerMoveType)moveType informLayerSelector:(SEL)selector;
+-(void)changeToGrid:(CGPoint)destinationGrid;
 -(void)moveToGrid:(CGPoint)destinationGrid withDuration:(float)duration informSelector:(SEL)selector;
 -(void)fallByOneGrid:(SEL)selector;
 -(void)show;
+-(void)toggleBlink:(bool)enable;
+-(void)debloomToHide;
+-(void)bloomToShow;
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBFlowerType flowerType;
@@ -78,5 +88,6 @@ typedef enum
 @property (nonatomic, assign) bool isMoveCompleted;
 @property (nonatomic, assign) NBFlowerMatchType matchType;
 @property (nonatomic, assign) NBBouquetType bouquetType;
+@property (nonatomic, assign) BOOL isMovableDuringRearrangingShop;
 
 @end
