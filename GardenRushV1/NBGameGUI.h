@@ -13,9 +13,7 @@
 @interface NBGameGUI : CCLayer {
     //Misc
     CCSprite* GUIFrame;
-    
-    //Pause
-    CCSprite* pauseButtonImage;
+    CCMenu* pauseMenu;
     
     //Life
     CCArray* livesArray;
@@ -55,6 +53,8 @@
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;
+-(void)doResumeGame;
+-(void)doQuitGame;
 -(void)doChangeLife:(int)amount;
 -(void)setSpawnInterval:(int)min max:(int)max;
 -(void)setCustomerRequestAverageQuantity:(int)amount;
