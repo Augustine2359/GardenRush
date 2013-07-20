@@ -56,7 +56,7 @@
 			<key>tier</key>
 			<integer>3</integer>
 			<key>flowerTypeLevel</key>
-			<integer>7</integer>
+			<integer>10</integer>
 			<key>customerPatience</key>
 			<integer>1</integer>
 			<key>customerRequirementType</key>

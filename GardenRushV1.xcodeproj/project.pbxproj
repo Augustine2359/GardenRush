@@ -10,6 +10,11 @@
 		5690B2A5173E91690059192E /* NBCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5690B2A4173E91690059192E /* NBCustomer.m */; };
 		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
 		56A02628176787B400462344 /* NBDifficultyTier.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A02627176787B400462344 /* NBDifficultyTier.m */; };
+		BC015A9517925393000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = BC015A9417925393000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136.png */; };
+		BC015A9717925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC015A9617925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png */; };
+		BC015A9A17925F9F000ED5F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC5E175AEE720025709A /* Default@2x.png */; };
+		BC015A9C17925FF7000ED5F8 /* title640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = BC015A9B17925FF7000ED5F8 /* title640x960.png */; };
+		BC015AA0179A0B30000ED5F8 /* NB_flowerBoardBG_620x620-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC015A9F179A0B30000ED5F8 /* NB_flowerBoardBG_620x620-hd.png */; };
 		BC1FD79617363CB60065D4CF /* NBBasicScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */; };
 		BC1FD79717363CB60065D4CF /* NBTestScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79517363CB60065D4CF /* NBTestScreen.m */; };
 		BC1FD79B17363D4A0065D4CF /* NBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FD79A17363D4A0065D4CF /* NBDataManager.m */; };
@@ -145,7 +150,6 @@
 		BC8EA7D51734C4ED004454CF /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8EA7D41734C4ED004454CF /* IntroLayer.m */; };
 		BC98EC59175ADBD20025709A /* GameSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC58175ADBD20025709A /* GameSettings.plist */; };
 		BC98EC5B175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */; };
-		BC98EC5F175AEE720025709A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC98EC5E175AEE720025709A /* Default@2x.png */; };
 		BC9B376B1748E3C900FD1EDA /* NBGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9B376A1748E3C900FD1EDA /* NBGameKitHelper.m */; };
 		BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B3173BE443007CEEF2 /* GardenRushSpriteSheet1.plist */; };
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
@@ -174,6 +178,10 @@
 		569D11B2173A818D00D60069 /* NBGameGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBGameGUI.m; sourceTree = "<group>"; };
 		56A02626176787B400462344 /* NBDifficultyTier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBDifficultyTier.h; sourceTree = "<group>"; };
 		56A02627176787B400462344 /* NBDifficultyTier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBDifficultyTier.m; sourceTree = "<group>"; };
+		BC015A9417925393000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NB_FlowerFrenzyMainMenu_640x1136.png; path = Resources/NB_FlowerFrenzyMainMenu_640x1136.png; sourceTree = "<group>"; };
+		BC015A9617925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_FlowerFrenzyMainMenu_640x1136-hd.png"; path = "Resources/MainGameArts/NB_FlowerFrenzyMainMenu_640x1136-hd.png"; sourceTree = "<group>"; };
+		BC015A9B17925FF7000ED5F8 /* title640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = title640x960.png; path = Resources/MainGameArts/title640x960.png; sourceTree = "<group>"; };
+		BC015A9F179A0B30000ED5F8 /* NB_flowerBoardBG_620x620-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBoardBG_620x620-hd.png"; path = "Resources/MainGameArts/NB_flowerBoardBG_620x620-hd.png"; sourceTree = "<group>"; };
 		BC1FD79217363CB60065D4CF /* NBBasicScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBBasicScreenLayer.h; path = NBClasses/BasicClasses/NBBasicScreenLayer.h; sourceTree = "<group>"; };
 		BC1FD79317363CB60065D4CF /* NBBasicScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBBasicScreenLayer.m; path = NBClasses/BasicClasses/NBBasicScreenLayer.m; sourceTree = "<group>"; };
 		BC1FD79417363CB60065D4CF /* NBTestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestScreen.h; path = NBClasses/BasicClasses/NBTestScreen.h; sourceTree = "<group>"; };
@@ -608,7 +616,6 @@
 			isa = PBXGroup;
 			children = (
 				F9D01A41175B94B90084EAB6 /* Audio */,
-				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC8EA6591734C4EA004454CF /* Default-Landscape~ipad.png */,
 				BC8EA6571734C4EA004454CF /* Default.png */,
 				BC8EA65D1734C4EA004454CF /* fps_images-hd.png */,
@@ -623,10 +630,15 @@
 				BC8EA66B1734C4EA004454CF /* Icon@2x.png */,
 				BC8EA66D1734C4EA004454CF /* Info.plist */,
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
+				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
+				BC015A9F179A0B30000ED5F8 /* NB_flowerBoardBG_620x620-hd.png */,
+				BC015A9617925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png */,
+				BC015A9417925393000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136.png */,
+				BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */,
 				F9CC90841760877E008D1E3F /* Particles_fire.png */,
 				F909BF69175C932400E46AF0 /* petal.png */,
+				BC015A9B17925FF7000ED5F8 /* title640x960.png */,
 				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
-				BC98EC5A175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1092,7 +1104,11 @@
 				F9CC90851760877E008D1E3F /* Particles_fire.png in Resources */,
 				BC98EC59175ADBD20025709A /* GameSettings.plist in Resources */,
 				BC98EC5B175AE9F30025709A /* NB_nebulaLogo_960x640-hd.png in Resources */,
-				BC98EC5F175AEE720025709A /* Default@2x.png in Resources */,
+				BC015A9517925393000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136.png in Resources */,
+				BC015A9717925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png in Resources */,
+				BC015A9A17925F9F000ED5F8 /* Default@2x.png in Resources */,
+				BC015A9C17925FF7000ED5F8 /* title640x960.png in Resources */,
+				BC015AA0179A0B30000ED5F8 /* NB_flowerBoardBG_620x620-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1224,6 +1240,7 @@
 				F909BF6D175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m in Sources */,
 				F9CC908317607E66008D1E3F /* NBParticleScreen.m in Sources */,
 				BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */,
+				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

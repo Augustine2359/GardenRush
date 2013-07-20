@@ -131,7 +131,8 @@ static int difficultyLevel = 1;
                     break;
                     
                 case ftRedFlower:
-                    self.flowerImage.color = ccRED;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower04.png"];
+                    //self.flowerImage.color = ccRED;
                     self.isMovableDuringRearrangingShop = true;
                     break;
                 
@@ -275,6 +276,7 @@ static int difficultyLevel = 1;
 {
     CGPoint destination = [NBFlower convertFieldGridPositionToActualPixel:destinationGrid];
     self.position = destination;
+    self.gridPosition = destinationGrid;
 }
 
 -(void)onMoveCompleted

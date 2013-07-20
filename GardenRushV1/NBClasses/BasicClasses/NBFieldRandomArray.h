@@ -17,5 +17,6 @@
 
 +(id)arrayWithFieldHorizontalCount:(int)horizontalTileCount andVerticalCount:(int)verticalTileCount;
 -(CGPoint)getNewRandomLocation;
+-(void)utilizeGrid:(CGPoint)gridPosition;
 
 @end

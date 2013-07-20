@@ -40,13 +40,19 @@
     
     if (self = [super init])
     {
-        if (isFlowerFieldExpanded) {
+        isFlowerFieldExpanded = false;
+        
+        if (isFlowerFieldExpanded)
+        {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoardBG_620x620.png"];
         }
-        else {
+        else
+        {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
+            self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"NB_shopBG_560_560.png"];
         }
       
         //CGSize fieldSize = CGSizeMake(10, 10);
@@ -56,9 +62,9 @@
         self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
-        self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
-        self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
-        self.fieldBackground.scaleY = self.contentSize.height / self.fieldBackground.contentSize.height;
+        //self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
+        //self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
+        //self.fieldBackground.scaleY = self.contentSize.height / self.fieldBackground.contentSize.height;
         self.fieldBackground.anchorPoint = ccp(0, 0);
         self.fieldBackground.position = ccp(0, 0);
         self.fieldBackground.color = ccc3(139, 119, 101);
@@ -1303,6 +1309,12 @@
     
     [self debloomAllFlowers];
     [self randomizeNewPositionForAllFlower];
+    
+    CCDelayTime* delay3 = [CCDelayTime actionWithDuration:1.0f];
+    [self runAction:delay3];
+    
+    [self bloomAllFlowers];
+    [self unlockField];
 }
 
 -(void)debloomAllFlowers
@@ -1315,6 +1327,20 @@
         {
             NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
             [flower debloomToHide];
+        }
+    }
+}
+
+-(void)bloomAllFlowers
+{
+    for (int x = 0; x < [self.flowerArrays count]; x++)
+    {
+        NSMutableArray* flowerArrayOnGridX = [self.flowerArrays objectAtIndex:x];
+        
+        for (int y = 0; y < [flowerArrayOnGridX count]; y++)
+        {
+            NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
+            [flower bloomToShow];
         }
     }
 }
@@ -1340,18 +1366,54 @@
         for (int y = 0; y < [flowerArrayOnGridX count]; y++)
         {
             NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
+            CGPoint newPosition = CGPointZero;
+            
             if (flower.isMovableDuringRearrangingShop)
             {
-                CGPoint newPosition = [virtualRandomNumberArray getNewRandomLocation];
-                [flower changeToGrid:newPosition];
-                [virtualRandomNumberArray utilizeGrid:newPosition];
-            }
-            else
-            {
+                newPosition = [virtualRandomNumberArray getNewRandomLocation];
                 
+                if (newPosition.x == -1 && newPosition.y == -1)
+                {
+                    //No more remaining slot
+                    break;
+                }
+                
+                [flower changeToGrid:newPosition];
+                
+                NSMutableArray* verticalArray = [virtualArrayX objectAtIndex:newPosition.x];
+                
+                if ([verticalArray count] == 0)
+                    [verticalArray addObject:flower];
+                else
+                {
+                    bool useAdd = false;
+                    int i;
+                    
+                    for (i = 0; i < [verticalArray count]; i++)
+                    {
+                        NBFlower* otherFlower = (NBFlower*)[verticalArray objectAtIndex:i];
+                        if (newPosition.y < otherFlower.gridPosition.y)
+                        {
+                            useAdd = false;
+                            break;
+                        }
+                        else
+                            useAdd = true;
+                    }
+                    
+                    if (useAdd)
+                        [verticalArray addObject:flower];
+                    else
+                        [verticalArray insertObject:flower atIndex:i];
+                }
             }
+        
+            [virtualRandomNumberArray utilizeGrid:newPosition];
         }
     }
+    
+    self.flowerArrays = virtualArrayX;
+    [NBFlower assignFlowerField:self.flowerArrays];
 }
 
 -(void)rearrangeGridPosition

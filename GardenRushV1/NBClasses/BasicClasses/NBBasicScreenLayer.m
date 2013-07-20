@@ -188,13 +188,22 @@ static TargetSceneTypes currentLayerType = TargetSceneINVALID;
     
     switch (sceneType)
     {
+        case TargetSceneMain:
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"MainGameLayer") scene] withColor:ccBLUE]];
+            break;
+            
         case TargetSceneFirst:
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBTestScreen") scene] withColor:ccWHITE]];
             break;
-      case TargetScenePreGame:
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBPreGameScreen") scene] withColor:ccWHITE]];
-      case TargetSceneParticle:
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBParticleScreen") scene] withColor:ccBLUE]];
+            
+        case TargetScenePreGame:
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBPreGameScreen") scene] withColor:ccWHITE]];
+            break;
+            
+        case TargetSceneParticle:
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:duration scene:[NSClassFromString(@"NBParticleScreen") scene] withColor:ccBLUE]];
+            break;
+            
         default:
             break;
     }

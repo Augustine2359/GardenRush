@@ -19,9 +19,9 @@
 - (id)initWithColor:(ccColor4B)color width:(GLfloat)w height:(GLfloat)h {
   self = [super initWithColor:color width:w height:h];
   if (self) {
-    self.petalSprite = [[CCSprite alloc] initWithFile:@"petal.png"];
-    self.petalSprite.scaleX = 0.5;
-    self.petalSprite.scaleY = 0.5;
+    self.petalSprite = [CCSprite spriteWithSpriteFrameName:@"flower_petals_64_64.png"];
+    //self.petalSprite.scaleX = 0.5;
+    //self.petalSprite.scaleY = 0.5;
     self.petalSprite.position = CGPointMake(w/2, 0);
     [self addChild:self.petalSprite];
 

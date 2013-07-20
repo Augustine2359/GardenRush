@@ -46,10 +46,17 @@
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		
+        //Add Sky
+        CCSprite* sky = [CCSprite spriteWithFile:@"NB_FlowerFrenzyMainMenu_640x1136.png"];
+        //sky.scaleX = (size.width + 20) / sky.contentSize.width;
+        //sky.scaleY = (size.height + 20) / sky.contentSize.height;
+        sky.position = ccp(size.width / 2, size.height / 2);
+        [self addChild:sky z:0];
+        
         // create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Bouquet Frenzy" fontName:@"Papyrus" fontSize:36];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Flower Frenzy" fontName:@"Papyrus" fontSize:36];
         label.position =  ccp(size.width / 2, size.height / 2);
-		[self addChild: label];
+		[self addChild:label z:2];
         
         CCLabelTTF* playGameLabel =[CCLabelTTF labelWithString:@"Play" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Papyrus" fontSize:24];
         CCMenuItemLabel* playGameMenu = [CCMenuItemLabel itemWithLabel:playGameLabel target:self selector:@selector(gotoTestScreen)];
@@ -167,7 +174,7 @@
   NSInteger width = [[CCDirector sharedDirector] winSize].width;
   NBLayerWithFlowerAtEnd *layerWithFlowerAtEnd = [[NBLayerWithFlowerAtEnd alloc] initWithColor:ccc4(0, 0, 0, 0) width:50 height:300];
   layerWithFlowerAtEnd.position = CGPointMake(arc4random()%width, [[CCDirector sharedDirector] winSize].height);
-  [self addChild:layerWithFlowerAtEnd z:-1];
+  [self addChild:layerWithFlowerAtEnd z:1];
 }
 
 #pragma mark GameKit delegate

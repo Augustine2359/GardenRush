@@ -36,6 +36,8 @@ bool isPaused = false;
         [self initialiseCustomerGUI];
         [self scheduleUpdate];
         
+        /*[[CCDirector sharedDirector].touchDispatcher addTargetedDelegate:self priority:INT_MIN+1 swallowsTouches:YES];*/
+        
         sharedGameGUI = self;
     }
     return self;
@@ -304,7 +306,8 @@ bool isPaused = false;
 
 -(void)doQuitGame{
     CCLOG(@"Quit Game!");
-    [[CCDirector sharedDirector] popScene];
+    NBBasicScreenLayer* parentLayer = (NBBasicScreenLayer*)[self parent];
+    [parentLayer changeToScene:TargetSceneMain];
 }
 
 -(void)doChangeLife:(int)amount{
