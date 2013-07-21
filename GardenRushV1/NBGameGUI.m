@@ -8,6 +8,7 @@
 
 #import "NBGameGUI.h"
 #import "NBDifficultyTier.h"
+#import "NBTestScreen.h"
 
 static NBGameGUI* sharedGameGUI = nil;
 static CGPoint scorePosition = {0, 0};
@@ -304,7 +305,8 @@ bool isPaused = false;
 
 -(void)doQuitGame{
     CCLOG(@"Quit Game!");
-    [[CCDirector sharedDirector] popScene];
+//    [[CCDirector sharedDirector] popScene];
+    [[NBTestScreen scene] changeToScene:TargetScenePreGame];
 }
 
 -(void)doChangeLife:(int)amount{
