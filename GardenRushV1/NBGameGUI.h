@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NBCustomer.h"
-
+#import "NBBasicScreenLayer.h"
 
 @interface NBGameGUI : CCLayer {
     //Misc

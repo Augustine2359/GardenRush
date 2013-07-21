@@ -11,14 +11,19 @@
 
 @interface NBFlowerFieldGameGrid()
 {
+    bool isGameJustStarted;
     bool isReturningFlower; //use to detect whether after the move need to check match
     bool isRearranging;
     bool isCheckingCombo;
     bool needToCheckCombo;
     bool needtocheckPossibleMove;
+    bool userHasMakeAMoveSinceHistDisplayed;
     UISwipeGestureRecognizerDirection lastGestureDirection;
     ccTime timeRemainingBeforeComboCheck;
     ccTime timeRemainingBeforePossibleMoveCheck;
+    ccTime timeRemainingBeforeDisplayingHintMove;
+    CGPoint currentlyShownHintMoveGridPosition;
+    NBFieldRandomArray* virtualRandomNumberArray;
 }
 
 @property (nonatomic, strong) NSArray *gestureRecognizers;
@@ -35,13 +40,19 @@
     
     if (self = [super init])
     {
-        if (isFlowerFieldExpanded) {
+        isFlowerFieldExpanded = false;
+        
+        if (isFlowerFieldExpanded)
+        {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoardBG_620x620.png"];
         }
-        else {
+        else
+        {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
+            self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"NB_shopBG_560_560.png"];
         }
       
         //CGSize fieldSize = CGSizeMake(10, 10);
@@ -51,9 +62,9 @@
         self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
-        self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
-        self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
-        self.fieldBackground.scaleY = self.contentSize.height / self.fieldBackground.contentSize.height;
+        //self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
+        //self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
+        //self.fieldBackground.scaleY = self.contentSize.height / self.fieldBackground.contentSize.height;
         self.fieldBackground.anchorPoint = ccp(0, 0);
         self.fieldBackground.position = ccp(0, 0);
         self.fieldBackground.color = ccc3(139, 119, 101);
@@ -66,6 +77,8 @@
         self.arrayOfMatchedFlowerSlots = [NSMutableArray array];
         self.potentialComboGrids = [NSMutableArray array];
         self.potentialNextMoveHasMatchGrids = [NSMutableArray array];
+        self.currentRoundPossibleMoves = [NSMutableArray array];
+        virtualRandomNumberArray = [NBFieldRandomArray arrayWithFieldHorizontalCount:self.horizontalTileCount andVerticalCount:self.verticalTileCount];
         
         for (int i = 0; i < self.horizontalTileCount; i++)
         {
@@ -85,6 +98,8 @@
         [self unlockField];
         needToCheckCombo = false;
         needtocheckPossibleMove = false;
+        isGameJustStarted = true;
+        userHasMakeAMoveSinceHistDisplayed = true;
         
         [self addSwipeGestureRecognizers];
         [self scheduleUpdate];
@@ -117,7 +132,7 @@
     }
 }
 
--(void)generateLevel
+-(bool)generateLevel
 {
     for (int x = 0; x < self.horizontalTileCount; x++)
     {
@@ -134,6 +149,8 @@
             }
         }
     }
+    
+    return [self detectPossibleMove];
 }
 
 -(void)showAllFlower
@@ -392,10 +409,10 @@
 {
     if (self.isProcessingMove || self.isProcessingMatching/* || isRearranging*/)
         return;
+    else
+        [self lockField];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
-    self.isProcessingMove = true;
     
     CGPoint touchLocation = [swipeGestureRecognizer locationInView:[CCDirector sharedDirector].view];
     
@@ -433,6 +450,10 @@
     }
     
     [self moveFlower:self.selectedFlowerGrid toGridPosition:self.swappedFlowerGrid swipe:swipeGestureRecognizer];
+    
+    //This is an indicator to remove the display of hint move.
+    userHasMakeAMoveSinceHistDisplayed = true;
+    [self removeHintMoveDisplay];
 }
 
 -(void)moveFlower:(CGPoint)originalGridPosition toGridPosition:(CGPoint)newGridPosition swipe:(UISwipeGestureRecognizer*)swipeGestureRecognizer
@@ -881,6 +902,30 @@
             }
         }
     }
+    
+    if (isGameJustStarted)
+    {
+        timeRemainingBeforeDisplayingHintMove = DURATION_BEFORE_DISPLAYING_HINT_MOVE;
+        isGameJustStarted = false;
+    }
+    
+    if (!self.isProcessingMove && !self.isProcessingMatching)
+    {
+        if (userHasMakeAMoveSinceHistDisplayed)
+        {
+            timeRemainingBeforeDisplayingHintMove -= delta;
+            
+            if (timeRemainingBeforeDisplayingHintMove <= 0)
+            {
+                userHasMakeAMoveSinceHistDisplayed = false;
+                [self displayRandomHintMove];
+            }
+        }
+        else
+            timeRemainingBeforeDisplayingHintMove = DURATION_BEFORE_DISPLAYING_HINT_MOVE;
+    }
+    else
+        timeRemainingBeforeDisplayingHintMove = DURATION_BEFORE_DISPLAYING_HINT_MOVE;
 }
 
 -(void)removeFlowerFromField:(NSArray*)arrayOfToBeRemovedFlowers
@@ -910,7 +955,7 @@
             if (flower.flowerType == ftNoFlower)
             {
                 hasEmpty = true;
-                [self rearrangeGridPosition:CGPointMake(x, y)];
+                [self rearrangeEmptyGridPosition:CGPointMake(x, y)];
             }
         }
     }
@@ -1015,7 +1060,7 @@
     isCheckingCombo = false;
 }
 
--(void)rearrangeGridPosition:(CGPoint)gridPosition
+-(void)rearrangeEmptyGridPosition:(CGPoint)gridPosition
 {
     isRearranging = true;
     int emptyCount = 0;
@@ -1160,27 +1205,27 @@
     
     bool hasMatch = false;
     
+    if ([self.currentRoundPossibleMoves count] > 0)
+        [self.currentRoundPossibleMoves removeAllObjects];
+    else
+        self.currentRoundPossibleMoves = [NSMutableArray array];
+    
     for (int x = 0; x < [self.flowerArrays count]; x++)
     {
         for (int y = 0; y < [self.flowerArrays count]; y++)
         {
-            //NSValue* value = (NSValue*)[self.flowerArrays objectAtIndex:x];
-            //CGPoint possibleMoveFlowerGridPosition = [value CGPointValue];
-            
             for (int j = 0; j < fmtMaxMoveType; j++)
             {
                 if ([self checkPossibleMatchIfGrid:ccp(x, y) moveTo:(NBFlowerMoveType)j])
                 {
                     hasMatch = true;
-                    break;
+                    
+                    //Add the position to the possible moves list for later use to hint user.
+                    NSValue* value = [NSValue valueWithCGPoint:ccp(x, y)];
+                    [self.currentRoundPossibleMoves addObject:value];
                 }
             }
-            
-            if (hasMatch) break;
         }
-        
-        if (hasMatch) break;
-        //[self.potentialNextMoveHasMatchGrids removeObjectAtIndex:i--];
     }
     
     [self unlockField];
@@ -1188,7 +1233,10 @@
     if (hasMatch)
         DLog(@"found possible move");
     else
+    {
         DLog(@"No possible move found");
+        [self invokeRearrangeFieldDueToNPossibleMove];
+    }
     
     return hasMatch;
 }
@@ -1235,4 +1283,163 @@
     return hasMatch;
 }
 
+-(void)invokeRearrangeFieldDueToNPossibleMove
+{
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    CCLabelTTF* noMovesLabel = [CCLabelTTF labelWithString:@"Rearranging Shop..." dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Marker Felt" fontSize:24];
+    noMovesLabel.position = ccp(0, (self.contentSize.height / 2));
+    noMovesLabel.opacity = 0;
+    
+    [self.parent addChild:noMovesLabel z:self.zOrder + 1];
+
+    CCFadeIn* fadeIn = [CCFadeIn actionWithDuration:.75f];
+    CCDelayTime* delay1 = [CCDelayTime actionWithDuration:3.50f];
+    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:.75f];
+    CCSequence* sequence = [CCSequence actions:fadeIn, delay1, fadeOut, nil];
+    [noMovesLabel runAction:sequence];
+    
+    CCMoveTo* moveTo1 = [CCMoveTo actionWithDuration:1.0f position:ccp((winSize.width / 2), (self.contentSize.height / 2))];
+    CCEaseIn* easeIn = [CCEaseIn actionWithAction:moveTo1 rate:0.75];
+    CCDelayTime* delay2 = [CCDelayTime actionWithDuration:2.25f];
+    CCMoveTo* moveTo2 = [CCMoveTo actionWithDuration:1.25f position:ccp(winSize.width + (noMovesLabel.contentSize.width / 2), (self.contentSize.height / 2))];
+    CCEaseIn* easeOut = [CCEaseIn actionWithAction:moveTo2 rate:0.75];
+    CCSequence* sequence2 = [CCSequence actions:easeIn, delay2, easeOut, nil];
+    [noMovesLabel runAction:sequence2];
+    
+    [self debloomAllFlowers];
+    [self randomizeNewPositionForAllFlower];
+    
+    CCDelayTime* delay3 = [CCDelayTime actionWithDuration:1.0f];
+    [self runAction:delay3];
+    
+    [self bloomAllFlowers];
+    [self unlockField];
+}
+
+-(void)debloomAllFlowers
+{
+    for (int x = 0; x < [self.flowerArrays count]; x++)
+    {
+        NSMutableArray* flowerArrayOnGridX = [self.flowerArrays objectAtIndex:x];
+        
+        for (int y = 0; y < [flowerArrayOnGridX count]; y++)
+        {
+            NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
+            [flower debloomToHide];
+        }
+    }
+}
+
+-(void)bloomAllFlowers
+{
+    for (int x = 0; x < [self.flowerArrays count]; x++)
+    {
+        NSMutableArray* flowerArrayOnGridX = [self.flowerArrays objectAtIndex:x];
+        
+        for (int y = 0; y < [flowerArrayOnGridX count]; y++)
+        {
+            NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
+            [flower bloomToShow];
+        }
+    }
+}
+
+-(void)randomizeNewPositionForAllFlower
+{
+    virtualRandomNumberArray = [NBFieldRandomArray arrayWithFieldHorizontalCount:self.horizontalTileCount andVerticalCount:self.verticalTileCount];
+    
+    //Prepare virtual array to store new position
+    NSMutableArray* virtualArrayX = [NSMutableArray arrayWithCapacity:self.horizontalTileCount];
+    
+    for (int x = 0; x < self.horizontalTileCount; x++)
+    {
+        NSMutableArray* virtualArrayY = [NSMutableArray arrayWithCapacity:self.verticalTileCount];
+        [virtualArrayX addObject:virtualArrayY];
+    }
+    
+    //Start randomizing
+    for (int x = 0; x < [self.flowerArrays count]; x++)
+    {
+        NSMutableArray* flowerArrayOnGridX = [self.flowerArrays objectAtIndex:x];
+        
+        for (int y = 0; y < [flowerArrayOnGridX count]; y++)
+        {
+            NBFlower* flower = (NBFlower*)[flowerArrayOnGridX objectAtIndex:y];
+            CGPoint newPosition = CGPointZero;
+            
+            if (flower.isMovableDuringRearrangingShop)
+            {
+                newPosition = [virtualRandomNumberArray getNewRandomLocation];
+                
+                if (newPosition.x == -1 && newPosition.y == -1)
+                {
+                    //No more remaining slot
+                    break;
+                }
+                
+                [flower changeToGrid:newPosition];
+                
+                NSMutableArray* verticalArray = [virtualArrayX objectAtIndex:newPosition.x];
+                
+                if ([verticalArray count] == 0)
+                    [verticalArray addObject:flower];
+                else
+                {
+                    bool useAdd = false;
+                    int i;
+                    
+                    for (i = 0; i < [verticalArray count]; i++)
+                    {
+                        NBFlower* otherFlower = (NBFlower*)[verticalArray objectAtIndex:i];
+                        if (newPosition.y < otherFlower.gridPosition.y)
+                        {
+                            useAdd = false;
+                            break;
+                        }
+                        else
+                            useAdd = true;
+                    }
+                    
+                    if (useAdd)
+                        [verticalArray addObject:flower];
+                    else
+                        [verticalArray insertObject:flower atIndex:i];
+                }
+            }
+        
+            [virtualRandomNumberArray utilizeGrid:newPosition];
+        }
+    }
+    
+    self.flowerArrays = virtualArrayX;
+    [NBFlower assignFlowerField:self.flowerArrays];
+}
+
+-(void)rearrangeGridPosition
+{
+    [self lockField];
+    
+    
+    
+    [self unlockField];
+}
+
+-(void)displayRandomHintMove
+{
+    if ([self.currentRoundPossibleMoves count] == 0) return;
+    
+    int randomIndex = arc4random_uniform([self.currentRoundPossibleMoves count]);
+    NSValue* value = [self.currentRoundPossibleMoves objectAtIndex:randomIndex];
+    currentlyShownHintMoveGridPosition = [value CGPointValue];
+    NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:currentlyShownHintMoveGridPosition.x] objectAtIndex:currentlyShownHintMoveGridPosition.y];
+    [flower toggleBlink:true];
+}
+
+-(void)removeHintMoveDisplay
+{
+    NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:currentlyShownHintMoveGridPosition.x] objectAtIndex:currentlyShownHintMoveGridPosition.y];
+    [flower toggleBlink:false];
+    currentlyShownHintMoveGridPosition = CGPointZero;
+}
 @end

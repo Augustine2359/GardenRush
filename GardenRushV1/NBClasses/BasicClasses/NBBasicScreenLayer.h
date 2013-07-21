@@ -14,6 +14,7 @@
 typedef enum
 {
     TargetSceneINVALID = 0,
+    TargetSceneMain,
     TargetSceneFirst,
     TargetSceneSecond,
     TargetScenePreGame,
