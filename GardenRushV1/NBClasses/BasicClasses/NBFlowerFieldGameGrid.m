@@ -1129,9 +1129,16 @@
     
     for (NBCustomer* customer in gameGUI.customersArray)
     {
-        if (customer.flowerRequest.bouquetType == bouquetType)
-        {
-            return customer;
+//        if (customer.flowerRequest.bouquetType == bouquetType)
+//        {
+//            return customer;
+//        }
+        
+        CCArray* req = customer.request;
+        for (NBBouquet* flower in req) {
+            if (flower.bouquetType == bouquetType) {
+                return customer;
+            }
         }
     }
     
@@ -1159,7 +1166,7 @@
             index++;
         }
         
-        [bouquet performCustomerFulfillingScoringAtCustomerPosition:fulfilledCustomer.flowerRequest.position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
+        [bouquet performCustomerFulfillingScoringAtCustomerPosition:fulfilledCustomer./*.*/position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
     }
     else
     {
@@ -1178,7 +1185,9 @@
 -(void)onBouquetReachedCustomer:(NSNumber*)customerIndex bouquet:(NBBouquet*)bouquet
 {
     NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
-    [gameGUI doFulfillCustomer:[customerIndex intValue] flowerScore:0];
+//    [gameGUI doFulfillCustomer:[customerIndex intValue] flowerScore:0];
+    //To Romy pls change flowerIndex
+    [gameGUI doFulfillCustomer:[customerIndex intValue] flowerIndex:0 flowerScore:0];
     
     [self removeChild:bouquet cleanup:YES];
 }

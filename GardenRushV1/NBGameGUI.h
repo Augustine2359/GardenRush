@@ -49,7 +49,7 @@
 +(CGPoint)getScorePosition;
 -(void)update:(ccTime)delta;
 -(void)doAddScore:(int)amount;
--(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore; //Index is 0, 1, 2
+-(void)doFulfillCustomer:(int)customerIndex flowerIndex:(int)flowerIndex flowerScore:(int)flowerScore; //Index is 0, 1, 2
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;

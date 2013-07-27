@@ -17,15 +17,19 @@
     float initialWaitingTime, currentWaitingTime;
     int selfIndex;
     
-    CCArray* requests;
+//    CCArray* requests;
 }
 
-@property (nonatomic, retain) NBBouquet* flowerRequest;
+@property (nonatomic, retain) CCArray* request;
+//@property (nonatomic, retain) NBBouquet* flowerRequest;
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 
 -(id)initWithIndex:(int)index requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime;
 -(void)update:(ccTime)delta;
 -(void)doCustomerLeave;
+-(void)pauseWaitingTime;
+-(void)resumeWaitingTime;
+-(CCArray*)getRequestArray;
 
 @end
