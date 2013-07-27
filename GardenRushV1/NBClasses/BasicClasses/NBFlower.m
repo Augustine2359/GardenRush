@@ -39,6 +39,19 @@ static int difficultyLevel = 1;
     return flower;
 }
 
++(id)bloomFlower:(NBFlowerType)flowerType OnGridPosition:(CGPoint)gridPosition
+{
+    NBFlower* flower = [[NBFlower alloc] initWithFlowerType:flowerType onGridPosition:gridPosition show:true];
+    flower.flowerImage.scale = 0;
+    CCScaleTo* scaleTo = [CCScaleTo actionWithDuration:0.75f scaleX:FLOWERSIZE_WIDTH / flower.flowerImage.contentSize.width scaleY:FLOWERSIZE_HEIGHT / flower.flowerImage.contentSize.height];
+    [flower.flowerImage runAction:scaleTo];
+    
+    CCRotateBy* rotateBy = [CCRotateBy actionWithDuration:0.75f angle:360];
+    [flower.flowerImage runAction:rotateBy];
+    
+    return flower;
+}
+
 +(id)createNewFlower:(NBFlowerType)flowertype onGridPosition:(CGPoint)gridPosition show:(bool)show
 {
     NBFlower* flower = [[NBFlower alloc] initWithFlowerType:flowertype onGridPosition:gridPosition show:show];
@@ -128,57 +141,77 @@ static int difficultyLevel = 1;
                     //self.flowerImage.opacity = 0;
                     self.flowerImage.color = ccWHITE;
                     self.isMovableDuringRearrangingShop = false;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                     
                 case ftRedFlower:
-                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower04.png"];
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower1_60x60.png"];
                     //self.flowerImage.color = ccRED;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                 
                 case ftYellowFlower:
-                    self.flowerImage.color = ccYELLOW;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower2_60x60.png"];
+                    //self.flowerImage.color = ccYELLOW;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                 
                 case ftGreenFlower:
-                    self.flowerImage.color = ccGREEN;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower3_60x60.png"];
+                    //self.flowerImage.color = ccGREEN;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                     
                 case ftBlueFlower:
-                    self.flowerImage.color = ccBLUE;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower4_60x60.png"];
+                    //self.flowerImage.color = ccBLUE;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                 
                 case ftBlackFlower:
                     self.flowerImage.color = ccBLACK;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                     
                 case ftWhiteFlower:
                     self.flowerImage.color = ccWHITE;
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                 
                 case ftPurpleFlower:
                     self.flowerImage.color = ccc3(106, 90, 205);
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                     
                 case ftCyanFlower:
                     self.flowerImage.color = ccc3(0, 255, 255);
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                 
                 case ftBisqueFlower:
                     self.flowerImage.color = ccc3(139, 125, 107);
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
                     break;
                     
                 case ftAquamarineFlower:
                     self.flowerImage.color = ccc3(127, 255, 212);
                     self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstNormalFlower;
+                    break;
+               
+                case ftSpecialWildFlower:
+                    self.flowerImage.color = ccRED;
+                    self.isMovableDuringRearrangingShop = true;
+                    self.flowerSubType = fstSpecialFlower;
                     break;
                     
                 default:
@@ -195,22 +228,28 @@ static int difficultyLevel = 1;
                 isBloomed = true;
             
             self.flowerType = flowerType;
-            self.gridPosition = gridPosition;
-            self.flowerImage.anchorPoint = ccp(0.5, 0.5);
-            self.position = [NBFlower convertFieldGridPositionToActualPixel:gridPosition];
-            self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
-            self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
-            [self setContentSize:CGSizeMake(FLOWERSIZE_WIDTH, FLOWERSIZE_HEIGHT)];
-            [self addChild:self.flowerImage];
-            [flowerFieldLayer addChild:self];
+            self.isSpecialFlower = NO;
+            [self initializeOnGridPosition:gridPosition];
         }
-        
-        flowerCount++;
-        
-        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
     }
     
     return self;
+}
+
+-(void)initializeOnGridPosition:(CGPoint)gridPosition
+{
+    self.gridPosition = gridPosition;
+    self.flowerImage.anchorPoint = ccp(0.5, 0.5);
+    self.position = [NBFlower convertFieldGridPositionToActualPixel:gridPosition];
+    self.flowerImage.scaleX = FLOWERSIZE_WIDTH / self.flowerImage.contentSize.width;
+    self.flowerImage.scaleY = FLOWERSIZE_HEIGHT / self.flowerImage.contentSize.height;
+    [self setContentSize:CGSizeMake(FLOWERSIZE_WIDTH, FLOWERSIZE_HEIGHT)];
+    [self addChild:self.flowerImage];
+    [flowerFieldLayer addChild:self];
+    
+    flowerCount++;
+    
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 -(void)dealloc

@@ -10,10 +10,11 @@
 #import "cocos2d.h"
 #import "NBBouquet.h"
 
+/*Parameter*/
 #define FLOWERSIZE_WIDTH 30
 #define FLOWERSIZE_HEIGHT 30
 #define FIELD_FLOWER_GAP_WIDTH 4
-#define FLOWER_MOVE_DURATION 0.4f
+#define FLOWER_MOVE_DURATION 0.2f
 #define MAX_DIFFICULTY_LEVEL 10
 
 #define TAG_ID_BLINK 1
@@ -43,8 +44,15 @@ typedef enum
     ftCyanFlower,
     ftBisqueFlower,
     ftAquamarineFlower,
-    ftMaxFlower
+    ftMaxFlower,
+    ftSpecialWildFlower
 } NBFlowerType;
+
+typedef enum
+{
+    fstNormalFlower = 0,
+    fstSpecialFlower
+} NBFlowerSubType;
 
 typedef enum
 {
@@ -64,6 +72,7 @@ typedef enum
 +(id)createRandomFlowerOnGridPosition:(CGPoint)gridPosition show:(bool)show;
 +(id)createVirtualFlower;
 +(id)bloomRandomFlowerOnGridPosition:(CGPoint)gridPosition;
++(id)bloomFlower:(NBFlowerType)flowerType OnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
 +(void)assignFieldContentSize:(CGSize)contentSize;
@@ -83,11 +92,13 @@ typedef enum
 
 @property (nonatomic, retain) CCSprite* flowerImage;
 @property (nonatomic, assign) NBFlowerType flowerType;
+@property (nonatomic, assign) NBFlowerSubType flowerSubType;
 @property (nonatomic, assign) CGPoint gridPosition;
 @property (nonatomic, assign) bool isMarkedMatched;
 @property (nonatomic, assign) bool isMoveCompleted;
 @property (nonatomic, assign) NBFlowerMatchType matchType;
 @property (nonatomic, assign) NBBouquetType bouquetType;
 @property (nonatomic, assign) BOOL isMovableDuringRearrangingShop;
+@property (nonatomic, assign) BOOL isSpecialFlower;
 
 @end
