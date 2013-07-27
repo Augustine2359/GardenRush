@@ -85,7 +85,7 @@
         gkHelper.delegate = self;
         [gkHelper authenticateLocalPlayer];
 
-        [NBDataManager assignDifficulty:3];
+        [NBDataManager assignDifficulty:2];
         
         [self doPetalsFalling];
 	}

@@ -106,6 +106,9 @@ bool isPaused = false;
     [scoreLabel setPosition:ccp(GUIFrame.boundingBox.size.width*0.8, GUIFrame.position.y)];
     [self addChild:scoreLabel];
     
+    
+    scorePosition = scoreLabel.position;
+    
     //Testing only 
 //    id delay = [CCDelayTime actionWithDuration:2];
 //    NSNumber* temp = [NSNumber numberWithInt:100];
