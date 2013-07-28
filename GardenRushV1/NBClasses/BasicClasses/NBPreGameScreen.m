@@ -87,22 +87,46 @@
     [self addChild:energyLabel];
     
     //3 Items
+    CCSprite* item0Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    [item0Sprite setScale:4];
+    [item0Sprite setPosition:ccp(screenSize.width*0.25, screenSize.height*0.6)];
+    [self addChild:item0Sprite];
+    
+    item0Quantity = 0;
+    item0QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item0Quantity] fontName:@"Marker Felt" fontSize:20];
+    [item0QuantityLabel setPosition:ccp(item0Sprite.position.x+item0Sprite.boundingBox.size.width*0.5, item0Sprite.position.y-item0Sprite.boundingBox.size.height*0.5)];
+    [self addChild:item0QuantityLabel];
+    
     CCSprite* item1Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
     [item1Sprite setScale:4];
-    [item1Sprite setPosition:ccp(screenSize.width*0.25, screenSize.height*0.6)];
+    [item1Sprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.6)];
     [self addChild:item1Sprite];
+    
+    item1Quantity = 0;
+    item1QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item1Quantity] fontName:@"Marker Felt" fontSize:20];
+    [item1QuantityLabel setPosition:ccp(item1Sprite.position.x+item1Sprite.boundingBox.size.width*0.5, item1Sprite.position.y-item1Sprite.boundingBox.size.height*0.5)];
+    [self addChild:item1QuantityLabel];
     
     CCSprite* item2Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
     [item2Sprite setScale:4];
-    [item2Sprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.6)];
+    [item2Sprite setPosition:ccp(screenSize.width*0.75, screenSize.height*0.6)];
     [self addChild:item2Sprite];
     
-    CCSprite* item3Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-    [item3Sprite setScale:4];
-    [item3Sprite setPosition:ccp(screenSize.width*0.75, screenSize.height*0.6)];
-    [self addChild:item3Sprite];
+    item2Quantity = 0;
+    item2QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item2Quantity] fontName:@"Marker Felt" fontSize:20];
+    [item2QuantityLabel setPosition:ccp(item2Sprite.position.x+item2Sprite.boundingBox.size.width*0.5, item2Sprite.position.y-item2Sprite.boundingBox.size.height*0.5)];
+    [self addChild:item2QuantityLabel];
     
     //3 Buy Buttons
+    CCSprite* buyItem0ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
+    CCSprite* buyItem0ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
+    CCMenuItemSprite* buyItem0Button = [CCMenuItemSprite itemWithNormalSprite:buyItem0ButtonNormal selectedSprite:buyItem0ButtonSelected target:self selector:@selector(goToAppStore)];
+    
+    [buyItem0Button setScaleX:4];
+    [buyItem0Button setScaleY:3];
+    [buyItem0Button setPosition:ccp(item0Sprite.position.x, item0Sprite.position.y-buyItem0Button.boundingBox.size.height*2)];
+//    [buyItem0Button setTag:0];
+
     CCSprite* buyItem1ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCSprite* buyItem1ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCMenuItemSprite* buyItem1Button = [CCMenuItemSprite itemWithNormalSprite:buyItem1ButtonNormal selectedSprite:buyItem1ButtonSelected target:self selector:@selector(goToAppStore)];
@@ -110,8 +134,8 @@
     [buyItem1Button setScaleX:4];
     [buyItem1Button setScaleY:3];
     [buyItem1Button setPosition:ccp(item1Sprite.position.x, item1Sprite.position.y-buyItem1Button.boundingBox.size.height*2)];
-    [self addChild:buyItem1Button];
-
+//    [buyItem1Button setTag:1];
+    
     CCSprite* buyItem2ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCSprite* buyItem2ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCMenuItemSprite* buyItem2Button = [CCMenuItemSprite itemWithNormalSprite:buyItem2ButtonNormal selectedSprite:buyItem2ButtonSelected target:self selector:@selector(goToAppStore)];
@@ -119,19 +143,20 @@
     [buyItem2Button setScaleX:4];
     [buyItem2Button setScaleY:3];
     [buyItem2Button setPosition:ccp(item2Sprite.position.x, item2Sprite.position.y-buyItem2Button.boundingBox.size.height*2)];
-    [self addChild:buyItem2Button];
-    
-    CCSprite* buyItem3ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-    CCSprite* buyItem3ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-    CCMenuItemSprite* buyItem3Button = [CCMenuItemSprite itemWithNormalSprite:buyItem3ButtonNormal selectedSprite:buyItem3ButtonSelected target:self selector:@selector(goToAppStore)];
-    
-    [buyItem3Button setScaleX:4];
-    [buyItem3Button setScaleY:3];
-    [buyItem3Button setPosition:ccp(item3Sprite.position.x, item3Sprite.position.y-buyItem3Button.boundingBox.size.height*2)];
-    [self addChild:buyItem3Button];
+//    [buyItem2Button setTag:2];
 
-//    CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
-//    [self addChild:GUIMenu];
+    //Play Button
+    CCSprite* playButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCSprite* playButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCMenuItemSprite* playButton = [CCMenuItemSprite itemWithNormalSprite:playButtonNormal selectedSprite:playButtonSelected target:self selector:@selector(goToGame)];
+    
+    [playButton setScaleX:12];
+    [playButton setScaleY:5];
+    [playButton setPosition:ccp(buyItem2Button.position.x, buyItem2Button.position.y-buyItem2Button.boundingBox.size.height*2)];
+    
+    CCMenu* GUIMenu = [CCMenu menuWithItems:buyItem0Button, buyItem1Button, buyItem2Button, playButton, nil];
+    [GUIMenu setPosition:ccp(-screenSize.width*0.5, -screenSize.height*0.5)];
+    [self addChild:GUIMenu];
 }
 
 #pragma mark - NBSpecialPowerButtonsContainerDelegate
@@ -157,7 +182,7 @@
   }
 }
 
--(void)goToAppStore{
+-(void)goToAppStore/*:(id)buyButton*/{
     CCLOG(@"Open App Store!");
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
@@ -169,6 +194,34 @@
     CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
     [messageLabel setPosition:imageSprite.position];
     [self addChild:messageLabel z:-1];
+    
+    //Temp test
+//    CCMenuItemSprite* button = (CCMenuItemSprite*)buyButton;
+//    switch (button.tag) {
+//        case 0:
+//            item0Quantity++;
+//            [item0QuantityLabel setString:[NSString stringWithFormat:@"%i", item0Quantity]];
+//            break;
+//            
+//        case 1:
+//            item1Quantity++;
+//            [item1QuantityLabel setString:[NSString stringWithFormat:@"%i", item1Quantity]];
+//            break;
+//            
+//        case 2:
+//            item2Quantity++;
+//            [item2QuantityLabel setString:[NSString stringWithFormat:@"%i", item2Quantity]];
+//            break;
+//            
+//        default:
+//            break;
+//    }
+}
+
+-(void)goToGame{
+    CCLOG(@"Start Game!");
+    NBBasicScreenLayer* parentLayer = (NBBasicScreenLayer*)[self parent];
+    [parentLayer changeToScene:TargetSceneSecond];
 }
 
 @end
