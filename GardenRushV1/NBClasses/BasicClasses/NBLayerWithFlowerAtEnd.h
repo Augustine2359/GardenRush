@@ -8,6 +8,15 @@
 
 #import "CCLayer.h"
 
+typedef enum
+{
+    fptNoFlower = 0,
+	fptFlowerPetal1,
+    fptFlowerPetal2,
+    fptFlowerPetal3,
+    fptMaxFlowerPetal
+} NBFlowerPetalType;
+
 @interface NBLayerWithFlowerAtEnd : CCLayerColor
 
 @end

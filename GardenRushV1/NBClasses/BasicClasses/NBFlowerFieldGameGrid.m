@@ -40,21 +40,21 @@
     
     if (self = [super init])
     {
-        isFlowerFieldExpanded = true;
+        isFlowerFieldExpanded = false;
         
         if (isFlowerFieldExpanded)
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoardBgB_640x640.png"];
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBrdBgBMockCenter_640x640-hd.png"];
             [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 2) + 1, (FIELD_FLOWER_GAP_WIDTH * 2) + 1)];
         }
         else
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoardBgA_640x640.png"];
-            [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_WIDTH / 2), (FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_HEIGHT / 2))];
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBrdBgAMockCenter_640x640-hd.png"];
+            [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_WIDTH / 2) - 1, (FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_HEIGHT / 2) - 1)];
         }
         
         [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * self.horizontalTileCount) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * self.verticalTileCount) + FIELD_FLOWER_GAP_WIDTH))];
@@ -184,7 +184,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -198,7 +198,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -218,7 +218,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -232,7 +232,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -277,7 +277,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -300,7 +300,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -329,7 +329,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -352,7 +352,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -556,7 +556,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
         {
             NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
             [array addObject:matchedPosition];
@@ -574,7 +574,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
         {
             NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
             [array addObject:matchedPosition];
@@ -604,7 +604,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
         {
             NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
             [array addObject:matchedPosition];
@@ -622,7 +622,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
         {
             NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
             [array addObject:matchedPosition];
@@ -755,6 +755,9 @@
             case btSevenOfAKind:
                 DLog(@"found seven of a kind on selected flower");
                 hasMatch = true;
+                
+                [self performSpecialMoveSevenMatch:arrayOfMatchedFlowers withOriginalGridPosition:self.selectedFlowerGrid];
+                
                 break;
             default:
                 break;
@@ -1483,6 +1486,43 @@
     [[self.flowerArrays objectAtIndex:originalGridPosition.x] setObject:wildCardFlower atIndex:originalGridPosition.y];
     [self removeChild:originalFlower cleanup:YES];
     [originalFlower release];
-    [wildCardFlower bloomToShow];
+}
+
+-(void)performSpecialMoveSevenMatch:(NSMutableArray*)arrayOfMatchedFlowers withOriginalGridPosition:(CGPoint)originalGridPosition
+{
+    NBFlower* originalFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:originalGridPosition.x] objectAtIndex:originalGridPosition.y];
+    
+    for (int x = 0; x < self.horizontalTileCount; x++)
+    {
+        for (int y = 0; y < self.verticalTileCount; y++)
+        {
+            bool isExcluded = false;
+            
+            for (NSValue* value in arrayOfMatchedFlowers)
+            {
+                CGPoint flowerPosition = [value CGPointValue];
+                if (x == flowerPosition.x && y == flowerPosition.y)
+                {
+                    isExcluded = true;
+                    break;
+                }
+            }
+            
+            if (!isExcluded)
+            {
+                NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
+                
+                if (flower.flowerType == originalFlower.flowerType)
+                {
+                    NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:x] objectAtIndex:y];
+                    [flower debloomToHide];
+                    NBFlower* wildCardFlower = [NBFlower bloomFlower:ftSpecialWildFlower OnGridPosition:ccp(x, y)];
+                    [[self.flowerArrays objectAtIndex:x] setObject:wildCardFlower atIndex:y];
+                    [self removeChild:flower cleanup:YES];
+                    [flower release];
+                }
+            }
+        }
+    }
 }
 @end
