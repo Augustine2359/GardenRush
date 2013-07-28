@@ -40,7 +40,7 @@
     
     if (self = [super init])
     {
-        isFlowerFieldExpanded = false;
+        isFlowerFieldExpanded = true;
         
         if (isFlowerFieldExpanded)
         {
@@ -59,7 +59,7 @@
         
         [self setContentSize:CGSizeMake((((FLOWERSIZE_WIDTH + FIELD_FLOWER_GAP_WIDTH) * self.horizontalTileCount) + FIELD_FLOWER_GAP_WIDTH), (((FLOWERSIZE_HEIGHT + FIELD_FLOWER_GAP_WIDTH) * self.verticalTileCount) + FIELD_FLOWER_GAP_WIDTH))];
         self.anchorPoint = ccp(0, 0);
-        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_Y_POSITION);
+        self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_POSITION_ADJUSTMENT);
         self.position = ccp(0, 0);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
         
@@ -184,7 +184,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -198,7 +198,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPosition.y];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -218,7 +218,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -232,7 +232,7 @@
         
         NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPosition.x] objectAtIndex:gridY];
         if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -277,7 +277,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -300,7 +300,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountHorizontal++;
         else
             break;
@@ -329,7 +329,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -352,7 +352,7 @@
         }
         
         if (nextFlower.isMarkedMatched) break;
-        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || thisFlower.flowerType == ftSpecialWildFlower)
+        if (thisFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
             matchCountVertical++;
         else
             break;
@@ -369,6 +369,152 @@
         return true;
     else
         return false;
+}
+
+-(NSMutableArray*)checkLocalMatchFlowersAndAddToMatchSlots:(CGPoint)gridPoint
+{
+    NSMutableArray* array = [NSMutableArray array];
+    
+    int matchCount = 1; //include the flower itself
+    int matchCountHorizontal = 1;
+    int matchCountVertical = 1;
+    bool matchDetectedOnHorizontal = false;
+    bool matchDetectedOnVertical = false;
+    
+    NBFlower* localFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridPoint.y];
+    //Add the original flower at the first position. Later on if any match, all other flowers move to this flower's position
+    NSValue* matchedPosition = [NSValue valueWithCGPoint:localFlower.gridPosition];
+    [array addObject:matchedPosition];
+    
+    //check to the right
+    for (int i = 1; i < 5; i++)
+    {
+        int gridX = gridPoint.x + i;
+        if (gridX >= self.horizontalTileCount) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
+        if (nextFlower.isMarkedMatched) break;
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        {
+            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
+            [array addObject:matchedPosition];
+            matchCountHorizontal++;
+        }
+        else
+            break;
+    }
+    
+    //check to the left
+    for (int i = 1; i < 5; i++)
+    {
+        int gridX = gridPoint.x - i;
+        if (gridX < 0) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
+        if (nextFlower.isMarkedMatched) break;
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        {
+            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
+            [array addObject:matchedPosition];
+            matchCountHorizontal++;
+        }
+        else
+            break;
+    }
+    
+    if (matchCountHorizontal < 3)
+    {
+        for (int i = 0; i < matchCountHorizontal - 1; i++)
+        {
+            [array removeLastObject];
+        }
+        
+        matchCountHorizontal = 1; //If match count is not even three, dont add to the total match count and make 1
+    }
+    else
+        matchDetectedOnHorizontal = true; //if have 3 or more, mark as match found horizontally
+    
+    //check to the above
+    for (int i = 1; i < 5; i++)
+    {
+        int gridY = gridPoint.y + i;
+        if (gridY >= self.verticalTileCount) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
+        if (nextFlower.isMarkedMatched) break;
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        {
+            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
+            [array addObject:matchedPosition];
+            matchCountVertical++;
+        }
+        else
+            break;
+    }
+    
+    //check to the bottom
+    for (int i = 1; i < 5; i++)
+    {
+        int gridY = gridPoint.y - i;
+        if (gridY < 0) break;
+        
+        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
+        if (nextFlower.isMarkedMatched) break;
+        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower)
+        {
+            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
+            [array addObject:matchedPosition];
+            matchCountVertical++;
+        }
+        else
+            break;
+    }
+    
+    if (matchCountVertical < 3)
+    {
+        for (int i = 0; i < matchCountVertical - 1; i++)
+        {
+            [array removeLastObject];
+        }
+        
+        matchCountVertical = 1; //If match count is not even three, dont add to the total match count and make 1
+    }
+    else
+        matchDetectedOnVertical = true; //if have 3 or more, mark as match found vertically as well
+    
+    matchCount = matchCountHorizontal + matchCountVertical - 1; //minus 1 to remove duplicate match with self when matching vertically
+    
+    if (matchCount >= 3)
+    {
+        NBBouquetType bouquetType = btNoMatch;
+        
+        if (matchCount == 3) bouquetType = btThreeOfAKind;
+        if (matchCount == 4) bouquetType = btFourOfAKind;
+        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) bouquetType = btCornerFiveOfAKind;
+        if (matchCount == 5) bouquetType = btFiveOfAKind;
+        if (matchCount == 6) bouquetType = btSixOfAKind;
+        if (matchCount >= 7) bouquetType = btSevenOfAKind;
+        
+        for (int i = 0; i < [array count]; i++)
+        {
+            NSValue* value = [array objectAtIndex:i];
+            CGPoint flowerPosition = [value CGPointValue];
+            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
+            flower.bouquetType = bouquetType;
+            flower.isMarkedMatched = true;
+        }
+        
+        [self.arrayOfMatchedFlowerSlots addObject:array];
+        //[self processRemoveMatchedFlowerOnArray:array];
+        
+        return array;
+    }
+    else
+    {
+        //Otherwise
+        [array removeAllObjects];
+        return nil;
+    }
 }
 
 -(CGPoint)isTouchingWhichGrid:(CGPoint)touchLocation
@@ -419,7 +565,7 @@
     //need to flip because the coordinate systems are flipped
     touchLocation.y = [[CCDirector sharedDirector] winSize].height - touchLocation.y;
     
-    touchLocation = ccp(touchLocation.x - (winSize.width / 2 - (self.contentSize.width / 2)), touchLocation.y - FIELD_Y_POSITION);
+    touchLocation = ccp(touchLocation.x - (winSize.width / 2 - (self.contentSize.width / 2)) - FIELD_POSITION_ADJUSTMENT, touchLocation.y - [NBFlower getStartingPosition].y + FIELD_POSITION_ADJUSTMENT);
     
     CGPoint gridPositionBeingTouch = [self isTouchingWhichGrid:touchLocation];
     DLog(@"Flower Index (%f, %f) is touched.", gridPositionBeingTouch.x, gridPositionBeingTouch.y);
@@ -533,152 +679,6 @@
     originalFlower.gridPosition = newGridPosition;
 }
 
--(NSMutableArray*)checkLocalMatchFlowersAndAddToMatchSlots:(CGPoint)gridPoint
-{
-    NSMutableArray* array = [NSMutableArray array];
-    
-    int matchCount = 1; //include the flower itself
-    int matchCountHorizontal = 1;
-    int matchCountVertical = 1;
-    bool matchDetectedOnHorizontal = false;
-    bool matchDetectedOnVertical = false;
-    
-    NBFlower* localFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridPoint.y];
-    //Add the original flower at the first position. Later on if any match, all other flowers move to this flower's position
-    NSValue* matchedPosition = [NSValue valueWithCGPoint:localFlower.gridPosition];
-    [array addObject:matchedPosition];
-    
-    //check to the right
-    for (int i = 1; i < 5; i++)
-    {
-        int gridX = gridPoint.x + i;
-        if (gridX >= self.horizontalTileCount) break;
-        
-        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
-        if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
-        {
-            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
-            [array addObject:matchedPosition];
-            matchCountHorizontal++;
-        }
-        else
-            break;
-    }
-    
-    //check to the left
-    for (int i = 1; i < 5; i++)
-    {
-        int gridX = gridPoint.x - i;
-        if (gridX < 0) break;
-        
-        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridX] objectAtIndex:gridPoint.y];
-        if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
-        {
-            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
-            [array addObject:matchedPosition];
-            matchCountHorizontal++;
-        }
-        else
-            break;
-    }
-    
-    if (matchCountHorizontal < 3)
-    {
-        for (int i = 0; i < matchCountHorizontal - 1; i++)
-        {
-            [array removeLastObject];
-        }
-        
-        matchCountHorizontal = 1; //If match count is not even three, dont add to the total match count and make 1
-    }
-    else
-        matchDetectedOnHorizontal = true; //if have 3 or more, mark as match found horizontally
-    
-    //check to the above
-    for (int i = 1; i < 5; i++)
-    {
-        int gridY = gridPoint.y + i;
-        if (gridY >= self.verticalTileCount) break;
-        
-        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
-        if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
-        {
-            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
-            [array addObject:matchedPosition];
-            matchCountVertical++;
-        }
-        else
-            break;
-    }
-    
-    //check to the bottom
-    for (int i = 1; i < 5; i++)
-    {
-        int gridY = gridPoint.y - i;
-        if (gridY < 0) break;
-        
-        NBFlower* nextFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:gridPoint.x] objectAtIndex:gridY];
-        if (nextFlower.isMarkedMatched) break;
-        if (localFlower.flowerType == nextFlower.flowerType || nextFlower.flowerType == ftSpecialWildFlower || localFlower.flowerType == ftSpecialWildFlower)
-        {
-            NSValue* matchedPosition = [NSValue valueWithCGPoint:nextFlower.gridPosition];
-            [array addObject:matchedPosition];
-            matchCountVertical++;
-        }
-        else
-            break;
-    }
-    
-    if (matchCountVertical < 3)
-    {
-        for (int i = 0; i < matchCountVertical - 1; i++)
-        {
-            [array removeLastObject];
-        }
-        
-        matchCountVertical = 1; //If match count is not even three, dont add to the total match count and make 1
-    }
-    else
-        matchDetectedOnVertical = true; //if have 3 or more, mark as match found vertically as well
-    
-    matchCount = matchCountHorizontal + matchCountVertical - 1; //minus 1 to remove duplicate match with self when matching vertically
-    
-    if (matchCount >= 3)
-    {
-        NBBouquetType bouquetType = btNoMatch;
-        
-        if (matchCount == 3) bouquetType = btThreeOfAKind;
-        if (matchCount == 4) bouquetType = btFourOfAKind;
-        if ((matchCount == 5) && (matchDetectedOnHorizontal && matchDetectedOnVertical)) bouquetType = btCornerFiveOfAKind;
-        if (matchCount == 5) bouquetType = btFiveOfAKind;
-        if (matchCount == 6) bouquetType = btSixOfAKind;
-        if (matchCount >= 7) bouquetType = btSevenOfAKind;
-    
-        for (int i = 0; i < [array count]; i++)
-        {
-            NSValue* value = [array objectAtIndex:i];
-            CGPoint flowerPosition = [value CGPointValue];
-            NBFlower* flower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerPosition.x] objectAtIndex:flowerPosition.y];
-            flower.bouquetType = bouquetType;
-            flower.isMarkedMatched = true;
-        }
-        
-        [self.arrayOfMatchedFlowerSlots addObject:array];
-        //[self processRemoveMatchedFlowerOnArray:array];
-        
-        return array;
-    }
-    else
-    {
-        //Otherwise
-        [array removeAllObjects];
-        return nil;
-    }
-}
-
 -(void)swapFlowerOnGrid:(CGPoint)flowerAGrid withFlowerOnGrid:(CGPoint)flowerBGrid
 {
     NBFlower* swappingFlower = (NBFlower*)[[self.flowerArrays objectAtIndex:flowerAGrid.x] objectAtIndex:flowerAGrid.y];
@@ -705,13 +705,26 @@
 -(void)onFlowerMoveCompleted
 {
     bool hasMatch = false;
+    bool selectedFlowerIsWildFlower = false;
     
     DLog("Move completed.");
+    
+    NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
+    if (selectedflower.flowerType == ftSpecialWildFlower) selectedFlowerIsWildFlower = true;
 
     [self swapFlowerOnGrid:self.selectedFlowerGrid withFlowerOnGrid:self.swappedFlowerGrid];
 
     if (!isReturningFlower)
     {
+        //If It is Wild flower, change the type to follow the flower it is swapped with
+        if (selectedFlowerIsWildFlower)
+        {
+            NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
+            NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+            
+            selectedflower.flowerType = swappedflower.flowerType;
+        }
+            
         NSMutableArray* arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
         if ([arrayOfMatchedFlowers count] > 0)
         {
@@ -728,6 +741,14 @@
             case btNoMatch:
                 DLog(@"no match on selected flower");
                 hasMatch = false;
+                
+                //revert back the Wild flower
+                if (selectedFlowerIsWildFlower)
+                {
+                    NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
+                    selectedflower.flowerType = ftSpecialWildFlower;
+                }
+                
                 break;
             case btThreeOfAKind:
                 DLog(@"found three of a kind on selected flower");

@@ -111,7 +111,7 @@
 
 -(void)gotoTestScreen
 {
-    [self changeToScene:TargetSceneFirst];
+    [self changeToScene:TargetScenePreGame];
 }
 
 -(void)goToPreGameScreen

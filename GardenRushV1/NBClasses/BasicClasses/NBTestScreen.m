@@ -62,7 +62,7 @@ NBGameGUI* test = nil;
     [self addChild:test];
     
     CGPoint scorePadPosition = [NBGameGUI getScorePosition];
-    scorePadPosition = ccp(scorePadPosition.x, scorePadPosition.y - FIELD_Y_POSITION);
+    scorePadPosition = ccp(scorePadPosition.x, scorePadPosition.y - FIELD_POSITION_ADJUSTMENT);
     [NBBouquet setScorePadPosition:scorePadPosition];
     
     self.flowerCountLabel = [CCLabelTTF labelWithString:@"" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Arial" fontSize:24];

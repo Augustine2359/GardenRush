@@ -90,6 +90,11 @@ static int difficultyLevel = 1;
     startingPosition = position;
 }
 
++(CGPoint)getStartingPosition
+{
+    return startingPosition;
+}
+
 +(void)assignDifficultyLevel:(int)level
 {
     difficultyLevel = level;

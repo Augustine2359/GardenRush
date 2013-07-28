@@ -75,6 +75,7 @@ typedef enum
 +(id)bloomFlower:(NBFlowerType)flowerType OnGridPosition:(CGPoint)gridPosition;
 +(void)assignFieldLayer:(CCNode*)layer;
 +(void)assignStartingPosition:(CGPoint)position;
++(CGPoint)getStartingPosition;
 +(void)assignFieldContentSize:(CGSize)contentSize;
 +(void)assignFlowerField:(NSMutableArray*)fieldFlowerArray;
 +(void)assignDifficultyLevel:(int)level;
