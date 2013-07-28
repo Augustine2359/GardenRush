@@ -8,6 +8,7 @@
 
 #import "NBGameGUI.h"
 #import "NBDifficultyTier.h"
+#import "NBTestScreen.h"
 
 static NBGameGUI* sharedGameGUI = nil;
 static CGPoint scorePosition = {0, 0};
@@ -185,18 +186,28 @@ bool isPaused = false;
     [additionalScoreLabels removeObjectAtIndex:0];
 }
 
--(void)doFulfillCustomer:(int)index flowerScore:(int)flowerScore{
-    if (index > [customersArray count]) {
+-(void)doFulfillCustomer:(int)customerIndex flowerIndex:(int)flowerIndex flowerScore:(int)flowerScore{
+    if (customerIndex > [customersArray count]) {
         CCLOG(@"Invalid customer index");
         return;
     }
     
-    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:index];
+    //Add score
+    NBCustomer* thatCustomer = (NBCustomer*)[customersArray objectAtIndex:customerIndex];
     int requestScore = thatCustomer.requestScore;
     int totalScore = flowerScore + requestScore;
     [self doAddScore:totalScore];
-    [thatCustomer doCustomerLeave];
-    [self doDeleteCustomer:[NSNumber numberWithInt:index]];
+    
+    //Update requests
+    NBBouquet* thatFlower = (NBBouquet*)[thatCustomer.request objectAtIndex:flowerIndex];
+    [thatFlower removeFromParentAndCleanup:YES];
+    [thatCustomer.request removeObjectAtIndex:flowerIndex];
+    
+    //Completed all requests
+    if (thatCustomer.request.count <= 0) {
+        [thatCustomer doCustomerLeave];
+        [self doDeleteCustomer:[NSNumber numberWithInt:customerIndex]];
+    }
 }
 
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/{
@@ -309,6 +320,7 @@ bool isPaused = false;
 
 -(void)doQuitGame{
     CCLOG(@"Quit Game!");
+    isPaused = NO;
     NBBasicScreenLayer* parentLayer = (NBBasicScreenLayer*)[self parent];
     [parentLayer changeToScene:TargetSceneMain];
 }

@@ -8,6 +8,10 @@
 
 #import "NBBasicScreenLayer.h"
 
-@interface NBPreGameScreen : NBBasicScreenLayer
+@interface NBPreGameScreen : NBBasicScreenLayer{
+    
+}
+
+-(void)goToAppStore;
 
 @end
