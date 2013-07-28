@@ -40,7 +40,7 @@
     
     if (self = [super init])
     {
-        isFlowerFieldExpanded = true;
+        isFlowerFieldExpanded = false;
         
         if (isFlowerFieldExpanded)
         {
