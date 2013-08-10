@@ -81,8 +81,9 @@
     [energySprite setPosition:ccp(screenSize.width*0.15, screenSize.height*0.9)];
     [self addChild:energySprite];
     
-    int energyLevel = 5;
-    CCLabelTTF* energyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"X %i", energyLevel] fontName:@"Marker Felt" fontSize:30];
+    energyLevel = 1;
+    energyMaxLevel = 5;
+    energyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"X %i", energyLevel] fontName:@"Marker Felt" fontSize:30];
     [energyLabel setPosition:ccp(energySprite.position.x+energySprite.boundingBox.size.width, energySprite.position.y)];
     [self addChild:energyLabel];
     
@@ -158,6 +159,75 @@
     CCMenu* GUIMenu = [CCMenu menuWithItems:buyItem0Button, buyItem1Button, buyItem2Button, playButton, nil];
     [GUIMenu setPosition:ccp(0, 0)];
     [self addChild:GUIMenu];
+    
+    [self doReduceEnergy:4];
+}
+
+//-(void)update:(ccTime)delta{
+//    NSDate *firstUnitDeathTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstUnitDeathTime"];
+//    if (firstUnitDeathTime == nil) {
+//        DLog(@"no dead units");
+//        return;
+//    }
+//    NSDate *currentDate = [NSDate date];
+//    CGFloat timeSinceFirstUnitDeath = [currentDate timeIntervalSinceDate:firstUnitDeathTime];
+//    CGFloat numberOfRespawnedUnits = timeSinceFirstUnitDeath/self.respawnTimePerUnit;
+//    numberOfRespawnedUnits = floorf(numberOfRespawnedUnits);
+//    firstUnitDeathTime = [NSDate dateWithTimeInterval:numberOfRespawnedUnits * self.respawnTimePerUnit sinceDate:firstUnitDeathTime];
+//    [[NSUserDefaults standardUserDefaults] setObject:firstUnitDeathTime forKey:@"firstUnitDeathTime"];
+//}
+
+-(void)doReduceEnergy:(int)reducedEnergy{
+    energyLevel -= reducedEnergy;
+    if (energyLevel < 0) {
+        energyLevel = 0;
+    }
+    
+    [self doStartEnergyTimer];
+}
+
+-(void)doStartEnergyTimer{
+    NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
+    if (energyRefillStartTime == nil){
+        energyRefillStartTime = [NSDate date];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self schedule:@selector(updateEnergyTimer) interval:1 repeat:INFINITY delay:0];
+}
+
+-(void)updateEnergyTimer{
+    NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
+    if (energyRefillStartTime == nil) {
+        DLog(@"Full energy!");
+        [self unschedule:@selector(updateEnergyTimer)];
+        return;
+    }
+    
+    NSDate *currentDate = [NSDate date];
+    CGFloat energyRefillRate = 5;
+    CGFloat timeInterval = [currentDate timeIntervalSinceDate:energyRefillStartTime];
+    CGFloat refilledLives = timeInterval/energyRefillRate;
+    refilledLives = floorf(refilledLives);
+    energyRefillStartTime = [NSDate dateWithTimeInterval:refilledLives * energyRefillRate sinceDate:energyRefillStartTime];
+    [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
+    
+    bool maxEnergy = NO;
+    energyLevel += refilledLives;
+    if (energyLevel >= energyMaxLevel) {
+        energyLevel = energyMaxLevel;
+        maxEnergy = YES;
+    }
+    
+    [energyLabel setString:[NSString stringWithFormat:@"X %i", energyLevel]];
+    
+    if(maxEnergy){
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"energyRefillStartTime"];
+        DLog(@"Full energy!");
+        [self unschedule:@selector(updateEnergyTimer)];
+        return;
+    }
 }
 
 #pragma mark - NBSpecialPowerButtonsContainerDelegate
