@@ -146,16 +146,17 @@
 //    [buyItem2Button setTag:2];
 
     //Play Button
-    CCSprite* playButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-    CCSprite* playButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    CCSprite* playButtonNormal = [CCSprite spriteWithSpriteFrameName:@"nb_playButton1_500x160_v03-hd.png"];
+    CCSprite* playButtonSelected = [CCSprite spriteWithSpriteFrameName:@"nb_playButton2_500x160_v03-hd.png"];
     CCMenuItemSprite* playButton = [CCMenuItemSprite itemWithNormalSprite:playButtonNormal selectedSprite:playButtonSelected target:self selector:@selector(goToGame)];
     
-    [playButton setScaleX:12];
-    [playButton setScaleY:5];
-    [playButton setPosition:ccp(buyItem2Button.position.x, buyItem2Button.position.y-buyItem2Button.boundingBox.size.height*2)];
+    //[playButton setScaleX:12];
+    //[playButton setScaleY:5];
+    //[playButton setPosition:ccp(buyItem2Button.position.x, buyItem2Button.position.y-buyItem2Button.boundingBox.size.height*2)];
+    [playButton setPosition:ccp(screenSize.width / 2, 100)];
     
     CCMenu* GUIMenu = [CCMenu menuWithItems:buyItem0Button, buyItem1Button, buyItem2Button, playButton, nil];
-    [GUIMenu setPosition:ccp(-screenSize.width*0.5, -screenSize.height*0.5)];
+    [GUIMenu setPosition:ccp(0, 0)];
     [self addChild:GUIMenu];
 }
 
@@ -218,10 +219,10 @@
 //    }
 }
 
--(void)goToGame{
+-(void)goToGame
+{
     CCLOG(@"Start Game!");
-    NBBasicScreenLayer* parentLayer = (NBBasicScreenLayer*)[self parent];
-    [parentLayer changeToScene:TargetSceneSecond];
+    [self changeToScene:TargetSceneFirst];
 }
 
 @end

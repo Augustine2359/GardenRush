@@ -55,16 +55,24 @@
         
         // create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Flower Frenzy" fontName:@"Papyrus" fontSize:36];
-        label.position =  ccp(size.width / 2, size.height / 2);
+        label.position =  ccp(size.width / 2, size.height * 0.75);
 		[self addChild:label z:2];
         
         CCLabelTTF* playGameLabel =[CCLabelTTF labelWithString:@"Play" dimensions:CGSizeZero hAlignment:kCCTextAlignmentCenter fontName:@"Papyrus" fontSize:24];
         CCMenuItemLabel* playGameMenu = [CCMenuItemLabel itemWithLabel:playGameLabel target:self selector:@selector(gotoTestScreen)];
         CCMenu* mainMenu = [CCMenu menuWithItems:playGameMenu, nil];
 		mainMenu.position =  ccp(size.width / 2, (size.height / 2) - 40);
-		[self addChild:mainMenu];
+		//[self addChild:mainMenu];
 		
 		[CCMenuItemFont setFontSize:28];
+        
+        CCSprite* normalPlayButton = [CCSprite spriteWithSpriteFrameName:@"NB_FlowerFrenzyMainMenuStart_194x106.png"];
+        CCSprite* selectedPlayButton = [CCSprite spriteWithSpriteFrameName:@"NB_FlowerFrenzyMainMenuStart_194x106.png"];
+        CCMenuItemSprite* playButtonMenu = [CCMenuItemSprite itemWithNormalSprite:normalPlayButton selectedSprite:selectedPlayButton target:self selector:@selector(gotoTestScreen)];
+        CCMenu* playMenu = [CCMenu menuWithItems:playButtonMenu, nil];
+        playMenu.anchorPoint = ccp(0, 0);
+        playMenu.position =  ccp(75, 230);
+		[self addChild:playMenu];
 
         [self addStandardMenuString:@"Submit Dummy Score" withSelector:@selector(submitDummyScoreForTest)];
         [self addStandardMenuString:@"View Leaderboard" withSelector:@selector(openGameCenterLeaderBoard)];

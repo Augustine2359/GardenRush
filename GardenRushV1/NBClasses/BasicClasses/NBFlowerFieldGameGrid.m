@@ -40,20 +40,20 @@
     
     if (self = [super init])
     {
-        isFlowerFieldExpanded = true;
+        isFlowerFieldExpanded = false;
         
         if (isFlowerFieldExpanded)
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBrdBgBMockCenter_640x640-hd.png"];
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoard_b_640x729-hd.png"];
             [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 2) + 1, (FIELD_FLOWER_GAP_WIDTH * 2) + 1)];
         }
         else
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBrdBgAMockCenter_640x640-hd.png"];
+            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoard_a_640x729_v02-hd.png"];
             [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_WIDTH / 2) - 1, (FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_HEIGHT / 2) - 1)];
         }
         
@@ -106,6 +106,20 @@
         
         timeRemainingBeforeComboCheck = DURATION_TO_CHECK_EMPTY_SLOT;
         timeRemainingBeforePossibleMoveCheck = DURATION_TO_CHECK_EMPTY_SLOT;
+        
+        NBActiveItem* lifeCharger = [NBActiveItem createNewItem:@"NB_Item_life_203x64.png" withTypeOf:itLifeCharger withStockAmount:1];
+        //lifeCharger.itemImage.scaleX = (winSize.width / 3) / lifeCharger.itemImage.contentSize.width;
+        //lifeCharger.itemImage.scaleY = 32 / lifeCharger.itemImage.contentSize.height;
+        NBActiveItem* timeBooster = [NBActiveItem createNewItem:@"NB_Item_time_203x64.png" withTypeOf:itCustomerWaitTimeCharger withStockAmount:1];
+        //timeBooster.itemImage.scaleX = (winSize.width / 3) / timeBooster.itemImage.contentSize.width;
+        //timeBooster.itemImage.scaleY = 32 / timeBooster.itemImage.contentSize.height;
+        NBActiveItem* scoreMultiplier = [NBActiveItem createNewItem:@"NB_Item_score_booster_203x64.png" withTypeOf:itScoreMultiplier withStockAmount:1];
+        //scoreMultiplier.itemImage.scaleX = (winSize.width / 3) / scoreMultiplier.itemImage.contentSize.width;
+        //scoreMultiplier.itemImage.scaleY = 32 / scoreMultiplier.itemImage.contentSize.height;
+        self.activeItemsMenu = [CCMenu menuWithItems:lifeCharger.itemImage, timeBooster.itemImage, scoreMultiplier.itemImage, nil];
+        self.activeItemsMenu.anchorPoint = ccp(0, 0);
+        self.activeItemsMenu.position = ccp(2, self.fieldBackground.contentSize.height - lifeCharger.itemImage.contentSize.height - 12);
+        [self addChild:self.activeItemsMenu z:self.fieldBackground.zOrder + 1];
     }
     
     return self;
@@ -706,10 +720,11 @@
 {
     bool hasMatch = false;
     bool selectedFlowerIsWildFlower = false;
+    NSMutableArray* arrayOfMatchedFlowers = nil;
     
     DLog("Move completed.");
     
-    NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
+    NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
     if (selectedflower.flowerType == ftSpecialWildFlower) selectedFlowerIsWildFlower = true;
 
     [self swapFlowerOnGrid:self.selectedFlowerGrid withFlowerOnGrid:self.swappedFlowerGrid];
@@ -719,13 +734,69 @@
         //If It is Wild flower, change the type to follow the flower it is swapped with
         if (selectedFlowerIsWildFlower)
         {
-            NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.swappedFlowerGrid.x] objectAtIndex:self.swappedFlowerGrid.y];
-            NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+            for (int iteration = 0; iteration < 4; iteration++)
+            {
+                switch (iteration)
+                {
+                    case 0:
+                    {
+                        if ((self.selectedFlowerGrid.x + 1) >= self.horizontalTileCount) continue;
+                        
+                        NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+                        NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x + 1] objectAtIndex:self.selectedFlowerGrid.y];
+                        
+                        selectedflower.flowerType = swappedflower.flowerType;
+                    }
+                        break;
+                        
+                    case 1:
+                    {
+                        if ((self.selectedFlowerGrid.y - 1) < 0) continue;
+                        
+                        NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+                        NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y - 1];
+                        
+                        selectedflower.flowerType = swappedflower.flowerType;
+                    }
+                        break;
+                    
+                    case 2:
+                    {
+                        if ((self.selectedFlowerGrid.x - 1) < 0) continue;
+                        
+                        NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+                        NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x - 1] objectAtIndex:self.selectedFlowerGrid.y];
+                        
+                        selectedflower.flowerType = swappedflower.flowerType;
+                    }
+                        break;
+                        
+                    case 3:
+                    {
+                        if ((self.selectedFlowerGrid.y + 1) >= self.verticalTileCount) continue;
+                        
+                        NBFlower* selectedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y];
+                        NBFlower* swappedflower = (NBFlower*)[[self.flowerArrays objectAtIndex:self.selectedFlowerGrid.x] objectAtIndex:self.selectedFlowerGrid.y + 1];
+                        
+                        selectedflower.flowerType = swappedflower.flowerType;
+                    }
+                        break;
+                }
+                
+                arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
+                if ([arrayOfMatchedFlowers count] > 0)
+                {
+                    break;
+                }
+            }
             
-            selectedflower.flowerType = swappedflower.flowerType;
+            
         }
-            
-        NSMutableArray* arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
+        else
+        {
+            arrayOfMatchedFlowers = [self checkLocalMatchFlowersAndAddToMatchSlots:self.selectedFlowerGrid];
+        }
+        
         if ([arrayOfMatchedFlowers count] > 0)
         {
             NSValue* value = (NSValue*)[arrayOfMatchedFlowers objectAtIndex:0];

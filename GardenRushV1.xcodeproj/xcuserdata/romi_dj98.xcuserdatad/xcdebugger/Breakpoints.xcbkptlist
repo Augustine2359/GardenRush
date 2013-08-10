@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680613.38659"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "671"
-         endingLineNumber = "671"
+         startingLineNumber = "685"
+         endingLineNumber = "685"
          landmarkName = "-returnFlower"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "883"
-         endingLineNumber = "883"
+         startingLineNumber = "954"
+         endingLineNumber = "954"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "887"
-         endingLineNumber = "887"
+         startingLineNumber = "958"
+         endingLineNumber = "958"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680613.38659"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "675"
-         endingLineNumber = "675"
+         startingLineNumber = "689"
+         endingLineNumber = "689"
          landmarkName = "-returnFlower"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "841"
-         endingLineNumber = "841"
+         startingLineNumber = "912"
+         endingLineNumber = "912"
          landmarkName = "-onFlowerMoveCompleted"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/MainGameLayer.m"
-         timestampString = "395463255.740264"
+         timestampString = "396688129.229781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-gotoTestScreen"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/MainGameLayer.m"
-         timestampString = "395463255.740264"
+         timestampString = "396688129.229781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "139"
-         endingLineNumber = "139"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "-removeNode"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/MainGameLayer.m"
-         timestampString = "395463255.740264"
+         timestampString = "396688129.229781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
          landmarkName = "-openGameCenterLeaderBoard"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1120"
-         endingLineNumber = "1120"
+         startingLineNumber = "1191"
+         endingLineNumber = "1191"
          landmarkName = "-rearrangeEmptyGridPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,37 +216,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "976"
+         endingLineNumber = "976"
+         landmarkName = "-update:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
+         timestampString = "396690925.385875"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "964"
+         endingLineNumber = "964"
+         landmarkName = "-update:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "905"
          endingLineNumber = "905"
-         landmarkName = "-update:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "893"
-         endingLineNumber = "893"
-         landmarkName = "-update:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "834"
-         endingLineNumber = "834"
          landmarkName = "-onFlowerMoveCompleted"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "837"
-         endingLineNumber = "837"
+         startingLineNumber = "908"
+         endingLineNumber = "908"
          landmarkName = "-onFlowerMoveCompleted"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "968"
-         endingLineNumber = "968"
+         startingLineNumber = "1039"
+         endingLineNumber = "1039"
          landmarkName = "-removeFlowerFromField:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "904"
-         endingLineNumber = "904"
+         startingLineNumber = "975"
+         endingLineNumber = "975"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396611289.993085"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "-showAllFlower"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396611289.993085"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
          landmarkName = "-fillFlower"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1170"
-         endingLineNumber = "1170"
+         startingLineNumber = "1241"
+         endingLineNumber = "1241"
          landmarkName = "-checkMatchedFlowerWithCustomerRequirement:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "896"
-         endingLineNumber = "896"
+         startingLineNumber = "967"
+         endingLineNumber = "967"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1142"
-         endingLineNumber = "1142"
+         startingLineNumber = "1213"
+         endingLineNumber = "1213"
          landmarkName = "-rearrangeEmptyGridPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "949"
-         endingLineNumber = "949"
+         startingLineNumber = "1020"
+         endingLineNumber = "1020"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396611289.993085"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
          landmarkName = "-generateLevel"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1398"
-         endingLineNumber = "1398"
+         startingLineNumber = "1469"
+         endingLineNumber = "1469"
          landmarkName = "-randomizeNewPositionForAllFlower"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,11 +463,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680893.994973"
+         timestampString = "396690925.385875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1505"
-         endingLineNumber = "1505"
+         startingLineNumber = "1576"
+         endingLineNumber = "1576"
          landmarkName = "-performSpecialMoveFourMatch:withOriginalGridPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -476,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396680890.047512"
+         timestampString = "396690352.700823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "715"
-         endingLineNumber = "715"
+         startingLineNumber = "730"
+         endingLineNumber = "730"
          landmarkName = "-onFlowerMoveCompleted"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396681572.522295"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "522"
-         endingLineNumber = "522"
+         startingLineNumber = "536"
+         endingLineNumber = "536"
          landmarkName = "-isTouchingWhichGrid:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,12 +502,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
-         timestampString = "396682026.621599"
+         timestampString = "396689759.605269"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "568"
-         endingLineNumber = "568"
+         startingLineNumber = "582"
+         endingLineNumber = "582"
          landmarkName = "-onSwipe:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
+         timestampString = "396690693.953894"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "737"
+         endingLineNumber = "737"
+         landmarkName = "-onFlowerMoveCompleted"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GardenRushV1/NBClasses/BasicClasses/NBFlowerFieldGameGrid.m"
+         timestampString = "396690701.309651"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "727"
+         endingLineNumber = "727"
+         landmarkName = "-onFlowerMoveCompleted"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

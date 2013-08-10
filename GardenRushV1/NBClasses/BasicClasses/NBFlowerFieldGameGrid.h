@@ -10,6 +10,7 @@
 #import "NBFlower.h"
 #import "NBGameGUI.h"
 #import "NBFieldRandomArray.h"
+#import "NBActiveItem.h"
 
 #define FIELD_HORIZONTAL_UNIT_COUNT 8
 #define FIELD_VERTICAL_UNIT_COUNT 8
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) NSMutableArray* potentialNextMoveHasMatchGrids;
 @property (nonatomic, retain) NSMutableArray* currentRoundPossibleMoves;
 @property (nonatomic, assign) NBBouquetType currentBouquetMatchType;
+@property (nonatomic, retain) CCMenu* activeItemsMenu;
 
 @property (nonatomic, assign) bool isProcessingMove;
 @property (nonatomic, assign) bool isProcessingMatching;

@@ -354,19 +354,19 @@ static int difficultyLevel = 1;
             break;
         
         case ftRedFlower:
-            flowerTypeInString = @"Red Flower";
+            flowerTypeInString = @"Kenneth's Flower";
             break;
             
         case ftYellowFlower:
-            flowerTypeInString = @"Yellow Flower";
+            flowerTypeInString = @"Andrew's Flower";
             break;
             
         case ftGreenFlower:
-            flowerTypeInString = @"Green Flower";
+            flowerTypeInString = @"Adam's Flower";
             break;
             
         case ftBlueFlower:
-            flowerTypeInString = @"Blue Flower";
+            flowerTypeInString = @"Frances' Flower";
             break;
         
         case ftBlackFlower:

@@ -19,6 +19,13 @@
 		BC1FD79D173692D90065D4CF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FD79C173692D90065D4CF /* Default-568h@2x.png */; };
 		BC1FFA6317A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6117A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png */; };
 		BC1FFA6417A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */; };
+		BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */; };
+		BC1FFA6A17A4F1E4003B5E43 /* NBActiveItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */; };
+		BC1FFA6C17B65AF5003B5E43 /* NB_AppLogo_FlowerFrenzy.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6B17B65AF4003B5E43 /* NB_AppLogo_FlowerFrenzy.png */; };
+		BC1FFA6E17B65B58003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6D17B65B57003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png */; };
+		BC1FFA7017B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6F17B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png */; };
+		BC1FFA7217B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA7117B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png */; };
+		BC1FFA7617B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA7517B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png */; };
 		BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */; };
 		BC829158174A6A800064B977 /* NBTestNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BC829157174A6A800064B977 /* NBTestNode.m */; };
 		BC82915B174FCBDD0064B977 /* NBBouquet.m in Sources */ = {isa = PBXBuildFile; fileRef = BC82915A174FCBDD0064B977 /* NBBouquet.m */; };
@@ -189,6 +196,15 @@
 		BC1FD79C173692D90065D4CF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BC1FFA6117A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBrdBgAMockCenter_640x640-hd.png"; path = "Resources/MainGameArts/NB_flowerBrdBgAMockCenter_640x640-hd.png"; sourceTree = "<group>"; };
 		BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBrdBgBMockCenter_640x640-hd.png"; path = "Resources/MainGameArts/NB_flowerBrdBgBMockCenter_640x640-hd.png"; sourceTree = "<group>"; };
+		BC1FFA6517A4F14E003B5E43 /* NBActiveItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBActiveItem.h; path = NBClasses/BasicClasses/NBActiveItem.h; sourceTree = "<group>"; };
+		BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBActiveItem.m; path = NBClasses/BasicClasses/NBActiveItem.m; sourceTree = "<group>"; };
+		BC1FFA6817A4F1E3003B5E43 /* NBActiveItemGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBActiveItemGroup.h; path = NBClasses/BasicClasses/NBActiveItemGroup.h; sourceTree = "<group>"; };
+		BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBActiveItemGroup.m; path = NBClasses/BasicClasses/NBActiveItemGroup.m; sourceTree = "<group>"; };
+		BC1FFA6B17B65AF4003B5E43 /* NB_AppLogo_FlowerFrenzy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy.png; sourceTree = "<group>"; };
+		BC1FFA6D17B65B57003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy_114x114.png; sourceTree = "<group>"; };
+		BC1FFA6F17B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy_144x144.png; sourceTree = "<group>"; };
+		BC1FFA7117B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBoard_b_640x729-hd.png"; path = "Resources/MainGameArts/NB_flowerBoard_b_640x729-hd.png"; sourceTree = "<group>"; };
+		BC1FFA7517B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBoard_a_640x729_v02-hd.png"; path = "Resources/MainGameArts/NB_flowerBoard_a_640x729_v02-hd.png"; sourceTree = "<group>"; };
 		BC4E069E176DCE2F00CC2898 /* NBFieldRandomArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFieldRandomArray.h; path = NBClasses/BasicClasses/NBFieldRandomArray.h; sourceTree = "<group>"; };
 		BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFieldRandomArray.m; path = NBClasses/BasicClasses/NBFieldRandomArray.m; sourceTree = "<group>"; };
 		BC829156174A6A800064B977 /* NBTestNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBTestNode.h; path = NBClasses/BasicClasses/NBTestNode.h; sourceTree = "<group>"; };
@@ -554,6 +570,10 @@
 				F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */,
 				BC4E069E176DCE2F00CC2898 /* NBFieldRandomArray.h */,
 				BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */,
+				BC1FFA6517A4F14E003B5E43 /* NBActiveItem.h */,
+				BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */,
+				BC1FFA6817A4F1E3003B5E43 /* NBActiveItemGroup.h */,
+				BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -561,6 +581,9 @@
 		BC8EA6371734C4EA004454CF = {
 			isa = PBXGroup;
 			children = (
+				BC1FFA6F17B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png */,
+				BC1FFA6D17B65B57003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png */,
+				BC1FFA6B17B65AF4003B5E43 /* NB_AppLogo_FlowerFrenzy.png */,
 				BC98EC5E175AEE720025709A /* Default@2x.png */,
 				BC98EC5C175AEA5C0025709A /* Default.png */,
 				BC1FD79C173692D90065D4CF /* Default-568h@2x.png */,
@@ -631,6 +654,8 @@
 				BC8EA66D1734C4EA004454CF /* Info.plist */,
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
 				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
+				BC1FFA7517B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png */,
+				BC1FFA7117B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png */,
 				BC1FFA6117A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png */,
 				BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */,
 				BC015A9617925407000ED5F8 /* NB_FlowerFrenzyMainMenu_640x1136-hd.png */,
@@ -1109,6 +1134,11 @@
 				BC015A9C17925FF7000ED5F8 /* title640x960.png in Resources */,
 				BC1FFA6317A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png in Resources */,
 				BC1FFA6417A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png in Resources */,
+				BC1FFA6C17B65AF5003B5E43 /* NB_AppLogo_FlowerFrenzy.png in Resources */,
+				BC1FFA6E17B65B58003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png in Resources */,
+				BC1FFA7017B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png in Resources */,
+				BC1FFA7217B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png in Resources */,
+				BC1FFA7617B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,6 +1271,8 @@
 				F9CC908317607E66008D1E3F /* NBParticleScreen.m in Sources */,
 				BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */,
 				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
+				BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */,
+				BC1FFA6A17A4F1E4003B5E43 /* NBActiveItemGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
