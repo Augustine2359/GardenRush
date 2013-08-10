@@ -1278,6 +1278,7 @@
 				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
 				BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */,
 				BC1FFA6A17A4F1E4003B5E43 /* NBActiveItemGroup.m in Sources */,
+				569080C717B5FBCE00A551EA /* NBPauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

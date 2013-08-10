@@ -8,8 +8,9 @@
 
 #import "NBBasicScreenLayer.h"
 
-@interface NBPreGameScreen : NBBasicScreenLayer
-{
+@interface NBPreGameScreen : NBBasicScreenLayer{
+    
+    int energyLevel, energyMaxLevel;
     int item0Quantity, item1Quantity, item2Quantity;
     CCLabelTTF* energyLabel;
     CCLabelTTF* item0QuantityLabel;

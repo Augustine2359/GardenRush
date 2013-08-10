@@ -153,11 +153,11 @@
     
     //[playButton setScaleX:12];
     //[playButton setScaleY:5];
-    //[playButton setPosition:ccp(buyItem2Button.position.x, buyItem2Button.position.y-buyItem2Button.boundingBox.size.height*2)];
-    [playButton setPosition:ccp(screenSize.width / 2, 100)];
+    [playButton setPosition:ccp(buyItem1Button.position.x, buyItem2Button.position.y-buyItem2Button.boundingBox.size.height*2)];
     
     CCMenu* GUIMenu = [CCMenu menuWithItems:buyItem0Button, buyItem1Button, buyItem2Button, playButton, nil];
     [GUIMenu setPosition:ccp(0, 0)];
+//    [GUIMenu setPosition:ccp(-screenSize.width*0.5, -screenSize.height*0.5)];
     [self addChild:GUIMenu];
     
     [self doReduceEnergy:4];
