@@ -9,11 +9,18 @@
 #import "NBBasicScreenLayer.h"
 
 @interface NBPreGameScreen : NBBasicScreenLayer{
+    
+    int energyLevel, energyMaxLevel;
     int item0Quantity, item1Quantity, item2Quantity;
+    CCLabelTTF* energyLabel;
     CCLabelTTF* item0QuantityLabel;
     CCLabelTTF* item1QuantityLabel;
     CCLabelTTF* item2QuantityLabel;
 }
+
+-(void)doReduceEnergy:(int)reducedEnergy;
+-(void)doStartEnergyTimer;
+-(void)updateEnergyTimer;
 
 -(void)goToAppStore/*:(id)buyButton*/;
 -(void)goToGame;

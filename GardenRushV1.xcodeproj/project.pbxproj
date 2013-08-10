@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		569080C717B5FBCE00A551EA /* NBPauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 569080C617B5FBCE00A551EA /* NBPauseLayer.m */; };
 		5690B2A5173E91690059192E /* NBCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5690B2A4173E91690059192E /* NBCustomer.m */; };
 		569D11B3173A818D00D60069 /* NBGameGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 569D11B2173A818D00D60069 /* NBGameGUI.m */; };
 		56A02628176787B400462344 /* NBDifficultyTier.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A02627176787B400462344 /* NBDifficultyTier.m */; };
@@ -172,6 +173,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		569080C517B5FBCE00A551EA /* NBPauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPauseLayer.h; sourceTree = "<group>"; };
+		569080C617B5FBCE00A551EA /* NBPauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPauseLayer.m; sourceTree = "<group>"; };
 		5690B2A3173E91690059192E /* NBCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBCustomer.h; sourceTree = "<group>"; };
 		5690B2A4173E91690059192E /* NBCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBCustomer.m; sourceTree = "<group>"; };
 		569D11B1173A818D00D60069 /* NBGameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGameGUI.h; sourceTree = "<group>"; };
@@ -519,6 +522,8 @@
 				5690B2A4173E91690059192E /* NBCustomer.m */,
 				56A02626176787B400462344 /* NBDifficultyTier.h */,
 				56A02627176787B400462344 /* NBDifficultyTier.m */,
+				569080C517B5FBCE00A551EA /* NBPauseLayer.h */,
+				569080C617B5FBCE00A551EA /* NBPauseLayer.m */,
 			);
 			name = AdvanceClasses;
 			sourceTree = "<group>";
@@ -1241,6 +1246,7 @@
 				F9CC908317607E66008D1E3F /* NBParticleScreen.m in Sources */,
 				BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */,
 				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
+				569080C717B5FBCE00A551EA /* NBPauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
