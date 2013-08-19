@@ -15,9 +15,8 @@
     CCSprite* timerBarImage;
     
     float initialWaitingTime, currentWaitingTime;
+    float timerSpeedRate;
     int selfIndex;
-    
-//    CCArray* requests;
 }
 
 @property (nonatomic, retain) CCArray* request;
@@ -30,6 +29,10 @@
 -(void)doCustomerLeave;
 -(void)pauseWaitingTime;
 -(void)resumeWaitingTime;
+-(void)setTimerSpeedRate:(float)newRate;
+-(void)fasterTimerSpeedRate;
+-(void)slowerTimerSpeedRate;
+-(void)resetTimerSpeedRate;
 -(CCArray*)getRequestArray;
 
 @end
