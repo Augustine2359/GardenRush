@@ -17,6 +17,7 @@
 +(int)getDifficultyValueOnKey:(NSString*)keyString;
 
 -(NSDate*)getFirstTimeEnergyReduced;
+-(void)setFirstTimeEnergyReduced:(NSDate*)newTime;
 
 @property (nonatomic, retain) NSMutableDictionary* currentDataDictionary;
 
