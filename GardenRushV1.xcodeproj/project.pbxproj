@@ -21,7 +21,6 @@
 		BC1FFA6317A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6117A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png */; };
 		BC1FFA6417A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */; };
 		BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */; };
-		BC1FFA6A17A4F1E4003B5E43 /* NBActiveItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */; };
 		BC1FFA6C17B65AF5003B5E43 /* NB_AppLogo_FlowerFrenzy.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6B17B65AF4003B5E43 /* NB_AppLogo_FlowerFrenzy.png */; };
 		BC1FFA6E17B65B58003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6D17B65B57003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png */; };
 		BC1FFA7017B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = BC1FFA6F17B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png */; };
@@ -201,8 +200,6 @@
 		BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NB_flowerBrdBgBMockCenter_640x640-hd.png"; path = "Resources/MainGameArts/NB_flowerBrdBgBMockCenter_640x640-hd.png"; sourceTree = "<group>"; };
 		BC1FFA6517A4F14E003B5E43 /* NBActiveItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBActiveItem.h; path = NBClasses/BasicClasses/NBActiveItem.h; sourceTree = "<group>"; };
 		BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBActiveItem.m; path = NBClasses/BasicClasses/NBActiveItem.m; sourceTree = "<group>"; };
-		BC1FFA6817A4F1E3003B5E43 /* NBActiveItemGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBActiveItemGroup.h; path = NBClasses/BasicClasses/NBActiveItemGroup.h; sourceTree = "<group>"; };
-		BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBActiveItemGroup.m; path = NBClasses/BasicClasses/NBActiveItemGroup.m; sourceTree = "<group>"; };
 		BC1FFA6B17B65AF4003B5E43 /* NB_AppLogo_FlowerFrenzy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy.png; sourceTree = "<group>"; };
 		BC1FFA6D17B65B57003B5E43 /* NB_AppLogo_FlowerFrenzy_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy_114x114.png; sourceTree = "<group>"; };
 		BC1FFA6F17B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NB_AppLogo_FlowerFrenzy_144x144.png; sourceTree = "<group>"; };
@@ -577,8 +574,6 @@
 				BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */,
 				BC1FFA6517A4F14E003B5E43 /* NBActiveItem.h */,
 				BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */,
-				BC1FFA6817A4F1E3003B5E43 /* NBActiveItemGroup.h */,
-				BC1FFA6917A4F1E3003B5E43 /* NBActiveItemGroup.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -1277,7 +1272,6 @@
 				BC4E06A0176DCE2F00CC2898 /* NBFieldRandomArray.m in Sources */,
 				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
 				BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */,
-				BC1FFA6A17A4F1E4003B5E43 /* NBActiveItemGroup.m in Sources */,
 				569080C717B5FBCE00A551EA /* NBPauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

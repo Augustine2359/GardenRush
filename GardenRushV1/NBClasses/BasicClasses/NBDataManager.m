@@ -10,6 +10,13 @@
 
 static NBDataManager* sharedDataManager = nil;
 
+@interface NBDataManager()
+{
+    int item1Quantity, item2Quantity, item3Quantity;
+}
+
+@end
+
 @implementation NBDataManager
 
 +(NBDataManager*)sharedDataManager
@@ -50,7 +57,9 @@ static NBDataManager* sharedDataManager = nil;
     //Update below if any new key for the Game State settings
     //*******************************************************
     [gameStateCollection setObject:[NSNumber numberWithLong:sharedDataManager.availableCoins] forKey:@"availableCoins"];
-    [gameStateCollection setObject:[NSNumber numberWithLong:sharedDataManager.availableItem1] forKey:@"availableItem1"];
+    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem1Quantity]] forKey:@"availableItem1"];
+    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem2Quantity]] forKey:@"availableItem2"];
+    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem3Quantity]] forKey:@"availableItem3"];
     //*******************************************************
     
     [sharedDataManager.currentDataDictionary setObject:gameStateCollection forKey:@"GameState"];
@@ -105,7 +114,9 @@ static NBDataManager* sharedDataManager = nil;
         NSDictionary* gameStateDictionary = [self.currentDataDictionary objectForKey:@"GameState"];
         self.currentDifficultyTier = [[gameStateDictionary objectForKey:@"currentDifficultyTier"] intValue];
         self.availableCoins = [[gameStateDictionary objectForKey:@"availableCoins"] intValue];
-        self.availableItem1 = [[gameStateDictionary objectForKey:@"AvailableItem1"] intValue];
+        item1Quantity = [[gameStateDictionary objectForKey:@"AvailableItem1"] intValue];
+        item2Quantity = [[gameStateDictionary objectForKey:@"AvailableItem2"] intValue];
+        item3Quantity = [[gameStateDictionary objectForKey:@"AvailableItem3"] intValue];
         
         NSDictionary* userProfileDictionary = [self.currentDataDictionary objectForKey:@"UserProfile"];
         self.currentGameScore = [[userProfileDictionary objectForKey:@"currentGameScore"] longValue];
@@ -128,6 +139,36 @@ static NBDataManager* sharedDataManager = nil;
     }
     
     return self;
+}
+
+-(int)getItem1Quantity
+{
+    return item1Quantity;
+}
+
+-(int)getItem2Quantity
+{
+    return item2Quantity;
+}
+
+-(int)getItem3Quantity
+{
+    return item3Quantity;
+}
+
+-(void)setItem1Quantity:(int)quantity
+{
+    item1Quantity = quantity;
+}
+
+-(void)setItem2Quantity:(int)quantity
+{
+    item2Quantity = quantity;
+}
+
+-(void)setItem3Quantity:(int)quantity
+{
+    item3Quantity = quantity;
 }
 
 @end

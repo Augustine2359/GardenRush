@@ -23,7 +23,6 @@
 @property (nonatomic, assign) long highestGameScoreAllTime;
 
 @property (nonatomic, assign) int availableCoins;
-@property (nonatomic, assign) int availableItem1;
 
 @property (nonatomic, assign) int currentDifficultyTier;
 @property (nonatomic, assign) int flowerTypeLevel;

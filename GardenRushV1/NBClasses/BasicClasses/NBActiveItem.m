@@ -37,6 +37,12 @@ static CCArray* itemArray = nil;
     item.itemImage.anchorPoint = ccp(0, 0);
     item.itemImage.position = ccp(0 + ([itemArray count] * (winSize.width / 3)), 0);
     
+    item.itemAvailableCountLabel = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%i", amount] charMapFile:@"fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
+    item.itemAvailableCountLabel.anchorPoint = item.itemImage.anchorPoint;
+    item.itemAvailableCountLabel.position = ccp(70, item.itemImage.position.y + 8);
+    
+    [item.itemImage addChild:item.itemAvailableCountLabel z:item.itemImage.zOrder + 1];
+    
     if (!itemArray) itemArray = [CCArray arrayWithCapacity:SUPPORTED_ITEM_COUNT];
     item.itemName = [NSString stringWithFormat:@"item%i", [itemArray count]];
     [itemArray addObject:item];
@@ -63,6 +69,8 @@ static CCArray* itemArray = nil;
     if (self.currentStock > 0)
     {
         CCLOG(@"Activate Item: %@", self.itemName);
+        self.currentStock--;
+        
     }
     else
     {

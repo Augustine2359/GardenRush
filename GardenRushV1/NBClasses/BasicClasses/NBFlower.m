@@ -150,7 +150,7 @@ static int difficultyLevel = 1;
                     break;
                     
                 case ftRedFlower:
-                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower1_60x60.png"];
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower12_60x60.png"];
                     //self.flowerImage.color = ccRED;
                     self.isMovableDuringRearrangingShop = true;
                     self.flowerSubType = fstNormalFlower;
@@ -178,7 +178,8 @@ static int difficultyLevel = 1;
                     break;
                 
                 case ftBlackFlower:
-                    self.flowerImage.color = ccBLACK;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_Flower5_60x60.png"];
+                    //self.flowerImage.color = ccBLACK;
                     self.isMovableDuringRearrangingShop = true;
                     self.flowerSubType = fstNormalFlower;
                     break;

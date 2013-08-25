@@ -75,6 +75,13 @@
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self setIsTouchEnabled:YES];
     
+    //Add Sky
+    CCSprite* sky = [CCSprite spriteWithFile:@"NB_FlowerFrenzyMainMenu_640x1136.png"];
+    //sky.scaleX = (size.width + 20) / sky.contentSize.width;
+    //sky.scaleY = (size.height + 20) / sky.contentSize.height;
+    sky.position = ccp(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:sky z:0];
+    
     //Energy
     CCSprite* energySprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
     [energySprite setScale:3];
@@ -240,7 +247,7 @@
     [self.inGameItemsButtonsContainer setShouldRespondToTouches:NO];
     [self.iapButtonsContainer setShouldRespondToTouches:YES];
 
-    [[NBAudioManager sharedInstance] playSoundEffect:@"hadouken.wav"];
+    [[NBAudioManager sharedInstance] playSoundEffect:@"hadouken.wav"]; 
   }
   else {
     CCFadeTo *fadeOut = [[CCFadeTo alloc] initWithDuration:1 opacity:0];
