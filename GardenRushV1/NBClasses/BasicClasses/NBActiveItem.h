@@ -28,6 +28,7 @@ typedef enum
 -(void)removeStock:(int)amount;
 
 @property (nonatomic, retain) CCMenuItemSprite* itemImage;
+@property (nonatomic, retain) CCLabelAtlas* itemAvailableCountLabel;
 @property (nonatomic, assign) int currentStock;
 @property (nonatomic, assign) NBItemType itemType;
 @property (nonatomic, retain) NSString* itemName;

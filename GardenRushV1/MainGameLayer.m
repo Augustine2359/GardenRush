@@ -45,6 +45,8 @@
     {
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        [NBAudioManager sharedInstance];
 		
         //Add Sky
         CCSprite* sky = [CCSprite spriteWithFile:@"NB_FlowerFrenzyMainMenu_640x1136.png"];

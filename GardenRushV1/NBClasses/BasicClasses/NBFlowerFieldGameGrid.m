@@ -40,7 +40,7 @@
     
     if (self = [super init])
     {
-        isFlowerFieldExpanded = false;
+        isFlowerFieldExpanded = true;
         
         if (isFlowerFieldExpanded)
         {
@@ -108,14 +108,8 @@
         timeRemainingBeforePossibleMoveCheck = DURATION_TO_CHECK_EMPTY_SLOT;
         
         NBActiveItem* lifeCharger = [NBActiveItem createNewItem:@"NB_Item_life_203x64.png" withTypeOf:itLifeCharger withStockAmount:1];
-        //lifeCharger.itemImage.scaleX = (winSize.width / 3) / lifeCharger.itemImage.contentSize.width;
-        //lifeCharger.itemImage.scaleY = 32 / lifeCharger.itemImage.contentSize.height;
         NBActiveItem* timeBooster = [NBActiveItem createNewItem:@"NB_Item_time_203x64.png" withTypeOf:itCustomerWaitTimeCharger withStockAmount:1];
-        //timeBooster.itemImage.scaleX = (winSize.width / 3) / timeBooster.itemImage.contentSize.width;
-        //timeBooster.itemImage.scaleY = 32 / timeBooster.itemImage.contentSize.height;
         NBActiveItem* scoreMultiplier = [NBActiveItem createNewItem:@"NB_Item_score_booster_203x64.png" withTypeOf:itScoreMultiplier withStockAmount:1];
-        //scoreMultiplier.itemImage.scaleX = (winSize.width / 3) / scoreMultiplier.itemImage.contentSize.width;
-        //scoreMultiplier.itemImage.scaleY = 32 / scoreMultiplier.itemImage.contentSize.height;
         self.activeItemsMenu = [CCMenu menuWithItems:lifeCharger.itemImage, timeBooster.itemImage, scoreMultiplier.itemImage, nil];
         self.activeItemsMenu.anchorPoint = ccp(0, 0);
         self.activeItemsMenu.position = ccp(2, self.fieldBackground.contentSize.height - lifeCharger.itemImage.contentSize.height - 12);
