@@ -18,6 +18,7 @@
 +(CCArray*)getItemList;
 
 -(NSDate*)getFirstTimeEnergyReduced;
+-(void)setFirstTimeEnergyReduced:(NSDate*)newTime;
 -(int)getItem0Quantity;
 -(int)getItem1Quantity;
 -(int)getItem2Quantity;

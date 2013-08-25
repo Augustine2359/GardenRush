@@ -176,6 +176,11 @@ static CCArray* itemList = nil;
     return energyRefillStartTime;
 }
 
+-(void)setFirstTimeEnergyReduced:(NSDate *)newTime{
+    [[NSUserDefaults standardUserDefaults] setObject:newTime forKey:@"energyRefillStartTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(int)getItem0Quantity
 {
     return item0Quantity;
