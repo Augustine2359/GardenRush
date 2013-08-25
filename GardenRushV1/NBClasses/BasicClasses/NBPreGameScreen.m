@@ -205,11 +205,11 @@ bool isUpdatingEnergy = NO;
 }
 
 -(void)doStartEnergyTimer{
-    NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
+    NSDate *energyRefillStartTime = [[NBDataManager sharedDataManager] getFirstTimeEnergyReduced];
+    
     if (energyRefillStartTime == nil){
         energyRefillStartTime = [NSDate date];
-        [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NBDataManager sharedDataManager] setFirstTimeEnergyReduced:energyRefillStartTime];
     }
     
     if (!isUpdatingEnergy) {
@@ -220,9 +220,10 @@ bool isUpdatingEnergy = NO;
 -(void)updateEnergyTimer{
     isUpdatingEnergy = YES;
     
-    NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
+    NSDate *energyRefillStartTime = [[NBDataManager sharedDataManager] getFirstTimeEnergyReduced];
     if (energyRefillStartTime == nil) {
         DLog(@"Full energy!");
+        isUpdatingEnergy = NO;
         [self unschedule:@selector(updateEnergyTimer)];
         return;
     }
@@ -233,7 +234,7 @@ bool isUpdatingEnergy = NO;
     CGFloat refilledLives = timeInterval/energyRefillRate;
     refilledLives = floorf(refilledLives);
     energyRefillStartTime = [NSDate dateWithTimeInterval:refilledLives * energyRefillRate sinceDate:energyRefillStartTime];
-    [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
+    [[NBDataManager sharedDataManager] setFirstTimeEnergyReduced:energyRefillStartTime];
     
     bool maxEnergy = NO;
     energyLevel += refilledLives;
