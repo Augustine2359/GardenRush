@@ -130,4 +130,9 @@ static NBDataManager* sharedDataManager = nil;
     return self;
 }
 
+-(NSDate*)getFirstTimeEnergyReduced{
+    NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
+    return energyRefillStartTime;
+}
+
 @end

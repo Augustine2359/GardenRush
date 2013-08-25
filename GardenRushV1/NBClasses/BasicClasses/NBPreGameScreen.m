@@ -18,6 +18,9 @@
 
 @end
 
+
+bool isUpdatingEnergy = NO;
+
 @implementation NBPreGameScreen
 
 +(CCScene*)scene
@@ -190,14 +193,18 @@
     NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
     if (energyRefillStartTime == nil){
         energyRefillStartTime = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self schedule:@selector(updateEnergyTimer) interval:1 repeat:INFINITY delay:0];
+    if (!isUpdatingEnergy) {
+        [self schedule:@selector(updateEnergyTimer) interval:1 repeat:INFINITY delay:0];
+    }
 }
 
 -(void)updateEnergyTimer{
+    isUpdatingEnergy = YES;
+    
     NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
     if (energyRefillStartTime == nil) {
         DLog(@"Full energy!");
@@ -255,16 +262,20 @@
 
 -(void)goToAppStore/*:(id)buyButton*/{
     CCLOG(@"Open App Store!");
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+//    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
-    CCSprite* imageSprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
-    [imageSprite setScale:3];
-    [imageSprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.5)];
-    [self addChild:imageSprite z:-1];
+//    CCSprite* imageSprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
+//    [imageSprite setScale:3];
+//    [imageSprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.5)];
+//    [self addChild:imageSprite z:-1];
+//    
+//    CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
+//    [messageLabel setPosition:imageSprite.position];
+//    [self addChild:messageLabel z:-1];
     
-    CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
-    [messageLabel setPosition:imageSprite.position];
-    [self addChild:messageLabel z:-1];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
     
     //Temp test
 //    CCMenuItemSprite* button = (CCMenuItemSprite*)buyButton;

@@ -7,6 +7,7 @@
 //
 
 #import "NBBasicScreenLayer.h"
+#import <UIKit/UIKit.h>
 
 @interface NBPreGameScreen : NBBasicScreenLayer{
     
@@ -19,8 +20,8 @@
 }
 
 -(void)doReduceEnergy:(int)reducedEnergy;
--(void)doStartEnergyTimer;
--(void)updateEnergyTimer;
+//-(void)doStartEnergyTimer;
+//-(void)updateEnergyTimer;
 
 -(void)goToAppStore/*:(id)buyButton*/;
 -(void)goToGame;
