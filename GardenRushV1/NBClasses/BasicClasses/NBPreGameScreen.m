@@ -85,6 +85,14 @@ bool isUpdatingEnergy = NO;
     sky.position = ccp(screenSize.width / 2, screenSize.height / 2);
     [self addChild:sky z:0];
     
+    //Add signboard
+    CCSprite* signboard = [CCSprite spriteWithSpriteFrameName:@"staticemptybox_white.png"];
+    signboard.scaleX = (screenSize.width * 0.9) / signboard.contentSize.width;
+    signboard.scaleY = (screenSize.height * 0.425) / signboard.contentSize.height;
+    CCLOG(@"width = %f, height = %f", (screenSize.width * 0.9), (screenSize.height * 0.425));
+    signboard.position = ccp(screenSize.width / 2, screenSize.height * 0.6);
+    [self addChild:signboard z:0];
+    
     //Energy
     CCSprite* energySprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
     [energySprite setScale:3];

@@ -46,14 +46,14 @@
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT_EXPANDED;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT_EXPANDED;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoard_b_640x729-hd.png"];
+            self.fieldBackground = [CCSprite spriteWithFile:@"nb_flowerBoard_b_640x713-hd.png"];
             [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 2) + 1, (FIELD_FLOWER_GAP_WIDTH * 2) + 1)];
         }
         else
         {
             self.horizontalTileCount = FIELD_HORIZONTAL_UNIT_COUNT;
             self.verticalTileCount = FIELD_VERTICAL_UNIT_COUNT;
-            self.fieldBackground = [CCSprite spriteWithFile:@"NB_flowerBoard_a_640x729_v02-hd.png"];
+            self.fieldBackground = [CCSprite spriteWithFile:@"nb_flowerBoard_b_640x725-hd.png"];
             [NBFlower assignStartingPosition:CGPointMake((FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_WIDTH / 2) - 1, (FIELD_FLOWER_GAP_WIDTH * 3) + (FLOWERSIZE_HEIGHT / 2) - 1)];
         }
         
@@ -107,12 +107,17 @@
         timeRemainingBeforeComboCheck = DURATION_TO_CHECK_EMPTY_SLOT;
         timeRemainingBeforePossibleMoveCheck = DURATION_TO_CHECK_EMPTY_SLOT;
         
-        NBActiveItem* lifeCharger = [NBActiveItem createNewItem:@"NB_Item_life_203x64.png" withTypeOf:itLifeCharger withStockAmount:1];
-        NBActiveItem* timeBooster = [NBActiveItem createNewItem:@"NB_Item_time_203x64.png" withTypeOf:itCustomerWaitTimeCharger withStockAmount:1];
-        NBActiveItem* scoreMultiplier = [NBActiveItem createNewItem:@"NB_Item_score_booster_203x64.png" withTypeOf:itScoreMultiplier withStockAmount:1];
-        self.activeItemsMenu = [CCMenu menuWithItems:lifeCharger.itemImage, timeBooster.itemImage, scoreMultiplier.itemImage, nil];
+        NBDataManager* dataManager = [NBDataManager sharedDataManager];
+        CCArray* itemList = [NBDataManager getItemList];
+        NBItemData* itemData = (NBItemData*)[itemList objectAtIndex:0];
+        self.timeBooster = [NBActiveItem createNewItemWithItemData:itemData withTypeOf:itCustomerWaitTimeCharger withStockAmount:[dataManager getItem0Quantity]];
+        itemData = [[NBDataManager getItemList] objectAtIndex:1];
+        self.lifeBooster = [NBActiveItem createNewItemWithItemData:itemData withTypeOf:itLifeCharger withStockAmount:[dataManager getItem1Quantity]];
+        itemData = [[NBDataManager getItemList] objectAtIndex:2];
+        self.scoreBooster = [NBActiveItem createNewItemWithItemData:itemData withTypeOf:itScoreMultiplier withStockAmount:[dataManager getItem2Quantity]];
+        self.activeItemsMenu = [CCMenu menuWithItems:self.timeBooster.itemImage, self.lifeBooster.itemImage, self.scoreBooster.itemImage, nil];
         self.activeItemsMenu.anchorPoint = ccp(0, 0);
-        self.activeItemsMenu.position = ccp(2, self.fieldBackground.contentSize.height - lifeCharger.itemImage.contentSize.height - 12);
+        self.activeItemsMenu.position = ccp(2, self.fieldBackground.contentSize.height - self.timeBooster.itemImage.contentSize.height - 4);
         [self addChild:self.activeItemsMenu z:self.fieldBackground.zOrder + 1];
     }
     
@@ -1020,6 +1025,8 @@
     }
     else
         timeRemainingBeforeDisplayingHintMove = DURATION_BEFORE_DISPLAYING_HINT_MOVE;
+    
+    [self checkItemStatus:delta];
 }
 
 -(void)removeFlowerFromField:(NSArray*)arrayOfToBeRemovedFlowers
@@ -1609,6 +1616,24 @@
                 }
             }
         }
+    }
+}
+
+-(void)checkItemStatus:(ccTime)delta
+{
+    if (self.timeBooster.isActivated)
+    {
+        [self.timeBooster update:delta];
+    }
+    
+    if (self.lifeBooster.isActivated)
+    {
+        [self.lifeBooster update:delta];
+    }
+    
+    if (self.timeBooster.isActivated)
+    {
+        [self.timeBooster update:delta];
     }
 }
 @end

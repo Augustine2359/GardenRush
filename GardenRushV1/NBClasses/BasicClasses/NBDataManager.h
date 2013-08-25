@@ -15,8 +15,15 @@
 +(NBDataManager*)sharedDataManager;
 +(void)assignDifficulty:(int)difficultyIndex;
 +(int)getDifficultyValueOnKey:(NSString*)keyString;
++(CCArray*)getItemList;
 
 -(NSDate*)getFirstTimeEnergyReduced;
+-(int)getItem0Quantity;
+-(int)getItem1Quantity;
+-(int)getItem2Quantity;
+-(void)setItem0Quantity:(int)quantity;
+-(void)setItem1Quantity:(int)quantity;
+-(void)setItem2Quantity:(int)quantity;
 
 @property (nonatomic, retain) NSMutableDictionary* currentDataDictionary;
 
@@ -35,6 +42,5 @@
 @property (nonatomic, assign) int customerRequirementCount;
 
 @property (nonatomic, assign) NSArray* difficultyTierArray;
-
 
 @end

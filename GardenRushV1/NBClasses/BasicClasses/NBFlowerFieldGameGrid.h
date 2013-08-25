@@ -39,6 +39,9 @@
 @property (nonatomic, retain) NSMutableArray* currentRoundPossibleMoves;
 @property (nonatomic, assign) NBBouquetType currentBouquetMatchType;
 @property (nonatomic, retain) CCMenu* activeItemsMenu;
+@property (nonatomic, retain) NBActiveItem* timeBooster;
+@property (nonatomic, retain) NBActiveItem* lifeBooster;
+@property (nonatomic, retain) NBActiveItem* scoreBooster;
 
 @property (nonatomic, assign) bool isProcessingMove;
 @property (nonatomic, assign) bool isProcessingMatching;

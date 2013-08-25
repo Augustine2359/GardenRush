@@ -10,9 +10,16 @@
 
 static CCArray* itemArray = nil;
 
+@interface NBActiveItem()
+{
+    float remainingTime;
+}
+
+@end
+
 @implementation NBActiveItem
 
-+(id)createNewItem:(NSString*)frameName withTypeOf:(NBItemType)itemType withStockAmount:(int)amount
++(id)createNewItemWithItemData:(NBItemData*)itemData withTypeOf:(NBItemType)itemType withStockAmount:(int)amount
 {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
@@ -31,8 +38,11 @@ static CCArray* itemArray = nil;
         }
     }
     
-    NBActiveItem* item = [[NBActiveItem alloc] initWithSpriteName:frameName withTypeOf:itemType];
+    NBActiveItem* item = [[NBActiveItem alloc] initWithSpriteName:itemData.itemImageName withTypeOf:itemType];
+    item.itemData = itemData;
+    item.itemData.duration = DEFAULT_ITEM_DURATION;
     item.currentStock = amount;
+    item.isActivated = NO;
     
     item.itemImage.anchorPoint = ccp(0, 0);
     item.itemImage.position = ccp(0 + ([itemArray count] * (winSize.width / 3)), 0);
@@ -44,7 +54,6 @@ static CCArray* itemArray = nil;
     [item.itemImage addChild:item.itemAvailableCountLabel z:item.itemImage.zOrder + 1];
     
     if (!itemArray) itemArray = [CCArray arrayWithCapacity:SUPPORTED_ITEM_COUNT];
-    item.itemName = [NSString stringWithFormat:@"item%i", [itemArray count]];
     [itemArray addObject:item];
     
     return item;
@@ -66,21 +75,46 @@ static CCArray* itemArray = nil;
 
 -(void)activateItem
 {
-    if (self.currentStock > 0)
+    if (!self.isActivated)
     {
-        CCLOG(@"Activate Item: %@", self.itemName);
-        self.currentStock--;
-        
+        if (self.currentStock > 0)
+        {
+            CCLOG(@"Activate Item: %@", self.itemData.itemName);
+            self.currentStock--;
+            self.isActivated = YES;
+            remainingTime = self.itemData.duration;
+            
+            [self updateLabel];
+        }
+        else
+        {
+            CCLOG(@"Ran out of stock");
+        }
     }
     else
     {
-        CCLOG(@"Ran out of stock");
+        CCLOG(@"Item %@ is already activated.", self.itemData.itemName);
+    }
+}
+
+-(void)deactivateItem
+{
+    if (self.isActivated)
+    {
+        self.isActivated = NO;
+        remainingTime = 0;
+        CCLOG(@"Deactivate Item: %@", self.itemData.itemName);
+        [self updateLabel];
+    }
+    else
+    {
+        CCLOG(@"Item %@ is already deactivated.", self.itemData.itemName);
     }
 }
 
 -(void)assignName:(NSString*)name
 {
-    self.itemName = name;
+    self.itemData.itemName = name;
 }
 
 -(void)addStock:(int)amount
@@ -91,6 +125,24 @@ static CCArray* itemArray = nil;
 -(void)removeStock:(int)amount
 {
     self.currentStock -= amount;
+}
+
+-(void)updateLabel
+{
+    [self.itemAvailableCountLabel setString:[NSString stringWithFormat:@"%i", self.currentStock]];
+}
+
+-(void)update:(ccTime)delta
+{
+    if (self.isActivated)
+    {
+        remainingTime -= delta;
+        
+        if (remainingTime <= 0)
+        {
+            [self deactivateItem];
+        }
+    }
 }
 
 @end
