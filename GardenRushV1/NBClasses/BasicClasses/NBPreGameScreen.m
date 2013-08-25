@@ -18,6 +18,9 @@
 
 @end
 
+
+bool isUpdatingEnergy = NO;
+
 @implementation NBPreGameScreen
 
 +(CCScene*)scene
@@ -95,8 +98,8 @@
     [self addChild:energyLabel];
     
     //3 Items
-    CCSprite* item0Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-    [item0Sprite setScale:4];
+    CCSprite* item0Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_life_203x64.png"];
+//    [item0Sprite setScale:4];
     [item0Sprite setPosition:ccp(screenSize.width*0.25, screenSize.height*0.6)];
     [self addChild:item0Sprite];
     
@@ -105,8 +108,8 @@
     [item0QuantityLabel setPosition:ccp(item0Sprite.position.x+item0Sprite.boundingBox.size.width*0.5, item0Sprite.position.y-item0Sprite.boundingBox.size.height*0.5)];
     [self addChild:item0QuantityLabel];
     
-    CCSprite* item1Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-    [item1Sprite setScale:4];
+    CCSprite* item1Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_score_booster_203x64.png"];
+//    [item1Sprite setScale:4];
     [item1Sprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.6)];
     [self addChild:item1Sprite];
     
@@ -115,8 +118,8 @@
     [item1QuantityLabel setPosition:ccp(item1Sprite.position.x+item1Sprite.boundingBox.size.width*0.5, item1Sprite.position.y-item1Sprite.boundingBox.size.height*0.5)];
     [self addChild:item1QuantityLabel];
     
-    CCSprite* item2Sprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
-    [item2Sprite setScale:4];
+    CCSprite* item2Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_time_203x64.png"];
+//    [item2Sprite setScale:4];
     [item2Sprite setPosition:ccp(screenSize.width*0.75, screenSize.height*0.6)];
     [self addChild:item2Sprite];
     
@@ -197,14 +200,18 @@
     NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
     if (energyRefillStartTime == nil){
         energyRefillStartTime = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:energyRefillStartTime forKey:@"energyRefillStartTime"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self schedule:@selector(updateEnergyTimer) interval:1 repeat:INFINITY delay:0];
+    if (!isUpdatingEnergy) {
+        [self schedule:@selector(updateEnergyTimer) interval:1 repeat:INFINITY delay:0];
+    }
 }
 
 -(void)updateEnergyTimer{
+    isUpdatingEnergy = YES;
+    
     NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
     if (energyRefillStartTime == nil) {
         DLog(@"Full energy!");
@@ -262,16 +269,20 @@
 
 -(void)goToAppStore/*:(id)buyButton*/{
     CCLOG(@"Open App Store!");
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+//    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
-    CCSprite* imageSprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
-    [imageSprite setScale:3];
-    [imageSprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.5)];
-    [self addChild:imageSprite z:-1];
+//    CCSprite* imageSprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
+//    [imageSprite setScale:3];
+//    [imageSprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.5)];
+//    [self addChild:imageSprite z:-1];
+//    
+//    CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
+//    [messageLabel setPosition:imageSprite.position];
+//    [self addChild:messageLabel z:-1];
     
-    CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
-    [messageLabel setPosition:imageSprite.position];
-    [self addChild:messageLabel z:-1];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
     
     //Temp test
 //    CCMenuItemSprite* button = (CCMenuItemSprite*)buyButton;

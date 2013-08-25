@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NBDataManager : NSObject
+@interface NBDataManager : NSObject{
+    int energyLevel, energyMaxLevel;
+}
 
 +(NBDataManager*)sharedDataManager;
 +(void)assignDifficulty:(int)difficultyIndex;
 +(int)getDifficultyValueOnKey:(NSString*)keyString;
+
+-(NSDate*)getFirstTimeEnergyReduced;
 
 @property (nonatomic, retain) NSMutableDictionary* currentDataDictionary;
 

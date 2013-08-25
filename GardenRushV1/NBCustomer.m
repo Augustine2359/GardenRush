@@ -55,6 +55,7 @@
         currentWaitingTime = initialWaitingTime;
         [timerBarImage setAnchorPoint:ccp(0, 0.5)];
         self.requestScore = 100 * requestQuantity;
+        [self resetTimerSpeedRate];
         
         //Transit to position
         self.position = ccp(self.position.x, self.position.y+screenSize.height*0.5);
@@ -67,7 +68,7 @@
 }
 
 -(void)update:(ccTime)delta{
-    currentWaitingTime -= delta;
+    currentWaitingTime -= delta * timerSpeedRate;
     
     if (currentWaitingTime <= 0) {
         CCLOG(@"You pissed off a customer!");
@@ -101,6 +102,22 @@
 
 -(void)resumeWaitingTime{
     [self resumeSchedulerAndActions];
+}
+
+-(void)setTimerSpeedRate:(float)newRate{
+    timerSpeedRate = newRate;
+}
+
+-(void)fasterTimerSpeedRate{
+    timerSpeedRate++;
+}
+
+-(void)slowerTimerSpeedRate{
+    timerSpeedRate--;
+}
+
+-(void)resetTimerSpeedRate{
+    timerSpeedRate = 1;
 }
 
 @end
