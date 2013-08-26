@@ -24,6 +24,7 @@
     CCArray* additionalScoreLabels;
     float tempScore, actualScore;
     float deltaScore;
+    float scoreMultiplier;
     bool isScoreUpdating;
     
     CCArray* missingCustomerIndex;
@@ -59,5 +60,9 @@
 -(void)setSpawnInterval:(int)min max:(int)max;
 -(void)setCustomerRequestAverageQuantity:(int)amount;
 -(void)setNextCustomerWaitingTime:(float)time;
+
+-(float)getScoreMultiplier;
+-(void)setScoreMultiplier:(float)newMultiplier;
+-(void)resetScoreMultiplier;
 
 @end

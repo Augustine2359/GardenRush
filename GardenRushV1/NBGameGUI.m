@@ -102,6 +102,7 @@ bool isPaused = false;
     
     actualScore = 0;
     tempScore = actualScore;
+    [self resetScoreMultiplier];
     
     scoreLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"$%i", (int)tempScore] fontName:@"Marker Felt" fontSize:30];
     [scoreLabel setPosition:ccp(GUIFrame.boundingBox.size.width*0.8, GUIFrame.position.y)];
@@ -165,7 +166,7 @@ bool isPaused = false;
 
 -(void)doAddScore:(int)amount{
 //    amount = 200;
-    actualScore += amount;
+    actualScore += amount * scoreMultiplier;
     deltaScore = actualScore - tempScore;
     deltaScore = deltaScore / 60;
     
@@ -372,6 +373,18 @@ bool isPaused = false;
 
 -(void)setNextCustomerWaitingTime:(float)time{
     nextWaitingTime = time;
+}
+
+-(void)setScoreMultiplier:(float)newMultiplier{
+    scoreMultiplier = newMultiplier;
+}
+
+-(float)getScoreMultiplier{
+    return scoreMultiplier;
+}
+
+-(void)resetScoreMultiplier{
+    scoreMultiplier = 1;
 }
 
 @end
