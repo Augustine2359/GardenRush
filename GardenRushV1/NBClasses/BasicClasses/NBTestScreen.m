@@ -48,10 +48,16 @@ NBGameGUI* test = nil;
     
     UI_USER_INTERFACE_IDIOM();
     
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    
     self.currentScene = (CCScene*)self.parent;
     
-    //Display Title in the middle of the screen
-    [self displayLayerTitle:@"Test Screen"];
+    //Add Sky
+    CCSprite* sky = [CCSprite spriteWithFile:@"NB_FlowerFrenzyMainMenu_640x1136.png"];
+    //sky.scaleX = (size.width + 20) / sky.contentSize.width;
+    //sky.scaleY = (size.height + 20) / sky.contentSize.height;
+    sky.position = ccp(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:sky z:0];
   
     BOOL isFlowerFieldExpanded = [[[NSUserDefaults standardUserDefaults] objectForKey:IS_FLOWER_FIELD_EXPANDED] boolValue];
     self.flowerFieldGameGrid = [[NBFlowerFieldGameGrid alloc] initWithExpandedFlowerField:isFlowerFieldExpanded];

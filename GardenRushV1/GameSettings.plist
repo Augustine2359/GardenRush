@@ -25,11 +25,11 @@
 		<integer>0</integer>
 		<key>availableEnergy</key>
 		<integer>5</integer>
+		<key>availableItem0</key>
+		<integer>1</integer>
 		<key>availableItem1</key>
 		<integer>1</integer>
 		<key>availableItem2</key>
-		<integer>1</integer>
-		<key>availableItem3</key>
 		<integer>1</integer>
 	</dict>
 	<key>Difficulty</key>
@@ -71,5 +71,35 @@
 			<integer>1</integer>
 		</dict>
 	</array>
+	<key>GameObjects</key>
+	<dict>
+		<key>GameItem</key>
+		<array>
+			<dict>
+				<key>itemName</key>
+				<string>timeBooster</string>
+				<key>duration</key>
+				<integer>10</integer>
+				<key>itemImageName</key>
+				<string>NB_Item_time_203x64.png</string>
+			</dict>
+			<dict>
+				<key>itemName</key>
+				<string>lifeBooster</string>
+				<key>duration</key>
+				<integer>1</integer>
+				<key>itemImageName</key>
+				<string>NB_Item_life_203x64.png</string>
+			</dict>
+			<dict>
+				<key>itemName</key>
+				<string>scoreBooster</string>
+				<key>duration</key>
+				<integer>10</integer>
+				<key>itemImageName</key>
+				<string>NB_Item_score_booster_203x64.png</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>

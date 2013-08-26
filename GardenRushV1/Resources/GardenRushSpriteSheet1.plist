@@ -5,50 +5,6 @@
 	<key>frames</key>
 	<dict>
 		
-		<key>NB_Flower11_60x60.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {60, 60}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{60, 60}</string>
-			<key>spriteSourceSize</key>
-			<string>{60, 60}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{373, 162}, {60, 60}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>NB_Flower12_60x60.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {60, 60}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{60, 60}</string>
-			<key>spriteSourceSize</key>
-			<string>{60, 60}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{488, 309}, {60, 60}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
 		<key>NB_Flower1_60x60.png</key>
 		<dict>
 			<key>aliases</key>
@@ -71,7 +27,7 @@
 			<false/>
 		</dict>
 		
-		<key>NB_Flower22_60x60.png</key>
+		<key>NB_Flower2_60x60.png</key>
 		<dict>
 			<key>aliases</key>
 			<array>
@@ -93,7 +49,7 @@
 			<false/>
 		</dict>
 		
-		<key>NB_Flower2_60x60.png</key>
+		<key>NB_Flower3_60x60.png</key>
 		<dict>
 			<key>aliases</key>
 			<array>
@@ -115,28 +71,6 @@
 			<false/>
 		</dict>
 		
-		<key>NB_Flower3_60x60.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {60, 60}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{60, 60}</string>
-			<key>spriteSourceSize</key>
-			<string>{60, 60}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{298, 330}, {60, 60}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
 		<key>NB_Flower4_60x60.png</key>
 		<dict>
 			<key>aliases</key>
@@ -154,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{364, 290}, {60, 60}}</string>
+			<string>{{373, 162}, {60, 60}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -176,7 +110,29 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{426, 286}, {60, 60}}</string>
+			<string>{{298, 330}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>NB_Flower7_60x60.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{364, 290}, {60, 60}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -374,7 +330,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{426, 348}, {42, 44}}</string>
+			<string>{{426, 286}, {42, 44}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -396,7 +352,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{298, 264}, {64, 64}}</string>
+			<string>{{307, 162}, {64, 64}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -418,7 +374,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{307, 162}, {64, 64}}</string>
+			<string>{{298, 264}, {64, 64}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -506,7 +462,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{618, 309}, {32, 32}}</string>
+			<string>{{504, 309}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -528,7 +484,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{698, 66}, {32, 32}}</string>
+			<string>{{470, 309}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -572,7 +528,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{550, 309}, {32, 32}}</string>
+			<string>{{426, 332}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -616,7 +572,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{584, 309}, {32, 32}}</string>
+			<string>{{307, 228}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -638,7 +594,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{307, 228}, {32, 32}}</string>
+			<string>{{698, 66}, {32, 32}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>

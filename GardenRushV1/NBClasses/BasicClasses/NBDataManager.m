@@ -7,12 +7,16 @@
 //
 
 #import "NBDataManager.h"
+#import "NBActiveItem.h"
 
 static NBDataManager* sharedDataManager = nil;
+static CCArray* itemList = nil;
 
 @interface NBDataManager()
 {
-    int item1Quantity, item2Quantity, item3Quantity;
+    int item0Quantity, item1Quantity, item2Quantity;
+    
+    int timeBoosterDuration;
 }
 
 @end
@@ -47,6 +51,11 @@ static NBDataManager* sharedDataManager = nil;
     return 0;
 }
 
++(CCArray*)getItemList
+{
+    return itemList;
+}
+
 +(void)saveState
 {
     if (!sharedDataManager)
@@ -57,9 +66,9 @@ static NBDataManager* sharedDataManager = nil;
     //Update below if any new key for the Game State settings
     //*******************************************************
     [gameStateCollection setObject:[NSNumber numberWithLong:sharedDataManager.availableCoins] forKey:@"availableCoins"];
+    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem0Quantity]] forKey:@"availableItem0"];
     [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem1Quantity]] forKey:@"availableItem1"];
     [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem2Quantity]] forKey:@"availableItem2"];
-    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem3Quantity]] forKey:@"availableItem3"];
     //*******************************************************
     
     [sharedDataManager.currentDataDictionary setObject:gameStateCollection forKey:@"GameState"];
@@ -114,9 +123,11 @@ static NBDataManager* sharedDataManager = nil;
         NSDictionary* gameStateDictionary = [self.currentDataDictionary objectForKey:@"GameState"];
         self.currentDifficultyTier = [[gameStateDictionary objectForKey:@"currentDifficultyTier"] intValue];
         self.availableCoins = [[gameStateDictionary objectForKey:@"availableCoins"] intValue];
-        item1Quantity = [[gameStateDictionary objectForKey:@"AvailableItem1"] intValue];
-        item2Quantity = [[gameStateDictionary objectForKey:@"AvailableItem2"] intValue];
-        item3Quantity = [[gameStateDictionary objectForKey:@"AvailableItem3"] intValue];
+        item0Quantity = [[gameStateDictionary objectForKey:@"availableItem0"] intValue];
+        item1Quantity = [[gameStateDictionary objectForKey:@"availableItem1"] intValue];
+        item2Quantity = [[gameStateDictionary objectForKey:@"availableItem2"] intValue];
+        
+        [self loadItemData];
         
         NSDictionary* userProfileDictionary = [self.currentDataDictionary objectForKey:@"UserProfile"];
         self.currentGameScore = [[userProfileDictionary objectForKey:@"currentGameScore"] longValue];
@@ -141,6 +152,25 @@ static NBDataManager* sharedDataManager = nil;
     return self;
 }
 
+-(void)loadItemData
+{
+    NSDictionary* gameStateDictionary = [self.currentDataDictionary objectForKey:@"GameObjects"];
+    NSArray* itemArray = (NSArray*)[gameStateDictionary objectForKey:@"GameItem"];
+    
+    itemList = [[CCArray alloc] initWithCapacity:[itemArray count]];
+    
+    for (int i = 0; i < [itemArray count]; i++)
+    {
+        NBItemData* itemData = [[NBItemData alloc] init];
+        NSDictionary* itemDictionary = (NSDictionary*)[itemArray objectAtIndex:i];
+        itemData.itemName = [itemDictionary objectForKey:@"itemName"];
+        itemData.duration = [[itemDictionary objectForKey:@"duration"] intValue];
+        itemData.itemImageName = [itemDictionary objectForKey:@"itemImageName"];
+        
+        [itemList addObject:itemData];
+    }
+}
+
 -(NSDate*)getFirstTimeEnergyReduced{
     NSDate *energyRefillStartTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"energyRefillStartTime"];
     return energyRefillStartTime;
@@ -149,6 +179,11 @@ static NBDataManager* sharedDataManager = nil;
 -(void)setFirstTimeEnergyReduced:(NSDate *)newTime{
     [[NSUserDefaults standardUserDefaults] setObject:newTime forKey:@"energyRefillStartTime"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(int)getItem0Quantity
+{
+    return item0Quantity;
 }
 
 -(int)getItem1Quantity
@@ -161,9 +196,9 @@ static NBDataManager* sharedDataManager = nil;
     return item2Quantity;
 }
 
--(int)getItem3Quantity
+-(void)setItem0Quantity:(int)quantity
 {
-    return item3Quantity;
+    item0Quantity = quantity;
 }
 
 -(void)setItem1Quantity:(int)quantity
@@ -174,11 +209,6 @@ static NBDataManager* sharedDataManager = nil;
 -(void)setItem2Quantity:(int)quantity
 {
     item2Quantity = quantity;
-}
-
--(void)setItem3Quantity:(int)quantity
-{
-    item3Quantity = quantity;
 }
 
 @end

@@ -162,6 +162,8 @@
 		BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = BCDBE3B4173BE443007CEEF2 /* GardenRushSpriteSheet1.png */; };
 		BCDBE3BE173BE870007CEEF2 /* NBFlowerFieldGameGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */; };
 		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
+		BCE8ED3417C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */; };
+		BCE8ED3717CA09CE00DD579A /* NBItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE8ED3617CA09CE00DD579A /* NBItemData.m */; };
 		F909BF6A175C932400E46AF0 /* petal.png in Resources */ = {isa = PBXBuildFile; fileRef = F909BF69175C932400E46AF0 /* petal.png */; };
 		F909BF6D175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */; };
 		F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CA645E17585527006A1033 /* NBPreGameScreen.m */; };
@@ -485,6 +487,9 @@
 		BCDBE3BD173BE870007CEEF2 /* NBFlowerFieldGameGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlowerFieldGameGrid.m; path = NBClasses/BasicClasses/NBFlowerFieldGameGrid.m; sourceTree = "<group>"; };
 		BCDBE3BF173BEBF7007CEEF2 /* NBFlower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBFlower.h; path = NBClasses/BasicClasses/NBFlower.h; sourceTree = "<group>"; };
 		BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBFlower.m; path = NBClasses/BasicClasses/NBFlower.m; sourceTree = "<group>"; };
+		BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nb_flowerBoard_b_640x713-hd.png"; path = "Resources/MainGameArts/nb_flowerBoard_b_640x713-hd.png"; sourceTree = "<group>"; };
+		BCE8ED3517CA09CE00DD579A /* NBItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBItemData.h; path = NBClasses/BasicClasses/NBItemData.h; sourceTree = "<group>"; };
+		BCE8ED3617CA09CE00DD579A /* NBItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBItemData.m; path = NBClasses/BasicClasses/NBItemData.m; sourceTree = "<group>"; };
 		F909BF69175C932400E46AF0 /* petal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petal.png; path = Resources/petal.png; sourceTree = "<group>"; };
 		F909BF6B175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBLayerWithFlowerAtEnd.h; path = NBClasses/BasicClasses/NBLayerWithFlowerAtEnd.h; sourceTree = "<group>"; };
 		F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBLayerWithFlowerAtEnd.m; path = NBClasses/BasicClasses/NBLayerWithFlowerAtEnd.m; sourceTree = "<group>"; };
@@ -574,6 +579,8 @@
 				BC4E069F176DCE2F00CC2898 /* NBFieldRandomArray.m */,
 				BC1FFA6517A4F14E003B5E43 /* NBActiveItem.h */,
 				BC1FFA6617A4F14E003B5E43 /* NBActiveItem.m */,
+				BCE8ED3517CA09CE00DD579A /* NBItemData.h */,
+				BCE8ED3617CA09CE00DD579A /* NBItemData.m */,
 			);
 			name = BasicClasses;
 			sourceTree = "<group>";
@@ -655,6 +662,7 @@
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
 				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC1FFA7517B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png */,
+				BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */,
 				BC1FFA7117B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png */,
 				BC1FFA6117A3DA9A003B5E43 /* NB_flowerBrdBgAMockCenter_640x640-hd.png */,
 				BC1FFA6217A3DA9A003B5E43 /* NB_flowerBrdBgBMockCenter_640x640-hd.png */,
@@ -1139,6 +1147,7 @@
 				BC1FFA7017B65B62003B5E43 /* NB_AppLogo_FlowerFrenzy_144x144.png in Resources */,
 				BC1FFA7217B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png in Resources */,
 				BC1FFA7617B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png in Resources */,
+				BCE8ED3417C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1273,6 +1282,7 @@
 				56A02628176787B400462344 /* NBDifficultyTier.m in Sources */,
 				BC1FFA6717A4F14F003B5E43 /* NBActiveItem.m in Sources */,
 				569080C717B5FBCE00A551EA /* NBPauseLayer.m in Sources */,
+				BCE8ED3717CA09CE00DD579A /* NBItemData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
