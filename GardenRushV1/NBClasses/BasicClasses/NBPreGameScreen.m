@@ -111,7 +111,7 @@ bool isUpdatingEnergy = NO;
     [item0Sprite setPosition:ccp(screenSize.width*0.25, screenSize.height*0.6)];
     [self addChild:item0Sprite];
     
-    item0Quantity = 0;
+    item0Quantity = [[NBDataManager sharedDataManager] getItem0Quantity];
     item0QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item0Quantity] fontName:@"Marker Felt" fontSize:20];
     [item0QuantityLabel setPosition:ccp(item0Sprite.position.x+item0Sprite.boundingBox.size.width*0.5, item0Sprite.position.y-item0Sprite.boundingBox.size.height*0.5)];
     [self addChild:item0QuantityLabel];
@@ -121,7 +121,7 @@ bool isUpdatingEnergy = NO;
     [item1Sprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.6)];
     [self addChild:item1Sprite];
     
-    item1Quantity = 0;
+    item1Quantity = [[NBDataManager sharedDataManager] getItem1Quantity];
     item1QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item1Quantity] fontName:@"Marker Felt" fontSize:20];
     [item1QuantityLabel setPosition:ccp(item1Sprite.position.x+item1Sprite.boundingBox.size.width*0.5, item1Sprite.position.y-item1Sprite.boundingBox.size.height*0.5)];
     [self addChild:item1QuantityLabel];
@@ -131,7 +131,7 @@ bool isUpdatingEnergy = NO;
     [item2Sprite setPosition:ccp(screenSize.width*0.75, screenSize.height*0.6)];
     [self addChild:item2Sprite];
     
-    item2Quantity = 0;
+    item2Quantity = [[NBDataManager sharedDataManager] getItem2Quantity];
     item2QuantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", item2Quantity] fontName:@"Marker Felt" fontSize:20];
     [item2QuantityLabel setPosition:ccp(item2Sprite.position.x+item2Sprite.boundingBox.size.width*0.5, item2Sprite.position.y-item2Sprite.boundingBox.size.height*0.5)];
     [self addChild:item2QuantityLabel];
@@ -139,7 +139,7 @@ bool isUpdatingEnergy = NO;
     //3 Buy Buttons
     CCSprite* buyItem0ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCSprite* buyItem0ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-    CCMenuItemSprite* buyItem0Button = [CCMenuItemSprite itemWithNormalSprite:buyItem0ButtonNormal selectedSprite:buyItem0ButtonSelected target:self selector:@selector(goToAppStore)];
+    CCMenuItemSprite* buyItem0Button = [CCMenuItemSprite itemWithNormalSprite:buyItem0ButtonNormal selectedSprite:buyItem0ButtonSelected target:self selector:@selector(onBuyButtonPressed)];
     
     [buyItem0Button setScaleX:4];
     [buyItem0Button setScaleY:3];
@@ -148,7 +148,7 @@ bool isUpdatingEnergy = NO;
 
     CCSprite* buyItem1ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCSprite* buyItem1ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-    CCMenuItemSprite* buyItem1Button = [CCMenuItemSprite itemWithNormalSprite:buyItem1ButtonNormal selectedSprite:buyItem1ButtonSelected target:self selector:@selector(goToAppStore)];
+    CCMenuItemSprite* buyItem1Button = [CCMenuItemSprite itemWithNormalSprite:buyItem1ButtonNormal selectedSprite:buyItem1ButtonSelected target:self selector:@selector(onBuyButtonPressed)];
     
     [buyItem1Button setScaleX:4];
     [buyItem1Button setScaleY:3];
@@ -157,7 +157,7 @@ bool isUpdatingEnergy = NO;
     
     CCSprite* buyItem2ButtonNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
     CCSprite* buyItem2ButtonSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-    CCMenuItemSprite* buyItem2Button = [CCMenuItemSprite itemWithNormalSprite:buyItem2ButtonNormal selectedSprite:buyItem2ButtonSelected target:self selector:@selector(goToAppStore)];
+    CCMenuItemSprite* buyItem2Button = [CCMenuItemSprite itemWithNormalSprite:buyItem2ButtonNormal selectedSprite:buyItem2ButtonSelected target:self selector:@selector(onBuyButtonPressed)];
     
     [buyItem2Button setScaleX:4];
     [buyItem2Button setScaleY:3];
@@ -276,7 +276,7 @@ bool isUpdatingEnergy = NO;
   }
 }
 
--(void)goToAppStore/*:(id)buyButton*/{
+-(void)onBuyButtonPressed/*:(id)buyButton*/{
     CCLOG(@"Open App Store!");
 //    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
@@ -289,9 +289,15 @@ bool isUpdatingEnergy = NO;
 //    [messageLabel setPosition:imageSprite.position];
 //    [self addChild:messageLabel z:-1];
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
     [alert show];
     [alert release];
+    
+//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:nil cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+//    [alert show];
+//    [alert release];
+//    
+//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:<#(id)#> cancelButtonTitle:<#(NSString *)#> otherButtonTitles:<#(NSString *), ...#>, nil];
     
     //Temp test
 //    CCMenuItemSprite* button = (CCMenuItemSprite*)buyButton;
@@ -316,10 +322,31 @@ bool isUpdatingEnergy = NO;
 //    }
 }
 
+-(void)goToAppStore{
+    CCLOG(@"Opening app store..");
+}
+
 -(void)goToGame
 {
     CCLOG(@"Start Game!");
     [self changeToScene:TargetSceneFirst];
+}
+
+#pragma mark - Alert view delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:
+(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"YES button clicked");
+            [self goToAppStore];
+            break;
+        case 1:
+            NSLog(@"NO button clicked");
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

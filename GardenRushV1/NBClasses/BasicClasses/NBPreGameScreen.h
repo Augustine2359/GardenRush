@@ -23,7 +23,8 @@
 //-(void)doStartEnergyTimer;
 //-(void)updateEnergyTimer;
 
--(void)goToAppStore/*:(id)buyButton*/;
+-(void)onBuyButtonPressed/*:(id)buyButton*/;
+-(void)goToAppStore;
 -(void)goToGame;
 
 @end
