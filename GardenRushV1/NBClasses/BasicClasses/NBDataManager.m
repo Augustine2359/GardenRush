@@ -126,8 +126,10 @@ static CCArray* itemList = nil;
         item0Quantity = [[gameStateDictionary objectForKey:@"availableItem0"] intValue];
         item1Quantity = [[gameStateDictionary objectForKey:@"availableItem1"] intValue];
         item2Quantity = [[gameStateDictionary objectForKey:@"availableItem2"] intValue];
-        
         [self loadItemData];
+        
+        energyMaxLevel = 5;
+        energyLevel = [[gameStateDictionary objectForKey:@"availableEnergy"] intValue];
         
         NSDictionary* userProfileDictionary = [self.currentDataDictionary objectForKey:@"UserProfile"];
         self.currentGameScore = [[userProfileDictionary objectForKey:@"currentGameScore"] longValue];
@@ -209,6 +211,16 @@ static CCArray* itemList = nil;
 -(void)setItem2Quantity:(int)quantity
 {
     item2Quantity = quantity;
+}
+
+-(int)getEnergyLevel{
+    return energyLevel;
+}
+
+-(void)setEnergyLevel:(int)newLevel{
+    energyLevel = newLevel;
+    
+    //Save to gamesettings.plist
 }
 
 @end

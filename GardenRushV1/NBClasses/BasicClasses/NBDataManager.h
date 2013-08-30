@@ -25,6 +25,8 @@
 -(void)setItem0Quantity:(int)quantity;
 -(void)setItem1Quantity:(int)quantity;
 -(void)setItem2Quantity:(int)quantity;
+-(int)getEnergyLevel;
+-(void)setEnergyLevel:(int)newLevel;
 
 @property (nonatomic, retain) NSMutableDictionary* currentDataDictionary;
 

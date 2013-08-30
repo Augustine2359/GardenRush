@@ -99,7 +99,7 @@ bool isUpdatingEnergy = NO;
     [energySprite setPosition:ccp(screenSize.width*0.15, screenSize.height*0.9)];
     [self addChild:energySprite];
     
-    energyLevel = 1;
+    energyLevel = [[NBDataManager sharedDataManager] getEnergyLevel];
     energyMaxLevel = 5;
     energyLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"X %i", energyLevel] fontName:@"Marker Felt" fontSize:30];
     [energyLabel setPosition:ccp(energySprite.position.x+energySprite.boundingBox.size.width, energySprite.position.y)];
@@ -200,6 +200,8 @@ bool isUpdatingEnergy = NO;
     if (energyLevel < 0) {
         energyLevel = 0;
     }
+    
+    [[NBDataManager sharedDataManager] setEnergyLevel:energyLevel];
     
     [self doStartEnergyTimer];
 }
