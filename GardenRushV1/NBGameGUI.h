@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "NBCustomer.h"
 #import "NBBasicScreenLayer.h"
+#import "NBPauseLayer.h"
 
 @interface NBGameGUI : CCLayer {
     //Misc
     CCSprite* GUIFrame;
     CCMenu* pauseMenu;
+//    NBPauseLayer* pauseLayer;
     
     //Life
     CCArray* livesArray;
@@ -54,8 +56,9 @@
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;
--(void)doResumeGame;
--(void)doQuitGame;
+//-(void)doPauseGame;
+//-(void)doResumeGame;
+//-(void)doQuitGame;
 -(void)doChangeLife:(int)amount;
 -(void)setSpawnInterval:(int)min max:(int)max;
 -(void)setCustomerRequestAverageQuantity:(int)amount;
