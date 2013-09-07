@@ -106,7 +106,7 @@ bool isUpdatingEnergy = NO;
     [self addChild:energyLabel];
     
     //3 Items
-    CCSprite* item0Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_life_203x64.png"];
+    CCSprite* item0Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_ItemIcon_time_100x100.png"];
 //    [item0Sprite setScale:4];
     [item0Sprite setPosition:ccp(screenSize.width*0.25, screenSize.height*0.6)];
     [self addChild:item0Sprite];
@@ -116,7 +116,7 @@ bool isUpdatingEnergy = NO;
     [item0QuantityLabel setPosition:ccp(item0Sprite.position.x+item0Sprite.boundingBox.size.width*0.5, item0Sprite.position.y-item0Sprite.boundingBox.size.height*0.5)];
     [self addChild:item0QuantityLabel];
     
-    CCSprite* item1Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_score_booster_203x64.png"];
+    CCSprite* item1Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_ItemIcon_life_100x100.png"];
 //    [item1Sprite setScale:4];
     [item1Sprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.6)];
     [self addChild:item1Sprite];
@@ -126,7 +126,7 @@ bool isUpdatingEnergy = NO;
     [item1QuantityLabel setPosition:ccp(item1Sprite.position.x+item1Sprite.boundingBox.size.width*0.5, item1Sprite.position.y-item1Sprite.boundingBox.size.height*0.5)];
     [self addChild:item1QuantityLabel];
     
-    CCSprite* item2Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_Item_time_203x64.png"];
+    CCSprite* item2Sprite = [CCSprite spriteWithSpriteFrameName:@"NB_ItemIcon_score_booster_100x100.png"];
 //    [item2Sprite setScale:4];
     [item2Sprite setPosition:ccp(screenSize.width*0.75, screenSize.height*0.6)];
     [self addChild:item2Sprite];
@@ -280,52 +280,20 @@ bool isUpdatingEnergy = NO;
 
 -(void)onBuyButtonPressed/*:(id)buyButton*/{
     CCLOG(@"Open App Store!");
-//    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
-//    CCSprite* imageSprite = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
-//    [imageSprite setScale:3];
-//    [imageSprite setPosition:ccp(screenSize.width*0.5, screenSize.height*0.5)];
-//    [self addChild:imageSprite z:-1];
-//    
-//    CCLabelTTF* messageLabel = [[CCLabelTTF alloc] initWithString:@"Loading app store..." fontName:@"Marker Felt" fontSize:20];
-//    [messageLabel setPosition:imageSprite.position];
-//    [self addChild:messageLabel z:-1];
-    
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Power Up Purchase!" message:@"Are you sure you want to buy this item?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
     [alert show];
     [alert release];
-    
-//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:nil cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
-//    [alert show];
-//    [alert release];
-//    
-//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Purchase successful!" message:@"You have bought an item." delegate:<#(id)#> cancelButtonTitle:<#(NSString *)#> otherButtonTitles:<#(NSString *), ...#>, nil];
-    
-    //Temp test
-//    CCMenuItemSprite* button = (CCMenuItemSprite*)buyButton;
-//    switch (button.tag) {
-//        case 0:
-//            item0Quantity++;
-//            [item0QuantityLabel setString:[NSString stringWithFormat:@"%i", item0Quantity]];
-//            break;
-//            
-//        case 1:
-//            item1Quantity++;
-//            [item1QuantityLabel setString:[NSString stringWithFormat:@"%i", item1Quantity]];
-//            break;
-//            
-//        case 2:
-//            item2Quantity++;
-//            [item2QuantityLabel setString:[NSString stringWithFormat:@"%i", item2Quantity]];
-//            break;
-//            
-//        default:
-//            break;
-//    }
 }
 
 -(void)goToAppStore{
     CCLOG(@"Opening app store..");
+    item0Quantity++;
+    [item0QuantityLabel setString:[NSString stringWithFormat:@"%i", item0Quantity]];
+    item1Quantity++;
+    [item1QuantityLabel setString:[NSString stringWithFormat:@"%i", item1Quantity]];
+    item2Quantity++;
+    [item2QuantityLabel setString:[NSString stringWithFormat:@"%i", item2Quantity]];
 }
 
 -(void)goToGame

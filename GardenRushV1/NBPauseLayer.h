@@ -14,9 +14,10 @@
     CCMenu* pauseMenu;
 }
 
--(void)doPauseGame;
--(void)doResumeGame;
--(void)doQuitGame;
+-(id)initialise;
+-(void)pauseGame;
+-(void)resumeGame;
+-(void)quitGame;
 
 
 @end

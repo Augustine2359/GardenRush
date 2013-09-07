@@ -67,6 +67,11 @@ bool isPaused = false;
     CCMenu* GUIMenu = [CCMenu menuWithItems:pauseButton, nil];
     [self addChild:GUIMenu];
     
+    //Pause layer
+//    pauseLayer = [[NBPauseLayer alloc] initialise];
+//    [self addChild:pauseLayer z:-2];
+//    CCLOG(@"ASD = %@", pauseLayer);
+    
     NBDifficultyTier* difficultyTier = [NBDifficultyTier new];
     [difficultyTier setTier:1];
     [self addChild:difficultyTier];
@@ -236,6 +241,10 @@ bool isPaused = false;
     [missingCustomerIndex addObject:[NSNumber numberWithInt:thatIndex]];
     [customersArray replaceObjectAtIndex:thatIndex withObject:NULL];
 }
+
+//-(void)doPauseGame{
+//    [pauseLayer pauseGame];
+//}
 
 -(void)doPauseGame{
     if (isPaused) {
