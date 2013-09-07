@@ -1229,17 +1229,20 @@
 {
     NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
     
-    for (NBCustomer* customer in gameGUI.customersArray)
+    if ([gameGUI.customersArray count] > 0)
     {
-//        if (customer.flowerRequest.bouquetType == bouquetType)
-//        {
-//            return customer;
-//        }
-        
-        CCArray* req = customer.request;
-        for (NBBouquet* flower in req) {
-            if (flower.bouquetType == bouquetType) {
-                return customer;
+        for (NBCustomer* customer in gameGUI.customersArray)
+        {
+    //        if (customer.flowerRequest.bouquetType == bouquetType)
+    //        {
+    //            return customer;
+    //        }
+            
+            CCArray* req = customer.request;
+            for (NBBouquet* flower in req) {
+                if (flower.bouquetType == bouquetType) {
+                    return customer;
+                }
             }
         }
     }
@@ -1252,7 +1255,10 @@
     if (bouquetType == btNoMatch)
         return;
     
-    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:self];
+    CGSize winsize = [[CCDirector sharedDirector] winSize];
+    
+    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:[self parent]];
+    [[self parent] reorderChild:bouquet z:50];
     NBCustomer* fulfilledCustomer = [self checkMatchedFlowerWithCustomerRequirement:bouquet.bouquetType];
     
     if (fulfilledCustomer)
@@ -1268,7 +1274,10 @@
             index++;
         }
         
-        [bouquet performCustomerFulfillingScoringAtCustomerPosition:fulfilledCustomer./*.*/position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
+        CGPoint position = ccp((index * (winsize.width / 3)) + (winsize.width / 3), winsize.height * 0.75);
+        position = ccp((winsize.width / 3), winsize.height * 0.75);
+        
+        [bouquet performCustomerFulfillingScoringAtCustomerPosition:position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
     }
     else
     {

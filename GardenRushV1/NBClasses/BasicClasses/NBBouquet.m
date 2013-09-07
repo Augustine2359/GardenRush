@@ -60,11 +60,6 @@ static CGPoint scorePadPosition = {0, 0};
         
         switch (bouquetType)
         {
-            case btSingleFlower:
-                self.flowerImage.color = ccWHITE;
-                self.value = 100;
-                break;
-                
             case btThreeOfAKind:
                 self.flowerImage.color = ccc3(204, 51, 255);
                 self.value = 300;
@@ -168,9 +163,14 @@ static CGPoint scorePadPosition = {0, 0};
 
 -(void)onBouquetReachedScore
 {
-    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.7f];
-    [self runAction:fadeOut];
-    
+    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.5f];
+    CCCallFunc* callFunc = [CCCallFunc actionWithTarget:self selector:@selector(onBouquetFadedOutAfterReachedScore)];
+    CCSequence* sequence = [CCSequence actions:fadeOut, callFunc, nil];
+    [self.flowerImage runAction:sequence];
+}
+
+-(void)onBouquetFadedOutAfterReachedScore
+{
     [self.nodeToReportScore performSelector:self.selectorToReportScore withObject:self];
     
     self.nodeToReportScore = nil;
@@ -179,9 +179,14 @@ static CGPoint scorePadPosition = {0, 0};
 
 -(void)onBouquetReachedCustomer
 {
-    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.7f];
-    [self runAction:fadeOut];
-    
+    CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:0.5f];
+    CCCallFunc* callFunc = [CCCallFunc actionWithTarget:self selector:@selector(onBouquetFadedOutAfterReachedCustomer)];
+    CCSequence* sequence = [CCSequence actions:fadeOut, callFunc, nil];
+    [self.flowerImage runAction:sequence];
+}
+
+-(void)onBouquetFadedOutAfterReachedCustomer
+{
     [self.nodeToReportScore performSelector:self.selectorToReportScore withObject:[NSNumber numberWithInt:self.fulfilledCustomerIndex] withObject:self];
     
     self.nodeToReportScore = nil;

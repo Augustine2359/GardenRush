@@ -14,7 +14,6 @@
 typedef enum
 {
     btNoMatch = 0,
-    btSingleFlower,
     btThreeOfAKind,
     btFourOfAKind,
     btFiveOfAKind,
