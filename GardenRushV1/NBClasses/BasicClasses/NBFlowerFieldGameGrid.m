@@ -62,6 +62,8 @@
         self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_POSITION_ADJUSTMENT);
         self.position = ccp(0, 0);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
+        DLog(@"customer width = %f", winSize.width / 3);
+        DLog(@"customer height = %f", winSize.height - ((713/2) + winSize.height * 0.1));
         
         //self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
         //self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;

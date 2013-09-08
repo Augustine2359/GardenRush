@@ -47,6 +47,11 @@ static CCArray* itemArray = nil;
     item.itemImage.anchorPoint = ccp(0, 0);
     item.itemImage.position = ccp(0 + ([itemArray count] * (winSize.width / 3)), 0);
     
+    item.itemDurationBar = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
+    item.itemDurationBar.scaleY = 10 / item.itemDurationBar.contentSize.height;
+    item.itemDurationBar.position = ccp(0 + ([itemArray count] * (winSize.width / 3)), 0);
+    [item.itemImage addChild:item.itemDurationBar z:item.itemImage.zOrder + 1];
+    
     item.itemAvailableCountLabel = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%i", amount] charMapFile:@"fps_images.png" itemWidth:12 itemHeight:32 startCharMap:'.'];
     item.itemAvailableCountLabel.anchorPoint = item.itemImage.anchorPoint;
     item.itemAvailableCountLabel.position = ccp(70, item.itemImage.position.y + 8);

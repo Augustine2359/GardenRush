@@ -51,7 +51,7 @@ bool isPaused = false;
     GUIFrame = [CCSprite spriteWithSpriteFrameName:@"staticbox_green.png"];
     CGSize frameSize = GUIFrame.boundingBox.size;
     [GUIFrame setScaleX:(screenSize.width/frameSize.width)];
-    [GUIFrame setScaleY:(screenSize.height*0.1/frameSize.height)];
+    [GUIFrame setScaleY:(screenSize.height*0.095/frameSize.height)];
     frameSize = GUIFrame.boundingBox.size;
     [GUIFrame setPosition:ccp(screenSize.width*0.5, screenSize.height - frameSize.height*0.5)];
     [self addChild:GUIFrame];
