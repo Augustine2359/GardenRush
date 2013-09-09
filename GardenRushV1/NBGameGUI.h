@@ -15,7 +15,7 @@
     //Misc
     CCSprite* GUIFrame;
     CCMenu* pauseMenu;
-//    NBPauseLayer* pauseLayer;
+    NBPauseLayer* pauseLayer;
     
     //Life
     CCArray* livesArray;
@@ -59,6 +59,7 @@
 //-(void)doPauseGame;
 //-(void)doResumeGame;
 //-(void)doQuitGame;
+-(void)doAddOneLife;
 -(void)doChangeLife:(int)amount;
 -(void)setSpawnInterval:(int)min max:(int)max;
 -(void)setCustomerRequestAverageQuantity:(int)amount;

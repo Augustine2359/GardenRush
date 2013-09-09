@@ -69,6 +69,7 @@ static CCArray* itemList = nil;
     [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem0Quantity]] forKey:@"availableItem0"];
     [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem1Quantity]] forKey:@"availableItem1"];
     [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getItem2Quantity]] forKey:@"availableItem2"];
+    [gameStateCollection setObject:[NSNumber numberWithLong:[sharedDataManager getEnergyLevel]] forKey:@"availableEnergy"];
     //*******************************************************
     
     [sharedDataManager.currentDataDictionary setObject:gameStateCollection forKey:@"GameState"];
@@ -221,6 +222,7 @@ static CCArray* itemList = nil;
     energyLevel = newLevel;
     
     //Save to gamesettings.plist
+    [NBDataManager saveState];
 }
 
 @end

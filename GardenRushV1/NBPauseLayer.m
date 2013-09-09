@@ -21,14 +21,13 @@ bool isGamePaused = NO;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     
     //Pause GUI
-    CCSprite* pauseFrameImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_sky.png"];
-    CCSprite* pauseFrameImageSelected = [CCSprite spriteWithSpriteFrameName:@"staticbox_sky.png"];
-    CCMenuItemImage* pauseFrame = [CCMenuItemImage itemWithNormalSprite:pauseFrameImageNormal selectedSprite:pauseFrameImageSelected];
+    CCSprite* pauseFrame = [CCSprite spriteWithSpriteFrameName:@"staticbox_sky.png"];
     CGSize frameSize = pauseFrame.boundingBox.size;
     [pauseFrame setScaleX:(screenSize.width/frameSize.width)];
     [pauseFrame setScaleY:(screenSize.height*0.9/frameSize.height)];
     frameSize = pauseFrame.boundingBox.size;
-    [pauseFrame setPosition:ccp(screenSize.width*0.5, frameSize.height*0.5)];
+    //[pauseFrame setPosition:ccp(screenSize.width*0.5, frameSize.height*0.5)];
+    [self addChild:pauseFrame];
 //    [pauseFrame setIsEnabled:NO];
     
     CCSprite* resumeButtonImageNormal = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
@@ -47,7 +46,7 @@ bool isGamePaused = NO;
     [quitButton setScaleY:(screenSize.width*0.1/frameSize.height)];
     [quitButton setPosition:ccp(screenSize.width*0.5, screenSize.height*0.3)];
     
-    pauseMenu = [CCMenu menuWithItems: pauseFrame, resumeButton, quitButton, nil];
+    pauseMenu = [CCMenu menuWithItems: resumeButton, quitButton, nil];
     [pauseMenu setPosition:ccp(0, 0)];
 //    [pauseMenu setPosition:ccp(0, screenSize.height)];
     [self addChild:pauseMenu z:-1];

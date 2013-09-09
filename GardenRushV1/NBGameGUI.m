@@ -69,7 +69,8 @@ bool isPaused = false;
     
     //Pause layer
 //    pauseLayer = [[NBPauseLayer alloc] initialise];
-//    [self addChild:pauseLayer z:-2];
+//    pauseLayer.position = ccp(0, 0);
+//    [self addChild:pauseLayer];
 //    CCLOG(@"ASD = %@", pauseLayer);
     
     NBDifficultyTier* difficultyTier = [NBDifficultyTier new];
@@ -212,7 +213,7 @@ bool isPaused = false;
     //Completed all requests
     if (thatCustomer.request.count <= 0) {
         [thatCustomer doCustomerLeave];
-        [self doDeleteCustomer:[NSNumber numberWithInt:customerIndex]];
+//        [self doDeleteCustomer:[NSNumber numberWithInt:customerIndex]];
     }
 }
 
@@ -333,6 +334,10 @@ bool isPaused = false;
     isPaused = NO;
     NBBasicScreenLayer* parentLayer = (NBBasicScreenLayer*)[self parent];
     [parentLayer changeToScene:TargetSceneMain];
+}
+
+-(void)doAddOneLife{
+    [self doChangeLife:[livesArray count]+1];
 }
 
 -(void)doChangeLife:(int)amount{

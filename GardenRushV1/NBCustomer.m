@@ -38,8 +38,7 @@
         int random = arc4random() % (int)btFiveOfAKind;
         for (int x = 0; x < requestQuantity; x++) {
             NBBouquet* flowerRequest = [NBBouquet createBouquet:random show:YES];
-            [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x,
-                                           self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
+            [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x, self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
             [self addChild:flowerRequest];
             [self.request addObject:flowerRequest];
         }
