@@ -13,6 +13,9 @@
 #define COINS_100           @"com.nebula.flowerfrenzy.coin100"
 #define COINS_300           @"com.nebula.flowerfrenzy.coin300"
 #define COINS_750           @"com.nebula.flowerfrenzy.coin750"
+#define LIFE_BOOSTER        @"com.nebula.flowerfrenzy.lifebooster"
+#define TIME_BOOSTER        @"com.nebula.flowerfrenzy.timebooster"
+#define SCORE_BOOSTER       @"com.nebula.flowerfrenzy.scorebooster"
 
 @protocol NBInAppPurchaseManagerDelegate <NSObject>
 

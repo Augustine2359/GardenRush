@@ -138,7 +138,8 @@ static int difficultyLevel = 1;
         }
         else
         {
-            self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower_sketch_sakura.png"];;
+            self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"flower_sketch_sakura.png"];
+            self.isSpecialFlower = NO;
             
             switch (flowerType)
             {
@@ -216,9 +217,11 @@ static int difficultyLevel = 1;
                     break;
                
                 case ftSpecialWildFlower:
-                    self.flowerImage.color = ccRED;
+                    self.flowerImage = [CCSprite spriteWithSpriteFrameName:@"NB_FlowerWild_60x60.png"];
+                    //self.flowerImage.color = ccRED;
                     self.isMovableDuringRearrangingShop = true;
                     self.flowerSubType = fstSpecialFlower;
+                    self.isSpecialFlower = YES;
                     break;
                     
                 default:
@@ -235,7 +238,6 @@ static int difficultyLevel = 1;
                 isBloomed = true;
             
             self.flowerType = flowerType;
-            self.isSpecialFlower = NO;
             [self initializeOnGridPosition:gridPosition];
         }
     }

@@ -164,6 +164,7 @@
 		BCDBE3C1173BEBF8007CEEF2 /* NBFlower.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBE3C0173BEBF7007CEEF2 /* NBFlower.m */; };
 		BCE8ED3417C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */; };
 		BCE8ED3717CA09CE00DD579A /* NBItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE8ED3617CA09CE00DD579A /* NBItemData.m */; };
+		BCE8ED6B17D1ED3200DD579A /* POL-autumn-avenue-short.wav in Resources */ = {isa = PBXBuildFile; fileRef = BCE8ED6A17D1ED3200DD579A /* POL-autumn-avenue-short.wav */; };
 		F909BF6A175C932400E46AF0 /* petal.png in Resources */ = {isa = PBXBuildFile; fileRef = F909BF69175C932400E46AF0 /* petal.png */; };
 		F909BF6D175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */; };
 		F9CA645F17585527006A1033 /* NBPreGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CA645E17585527006A1033 /* NBPreGameScreen.m */; };
@@ -172,7 +173,6 @@
 		F9D01A3F175B93F20084EAB6 /* NBAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D01A3C175B93F20084EAB6 /* NBAudioManager.m */; };
 		F9D01A40175B93F20084EAB6 /* NBInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D01A3E175B93F20084EAB6 /* NBInAppPurchaseManager.m */; };
 		F9D01A47175B94B90084EAB6 /* die.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A42175B94B90084EAB6 /* die.wav */; };
-		F9D01A48175B94B90084EAB6 /* FFMainTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */; };
 		F9D01A49175B94B90084EAB6 /* hadouken.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A44175B94B90084EAB6 /* hadouken.wav */; };
 		F9D01A4A175B94B90084EAB6 /* shoryuken.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A45175B94B90084EAB6 /* shoryuken.wav */; };
 		F9D01A4B175B94B90084EAB6 /* tatsumakisenpuukyaku.wav in Resources */ = {isa = PBXBuildFile; fileRef = F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */; };
@@ -490,6 +490,7 @@
 		BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nb_flowerBoard_b_640x713-hd.png"; path = "Resources/MainGameArts/nb_flowerBoard_b_640x713-hd.png"; sourceTree = "<group>"; };
 		BCE8ED3517CA09CE00DD579A /* NBItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBItemData.h; path = NBClasses/BasicClasses/NBItemData.h; sourceTree = "<group>"; };
 		BCE8ED3617CA09CE00DD579A /* NBItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBItemData.m; path = NBClasses/BasicClasses/NBItemData.m; sourceTree = "<group>"; };
+		BCE8ED6A17D1ED3200DD579A /* POL-autumn-avenue-short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "POL-autumn-avenue-short.wav"; sourceTree = "<group>"; };
 		F909BF69175C932400E46AF0 /* petal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petal.png; path = Resources/petal.png; sourceTree = "<group>"; };
 		F909BF6B175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBLayerWithFlowerAtEnd.h; path = NBClasses/BasicClasses/NBLayerWithFlowerAtEnd.h; sourceTree = "<group>"; };
 		F909BF6C175C94D000E46AF0 /* NBLayerWithFlowerAtEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBLayerWithFlowerAtEnd.m; path = NBClasses/BasicClasses/NBLayerWithFlowerAtEnd.m; sourceTree = "<group>"; };
@@ -503,7 +504,6 @@
 		F9D01A3D175B93F20084EAB6 /* NBInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBInAppPurchaseManager.h; path = NBClasses/Managers/NBInAppPurchaseManager.h; sourceTree = "<group>"; };
 		F9D01A3E175B93F20084EAB6 /* NBInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBInAppPurchaseManager.m; path = NBClasses/Managers/NBInAppPurchaseManager.m; sourceTree = "<group>"; };
 		F9D01A42175B94B90084EAB6 /* die.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = die.wav; sourceTree = "<group>"; };
-		F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FFMainTheme.mp3; sourceTree = "<group>"; };
 		F9D01A44175B94B90084EAB6 /* hadouken.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hadouken.wav; sourceTree = "<group>"; };
 		F9D01A45175B94B90084EAB6 /* shoryuken.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoryuken.wav; sourceTree = "<group>"; };
 		F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tatsumakisenpuukyaku.wav; sourceTree = "<group>"; };
@@ -1041,8 +1041,8 @@
 		F9D01A41175B94B90084EAB6 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				BCE8ED6A17D1ED3200DD579A /* POL-autumn-avenue-short.wav */,
 				F9D01A42175B94B90084EAB6 /* die.wav */,
-				F9D01A43175B94B90084EAB6 /* FFMainTheme.mp3 */,
 				F9D01A44175B94B90084EAB6 /* hadouken.wav */,
 				F9D01A45175B94B90084EAB6 /* shoryuken.wav */,
 				F9D01A46175B94B90084EAB6 /* tatsumakisenpuukyaku.wav */,
@@ -1129,7 +1129,6 @@
 				BCDBE3B5173BE443007CEEF2 /* GardenRushSpriteSheet1.plist in Resources */,
 				BCDBE3B6173BE443007CEEF2 /* GardenRushSpriteSheet1.png in Resources */,
 				F9D01A47175B94B90084EAB6 /* die.wav in Resources */,
-				F9D01A48175B94B90084EAB6 /* FFMainTheme.mp3 in Resources */,
 				F9D01A49175B94B90084EAB6 /* hadouken.wav in Resources */,
 				F9D01A4A175B94B90084EAB6 /* shoryuken.wav in Resources */,
 				F9D01A4B175B94B90084EAB6 /* tatsumakisenpuukyaku.wav in Resources */,
@@ -1148,6 +1147,7 @@
 				BC1FFA7217B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png in Resources */,
 				BC1FFA7617B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png in Resources */,
 				BCE8ED3417C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png in Resources */,
+				BCE8ED6B17D1ED3200DD579A /* POL-autumn-avenue-short.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

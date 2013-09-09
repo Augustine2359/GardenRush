@@ -62,6 +62,8 @@
         self.position = ccp(winSize.width / 2 - (self.contentSize.width / 2), FIELD_POSITION_ADJUSTMENT);
         self.position = ccp(0, 0);
         DLog(@"%f", winSize.width / 2 - (self.contentSize.width / 2));
+        DLog(@"customer width = %f", winSize.width / 3);
+        DLog(@"customer height = %f", winSize.height - ((713/2) + winSize.height * 0.1));
         
         //self.fieldBackground = [CCSprite spriteWithSpriteFrameName:@"staticbox_white.png"];
         //self.fieldBackground.scaleX = self.contentSize.width / self.fieldBackground.contentSize.width;
@@ -1229,17 +1231,20 @@
 {
     NBGameGUI* gameGUI = [NBGameGUI sharedGameGUI];
     
-    for (NBCustomer* customer in gameGUI.customersArray)
+    if ([gameGUI.customersArray count] > 0)
     {
-//        if (customer.flowerRequest.bouquetType == bouquetType)
-//        {
-//            return customer;
-//        }
-        
-        CCArray* req = customer.request;
-        for (NBBouquet* flower in req) {
-            if (flower.bouquetType == bouquetType) {
-                return customer;
+        for (NBCustomer* customer in gameGUI.customersArray)
+        {
+    //        if (customer.flowerRequest.bouquetType == bouquetType)
+    //        {
+    //            return customer;
+    //        }
+            
+            CCArray* req = customer.request;
+            for (NBBouquet* flower in req) {
+                if (flower.bouquetType == bouquetType) {
+                    return customer;
+                }
             }
         }
     }
@@ -1252,7 +1257,10 @@
     if (bouquetType == btNoMatch)
         return;
     
-    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:self];
+    CGSize winsize = [[CCDirector sharedDirector] winSize];
+    
+    NBBouquet* bouquet = [NBBouquet bloomBouquetWithType:bouquetType withPosition:[NBFlower convertFieldGridPositionToActualPixel:gridPosition] addToNode:[self parent]];
+    [[self parent] reorderChild:bouquet z:50];
     NBCustomer* fulfilledCustomer = [self checkMatchedFlowerWithCustomerRequirement:bouquet.bouquetType];
     
     if (fulfilledCustomer)
@@ -1268,7 +1276,10 @@
             index++;
         }
         
-        [bouquet performCustomerFulfillingScoringAtCustomerPosition:fulfilledCustomer./*.*/position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
+        CGPoint position = ccp((index * (winsize.width / 3)) + (winsize.width / 3), winsize.height * 0.75);
+        position = ccp((winsize.width / 3), winsize.height * 0.75);
+        
+        [bouquet performCustomerFulfillingScoringAtCustomerPosition:position andIndex:index andInformLayer:self withSelector:@selector(onBouquetReachedCustomer:bouquet:)];
     }
     else
     {

@@ -34,6 +34,7 @@ typedef enum
 
 @property (nonatomic, retain) NBItemData* itemData;
 @property (nonatomic, retain) CCMenuItemSprite* itemImage;
+@property (nonatomic, retain) CCSprite* itemDurationBar;
 @property (nonatomic, retain) CCLabelAtlas* itemAvailableCountLabel;
 @property (nonatomic, assign) int currentStock;
 @property (nonatomic, assign) NBItemType itemType;

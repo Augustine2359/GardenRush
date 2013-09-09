@@ -36,7 +36,7 @@
     self.bgmVolume = 1;
     [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:(self.bgmVolume)*1.0/10];
     self.isMute = NO;
-    [self playBGM:@"FFMainTheme.mp3"];
+    [self playBGM:@"POL-autumn-avenue-short.wav"];
     self.effectsToPreload = [NSArray arrayWithObjects:@"die.wav",
                                                       @"hadouken.wav",
                                                       @"shoryuken.wav",

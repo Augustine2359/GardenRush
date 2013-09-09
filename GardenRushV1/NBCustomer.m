@@ -18,12 +18,12 @@
         selfIndex = index;
         
         //Background frame
-        self.customerFrame = [[CCSprite alloc] initWithFile:@"Default-Landscape~ipad.png"];
+        self.customerFrame = [CCSprite spriteWithSpriteFrameName:@"NB_UI_customerBoard_204x148-hd.png"];
         CGSize frameSize = self.customerFrame.boundingBox.size;
-        [self.customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
-        [self.customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
+        //[self.customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
+        //[self.customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
         frameSize = self.customerFrame.boundingBox.size;
-        [self.customerFrame setPosition:ccp(screenSize.width/3 * index + frameSize.width*0.5, screenSize.height - frameSize.height)];
+        [self.customerFrame setPosition:ccp((screenSize.width/3 * index + frameSize.width*0.5) + 3, (screenSize.height * 0.9) - (frameSize.height / 2) + 1)];
         [self addChild:self.customerFrame];
         
         //Sprite image
@@ -35,7 +35,7 @@
         
         //Request images
         self.request = [[CCArray alloc] initWithCapacity:5];
-        int random = arc4random() % (int)btFiveOfAKind;
+        int random = (arc4random() % (int)btFourOfAKind) + btThreeOfAKind;
         for (int x = 0; x < requestQuantity; x++) {
             NBBouquet* flowerRequest = [NBBouquet createBouquet:random show:YES];
             [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x, self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
