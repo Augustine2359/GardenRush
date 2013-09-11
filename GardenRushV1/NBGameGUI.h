@@ -60,6 +60,7 @@
 //-(void)doResumeGame;
 //-(void)doQuitGame;
 -(void)doAddOneLife;
+-(void)doMinusOneLife;
 -(void)doChangeLife:(int)amount;
 -(void)setSpawnInterval:(int)min max:(int)max;
 -(void)setCustomerRequestAverageQuantity:(int)amount;

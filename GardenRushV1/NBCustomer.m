@@ -20,33 +20,35 @@
         //Background frame
         self.customerFrame = [CCSprite spriteWithSpriteFrameName:@"NB_UI_customerBoard_204x148-hd.png"];
         CGSize frameSize = self.customerFrame.boundingBox.size;
-        //[self.customerFrame setScaleX:((screenSize.width/3)/frameSize.width)];
-        //[self.customerFrame setScaleY:(screenSize.height*0.2/frameSize.height)];
         frameSize = self.customerFrame.boundingBox.size;
         [self.customerFrame setPosition:ccp((screenSize.width/3 * index + frameSize.width*0.5) + 3, (screenSize.height * 0.9) - (frameSize.height / 2) + 1)];
         [self addChild:self.customerFrame];
         
         //Sprite image
         faceImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_blue.png"];
-        [faceImage setScale:2.5];
-        [faceImage setPosition:ccp(self.customerFrame.position.x - self.customerFrame.boundingBox.size.width*0.25,
-                                   self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
+        [faceImage setScale:3];
+        [faceImage setPosition:ccp(self.customerFrame.position.x - self.customerFrame.boundingBox.size.width*0.175,
+                                   self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.1)];
         [self addChild:faceImage];
         
         //Request images
-        self.request = [[CCArray alloc] initWithCapacity:5];
+//        self.request = [[CCArray alloc] initWithCapacity:5];
         int random = (arc4random() % (int)btFourOfAKind) + btThreeOfAKind;
-        for (int x = 0; x < requestQuantity; x++) {
-            NBBouquet* flowerRequest = [NBBouquet createBouquet:random show:YES];
-            [flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05f*x, self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
-            [self addChild:flowerRequest];
-            [self.request addObject:flowerRequest];
-        }
+        self.flowerRequest = [NBBouquet createBouquet:random show:YES];
+        [self.flowerRequest setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.375 - self.customerFrame.boundingBox.size.width*0.05, self.customerFrame.position.y + self.customerFrame.boundingBox.size.height*0.25)];
+        [self addChild:self.flowerRequest];
+//        [self.request addObject:flowerRequest];
+        
+        //Request quantity label
+        quantityLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"x %i", (int)requestQuantity] fontName:@"Marker Felt" fontSize:15];
+        [quantityLabel setPosition:ccp(self.customerFrame.position.x + self.customerFrame.boundingBox.size.width*0.3, self.customerFrame.position.y)];
+        [self addChild:quantityLabel];
         
         //TimerBar image
         timerBarImage = [CCSprite spriteWithSpriteFrameName:@"staticbox_red.png"];
         [timerBarImage setScaleX:5];
-        [timerBarImage setPosition:ccp(faceImage.position.x - faceImage.boundingBox.size.width*0.5, self.customerFrame.position.y - self.customerFrame.boundingBox.size.height*0.25)];
+        [timerBarImage setScaleY:0.5f];
+        [timerBarImage setPosition:ccp(faceImage.position.x - faceImage.boundingBox.size.width*0.5, self.customerFrame.position.y - self.customerFrame.boundingBox.size.height*0.4)];
         [self addChild:timerBarImage];
         
         //Misc
@@ -72,6 +74,7 @@
     if (currentWaitingTime <= 0) {
         CCLOG(@"You pissed off a customer!");
         currentWaitingTime = 0;
+        [[NBGameGUI sharedGameGUI] doMinusOneLife];
         [self unscheduleUpdate];
         [self doCustomerLeave];
     }
@@ -91,9 +94,9 @@
     [self removeFromParentAndCleanup:true];
 }
 
--(CCArray*)getRequestArray{
-    return self.request;
-}
+//-(CCArray*)getRequestArray{
+//    return self.request;
+//}
 
 -(void)pauseWaitingTime{
     [self pauseSchedulerAndActions];
@@ -117,6 +120,14 @@
 
 -(void)resetTimerSpeedRate{
     timerSpeedRate = 1;
+}
+
+-(void)updateRequestLabel{
+    if (self.requestQuantity < 0) {
+        self.requestQuantity = 0;
+    }
+    
+    [quantityLabel setString:[NSString stringWithFormat:@"x %i", self.requestQuantity]];
 }
 
 @end

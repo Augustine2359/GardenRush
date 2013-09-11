@@ -1240,12 +1240,17 @@
     //            return customer;
     //        }
             
-            CCArray* req = customer.request;
-            for (NBBouquet* flower in req) {
-                if (flower.bouquetType == bouquetType) {
+            
+            NBBouquet* req = customer.flowerRequest;
+                if (req.bouquetType == bouquetType) {
                     return customer;
                 }
-            }
+//            CCArray* req = customer.request;
+//            for (NBBouquet* flower in req) {
+//                if (flower.bouquetType == bouquetType) {
+//                    return customer;
+//                }
+//            }
         }
     }
     

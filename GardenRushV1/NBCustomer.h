@@ -17,10 +17,13 @@
     float initialWaitingTime, currentWaitingTime;
     float timerSpeedRate;
     int selfIndex;
+    
+    CCLabelTTF* quantityLabel;
 }
 
-@property (nonatomic, retain) CCArray* request;
-//@property (nonatomic, retain) NBBouquet* flowerRequest;
+@property (nonatomic, assign) int requestQuantity;
+//@property (nonatomic, retain) CCArray* request;
+@property (nonatomic, retain) NBBouquet* flowerRequest;
 @property (nonatomic, retain) CCSprite* customerFrame;
 @property (nonatomic, assign) int requestScore;
 
@@ -33,6 +36,7 @@
 -(void)fasterTimerSpeedRate;
 -(void)slowerTimerSpeedRate;
 -(void)resetTimerSpeedRate;
--(CCArray*)getRequestArray;
+//-(CCArray*)getRequestArray;
+-(void)updateRequestLabel;
 
 @end

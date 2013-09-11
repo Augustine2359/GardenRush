@@ -83,10 +83,11 @@ bool isPaused = false;
     [livesArray retain];
     //Read from datamanager when available
     maxLives = 5;
+    int initialLives = 3;
     
     CGSize frameSize = GUIFrame.boundingBox.size;
     
-    for (int x = 0; x < 3; x++) {
+    for (int x = 0; x < initialLives; x++) {
         CCSprite* lifeSprite = [[CCSprite alloc] initWithFile:@"Icon.png"];
         CGSize spriteSize = lifeSprite.boundingBox.size;
         [lifeSprite setScaleX:(frameSize.width*0.1/spriteSize.width)];
@@ -206,15 +207,19 @@ bool isPaused = false;
     [self doAddScore:totalScore];
     
     //Update requests
-    NBBouquet* thatFlower = (NBBouquet*)[thatCustomer.request objectAtIndex:flowerIndex];
-    [thatFlower removeFromParentAndCleanup:YES];
-    [thatCustomer.request removeObjectAtIndex:flowerIndex];
+    thatCustomer.requestQuantity--;
+    [thatCustomer updateRequestLabel];
+//    NBBouquet* thatFlower = (NBBouquet*)[thatCustomer.request objectAtIndex:flowerIndex];
+//    [thatFlower removeFromParentAndCleanup:YES];
+//    [thatCustomer.request removeObjectAtIndex:flowerIndex];
     
     //Completed all requests
-    if (thatCustomer.request.count <= 0) {
+    if (thatCustomer.requestQuantity <= 0) {
         [thatCustomer doCustomerLeave];
-//        [self doDeleteCustomer:[NSNumber numberWithInt:customerIndex]];
     }
+//    if (thatCustomer.request.count <= 0) {
+//        [thatCustomer doCustomerLeave];
+//    }
 }
 
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/{
@@ -340,9 +345,15 @@ bool isPaused = false;
     [self doChangeLife:[livesArray count]+1];
 }
 
+-(void)doMinusOneLife{
+    [self doChangeLife:[livesArray count]-1];
+}
+
 -(void)doChangeLife:(int)amount{
-    if (amount > 0) {
-        for (int x = 0; x < amount; x++) {
+    int difference = amount - [livesArray count];
+    
+    if (difference > 0) {
+        for (int x = 0; x < difference; x++) {
             if ([livesArray count] == maxLives) {
                 CCLOG(@"Full life");
                 return;
@@ -362,8 +373,8 @@ bool isPaused = false;
             [livesArray addObject:lifeSprite];
         }
     }
-    else if (amount < 0){
-        for (int x = amount; x < 0; x++) {
+    else if (difference < 0){
+        for (int x = difference; x < 0; x++) {
             if ([livesArray count] == 0) {
                 CCLOG(@"No more lives");
                 //Call game over method here
@@ -374,6 +385,10 @@ bool isPaused = false;
             [livesArray removeLastObject];
         }
     }
+    else{
+        CCLOG(@"Player is already at %i lives", amount);
+    }
+
 }
 
 -(void)setSpawnInterval:(int)min max:(int)max{
