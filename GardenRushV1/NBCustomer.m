@@ -74,9 +74,15 @@
     if (currentWaitingTime <= 0) {
         CCLOG(@"You pissed off a customer!");
         currentWaitingTime = 0;
+        [[NBGameGUI sharedGameGUI] doAngerCustomer:selfIndex];
         [[NBGameGUI sharedGameGUI] doMinusOneLife];
         [self unscheduleUpdate];
         [self doCustomerLeave];
+    }
+    else if(currentWaitingTime <= initialWaitingTime*0.2 && !isBlinking){
+        isBlinking = YES;
+        CCBlink* blink = [CCBlink actionWithDuration:initialWaitingTime*0.2 blinks:initialWaitingTime*0.2];
+        [faceImage runAction:blink];
     }
     
     [timerBarImage setScaleX:(currentWaitingTime/initialWaitingTime * 5)];

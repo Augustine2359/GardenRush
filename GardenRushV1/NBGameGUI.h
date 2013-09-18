@@ -24,6 +24,7 @@
     //Score
     CCLabelTTF* scoreLabel;
     CCArray* additionalScoreLabels;
+    CCArray* customerExtraLabels;
     float tempScore, actualScore;
     float deltaScore;
     float scoreMultiplier;
@@ -53,6 +54,7 @@
 -(void)update:(ccTime)delta;
 -(void)doAddScore:(int)amount;
 -(void)doFulfillCustomer:(int)customerIndex flowerIndex:(int)flowerIndex flowerScore:(int)flowerScore; //Index is 0, 1, 2
+-(void)doAngerCustomer:(int)customerIndex; //Index is 0, 1, 2
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/;
 -(void)doDeleteCustomer:(NSNumber*)index;
 -(void)doPauseGame;

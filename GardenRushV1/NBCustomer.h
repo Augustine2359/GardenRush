@@ -17,6 +17,7 @@
     float initialWaitingTime, currentWaitingTime;
     float timerSpeedRate;
     int selfIndex;
+    bool isBlinking;
     
     CCLabelTTF* quantityLabel;
 }

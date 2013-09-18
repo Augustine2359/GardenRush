@@ -279,6 +279,10 @@ bool isUpdatingEnergy = NO;
 }
 
 -(void)onBuyButtonPressed/*:(id)buyButton*/{
+    if (![self isTouchEnabled]) {
+        return;
+    }
+    
     CCLOG(@"Open App Store!");
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Power Up Purchase!" message:@"Are you sure you want to buy this item?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
@@ -298,6 +302,10 @@ bool isUpdatingEnergy = NO;
 
 -(void)goToGame
 {
+    if (![self isTouchEnabled]) {
+        return;
+    }
+    
     CCLOG(@"Start Game!");
     [self changeToScene:TargetSceneFirst];
 }
@@ -309,6 +317,7 @@ bool isUpdatingEnergy = NO;
         case 0:
             NSLog(@"YES button clicked");
             [self goToAppStore];
+            [self setIsTouchEnabled:NO];
             break;
         case 1:
             NSLog(@"NO button clicked");

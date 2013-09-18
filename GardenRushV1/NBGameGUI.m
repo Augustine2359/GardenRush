@@ -140,6 +140,17 @@ bool isPaused = false;
     [self setNextCustomerWaitingTime:60];
     [self setCustomerRequestAverageQuantity:1];
     
+    customerExtraLabels = [CCArray new];
+    [customerExtraLabels retain];
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    for (int x = 0; x < 3; x++) {
+        CCLabelTTF* extraLabel = [[CCLabelTTF alloc] initWithString:@"Thank you!" fontName:@"Marker Felt" fontSize:20];
+        extraLabel.position = ccp(screenSize.width*0.3 * x + screenSize.width*0.2, screenSize.height*0.8);
+        [extraLabel setVisible:NO];
+        [self addChild:extraLabel];
+        [customerExtraLabels addObject:extraLabel];
+    }
+    
     //Testing
 //    [self doFulfillCustomer:1 flowerScore:100];
 //    [self doSpawnNewCustomer];
@@ -216,10 +227,31 @@ bool isPaused = false;
     //Completed all requests
     if (thatCustomer.requestQuantity <= 0) {
         [thatCustomer doCustomerLeave];
+        
+        CCLabelTTF* thatLabel = (CCLabelTTF*)[customerExtraLabels objectAtIndex:customerIndex];
+        [thatLabel setString:@"Thank you!"];
+        [thatLabel setVisible:YES];
+        id delay = [CCDelayTime actionWithDuration:2];
+        id done = [CCCallFuncN actionWithTarget:self selector:@selector(updateExtraLabel:)];
+        [thatLabel runAction:[CCSequence actions:delay, done, nil]];
     }
 //    if (thatCustomer.request.count <= 0) {
 //        [thatCustomer doCustomerLeave];
 //    }
+}
+
+-(void)doAngerCustomer:(int)customerIndex{
+    CCLabelTTF* thatLabel = (CCLabelTTF*)[customerExtraLabels objectAtIndex:customerIndex];
+    [thatLabel setString:@"Waste my time.."];
+    [thatLabel setVisible:YES];
+    id delay = [CCDelayTime actionWithDuration:2];
+    id done = [CCCallFuncN actionWithTarget:self selector:@selector(updateExtraLabel:)];
+    [thatLabel runAction:[CCSequence actions:delay, done, nil]];
+}
+
+-(void)updateExtraLabel:(id)sender{
+    CCLabelTTF* thatLabel = (CCLabelTTF*)sender;
+    [thatLabel setVisible:NO];
 }
 
 -(void)doSpawnNewCustomer:(id)sender index:(NSNumber*)index/* requestQuantity:(int)requestQuantity waitingTime:(float)waitingTime*/{
