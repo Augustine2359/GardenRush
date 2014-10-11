@@ -660,7 +660,6 @@
 				BC8EA66B1734C4EA004454CF /* Icon@2x.png */,
 				BC8EA66D1734C4EA004454CF /* Info.plist */,
 				BC8EA66E1734C4EA004454CF /* iTunesArtwork */,
-				BCDBE3B7173BE456007CEEF2 /* MainGameArts */,
 				BC1FFA7517B66166003B5E43 /* NB_flowerBoard_a_640x729_v02-hd.png */,
 				BCE8ED3317C9CB8B00DD579A /* nb_flowerBoard_b_640x713-hd.png */,
 				BC1FFA7117B65D8A003B5E43 /* NB_flowerBoard_b_640x729-hd.png */,
@@ -1339,6 +1338,7 @@
 				GCC_PREFIX_HEADER = GardenRushV1/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"GardenRushV1/libs/kazmath/include\"";
 				INFOPLIST_FILE = GardenRushV1/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -1357,6 +1357,7 @@
 				GCC_PREFIX_HEADER = GardenRushV1/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"GardenRushV1/libs/kazmath/include\"";
 				INFOPLIST_FILE = GardenRushV1/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
